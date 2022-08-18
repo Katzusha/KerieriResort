@@ -1,0 +1,475 @@
+﻿<Window x:Class="testroom.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testroom"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="523" Width="1143" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700">
+    <Window.Resources>
+        <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
+            <EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#7F0000FF"/>
+            <Setter Property="Margin" Value="10, 10, 10, 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 0, 0" BorderBrush="#FF0074FF">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <!--BACKGROUND GRID-->
+    <Grid x:Name="BackGroundGrid">
+        <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-30"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+        <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-30"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+        <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-30"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+        <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-30"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Border.RenderTransform>
+        </Border>
+
+
+
+
+        <!-- LOGIN GRID -->
+        <Grid x:Name="LogInGrid" Visibility="Hidden">
+            <Image Source="/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
+                     Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="SnapsToDevicePixels"
+                            Value="True" />
+                        <Setter Property="OverridesDefaultStyle"
+                            Value="True" />
+                        <Setter Property="KeyboardNavigation.TabNavigation"
+                            Value="None" />
+                        <Setter Property="FocusVisualStyle"
+                            Value="{x:Null}" />
+                        <Setter Property="MinWidth"
+                            Value="0" />
+                        <Setter Property="MinHeight"
+                            Value="0" />
+                        <Setter Property="AllowDrop"
+                            Value="False" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                    <Border Name="Border"
+                                        CornerRadius="25"
+                                        Padding="2">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="#3e3e3e" />
+                                        </Border.Background>
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Border.BorderBrush>
+                                        <ScrollViewer Margin="0"
+                                            x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
+                         Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold">
+                <PasswordBox.Resources>
+                    <Style x:Key="{x:Type PasswordBox}"
+                        TargetType="{x:Type PasswordBox}">
+                        <Setter Property="SnapsToDevicePixels"
+                            Value="true" />
+                        <Setter Property="OverridesDefaultStyle"
+                            Value="true" />
+                        <Setter Property="KeyboardNavigation.TabNavigation"
+                            Value="None" />
+                        <Setter Property="FocusVisualStyle"
+                            Value="{x:Null}" />
+                        <Setter Property="FontFamily"
+                            Value="Verdana" />
+                        <Setter Property="PasswordChar"
+                            Value="●" />
+                        <Setter Property="MinWidth"
+                            Value="120" />
+                        <Setter Property="MinHeight"
+                            Value="20" />
+                        <Setter Property="AllowDrop"
+                            Value="true" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                                    <Border x:Name="Border"
+                                        CornerRadius="25"
+                                        Padding="2"
+                                        BorderThickness="0">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="#3e3e3e" />
+                                        </Border.Background>
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Border.BorderBrush>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="Disabled" />
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard.Target>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Cursor" Value="IBeam"/>
+                                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                                        </Trigger>
+                                                    </Storyboard.Target>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ScrollViewer x:Name="PART_ContentHost" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </PasswordBox.Resources>
+            </PasswordBox>
+            <Label x:Name="loginusernamelabel" Content="Username :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,-155,0,0" Foreground="White" 
+                   FontSize="20"/>
+            <Label x:Name="loginpasswordlabel" Content="Password :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,20,0,0" Foreground="White" 
+                   FontSize="20"/>
+            <Button x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="25"></Setter>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Blue"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="25"/>
+                        <Setter Property="BorderBrush" Value="Red"/>
+                        <Setter Property="BorderThickness" Value="3"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <TextBox x:Name="loginfaillabel" Visibility="Hidden" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Unvalid username or password!" 
+                     VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" SelectionBrush="{x:Null}" 
+                     SelectionTextBrush="{x:Null}" FontSize="24" FontFamily="Arial" TextAlignment="Center" VerticalContentAlignment="Center" 
+                     FontWeight="Bold" IsReadOnly="True" Width="450" Margin="0,-225,0,0">
+                <TextBox.Resources>
+                    <Style x:Key="{x:Type TextBox}"
+                    TargetType="{x:Type TextBox}">
+                        <Setter Property="SnapsToDevicePixels"
+                        Value="true" />
+                        <Setter Property="OverridesDefaultStyle"
+                        Value="true" />
+                        <Setter Property="KeyboardNavigation.TabNavigation"
+                        Value="None" />
+                        <Setter Property="FocusVisualStyle"
+                        Value="{x:Null}" />
+                        <Setter Property="FontFamily"
+                        Value="Verdana" />
+                        <Setter Property="MinWidth"
+                        Value="120" />
+                        <Setter Property="MinHeight"
+                        Value="20" />
+                        <Setter Property="AllowDrop"
+                        Value="true" />
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TextBox}">
+                                    <Border x:Name="Border"
+                                    CornerRadius="10"
+                                    Padding="2"
+                                    BorderThickness="1" Background="Transparent">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Border.BorderBrush>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="Disabled" />
+                                                <VisualState x:Name="MouseOver" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ScrollViewer x:Name="PART_ContentHost" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </Grid>
+
+
+        <!-- CONTROL GRID -->
+        <Grid x:Name="ControlGrid" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#FF171717"/>
+            <Image Grid.Column="0" Source="/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <!--#region MENU GRIDS-->
+            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
+                <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                        <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                    <TextBox x:Name="HomeGridSearch" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" 
+                     Height="50" Width="100" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Cursor="IBeam" GotFocus="SearchInput_GotFocus" LostFocus="SearchInput_LostFocus" FontWeight="Bold" 
+                     Text="🔍" MouseEnter="HomeGridSearch_MouseEnter" MouseLeave="HomeGridSearch_MouseLeave" Margin="0,0,20,0" KeyUp="HomeGridSearch_KeyUp">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="SnapsToDevicePixels"
+                            Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                            Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                            Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                            Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                            Value="0" />
+                                <Setter Property="MinHeight"
+                            Value="0" />
+                                <Setter Property="AllowDrop"
+                            Value="False" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                            <Border x:Name="Border"
+                                        CornerRadius="25"
+                                        Padding="2" Background="#3e3e3e" BorderBrush="Transparent">
+                                                <ScrollViewer Margin="0"
+                                            x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button x:Name="AddReservationsBtn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="50" 
+                    Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="10,0,0,0" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddReservationsBtn_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#3e3e3e"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Grid>
+
+
+            <!--#endregion-->
+
+            <!--#region  CREATION GRID-->
+
+            <!--#endregion-->
+
+            <!--#region MENU BUTTONS-->
+            <Button x:Name="MenuLogOutBtn" Content="☠" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="#FFFF4F4F"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="MenuClassifficationBtn" Grid.Column="0" Content="🛏" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,280,-1000,0" 
+                    Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="MenuReservationsBtn" Grid.Column="0" Content="🗀" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--#endregion-->
+
+        </Grid>
+    </Grid>
+</Window>
