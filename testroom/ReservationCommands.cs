@@ -11,6 +11,7 @@ namespace testroom
 {
     class ReservationCommands
     {
+        //TODO: Update API for new database
         public static dynamic GetAll()
         {
             WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ReservationsAPI/GetAll.php");
