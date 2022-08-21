@@ -35,6 +35,7 @@ namespace testroom
         public static string DatabaseName = "";
         #endregion
 
+        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region ENCRYPTION AND DECRYPTION
         public string EncryptString(string plainText, byte[] key, byte[] iv)
         {
@@ -170,9 +171,11 @@ namespace testroom
             return decrypted;
         }
         #endregion
-
+        
         public MainWindow()
         {
+            //When application start we need to make sure that the login window is the first window that we show
+            //Regardles of programming activity
             InitializeComponent();
 
             ControlGrid.Visibility = Visibility.Hidden;
@@ -183,6 +186,7 @@ namespace testroom
         }
 
         #region PUBLIC COMMANDS
+        //Public command to reset all variables and grid children
         public void ClearAll()
         {
             loginusernameinput.Clear();
@@ -192,7 +196,10 @@ namespace testroom
             HomeGridScrollViewer.RowDefinitions.Clear();
         }
 
+        //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
+        #region PUBLIC TASKS
         #region LogIn
+        //Check if the user is in database and retryve information in what company this user works
         public async Task<bool> LogIn()
         {
             await Task.Delay(500);
@@ -230,7 +237,7 @@ namespace testroom
         #endregion
 
         #region Reservations
-
+        //Generate buttons for all the Reservations in json file
         public async Task<bool> GetAllReservations()
         {
             await Task.Delay(500);
@@ -239,6 +246,7 @@ namespace testroom
             {
                 ClearAll();
 
+                //Get json file for all the reservations
                 dynamic getall = ReservationCommands.GetAll();
 
 
@@ -246,6 +254,7 @@ namespace testroom
                 {
                     try
                     {
+                        //Declare row definition for the generated children
                         int col = 0;
                         int row = 0;
                         RowDefinition newrow = new RowDefinition();
@@ -254,6 +263,7 @@ namespace testroom
 
                         foreach (var information in getall)
                         {
+                            //If there are four children in previus row generate new row same as privius
                             if (col == 4)
                             {
                                 newrow = new RowDefinition();
@@ -264,6 +274,7 @@ namespace testroom
                                 row++;
                             }
 
+                            //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
@@ -272,6 +283,8 @@ namespace testroom
                             button.Style = (Style)this.Resources["HomeGeneratedButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                             button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
+
+                            //Add generated children to the grid
                             Grid.SetColumn(button, col);
                             Grid.SetRow(button, row);
                             HomeGridScrollViewer.Children.Add(button);
@@ -286,6 +299,7 @@ namespace testroom
                 }
                 else
                 {
+                    //If there is no children inserted in grid, show No Results
                     HomeGridNoResultsLabel.Visibility = Visibility.Visible;
                 }
 
@@ -301,6 +315,7 @@ namespace testroom
             }
         }
 
+        //Generate buttons for searched Reservations in json file
         public async Task<bool> GetSearchedReservations()
         {
             await Task.Delay(500);
@@ -310,10 +325,12 @@ namespace testroom
 
             ClearAll();
 
+            //Get json file for the searched reservations
             dynamic GetSearched = ReservationCommands.GetSearched(HomeGridSearch.Text);
 
             if (GetSearched != null)
             {
+                //Declare row definition for the generated children
                 int col = 0;
                 int row = 0;
                 RowDefinition newrow = new RowDefinition();
@@ -324,6 +341,7 @@ namespace testroom
                 {
                     if (col == 4)
                     {
+                        //If there are four children in previus row generate new row same as privius
                         newrow = new RowDefinition();
                         newrow.Height = new GridLength(250);
                         HomeGridScrollViewer.RowDefinitions.Add(newrow);
@@ -332,6 +350,7 @@ namespace testroom
                         row++;
                     }
 
+                    //Declare children speciffications
                     Button button = new Button();
                     button.Name = "ReservationId" + information.Id;
                     string firstname = information.Firstname.ToString();
@@ -340,6 +359,8 @@ namespace testroom
                     button.Style = (Style)this.Resources["HomeGeneratedButton"];
                     //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                     button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
+
+                    //Add generated children to the grid
                     Grid.SetColumn(button, col);
                     Grid.SetRow(button, row);
                     HomeGridScrollViewer.Children.Add(button);
@@ -356,10 +377,12 @@ namespace testroom
         }
 
         #endregion
-
+        #endregion
         #endregion
 
+        //Public commands for showing other windows and their commands
         #region SHOW DIIALOG WINDOWS
+        //Show errors and their exceptions
         public static void ShowError(string errormessage)
         {
             ErrorWindow.ErrorMessage = errormessage;
@@ -369,12 +392,15 @@ namespace testroom
         }
         #endregion
 
+        //All the animations
         #region ANIMATIONS
+        //Enter and leave animations for red buttons
         #region RED BUTTON animations
         private void RedBtn_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -383,7 +409,7 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
-
+            //Animations for buttons background color to transforme it from transparrent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(0, 255, 0, 0);
@@ -398,6 +424,7 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -406,6 +433,7 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
+            //Animations for buttons background color to transforme it from red back to transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(255, 255, 0, 0);
@@ -418,11 +446,13 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for blue buttons
         #region BLUE BUTTON animations
         private void BlueBtn_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -437,6 +467,7 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -449,11 +480,13 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for green buttons
         #region GREEN BUTTON animations
         private void GreenBtn_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -462,7 +495,7 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
-
+            //Animations for buttons background color to transforme it from transparrent to green
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(0, 0, 255, 0);
@@ -477,6 +510,7 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to make transformate it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -485,6 +519,7 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
+            //Animations for buttons background color to transforme it from green back to transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(255, 0, 255, 0);
@@ -497,6 +532,7 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for + buttons
         #region ADD BUTTON animations
         private void AddBtn_Enter(object sender, MouseEventArgs e)
         {
@@ -504,11 +540,13 @@ namespace testroom
 
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme it to 100px width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 100;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Change its text from "+" to "Add"
             button.Content = "Add";
         }
         private void AddBtn_Leave(object sender, MouseEventArgs e)
@@ -517,20 +555,24 @@ namespace testroom
 
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme it back to 50px width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Change its text from "Add" back to "+"
             button.Content = "+";
         }
         #endregion
 
+        //Gotfocus and lostfocus animations for textboxes
         #region TEXTBOX INPUT animation
         private void LogInUsernameTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for textboxes size to transforme it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -543,6 +585,7 @@ namespace testroom
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for textboxes size to transforme it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -553,11 +596,13 @@ namespace testroom
         }
         #endregion
 
+        //Gotfocus and lostfocus animations for passwordboxes
         #region PASWORDBOX INPUT animation
         private void PasswordBoxInput_GotFocus(object sender, RoutedEventArgs e)
         {
             PasswordBox text = (PasswordBox)sender;
 
+            //Animation for textboxes size to transforme it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -570,6 +615,7 @@ namespace testroom
         {
             PasswordBox text = (PasswordBox)sender;
 
+            //Animation for passwordboxes size to transforme it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -580,17 +626,20 @@ namespace testroom
         }
         #endregion
 
-        #region MENU BLUE BUTTON animation
+        //Enter and leave animations for menu buttons
+        #region MENU BUTTON animation
         private void MenuHomeButton_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
@@ -608,11 +657,13 @@ namespace testroom
 
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(0, 0, 255);
@@ -631,11 +682,13 @@ namespace testroom
 
             button.Background = Brushes.Blue;
 
+            //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
@@ -652,11 +705,13 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(0, 0, 255);
@@ -675,11 +730,13 @@ namespace testroom
 
             button.Background = Brushes.Blue;
 
+            //Animation for buttons size to transforme to 300px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 300;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
@@ -696,11 +753,13 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
+            //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(255, 79, 79);
@@ -715,11 +774,13 @@ namespace testroom
         }
         #endregion
 
+        //Gotfocus, lostfocus, enter and leave animations for search boxes
         #region SEARCH BOX animations
         private void SearchInput_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 500;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -731,6 +792,7 @@ namespace testroom
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for buttons size to transforme back to 100px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 100;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -743,6 +805,7 @@ namespace testroom
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for searchboxes size to transforme it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myDoubleAnimation.To = 50 * 1.1;
@@ -752,6 +815,7 @@ namespace testroom
         {
             TextBox text = (TextBox)sender;
 
+            //Animation for searchboxes size to transforme it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -759,6 +823,7 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for settings buttons
         #region SETTINGS BUTTON animations
         private void HomeSettingsBtn_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -766,6 +831,7 @@ namespace testroom
 
             Cursor = Cursors.Hand;
 
+            //Animation for buttons size to transforme button to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myDoubleAnimation.To = 50 * 1.1;
@@ -775,6 +841,7 @@ namespace testroom
         {
             Button button = (Button)sender;
 
+            //Animation for buttons size to transforme button back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -784,6 +851,7 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for generated buttons
         #region GENERATED BUTTON animations
         private void GeneratedBtn_Enter(object sender, MouseEventArgs e)
         {
@@ -791,11 +859,13 @@ namespace testroom
 
             Cursor = Cursors.Hand;
 
+            //Animation for buttons size to transforme it for 5px bigger
             ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
             thicknessAnimation.To = new Thickness(0, 0, 0, 0);
             thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(MarginProperty, thicknessAnimation);
 
+            //Animation for buttons background to transforme it from kinda transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(127, 0, 0, 255);
@@ -810,11 +880,13 @@ namespace testroom
 
             Cursor = Cursors.Arrow;
 
+            //Animation for buttons size to transforme it for 5px smaller
             ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
             thicknessAnimation.To = new Thickness(10, 10, 10, 10);
             thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(MarginProperty, thicknessAnimation);
 
+            //Animation for buttons background to transforme it back from blue to kinda transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromArgb(255, 0, 0, 255);
@@ -825,9 +897,11 @@ namespace testroom
         }
         #endregion
 
+        //Loading animations for all times where application needs to proccess something
         #region LOADING animation
         public  void LoadingAnimation()
         {
+            //Animations for background lines to transforme it to black and white
             SolidColorBrush MyBrushLight = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(0, 0, 255);
@@ -841,6 +915,7 @@ namespace testroom
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
             MyBrushDark.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
 
+            ///Animation for background lines to move it further apart
             //ThicknessAnimation BackgroundBottomDarkAnimation = new ThicknessAnimation();
             //BackgroundBottomDarkAnimation.To = new Thickness(-1000, 413, -1573, -100);
             //BackgroundBottomDarkAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
@@ -868,6 +943,7 @@ namespace testroom
         }
         public void LoadedAnimation()
         {
+            //Animation for background lines to transforme it back to color from black and white
             SolidColorBrush MyBrushLight = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(150, 150, 150);
@@ -881,6 +957,7 @@ namespace testroom
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
             MyBrushDark.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
 
+            ///Animation for background lines to move it back closer
             //ThicknessAnimation BackgroundBottomDarkAnimation = new ThicknessAnimation();
             //BackgroundBottomDarkAnimation.To = new Thickness(-1000, 413, -1373, -100);
             //BackgroundBottomDarkAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
@@ -910,83 +987,105 @@ namespace testroom
         #endregion
 
         #region LOGIN SCREEN
+        //Exit button on login screen
         private void loginexitbutton_Click(object sender, RoutedEventArgs e)
         {
+            //Close appliaciton
             this.Close();
         }
 
+        //LogIn button on login screen
         private async void loginloginbutton_Click(object sender, RoutedEventArgs e)
         {
+            //Begin loading animation
             LoadingAnimation();
 
             var isLogIn = await LogIn();
-
+            
+            //If there is a user start this loop
             if (isLogIn)
             {
+                //Generate all reservations from users database
                 var isGetAllSearched = await GetAllReservations();
 
                 ControlGrid.Visibility = Visibility.Visible;
 
+                //Animation to hide login screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
+                //Animation to show control screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
                 ControlAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
+                //End the loading animation
                 LoadedAnimation();
             }
             else
             {
+                //If there is no user in database then show error label
                 loginfaillabel.Visibility = Visibility.Visible;
 
+                //End the loading animation
                 LoadedAnimation();
             }
         }
         #endregion
 
         #region MENU BUTTONS
+        //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                //Start the loading animation
                 LoadingAnimation();
 
+                //Show the reservatons grid and hide no results label
                 ReservationsGrid.Visibility = Visibility.Visible;
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
+                //Clear all elements
                 ClearAll();
 
+                //Generate all reservations
                 var isGetAllReservations = await GetAllReservations();
 
+                //End the loading animation
                 LoadedAnimation();
             }
             catch (Exception ex)
             {
                 ShowError(ex.Message);
 
+                //End the loading animation
                 LoadedAnimation();
             }
         }
 
+        //Classiffications button on control screen
         private async void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        //LogOut button on control screen
         private void MenuLogOutBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
             LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
+            //Animation to hide control screen
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
             ControlAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
             ControlAnimation.From = new Thickness(0, 0, 0, 0);
@@ -998,6 +1097,7 @@ namespace testroom
         #endregion
 
         #region HOME GRID ACTIONS
+        //SearchBox on reservations grid
         private async void HomeGridSearch_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -1005,12 +1105,16 @@ namespace testroom
                 Cursor = Cursors.Wait;
                 if (HomeGridSearch.IsFocused)
                 {
+                    //If Enter key is pressed
                     if (e.Key == Key.Enter)
                     {
+                        //Start the loading animation
                         LoadingAnimation();
 
+                        //Generate all the searched reservations 
                         var isGetSearched = await GetSearchedReservations();
 
+                        //If there were no generated children show No Results label
                         if (HomeGridScrollViewer.Children.Count == 0)
                         {
                             HomeGridNoResultsLabel.Visibility = Visibility.Visible;
@@ -1018,7 +1122,7 @@ namespace testroom
 
                         Cursor = Cursors.Arrow;
 
-
+                        //End the loading animation
                         LoadedAnimation();
                     }
                 }
@@ -1027,10 +1131,12 @@ namespace testroom
             {
                 ShowError(ex.Message);
 
+                //End the loading animation
                 LoadedAnimation();
             }
         }
 
+        //Add reservation button on reservations grid
         private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
 
