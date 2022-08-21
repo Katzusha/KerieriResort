@@ -1019,7 +1019,7 @@ namespace testroom
 
                 //Animation to show control screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1087,7 +1087,7 @@ namespace testroom
 
             //Animation to hide control screen
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            ControlAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+            ControlAnimation.To = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
             ControlAnimation.From = new Thickness(0, 0, 0, 0);
             ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
