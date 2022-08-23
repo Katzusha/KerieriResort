@@ -635,7 +635,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 440;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -648,7 +648,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "RESERVATIONS";
+            //button.Content = "RESERVATIONS";
 
             Cursor = Cursors.Hand;
         }
@@ -660,7 +660,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to blue
@@ -672,7 +672,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "🗀";
+            //button.Content = "🗀";
 
             Cursor = Cursors.Arrow;
         }
@@ -684,7 +684,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 650;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -697,7 +697,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "CLASSIFFICATIONS";
+            //button.Content = "CLASSIFFICATIONS";
 
             Cursor = Cursors.Hand;
         }
@@ -708,7 +708,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to blue
@@ -720,7 +720,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "🛏";
+            //button.Content = "🛏";
 
             Cursor = Cursors.Arrow;
         }
@@ -732,7 +732,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 300px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 300;
+            myDoubleAnimation.To = 380;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -745,7 +745,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "LogOut";
+            //button.Content = "LogOut";
 
             Cursor = Cursors.Hand;
         }
@@ -756,7 +756,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to red
@@ -768,7 +768,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "☠";
+            //button.Content = "☠";
 
             Cursor = Cursors.Arrow;
         }
@@ -1036,6 +1036,100 @@ namespace testroom
                 LoadedAnimation();
             }
         }
+
+        //Username input on login screen
+        private async void loginusernameinput_KeyUp(object sender, KeyEventArgs e)
+        {
+            //If Key.Enter is clicked while username input is focused
+            if (e.Key == Key.Enter)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                var isLogIn = await LogIn();
+
+                //If there is a user start this loop
+                if (isLogIn)
+                {
+                    //Generate all reservations from users database
+                    var isGetAllSearched = await GetAllReservations();
+
+                    ControlGrid.Visibility = Visibility.Visible;
+
+                    //Animation to hide login screen
+                    ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                    LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+                    //Animation to show control screen
+                    ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                    ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+                else
+                {
+                    //If there is no user in database then show error label
+                    loginfaillabel.Visibility = Visibility.Visible;
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+            }
+        }
+
+        //Password input on login screen
+        private async void loginpasswordinput_KeyUp(object sender, KeyEventArgs e)
+        {
+            //If Key.Enter is clicked while password input is focused
+            if (e.Key == Key.Enter)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                var isLogIn = await LogIn();
+
+                //If there is a user start this loop
+                if (isLogIn)
+                {
+                    //Generate all reservations from users database
+                    var isGetAllSearched = await GetAllReservations();
+
+                    ControlGrid.Visibility = Visibility.Visible;
+
+                    //Animation to hide login screen
+                    ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                    LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+                    //Animation to show control screen
+                    ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                    ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+                else
+                {
+                    //If there is no user in database then show error label
+                    loginfaillabel.Visibility = Visibility.Visible;
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+            }
+        }
         #endregion
 
         #region MENU BUTTONS
@@ -1141,6 +1235,9 @@ namespace testroom
         {
 
         }
+
+
+
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS
@@ -1214,5 +1311,7 @@ namespace testroom
         #endregion
 
         #endregion
+
+
     }
 }

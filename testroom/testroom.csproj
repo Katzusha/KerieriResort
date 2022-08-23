@@ -26,11 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="home.png" />
-    <Resource Include="icons8-home-500.png" />
-    <Resource Include="image.png" />
-    <Resource Include="kerieri.png" />
-    <Resource Include="kerierilogo.png" />
+    <Resource Include="Images\reservations.png" />
+    <Resource Include="Images\kerierilogo.png" />
   </ItemGroup>
 
 </Project>

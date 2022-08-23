@@ -80,10 +80,10 @@
 
         <!-- LOGIN GRID -->
         <Grid x:Name="LogInGrid" Visibility="Hidden">
-            <Image Source="/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
                      Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold">
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type TextBox}">
                         <Setter Property="SnapsToDevicePixels"
@@ -122,7 +122,7 @@
                 </TextBox.Resources>
             </TextBox>
             <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
-                         Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold">
+                         Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
                     <Style x:Key="{x:Type PasswordBox}"
                         TargetType="{x:Type PasswordBox}">
@@ -295,7 +295,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Background="#FF171717"/>
-            <Image Grid.Column="0" Source="/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <!--#region MENU GRIDS-->
             <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
@@ -392,7 +392,7 @@
             <!--#endregion-->
 
             <!--#region MENU BUTTONS-->
-            <Button x:Name="MenuLogOutBtn" Content="☠" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
+            <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                 FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
@@ -416,8 +416,21 @@
                         </Setter>
                     </Style>
                 </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="240px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/logouticon.png"/>
+                        </Image.Source>
+                    </Image>
+                    <TextBox Grid.Column="2" Text="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 5, 0, 5" IsReadOnly="True"/>
+                </Grid>
             </Button>
-            <Button x:Name="MenuClassifficationBtn" Grid.Column="0" Content="🛏" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+            <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                     FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,280,-1000,0" 
                     Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
@@ -442,8 +455,21 @@
                         </Setter>
                     </Style>
                 </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="520px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/classifficationsicon.png"/>
+                        </Image.Source>
+                    </Image>
+                    <TextBox Grid.Column="2" Text="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 5, 0, 5" IsReadOnly="True"/>
+                </Grid>
             </Button>
-            <Button x:Name="MenuReservationsBtn" Grid.Column="0" Content="🗀" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+            <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                     FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
                 <Button.Resources>
@@ -467,6 +493,19 @@
                         </Setter>
                     </Style>
                 </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="300px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/reservations.png" />
+                        </Image.Source>
+                    </Image>
+                    <TextBox Grid.Column="2" Text="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" IsReadOnly="True" Margin="0, 5, 0, 5"/>
+                </Grid>
             </Button>
             <!--#endregion-->
 
