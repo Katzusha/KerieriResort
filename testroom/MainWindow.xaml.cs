@@ -1036,6 +1036,100 @@ namespace testroom
                 LoadedAnimation();
             }
         }
+
+        //Username input on login screen
+        private async void loginusernameinput_KeyUp(object sender, KeyEventArgs e)
+        {
+            //If Key.Enter is clicked while username input is focused
+            if (e.Key == Key.Enter)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                var isLogIn = await LogIn();
+
+                //If there is a user start this loop
+                if (isLogIn)
+                {
+                    //Generate all reservations from users database
+                    var isGetAllSearched = await GetAllReservations();
+
+                    ControlGrid.Visibility = Visibility.Visible;
+
+                    //Animation to hide login screen
+                    ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                    LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+                    //Animation to show control screen
+                    ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                    ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+                else
+                {
+                    //If there is no user in database then show error label
+                    loginfaillabel.Visibility = Visibility.Visible;
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+            }
+        }
+
+        //Password input on login screen
+        private async void loginpasswordinput_KeyUp(object sender, KeyEventArgs e)
+        {
+            //If Key.Enter is clicked while password input is focused
+            if (e.Key == Key.Enter)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                var isLogIn = await LogIn();
+
+                //If there is a user start this loop
+                if (isLogIn)
+                {
+                    //Generate all reservations from users database
+                    var isGetAllSearched = await GetAllReservations();
+
+                    ControlGrid.Visibility = Visibility.Visible;
+
+                    //Animation to hide login screen
+                    ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                    LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+                    //Animation to show control screen
+                    ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                    ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                    ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+                else
+                {
+                    //If there is no user in database then show error label
+                    loginfaillabel.Visibility = Visibility.Visible;
+
+                    //End the loading animation
+                    LoadedAnimation();
+                }
+            }
+        }
         #endregion
 
         #region MENU BUTTONS
@@ -1141,6 +1235,9 @@ namespace testroom
         {
 
         }
+
+
+
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS
@@ -1214,5 +1311,7 @@ namespace testroom
         #endregion
 
         #endregion
+
+
     }
 }
