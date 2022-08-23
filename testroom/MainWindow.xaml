@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
         Title="MainWindow" Height="523" Width="1143" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700">
     <Window.Resources>
         <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
@@ -432,7 +433,7 @@
             </Button>
             <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,280,-1000,0" 
+                    FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,360,-1000,0" 
                     Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -471,7 +472,7 @@
             </Button>
             <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
@@ -505,6 +506,44 @@
                         </Image.Source>
                     </Image>
                     <TextBox Grid.Column="2" Text="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" IsReadOnly="True" Margin="0, 5, 0, 5"/>
+                </Grid>
+            </Button>
+            <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="340"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/dashboardicon.png" />
+                        </Image.Source>
+                    </Image>
+                    <TextBox Grid.Column="2" Text="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" IsReadOnly="True" Margin="0, 5, 0, 5"/>
                 </Grid>
             </Button>
             <!--#endregion-->
