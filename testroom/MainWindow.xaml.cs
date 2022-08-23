@@ -635,7 +635,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 440;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -648,7 +648,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "RESERVATIONS";
+            //button.Content = "RESERVATIONS";
 
             Cursor = Cursors.Hand;
         }
@@ -660,7 +660,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to blue
@@ -672,7 +672,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "🗀";
+            //button.Content = "🗀";
 
             Cursor = Cursors.Arrow;
         }
@@ -684,7 +684,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 650;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -697,7 +697,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "CLASSIFFICATIONS";
+            //button.Content = "CLASSIFFICATIONS";
 
             Cursor = Cursors.Hand;
         }
@@ -708,7 +708,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to blue
@@ -720,7 +720,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "🛏";
+            //button.Content = "🛏";
 
             Cursor = Cursors.Arrow;
         }
@@ -732,7 +732,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 300px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 300;
+            myDoubleAnimation.To = 380;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -745,7 +745,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "LogOut";
+            //button.Content = "LogOut";
 
             Cursor = Cursors.Hand;
         }
@@ -756,7 +756,7 @@ namespace testroom
             //Animation for buttons size to transforme it back to 150px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
             myDoubleAnimation.To = 150;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.1));
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
             //Animation for buttons background to transforme from transperent to red
@@ -768,7 +768,7 @@ namespace testroom
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
 
-            button.Content = "☠";
+            //button.Content = "☠";
 
             Cursor = Cursors.Arrow;
         }
