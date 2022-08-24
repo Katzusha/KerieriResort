@@ -1238,7 +1238,7 @@ namespace testroom
         }
         #endregion
 
-        #region HOME GRID ACTIONS
+        #region RESERVATIONS GRID ACTIONS
         //SearchBox on reservations grid
         private async void HomeGridSearch_KeyUp(object sender, KeyEventArgs e)
         {
@@ -1281,11 +1281,9 @@ namespace testroom
         //Add reservation button on reservations grid
         private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ReservationsGrid.Visibility = Visibility.Hidden;
+            CreateReservationGrid.Visibility = Visibility.Visible;
         }
-
-
-
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS

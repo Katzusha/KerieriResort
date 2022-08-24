@@ -298,6 +298,8 @@
             <Border Background="#FF171717"/>
             <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+            
+            
             <!--#region MENU GRIDS-->
             <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
@@ -389,7 +391,9 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-
+            <Grid x:Name="CreateReservationGrid" Grid.Column="2">
+                
+            </Grid>
             <!--#endregion-->
 
             <!--#region MENU BUTTONS-->
