@@ -10,6 +10,9 @@
     <None Remove="home.png" />
     <None Remove="icons8-home-500.png" />
     <None Remove="image.png" />
+    <None Remove="Images\classifficationsicon.png" />
+    <None Remove="Images\dashboardicon.png" />
+    <None Remove="Images\logouticon.png" />
     <None Remove="kerieri.png" />
     <None Remove="kerierilogo.png" />
   </ItemGroup>
@@ -26,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\classifficationsicon.png" />
+    <Resource Include="Images\dashboardicon.png" />
+    <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
   </ItemGroup>

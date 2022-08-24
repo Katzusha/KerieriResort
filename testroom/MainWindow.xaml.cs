@@ -183,6 +183,7 @@ namespace testroom
 
             ReservationsGrid.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+            CreateReservationGrid.Visibility = Visibility.Hidden;
         }
 
         #region PUBLIC COMMANDS
@@ -628,6 +629,54 @@ namespace testroom
 
         //Enter and leave animations for menu buttons
         #region MENU BUTTON animation
+        private void MenuDashboardButton_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to transforme to 500px it's width
+            button.Background = Brushes.Blue;
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 480;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+
+            //Animation for buttons background to transforme from transperent to blue
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(23, 23, 23);
+            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+
+            //button.Content = "RESERVATIONS";
+
+            Cursor = Cursors.Hand;
+        }
+        private void MenuDashboardButton_Leave(object sender, MouseEventArgs e)
+        {
+
+            Button button = (Button)sender;
+
+            //Animation for buttons size to transforme it back to 150px it's width
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 150;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+
+            //Animation for buttons background to transforme from transperent to blue
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.To = Color.FromRgb(23, 23, 23);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+
+            //button.Content = "🗀";
+
+            Cursor = Cursors.Arrow;
+        }
         private void MenuHomeButton_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
@@ -1144,6 +1193,7 @@ namespace testroom
                 //Show the reservatons grid and hide no results label
                 ReservationsGrid.Visibility = Visibility.Visible;
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                CreateReservationGrid.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1164,7 +1214,7 @@ namespace testroom
         }
 
         //Classiffications button on control screen
-        private async void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
+        private void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -1190,7 +1240,7 @@ namespace testroom
         }
         #endregion
 
-        #region HOME GRID ACTIONS
+        #region RESERVATIONS GRID ACTIONS
         //SearchBox on reservations grid
         private async void HomeGridSearch_KeyUp(object sender, KeyEventArgs e)
         {
@@ -1233,11 +1283,9 @@ namespace testroom
         //Add reservation button on reservations grid
         private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ReservationsGrid.Visibility = Visibility.Hidden;
+            CreateReservationGrid.Visibility = Visibility.Visible;
         }
-
-
-
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS
@@ -1311,7 +1359,5 @@ namespace testroom
         #endregion
 
         #endregion
-
-
     }
 }
