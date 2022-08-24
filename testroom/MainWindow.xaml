@@ -391,7 +391,7 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationGrid" Grid.Column="2">
+            <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible">
                 
             </Grid>
             <!--#endregion-->

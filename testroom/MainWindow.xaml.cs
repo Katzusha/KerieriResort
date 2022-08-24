@@ -183,6 +183,7 @@ namespace testroom
 
             ReservationsGrid.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+            CreateReservationGrid.Visibility = Visibility.Hidden;
         }
 
         #region PUBLIC COMMANDS
@@ -1192,6 +1193,7 @@ namespace testroom
                 //Show the reservatons grid and hide no results label
                 ReservationsGrid.Visibility = Visibility.Visible;
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                CreateReservationGrid.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1212,7 +1214,7 @@ namespace testroom
         }
 
         //Classiffications button on control screen
-        private async void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
+        private void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
