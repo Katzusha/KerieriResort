@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="ThreeDBorderWindow"
-        Title="MainWindow" Height="265" Width="1254" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700">
+        Title="MainWindow" Height="1080" Width="1920" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700">
     <Window.Resources>
         <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -298,8 +298,8 @@
             <Border Background="#FF171717"/>
             <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-            
-            
+
+
             <!--#region MENU GRIDS-->
             <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
@@ -391,8 +391,11 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible">
-                
+            <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Margin="0, 75, 0, 50"/>
+                <Border Name="CreateReservationGridMainReservantInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="0,0,0,10"/>
+                <Border Name="CreateReservationGridSideReservantsInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="225,0,0,10"/>
+                <Border Name="CreateReservationGridReservationInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="0,0,225,10"/>
             </Grid>
             <!--#endregion-->
 

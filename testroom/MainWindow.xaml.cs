@@ -1191,7 +1191,9 @@ namespace testroom
                 LoadingAnimation();
 
                 //Show the reservatons grid and hide no results label
+                ControlGrid.Visibility = Visibility.Visible;
                 ReservationsGrid.Visibility = Visibility.Visible;
+                ReservationsGrid.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
                 CreateReservationGrid.Visibility = Visibility.Hidden;
 
@@ -1283,8 +1285,26 @@ namespace testroom
         //Add reservation button on reservations grid
         private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-            ReservationsGrid.Visibility = Visibility.Hidden;
             CreateReservationGrid.Visibility = Visibility.Visible;
+            ReservationsGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridReservationInformationGridBorderLabel.Background = Brushes.White;
+
+            ////Animation to hide login screen
+            //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+            //LogInAnimation.From = new Thickness(0, 0, 0, 0);
+            //LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+            //ReservationsGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+            ////Animation to show control screen
+            //ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            //ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+            //ControlAnimation.To = new Thickness(0, 0, 0, 0);
+            //ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+            //CreateReservationGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+            ////End the loading animation
+            LoadedAnimation();
         }
         #endregion
 
