@@ -392,10 +392,138 @@
 
             <!--#region  CREATION GRID-->
             <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Margin="0, 75, 0, 50"/>
-                <Border Name="CreateReservationGridMainReservantInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="0,0,0,10"/>
-                <Border Name="CreateReservationGridSideReservantsInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="225,0,0,10"/>
-                <Border Name="CreateReservationGridReservationInformationGridBorderLabel" Background="#FF5A5A5A" Height="15" CornerRadius="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Margin="0,0,225,10"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="CreateReservationGridReservationInformationProgress" Content="Reservation info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" Margin="-1000,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}"/>
+                <Label x:Name="CreateReservationGridMainReservantInformationProgress" Content="Main guest info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-300,0,0,0"/>
+                <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-400,0"/>
+                <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-1000,0"/>
+
+                <Grid x:Name="CreateReservationGridReservationInformationGrid" Margin="0,0,0,0" Grid.Row="1" Visibility="Visible">
+                    <Button x:Name="CreateReservationGridReservationInformationNextBtn" Click="CreateReservationGridReservationInformationNextBtn_Click"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="50" Content="Next"
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Margin="0,0,30,30">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Margin="0,0,0,0" Grid.Row="1" Visibility="Hidden">
+                    <Button x:Name="CreateReservationGridMainReservantInformationNextBtn" Click="CreateReservationGridMainReservantInformationNextBtn_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="50" Content="Next"
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,30,30" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Margin="0,0,0,0" Grid.Row="1" Visibility="Hidden">
+                    <Button x:Name="CreateReservationGridSideReservantInformationNextBtn" Click="CreateReservationGridSideReservantInformationNextBtn_Click"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="50" Content="Next"
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,30,30" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Margin="0,0,0,0" Grid.Row="1" Visibility="Hidden">
+                    <Button x:Name="CreateReservationGridPaymentInformationSaveBtn" Click="CreateReservationGridPaymentInformationSaveBtn_Click"
+                            HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="50" Content="Next"
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,30,30" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
             </Grid>
             <!--#endregion-->
 
@@ -435,7 +563,7 @@
                             UriSource="Images/logouticon.png"/>
                         </Image.Source>
                     </Image>
-                    <TextBox Grid.Column="2" Text="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 5, 0, 5" IsReadOnly="True"/>
+                    <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
@@ -474,7 +602,7 @@
                             UriSource="Images/classifficationsicon.png"/>
                         </Image.Source>
                     </Image>
-                    <TextBox Grid.Column="2" Text="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 5, 0, 5" IsReadOnly="True"/>
+                    <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
@@ -512,7 +640,7 @@
                             UriSource="Images/reservations.png" />
                         </Image.Source>
                     </Image>
-                    <TextBox Grid.Column="2" Text="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" IsReadOnly="True" Margin="0, 5, 0, 5"/>
+                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
@@ -550,7 +678,7 @@
                             UriSource="Images/dashboardicon.png" />
                         </Image.Source>
                     </Image>
-                    <TextBox Grid.Column="2" Text="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" IsReadOnly="True" Margin="0, 5, 0, 5"/>
+                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <!--#endregion-->

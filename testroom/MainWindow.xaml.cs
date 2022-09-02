@@ -1287,7 +1287,15 @@ namespace testroom
         {
             CreateReservationGrid.Visibility = Visibility.Visible;
             ReservationsGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridReservationInformationGridBorderLabel.Background = Brushes.White;
+
+            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
 
             ////Animation to hide login screen
             //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
@@ -1379,5 +1387,77 @@ namespace testroom
         #endregion
 
         #endregion
+
+        private void CreateReservationGridReservationInformationNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+            //Animation to hide reservation information screen
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+            ControlAnimation.From = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
+        }
+
+        private void CreateReservationGridMainReservantInformationNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+            //Animation to hide reservation information screen
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+            ControlAnimation.From = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
+        }
+
+        private void CreateReservationGridSideReservantInformationNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridPaymentInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+            //Animation to hide reservation information screen
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+            ControlAnimation.From = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+        }
+
+        private void CreateReservationGridPaymentInformationSaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateReservationGrid.Visibility = Visibility.Hidden;
+            ReservationsGrid.Visibility = Visibility.Visible;
+        }
     }
 }
