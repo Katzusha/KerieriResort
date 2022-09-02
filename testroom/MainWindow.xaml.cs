@@ -1297,6 +1297,12 @@ namespace testroom
             CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
 
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.To = new Thickness(0, 0, 0, 0);
+            ControlAnimation.From = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
             ////Animation to hide login screen
             //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
