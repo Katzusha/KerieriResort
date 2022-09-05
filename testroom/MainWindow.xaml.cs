@@ -259,28 +259,28 @@ namespace testroom
                         int col = 0;
                         int row = 0;
                         RowDefinition newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
+                        newrow.Height = new GridLength(75);
                         HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                         foreach (var information in getall)
                         {
                             //If there are four children in previus row generate new row same as privius
-                            if (col == 4)
-                            {
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                            //if (col == 4)
+                            //{
+                            //    newrow = new RowDefinition();
+                            //    newrow.Height = new GridLength(250);
+                            //    HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
-                                col = 0;
-                                row++;
-                            }
+                            //    col = 0;
+                            //    row++;
+                            //}
 
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\n" +
-                                "From: " + information.FromDate + "\nTo: " + information.ToDate + "\nCl.: " + information.Name;
+                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\tCl.: " + information.Name +
+                                "\tFrom : " + information.FromDate + "\tTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["HomeGeneratedButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                             button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
@@ -290,7 +290,11 @@ namespace testroom
                             Grid.SetRow(button, row);
                             HomeGridScrollViewer.Children.Add(button);
 
-                            col++;
+                            newrow = new RowDefinition();
+                            newrow.Height = new GridLength(75);
+                            HomeGridScrollViewer.RowDefinitions.Add(newrow);
+
+                            row++;
                         }
                     }
                     catch (Exception ex)
@@ -335,7 +339,7 @@ namespace testroom
                 int col = 0;
                 int row = 0;
                 RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(250);
+                newrow.Height = new GridLength(75);
                 HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                 foreach (var information in GetSearched)
@@ -344,7 +348,7 @@ namespace testroom
                     {
                         //If there are four children in previus row generate new row same as privius
                         newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
+                        newrow.Height = new GridLength(75);
                         HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                         col = 0;
@@ -355,8 +359,8 @@ namespace testroom
                     Button button = new Button();
                     button.Name = "ReservationId" + information.Id;
                     string firstname = information.Firstname.ToString();
-                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\n" +
-                        "From: " + information.FromDate + "\nTo: " + information.ToDate + "\nCl.:" + information.Name;
+                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\tCl.: " + information.Name +
+                                "\tFrom : " + information.FromDate + "\tTo: " + information.ToDate;
                     button.Style = (Style)this.Resources["HomeGeneratedButton"];
                     //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                     button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));

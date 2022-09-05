@@ -12,13 +12,13 @@
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
             <EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>
             <EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Background" Value="#7F0000FF"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="32px"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -298,10 +298,10 @@
             <Border Background="#FF171717"/>
             <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-            
-            
+
+
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -314,9 +314,6 @@
                     <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
                         <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                         </Grid>
@@ -392,7 +389,7 @@
 
             <!--#region  CREATION GRID-->
             <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible">
-                
+
             </Grid>
             <!--#endregion-->
 
