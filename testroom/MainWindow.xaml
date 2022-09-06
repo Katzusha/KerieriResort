@@ -415,6 +415,7 @@
                     <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0"/>
                     <Calendar x:Name="CreateReservationGridFromDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-300,0,0,-150"/>
                     <Calendar x:Name="CreateReservationGridToDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,-300,-150"/>
+                    
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">

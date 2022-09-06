@@ -378,6 +378,30 @@ namespace testroom
             }
         }
 
+        //Generate children for CreateReservation combobox
+        public async Task<bool> GetAllClassifficaitonsForCombobox()
+        {
+            await Task.Delay(500);
+
+            ClearAll();
+
+            dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+            if (GetClassiffications != null)
+            {
+                foreach (var information in GetClassiffications)
+                {
+                    CreateReservationGridClassifficationCombobox.Items.Add(information.Name);
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -1288,46 +1312,37 @@ namespace testroom
         //Add reservation button on reservations grid
         private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Begin loading animation
+            LoadingAnimation();
+
+            //Switch displayed grids
             CreateReservationGrid.Visibility = Visibility.Visible;
             ReservationsGrid.Visibility = Visibility.Hidden;
 
+            //Make sure that every grid will be displayed in the right order
             CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
             CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
             CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
             CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
 
+            //Resert progression bar
             CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
 
-            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            ControlAnimation.To = new Thickness(0, 0, 0, 0);
-            ControlAnimation.From = new Thickness(0, 0, 0, 0);
-            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
+            //Start the progress bar
             CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
 
+            //Reset all the values needed for the Creation
             CreateReservationProgress = 1;
             CreateReservationGridNextBtn.Content = "Next";
             CreateReservationGridBackBtn.Content = "Cancel";
 
-            ////Animation to hide login screen
-            //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-            //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
-            //LogInAnimation.From = new Thickness(0, 0, 0, 0);
-            //LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            //ReservationsGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            //Fill the Combobox with all the classifficaitons
+            GetAllClassifficaitonsForCombobox();
 
-            ////Animation to show control screen
-            //ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            //ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
-            //ControlAnimation.To = new Thickness(0, 0, 0, 0);
-            //ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            //CreateReservationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-            ////End the loading animation
+            //End the loading animation
             LoadedAnimation();
         }
         #endregion
@@ -1491,8 +1506,16 @@ namespace testroom
         {
             if (CreateReservationProgress == 1)
             {
+                //Begin loading animation
+                LoadingAnimation();
+
                 CreateReservationGrid.Visibility = Visibility.Hidden;
                 ReservationsGrid.Visibility = Visibility.Visible;
+
+                GetAllReservations();
+
+                //End loading animation
+                LoadedAnimation();
             }
             else if (CreateReservationProgress == 2)
             {
