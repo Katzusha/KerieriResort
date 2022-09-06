@@ -280,8 +280,8 @@ namespace testroom
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\n" +
-                                "From: " + information.FromDate + "\nTo: " + information.ToDate + "\nCl.: " + information.Name;
+                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["HomeGeneratedButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                             button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
@@ -356,8 +356,8 @@ namespace testroom
                     Button button = new Button();
                     button.Name = "ReservationId" + information.Id;
                     string firstname = information.Firstname.ToString();
-                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\n" +
-                        "From: " + information.FromDate + "\nTo: " + information.ToDate + "\nCl.:" + information.Name;
+                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                     button.Style = (Style)this.Resources["HomeGeneratedButton"];
                     //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
                     button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));

@@ -12,13 +12,13 @@
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
             <EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>
             <EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Background" Value="#7F0000FF"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="32px"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -301,7 +301,7 @@
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
