@@ -12,6 +12,7 @@ namespace testroom
 {
     class LogInCommands
     {
+        //Send username and password and retrive user information
         public static bool UserLogIn(string username, string password)
         {
             // Create a request using a URL that can receive a post. 

@@ -11,6 +11,7 @@ namespace testroom
 {
     class ClassifficationCommands
     {
+        //Retrive all classiffications from clients database
         public static dynamic GetAll()
         {
             WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ClassifficationsAPI/GetAll.php");
@@ -46,6 +47,7 @@ namespace testroom
             return AllClassiffications;
         }
 
+        //Retrive searched classiffications from clients database
         public static dynamic GetSearched(string searched)
         {
             // Create a request using a URL that can receive a post. 
@@ -82,6 +84,7 @@ namespace testroom
             return SearchedReservations;
         }
 
+        //Post classiffication information to clients database
         public static bool CreateClassiffication(string Name, string SerialNumber, string Price)
         {
             WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ClassifficationsAPI/PostClassiffication.php");
