@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="MainWindow" Height="1080" Width="1920" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700" WindowState="Maximized">
+        Title="MainWindow" Height="453" Width="1140" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -295,8 +295,6 @@
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Background="#FF171717"/>
-            <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
 
@@ -397,20 +395,32 @@
                     <RowDefinition Height="857*"/>
                     <RowDefinition Height="123*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="CreateReservationGridReservationInformationProgress" Content="Reservation info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" Margin="211,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}"/>
-                <Label x:Name="CreateReservationGridMainReservantInformationProgress" Content="Main guest info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="565,0,0,0"/>
-                <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="901,0,0,0"/>
-                <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="1276,0,0,0"/>
+                <Label x:Name="CreateReservationGridReservationInformationProgress" Content="Reservation info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" Margin="-930,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}"/>
+                <Label x:Name="CreateReservationGridMainReservantInformationProgress" Content="Main guest info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-317,0,0,0"/>
+                <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-311,0"/>
+                <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-858,0"/>
 
-                <Grid x:Name="CreateReservationGridReservationInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
+                <Grid x:Name="CreateReservationGridReservationInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                    <Label x:Name="CreateReservationGridFromDateLabel" Content="From date :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-975,-315,0,0" Foreground="White" 
+                   FontSize="20"/>
+                    <DatePicker x:Name="CreateReservationGridFromDateDatePicker" HorizontalAlignment="Center" Margin="-675,-225,0,0" VerticalAlignment="Center" Width="450" Height="50" FontSize="24"/>
+
+                    <Label x:Name="CreateReservationGridToDateLabel" Content="To date :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-975,-125,0,0" Foreground="White" 
+                   FontSize="20"/>
+                    <DatePicker x:Name="CreateReservationGridToDateDatePicker" HorizontalAlignment="Center" Margin="-675,-30,0,0" VerticalAlignment="Center" Width="450" Height="50" FontSize="24"/>
+                    <Label x:Name="CreateReservationGridClassifficationLabel" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-975,-515,0,0" Foreground="White" 
+                   FontSize="20"/>
+                    <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" Margin="-675,-425,0,0" VerticalAlignment="Center" Width="450" Height="50" FontSize="24"/>
                 </Grid>
+                
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Button/>
                 </Grid>
+                
                 <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Button/>
                 </Grid>
+                
                 <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Button/>
                 </Grid>
@@ -474,13 +484,14 @@
             <!--#endregion-->
 
             <!--#region MENU BUTTONS-->
-            <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
+            <Border Background="#FF171717"/>
+            <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
+                    FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="#FFFF4F4F"/>
+                        <Setter Property="BorderBrush" Value="Blue"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -501,15 +512,53 @@
                 <Grid Height="70" Width="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="240px"/>
+                        <ColumnDefinition Width="340"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
                         <Image.Source>
                             <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/logouticon.png"/>
+                            UriSource="Images/dashboardicon.png" />
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                </Grid>
+            </Button>
+            <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="300px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/reservations.png" />
+                        </Image.Source>
+                    </Image>
+                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
@@ -551,13 +600,13 @@
                     <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
-            <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+            <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderBrush" Value="#FFFF4F4F"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -578,55 +627,18 @@
                 <Grid Height="70" Width="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="300px"/>
+                        <ColumnDefinition Width="240px"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
                         <Image.Source>
                             <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/reservations.png" />
+                            UriSource="Images/logouticon.png"/>
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
-            <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
-                        <Setter Property="BorderThickness" Value="4"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid Height="70" Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="340"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
-                        <Image.Source>
-                            <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/dashboardicon.png" />
-                        </Image.Source>
-                    </Image>
-                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
-                </Grid>
-            </Button>
+            <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <!--#endregion-->
 
         </Grid>

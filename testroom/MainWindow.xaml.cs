@@ -1064,14 +1064,14 @@ namespace testroom
 
                 //Animation to hide login screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to show control screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1110,14 +1110,14 @@ namespace testroom
 
                     //Animation to hide login screen
                     ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                     ControlAnimation.To = new Thickness(0, 0, 0, 0);
                     ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1157,14 +1157,14 @@ namespace testroom
 
                     //Animation to hide login screen
                     ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                     ControlAnimation.To = new Thickness(0, 0, 0, 0);
                     ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1230,13 +1230,13 @@ namespace testroom
             //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
-            LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+            LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
             //Animation to hide control screen
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            ControlAnimation.To = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+            ControlAnimation.To = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
             ControlAnimation.From = new Thickness(0, 0, 0, 0);
             ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1315,14 +1315,14 @@ namespace testroom
 
             ////Animation to hide login screen
             //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-            //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+            //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
             //LogInAnimation.From = new Thickness(0, 0, 0, 0);
             //LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             //ReservationsGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
             ////Animation to show control screen
             //ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            //ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+            //ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
             //ControlAnimation.To = new Thickness(0, 0, 0, 0);
             //ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             //CreateReservationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1415,13 +1415,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.From = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1438,13 +1438,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.From = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1461,13 +1461,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridPaymentInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.From = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1504,13 +1504,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1525,13 +1525,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1548,13 +1548,13 @@ namespace testroom
                 //Animation to show main reservant information screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
+                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridPaymentInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to hide reservation information screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
+                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
                 CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
