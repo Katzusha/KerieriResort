@@ -41,17 +41,17 @@
                 <Border
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
-                  CornerRadius="0"
+                  CornerRadius="25"
                   Background="#FF3F3F3F"
                   BorderBrush="#FF97A0A5"
-                  BorderThickness="1" />
+                  BorderThickness="0" />
                 <Border 
                   Grid.Column="0"
-                  CornerRadius="0" 
+                  CornerRadius="25, 0, 0, 25" 
                   Margin="1" 
                   Background="#FF3F3F3F" 
                   BorderBrush="#FF97A0A5"
-                  BorderThickness="0,0,1,0" />
+                  BorderThickness="0,0,0,0" />
                 <Path 
                   x:Name="Arrow"
                   Grid.Column="1"     
@@ -105,7 +105,7 @@
                             <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                            Margin="3,3,23,3"
+                            Margin="25,3,23,3"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left" />
                             <TextBox x:Name="PART_EditableTextBox"
@@ -113,7 +113,7 @@
                             Template="{StaticResource ComboBoxTextBox}" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
-                            Margin="3,3,23,3"
+                            Margin="25,3,23,3"
                             Focusable="True" 
                             Background="#3e3e3e"
                             Foreground="White"
@@ -574,7 +574,6 @@
                     <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0" SelectedIndex="0"/>
                     <Calendar x:Name="CreateReservationGridFromDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,300,-150"/>
                     <Calendar x:Name="CreateReservationGridToDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="300,0,0,-150"/>
-
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
