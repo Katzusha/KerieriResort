@@ -409,6 +409,8 @@ namespace testroom
             CreateReservationGridNextBtn.Content = "Next";
             CreateReservationGridBackBtn.Content = "Cancel";
 
+            CreateReservationGridClassifficationCombobox.Items.Add("None");
+
             dynamic GetClassiffications = ClassifficationCommands.GetAll();
 
             if (GetClassiffications != null)
@@ -1124,6 +1126,8 @@ namespace testroom
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
+                loginfaillabel.Visibility = Visibility.Hidden;
+
                 //End the loading animation
                 LoadedAnimation();
             }
@@ -1290,6 +1294,7 @@ namespace testroom
             ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
             LogInGrid.Visibility = Visibility.Visible;
+            loginfaillabel.Visibility = Visibility.Hidden;
         }
         #endregion
 
