@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace testroom
 {
@@ -171,7 +172,7 @@ namespace testroom
             return decrypted;
         }
         #endregion
-        
+
         public MainWindow()
         {
             //When application start we need to make sure that the login window is the first window that we show
@@ -184,6 +185,24 @@ namespace testroom
             ReservationsGrid.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
             CreateReservationGrid.Visibility = Visibility.Hidden;
+
+            InitializeComponent();
+
+            StartClock();
+        }
+
+        private void StartClock()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += tickevent;
+            timer.Start();
+        }
+
+        private void tickevent(object sender, EventArgs e)
+        {
+            MenuClock.Content = DateTime.Now.ToString("HH:mm");
+            MenuDate.Content = DateTime.Now.ToString("dd.MM.yyyy");
         }
 
         #region PUBLIC COMMANDS
@@ -195,6 +214,11 @@ namespace testroom
 
             HomeGridScrollViewer.Children.Clear();
             HomeGridScrollViewer.RowDefinitions.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            loginusernamelabel.Content = DateTime.Now.ToString("HH:mm:ss");
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
@@ -385,30 +409,6 @@ namespace testroom
 
             ClearAll();
 
-            //Switch displayed grids
-            CreateReservationGrid.Visibility = Visibility.Visible;
-            ReservationsGrid.Visibility = Visibility.Hidden;
-
-            //Make sure that every grid will be displayed in the right order
-            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
-            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
-
-            //Resert progression bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-
-            //Start the progress bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
-
-            //Reset all the values needed for the Creation
-            CreateReservationProgress = 1;
-            CreateReservationGridNextBtn.Content = "Next";
-            CreateReservationGridBackBtn.Content = "Cancel";
-
             CreateReservationGridClassifficationCombobox.Items.Add("None");
 
             dynamic GetClassiffications = ClassifficationCommands.GetAll();
@@ -426,6 +426,42 @@ namespace testroom
             {
                 return false;
             }
+        }
+
+        public async Task<bool> GetAvailableEssentialsOfClassiffication(int ClassifficationId)
+        {
+            await Task.Delay(500);
+
+            dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+            int row = 0;
+
+            foreach (var information in GetClassiffications)
+            {
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(60);
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Add(newrow);
+
+
+                CheckBox checkbox = new CheckBox();
+                checkbox.Name = "EssentialId" + information.Id;
+                checkbox.Content = information.Name;
+
+                TextBox textbox = new TextBox();
+                textbox.Text = "0.00€";
+
+                Grid.SetColumn(checkbox, 0);
+                Grid.SetRow(checkbox, row);
+                CreateReservationGridAvailableEssentialsGrid.Children.Add(checkbox);
+
+                Grid.SetColumn(textbox, 1);
+                Grid.SetRow(textbox, row);
+                CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
+
+                row++;
+            }
+
+            return false;
         }
 
         #endregion
@@ -1346,6 +1382,32 @@ namespace testroom
 
             //Fill the Combobox with all the classifficaitons
             var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
+
+            var isGetAvailableEssentials = await GetAvailableEssentialsOfClassiffication(1);
+
+            //Switch displayed grids
+            CreateReservationGrid.Visibility = Visibility.Visible;
+            ReservationsGrid.Visibility = Visibility.Hidden;
+
+            //Make sure that every grid will be displayed in the right order
+            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+            //Resert progression bar
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+            //Start the progress bar
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
+
+            //Reset all the values needed for the Creation
+            CreateReservationProgress = 1;
+            CreateReservationGridNextBtn.Content = "Next";
+            CreateReservationGridBackBtn.Content = "Cancel";
 
             //End the loading animation
             LoadedAnimation();

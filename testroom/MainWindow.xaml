@@ -574,6 +574,16 @@
                     <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0" SelectedIndex="0"/>
                     <Calendar x:Name="CreateReservationGridFromDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,300,-150"/>
                     <Calendar x:Name="CreateReservationGridToDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="300,0,0,-150"/>
+                    <Border BorderThickness="1" Grid.Column="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E">
+                        <ScrollViewer Margin="0,25,0,25">
+                            <Grid x:Name="CreateReservationGridAvailableEssentialsGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
@@ -765,7 +775,7 @@
             </Button>
             <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
+                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,94" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
@@ -801,6 +811,8 @@
                     <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
+            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="12:00" FontWeight="Bold" Padding="-10"/>
+            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1999" VerticalAlignment="Bottom"/>
             <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <!--#endregion-->
 
