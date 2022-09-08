@@ -385,6 +385,30 @@ namespace testroom
 
             ClearAll();
 
+            //Switch displayed grids
+            CreateReservationGrid.Visibility = Visibility.Visible;
+            ReservationsGrid.Visibility = Visibility.Hidden;
+
+            //Make sure that every grid will be displayed in the right order
+            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+            //Resert progression bar
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+            CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+            //Start the progress bar
+            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
+
+            //Reset all the values needed for the Creation
+            CreateReservationProgress = 1;
+            CreateReservationGridNextBtn.Content = "Next";
+            CreateReservationGridBackBtn.Content = "Cancel";
+
             dynamic GetClassiffications = ClassifficationCommands.GetAll();
 
             if (GetClassiffications != null)
@@ -1310,37 +1334,13 @@ namespace testroom
         }
 
         //Add reservation button on reservations grid
-        private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
             //Begin loading animation
             LoadingAnimation();
 
-            //Switch displayed grids
-            CreateReservationGrid.Visibility = Visibility.Visible;
-            ReservationsGrid.Visibility = Visibility.Hidden;
-
-            //Make sure that every grid will be displayed in the right order
-            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
-            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
-
-            //Resert progression bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-
-            //Start the progress bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
-
-            //Reset all the values needed for the Creation
-            CreateReservationProgress = 1;
-            CreateReservationGridNextBtn.Content = "Next";
-            CreateReservationGridBackBtn.Content = "Cancel";
-
             //Fill the Combobox with all the classifficaitons
-            GetAllClassifficaitonsForCombobox();
+            var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
 
             //End the loading animation
             LoadedAnimation();

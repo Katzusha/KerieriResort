@@ -31,6 +31,38 @@
             </Setter>
             <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="TextBoxInput" TargetType="{x:Type TextBox}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="AllowDrop" Value="False" />
+            <Setter Property="FontSize" Value="24px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border" CornerRadius="25" Padding="2">
+                            <Border.Background>
+                                <SolidColorBrush Color="#3e3e3e" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.BorderBrush>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <!--BACKGROUND GRID-->
@@ -84,44 +116,7 @@
             <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
                      Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="SnapsToDevicePixels"
-                            Value="True" />
-                        <Setter Property="OverridesDefaultStyle"
-                            Value="True" />
-                        <Setter Property="KeyboardNavigation.TabNavigation"
-                            Value="None" />
-                        <Setter Property="FocusVisualStyle"
-                            Value="{x:Null}" />
-                        <Setter Property="MinWidth"
-                            Value="0" />
-                        <Setter Property="MinHeight"
-                            Value="0" />
-                        <Setter Property="AllowDrop"
-                            Value="False" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                                    <Border Name="Border"
-                                        CornerRadius="25"
-                                        Padding="2">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="#3e3e3e" />
-                                        </Border.Background>
-                                        <Border.BorderBrush>
-                                            <SolidColorBrush Color="Transparent" />
-                                        </Border.BorderBrush>
-                                        <ScrollViewer Margin="0"
-                                            x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
             <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
                          Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
@@ -406,16 +401,16 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label x:Name="CreateReservationGridFromDateLabel" Grid.Column="0" Content="From date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
-                   FontSize="20" Margin="-450,-175,0,0"/>
+                   FontSize="20" Margin="0,-175,450,0"/>
 
                     <Label x:Name="CreateReservationGridToDateLabel" Grid.Column="0" Content="To date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
-                   FontSize="20" Margin="0,-175,-150,0"/>
+                   FontSize="20" Margin="150,-175,0,0"/>
                     <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
-                   FontSize="20" Margin="-275,-390,0,0"/>
+                   FontSize="20" Margin="0,-390,275,0"/>
                     <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0"/>
-                    <Calendar x:Name="CreateReservationGridFromDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-300,0,0,-150"/>
-                    <Calendar x:Name="CreateReservationGridToDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,-300,-150"/>
-                    
+                    <Calendar x:Name="CreateReservationGridFromDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,300,-150"/>
+                    <Calendar x:Name="CreateReservationGridToDateCalendar" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="300,0,0,-150"/>
+
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
