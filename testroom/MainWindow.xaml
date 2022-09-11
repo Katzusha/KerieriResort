@@ -669,6 +669,31 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ComboBoxItemContainerStyle1" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Margin" Value="2, 0, 2, 0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Border" Padding="20, 0, 0, 0" SnapsToDevicePixels="true" CornerRadius="15">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Background" TargetName="Border" Value="#FF4F4F4F"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <!--BACKGROUND GRID-->
@@ -1001,7 +1026,7 @@
                 <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-311,0"/>
                 <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-858,0"/>
 
-                <Grid x:Name="CreateReservationGridReservationInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridReservationInformationGrid" Focusable="False" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -1013,7 +1038,7 @@
                    FontSize="20" Margin="150,-175,0,0"/>
                     <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
                    FontSize="20" Margin="0,-390,275,0"/>
-                    <ComboBox x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0" SelectedIndex="0"/>
+                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="0,-300,0,0" SelectedIndex="0"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridFromDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,300,-150"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridToDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="300,0,0,-150"/>
                     <Border BorderThickness="1" Grid.Column="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E">
