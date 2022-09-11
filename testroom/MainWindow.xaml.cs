@@ -449,6 +449,7 @@ namespace testroom
 
                 TextBox textbox = new TextBox();
                 textbox.Text = "0.00€";
+                textbox.Style = (Style)this.Resources["EssentialPrice"];
 
                 Grid.SetColumn(checkbox, 0);
                 Grid.SetRow(checkbox, row);
