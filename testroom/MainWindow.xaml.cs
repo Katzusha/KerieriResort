@@ -1569,6 +1569,8 @@ namespace testroom
             }
             else if (CreateReservationProgress == 4)
             {
+
+
                 CreateReservationGrid.Visibility = Visibility.Hidden;
                 ReservationsGrid.Visibility = Visibility.Visible;
             }
