@@ -15,12 +15,22 @@ namespace testroom
     /// </summary>
     public partial class PDF : Window
     {
-        public PDF(int id, string filename)
+        public PDF(int id, string filename, string documentnumber, string createddate, string fromdate, string todate, string customername, string customeraddress, string customercontact)
         {
             InitializeComponent();
 
             try
             {
+                DocumentNumber.Content = documentnumber;
+                CreatedDate.Content = createddate;
+                FromDate.Content = fromdate;
+                ToDate.Content = todate;
+                CustomerName.Content = customername;
+                CustomerAddress.Content = customeraddress;
+                CustomerContact.Content = customercontact;
+
+                GenerateItems();
+
                 if (id == 1)
                 { 
                     MemoryStream lMemoryStream = new MemoryStream();
@@ -72,7 +82,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
                     
                     // Write pdf file
-                    FileStream fileStream = new FileStream("D:\\" + filename + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("Documents\\" + filename + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
@@ -88,6 +98,28 @@ namespace testroom
             }
 
             this.Close();
+        }
+
+        private void GenerateItems()
+        {
+            for (int x = 1; x < 10; x++)
+            {
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(40);
+                ItemsGrid.RowDefinitions.Add(newrow);
+
+                for (int y = 0; y < 3; y++)
+                {
+                    Label button = new Label();
+                    button.Content = x.ToString();
+                    button.Style = (Style)this.Resources["Item"];
+
+
+                    Grid.SetColumn(button, y);
+                    Grid.SetRow(button, x);
+                    ItemsGrid.Children.Add(button);
+                }
+            }
         }
     }
 }

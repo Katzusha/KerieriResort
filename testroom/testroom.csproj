@@ -36,6 +36,11 @@
     <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
+    <Resource Include="kerierilogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Documents\" />
   </ItemGroup>
 
 </Project>

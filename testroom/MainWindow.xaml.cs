@@ -1498,7 +1498,7 @@ namespace testroom
         #endregion
 
         public int CreateReservationProgress = 1;
-        private void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
+        private async void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CreateReservationProgress == 1)
             {
@@ -1569,10 +1569,16 @@ namespace testroom
             }
             else if (CreateReservationProgress == 4)
             {
+                LoadingAnimation();
 
+                PDF pdf = new PDF(1, "Nekaj", "13/12122022-24122022", "12-09-2022", "12-12-2022", "24-12-2022", "Andraž Košak", "Braslovče 5b, 3314 Braslovče", "kosak.andraz@gmail.com");
 
                 CreateReservationGrid.Visibility = Visibility.Hidden;
                 ReservationsGrid.Visibility = Visibility.Visible;
+
+                var isGetAllReservations = await GetAllReservations();
+
+                LoadedAnimation();
             }
             else
             {

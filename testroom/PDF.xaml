@@ -7,17 +7,85 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Title="PDF" Height="1056" Width="816">
-    <Grid Margin="20, 20, 20, 20" x:Name="print">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Image HorizontalAlignment="Left" Height="120" Margin="0,0,0,0" VerticalAlignment="Top" Width="120">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/Images/kerierilogo.png"/>
-            </Image.OpacityMask>
-        </Image>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="193,174,0,0" Grid.Row="1" VerticalAlignment="Top" Height="183" Width="364"/>
+    <Window.Resources>
+        <Style x:Key="ItemsHeader" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="1, 1, 0, 3"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="#FFD1D1D1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="Item" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Margin="25, 25, 25, 25" x:Name="print">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="766"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="160"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Margin="10,10,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="153*"/>
+                    <ColumnDefinition Width="210*"/>
+                    <ColumnDefinition Width="233*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0" BorderBrush="Black" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/kerierilogo.png"/>
+                    </Border.Background>
+                </Border>
+                <Label Content="Document n.:" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="136"/>
+                <Label Content="Created date :" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2"/>
+                <Label Content="From date :" HorizontalAlignment="Right" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="117"/>
+                <Label Content="To date :" HorizontalAlignment="Right" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="90"/>
 
-    </Grid>
+                <Label x:Name="DocumentNumber" Content="00/000000000-00000000" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
+                <Label x:Name="CreatedDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
+                <Label x:Name="FromDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
+                <Label x:Name="ToDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
+            </Grid>
+            <Border BorderThickness="0" BorderBrush="Black" Grid.Row="1" Background="#3e3e3e"/>
+            <Grid Grid.Row="2" Margin="10,20,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Company inforamtion:" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" VerticalAlignment="Top"/>
+                <Label Content="Kerieri development s.p." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Top" Margin="30,35,0,0"/>
+                <Label Content="Braslovče 5b, 3314 Braslovče" HorizontalAlignment="Left" FontSize="19" VerticalAlignment="Top" Margin="30,65,0,0"/>
+                <Label Content="info@kerieri.com" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Top" Margin="30,96,0,0"/>
+
+                <Label Content="Customer inforamtion:" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label x:Name="CustomerName" Content="Kerieri development s.p." HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Top" Margin="30,35,0,0" Grid.Column="1"/>
+                <Label x:Name="CustomerAddress" Content="Braslovče 5b, 3314 Braslovče" HorizontalAlignment="Left" FontSize="19" VerticalAlignment="Top" Margin="30,65,0,0" Grid.Column="1"/>
+                <Label x:Name="CustomerContact" Content="info@kerieri.com" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Top" Margin="30,96,0,0" Grid.Column="1"/>
+            </Grid>
+            <Grid x:Name="ItemsGrid" Grid.Row="3" Margin="0, 20, 0, 0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,510,2" Grid.ColumnSpan="2"/>
+                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,0,2" Grid.Column="1"/>
+                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="510,0,0,2" Grid.Column="1" Grid.ColumnSpan="2"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+
 </Window>
