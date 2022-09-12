@@ -214,6 +214,14 @@ namespace testroom
 
             HomeGridScrollViewer.Children.Clear();
             HomeGridScrollViewer.RowDefinitions.Clear();
+
+            CreateReservationGridClassifficationCombobox.Items.Clear();
+            CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
+
+            CreateReservationGridFromDateCalendar.SelectedDate = DateTime.Today;
+            CreateReservationGridToDateCalendar.SelectedDate = DateTime.Today;
+
+            CreateReservationGridAvailableEssentialsGrid.Children.Clear();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -346,10 +354,10 @@ namespace testroom
         {
             await Task.Delay(500);
 
+            ClearAll();
+
             ReservationsGrid.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-
-            ClearAll();
 
             //Get json file for the searched reservations
             dynamic GetSearched = ReservationCommands.GetSearched(HomeGridSearch.Text);
@@ -431,6 +439,8 @@ namespace testroom
         public async Task<bool> GetAvailableEssentialsOfClassiffication(int ClassifficationId)
         {
             await Task.Delay(500);
+
+            ClearAll();
 
             dynamic GetClassiffications = ClassifficationCommands.GetAll();
 

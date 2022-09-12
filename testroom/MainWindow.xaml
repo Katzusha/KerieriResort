@@ -213,6 +213,7 @@
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Cursor" Value="IBeam"/>
             <Setter Property="MinHeight" Value="0" />
             <Setter Property="AllowDrop" Value="False" />
             <Setter Property="FontSize" Value="24px"/>
@@ -245,7 +246,7 @@
                     <TextBlock FontWeight="Bold" FontFamily="Verdana" Foreground="White" FontSize="12" HorizontalAlignment="Center" Margin="0, 0, 0, 0" Text="{Binding}" VerticalAlignment="Center"/>
                 </DataTemplate>
             </ControlTemplate.Resources>
-            <Grid x:Name="PART_Root" Width="275" Height="275">
+            <Grid x:Name="PART_Root" Width="275" Height="275" Focusable="False">
                 <Grid.Resources>
                     <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF"/>
                 </Grid.Resources>
@@ -392,7 +393,7 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
-                            <Grid x:Name="PART_MonthView" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Visible">
+                            <Grid x:Name="PART_MonthView" Focusable="False" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Visible">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -412,7 +413,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                             </Grid>
-                            <Grid x:Name="PART_YearView" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Hidden">
+                            <Grid x:Name="PART_YearView" Focusable="False" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Hidden">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -564,13 +565,13 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="TodayBackground" Fill="#000096" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <Rectangle x:Name="SelectedBackground" Fill="Blue" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+                            <Rectangle x:Name="TodayBackground" Fill="#000096" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="SelectedBackground" Fill="Blue" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Focusable="False"/>
                             <Rectangle x:Name="HighlightBackground" Fill="#3333ff" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <Path x:Name="Blackout" Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z" Fill="#FF000000" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
-                            <Rectangle x:Name="DayButtonFocusVisual" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Focusable="False" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Path x:Name="Blackout" Focusable="False" Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z" Fill="#FF000000" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
+                            <Rectangle x:Name="DayButtonFocusVisual" Focusable="False" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -655,10 +656,10 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="SelectedBackground" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <Rectangle x:Name="Background" Fill="{TemplateBinding Background}" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,0,1,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <Rectangle x:Name="CalendarButtonFocusVisual" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                            <Rectangle x:Name="SelectedBackground" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="Background" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,0,1,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="CalendarButtonFocusVisual" IsHitTestVisible="false" Focusable="False" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
@@ -669,6 +670,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <Style x:Key="ComboBoxItemContainerStyle1" TargetType="{x:Type ComboBoxItem}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="Margin" Value="2, 0, 2, 0"/>
