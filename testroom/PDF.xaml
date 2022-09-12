@@ -78,8 +78,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="0*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,510,2" Grid.ColumnSpan="2"/>
                 <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,0,2" Grid.Column="1"/>

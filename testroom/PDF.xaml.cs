@@ -82,7 +82,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
                     
                     // Write pdf file
-                    FileStream fileStream = new FileStream("Documents\\" + filename + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("\\Documents\\" + filename + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
@@ -102,23 +102,33 @@ namespace testroom
 
         private void GenerateItems()
         {
-            for (int x = 1; x < 10; x++)
-            {
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(40);
-                ItemsGrid.RowDefinitions.Add(newrow);
+            RowDefinition newrow = new RowDefinition();
+            newrow.Height = new GridLength(40);
+            ItemsGrid.RowDefinitions.Add(newrow);
 
+            string[] nekaj = { "nekaj", "nekaj1", "nekaj2" };
+
+            int row = 1;
+
+            foreach(var info in nekaj)
+            {
                 for (int y = 0; y < 3; y++)
                 {
                     Label button = new Label();
-                    button.Content = x.ToString();
+                    button.Content = info.ToString();
                     button.Style = (Style)this.Resources["Item"];
 
 
                     Grid.SetColumn(button, y);
-                    Grid.SetRow(button, x);
+                    Grid.SetRow(button, row);
                     ItemsGrid.Children.Add(button);
                 }
+
+                row++;
+
+                newrow = new RowDefinition();
+                newrow.Height = new GridLength(40);
+                ItemsGrid.RowDefinitions.Add(newrow);
             }
         }
     }
