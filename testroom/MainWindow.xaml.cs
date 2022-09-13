@@ -18,6 +18,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Dynamic;
+using Newtonsoft.Json.Converters;
 
 namespace testroom
 {
@@ -1571,7 +1573,22 @@ namespace testroom
             {
                 LoadingAnimation();
 
-                PDF pdf = new PDF(1, "Nekaj", "13/12122022-24122022", "12-09-2022", "12-12-2022", "24-12-2022", "Andraž Košak", "Braslovče 5b, 3314 Braslovče", "kosak.andraz@gmail.com");
+                //string json = "{\"endpoints\":[{\"name\":\"prod\",  \"enabled\":true },{\"name\":\"dev\", \"enabled\":true},{\"name\":\"qa\", \"enabled\":false}]}"; //see JSON section below for pretty printed JSON
+
+                //dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+                //Console.WriteLine($"Deserialized JSON into {config.GetType()}");
+
+                //foreach (var enabledEndpoint in ((IEnumerable<dynamic>)config.endpoints).Where(t => t.enabled))
+                //{
+                //    Console.WriteLine($"{enabledEndpoint.name} is enabled");
+                //}
+
+                string json = "{\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, {\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, {\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}]}";
+
+                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+                PDF pdf = new PDF(1, "Nekaj", "13/12122022-24122022", "12-09-2022", "12-12-2022", "24-12-2022", "Andraž Košak", "Braslovče 5b, 3314 Braslovče", "kosak.andraz@gmail.com", config);
 
                 CreateReservationGrid.Visibility = Visibility.Hidden;
                 ReservationsGrid.Visibility = Visibility.Visible;

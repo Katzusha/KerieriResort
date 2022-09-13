@@ -15,7 +15,7 @@ namespace testroom
     /// </summary>
     public partial class PDF : Window
     {
-        public PDF(int id, string filename, string documentnumber, string createddate, string fromdate, string todate, string customername, string customeraddress, string customercontact)
+        public PDF(int id, string filename, string documentnumber, string createddate, string fromdate, string todate, string customername, string customeraddress, string customercontact, dynamic config)
         {
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace testroom
                 CustomerAddress.Content = customeraddress;
                 CustomerContact.Content = customercontact;
 
-                GenerateItems();
+                GenerateItems(config);
 
                 if (id == 1)
                 { 
@@ -100,34 +100,41 @@ namespace testroom
             this.Close();
         }
 
-        private void GenerateItems()
+        private void GenerateItems(dynamic config)
         {
             RowDefinition newrow = new RowDefinition();
-            newrow.Height = new GridLength(40);
+            newrow.Height = new GridLength(30);
             ItemsGrid.RowDefinitions.Add(newrow);
-
-            string[] nekaj = { "nekaj", "nekaj1", "nekaj2" };
 
             int row = 1;
 
-            foreach(var info in nekaj)
+            foreach(var info in config.Items)
             {
-                for (int y = 0; y < 3; y++)
-                {
-                    Label button = new Label();
-                    button.Content = info.ToString();
-                    button.Style = (Style)this.Resources["Item"];
+                Label button = new Label();
+                button.Content = info.Quantity;
+                button.Style = (Style)this.Resources["Item"];
+                Grid.SetColumn(button, 0);
+                Grid.SetRow(button, row);
+                ItemsGrid.Children.Add(button);
 
+                button = new Label();
+                button.Content = info.Item;
+                button.Style = (Style)this.Resources["Item"];
+                Grid.SetColumn(button, 1);
+                Grid.SetRow(button, row);
+                ItemsGrid.Children.Add(button);
 
-                    Grid.SetColumn(button, y);
-                    Grid.SetRow(button, row);
-                    ItemsGrid.Children.Add(button);
-                }
+                button = new Label();
+                button.Content = info.Price;
+                button.Style = (Style)this.Resources["Item"];
+                Grid.SetColumn(button, 2);
+                Grid.SetRow(button, row);
+                ItemsGrid.Children.Add(button);
 
                 row++;
 
                 newrow = new RowDefinition();
-                newrow.Height = new GridLength(40);
+                newrow.Height = new GridLength(30);
                 ItemsGrid.RowDefinitions.Add(newrow);
             }
         }

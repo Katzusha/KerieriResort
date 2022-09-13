@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="PDF" Height="1056" Width="816">
+        Title="PDF" Height="1123" Width="816">
     <Window.Resources>
         <Style x:Key="ItemsHeader" TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="18"/>
@@ -16,7 +16,7 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <Style x:Key="Item" TargetType="{x:Type Label}">
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
             <Setter Property="BorderBrush" Value="Black"/>
         </Style>
@@ -70,7 +70,7 @@
                 <Label x:Name="CustomerAddress" Content="Braslovče 5b, 3314 Braslovče" HorizontalAlignment="Left" FontSize="19" VerticalAlignment="Top" Margin="30,65,0,0" Grid.Column="1"/>
                 <Label x:Name="CustomerContact" Content="info@kerieri.com" HorizontalAlignment="Left" FontSize="18" VerticalAlignment="Top" Margin="30,96,0,0" Grid.Column="1"/>
             </Grid>
-            <Grid x:Name="ItemsGrid" Grid.Row="3" Margin="0, 20, 0, 0" VerticalAlignment="Top">
+            <Grid x:Name="ItemsGrid" Grid.Row="3" Margin="0, 20, 0, 75" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="4*"/>
@@ -79,9 +79,17 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,510,2" Grid.ColumnSpan="2"/>
-                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="0,0,0,2" Grid.Column="1"/>
-                <Label Content="Content" Style="{DynamicResource ItemsHeader}" Margin="510,0,0,2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label Content="Quanitity" Style="{DynamicResource ItemsHeader}" Margin="0,0,510,2" Grid.ColumnSpan="2"/>
+                <Label Content="Item" Style="{DynamicResource ItemsHeader}" Margin="0,0,0,2" Grid.Column="1"/>
+                <Label Content="Price" Style="{DynamicResource ItemsHeader}" Margin="510,0,0,2" Grid.Column="1" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Grid Grid.Row="3" VerticalAlignment="Bottom" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label FontSize="24" Content="Total:" FontWeight="Bold" Background="#FFD1D1D1" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+                <Label x:Name="TotalPrice" VerticalContentAlignment="Center" FontSize="24" FontWeight="Bold" Content="0.00€" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </Grid>
         </Grid>
     </ScrollViewer>
