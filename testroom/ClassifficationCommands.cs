@@ -21,9 +21,9 @@ namespace testroom
             string postData = "DatabaseName=" + MainWindow.DatabaseName;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/x-www-form-urlencoded";
             // Set the ContentLength property of the WebRequest.
-            request.ContentLength = byteArray.Length;
+            //request.ContentLength = byteArray.Length;
             // Get the request stream.
             Stream dataStream = request.GetRequestStream();
             // Write the data to the request stream.
@@ -58,7 +58,7 @@ namespace testroom
             string postData = "searched=" + searched + "&DatabaseName=" + MainWindow.DatabaseName;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/x-www-form-urlencoded";
             // Set the ContentLength property of the WebRequest.
             request.ContentLength = byteArray.Length;
             // Get the request stream.
@@ -96,7 +96,7 @@ namespace testroom
                 "&PriceCents=" + Price.Substring(Price.Length - 2);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/x-www-form-urlencoded";
             // Set the ContentLength property of the WebRequest.
             request.ContentLength = byteArray.Length;
             // Get the request stream.

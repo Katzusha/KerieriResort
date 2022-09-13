@@ -15,21 +15,21 @@ namespace testroom
     /// </summary>
     public partial class PDF : Window
     {
-        public PDF(int id, string filename, string documentnumber, string createddate, string fromdate, string todate, string customername, string customeraddress, string customercontact, dynamic config)
+        public PDF(int id, dynamic pdfinfo)
         {
             InitializeComponent();
 
             try
             {
-                DocumentNumber.Content = documentnumber;
-                CreatedDate.Content = createddate;
-                FromDate.Content = fromdate;
-                ToDate.Content = todate;
-                CustomerName.Content = customername;
-                CustomerAddress.Content = customeraddress;
-                CustomerContact.Content = customercontact;
+                DocumentNumber.Content = pdfinfo.DocumentNumber;
+                CreatedDate.Content = pdfinfo.CreatedDate;
+                FromDate.Content = pdfinfo.FromDate;
+                ToDate.Content = pdfinfo.ToDate;
+                CustomerName.Content = pdfinfo.CustomerName;
+                CustomerAddress.Content = pdfinfo.CustomerAddress;
+                CustomerContact.Content = pdfinfo.CustomerContact;
 
-                GenerateItems(config);
+                GenerateItems(pdfinfo);
 
                 if (id == 1)
                 { 
@@ -49,7 +49,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
 
                     // Write pdf file
-                    FileStream fileStream = new FileStream("D:\\" + filename + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("D:\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
@@ -82,7 +82,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
                     
                     // Write pdf file
-                    FileStream fileStream = new FileStream("\\Documents\\" + filename + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("\\Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
@@ -100,15 +100,17 @@ namespace testroom
             this.Close();
         }
 
-        private void GenerateItems(dynamic config)
+        private void GenerateItems(dynamic pdfinfo)
         {
+            decimal totalprice = 0.00m;
+
             RowDefinition newrow = new RowDefinition();
             newrow.Height = new GridLength(30);
             ItemsGrid.RowDefinitions.Add(newrow);
 
             int row = 1;
 
-            foreach(var info in config.Items)
+            foreach(var info in pdfinfo.Items)
             {
                 Label button = new Label();
                 button.Content = info.Quantity;
@@ -125,11 +127,13 @@ namespace testroom
                 ItemsGrid.Children.Add(button);
 
                 button = new Label();
-                button.Content = info.Price;
+                button.Content = (decimal.Parse(info.Price.Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())) + "€";
                 button.Style = (Style)this.Resources["Item"];
                 Grid.SetColumn(button, 2);
                 Grid.SetRow(button, row);
                 ItemsGrid.Children.Add(button);
+
+                totalprice = totalprice + ((decimal.Parse(info.Price.ToString().Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())));
 
                 row++;
 
@@ -137,6 +141,8 @@ namespace testroom
                 newrow.Height = new GridLength(30);
                 ItemsGrid.RowDefinitions.Add(newrow);
             }
+
+            TotalPrice.Content = totalprice.ToString().Replace(',', '.') + "€";
         }
     }
 }

@@ -224,6 +224,7 @@ namespace testroom
             CreateReservationGridToDateCalendar.SelectedDate = DateTime.Today;
 
             CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+            CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -417,14 +418,14 @@ namespace testroom
         {
             await Task.Delay(500);
 
-            ClearAll();
-
-            CreateReservationGridClassifficationCombobox.Items.Add("None");
-
-            dynamic GetClassiffications = ClassifficationCommands.GetAll();
-
-            if (GetClassiffications != null)
+            try
             {
+                ClearAll();
+
+                CreateReservationGridClassifficationCombobox.Items.Add("None");
+
+                dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
                 foreach (var information in GetClassiffications)
                 {
                     CreateReservationGridClassifficationCombobox.Items.Add(information.Name);
@@ -432,17 +433,17 @@ namespace testroom
 
                 return true;
             }
-            else
+            catch (Exception ex)
             {
+                ShowError(ex.Message);
                 return false;
             }
+            
         }
 
         public async Task<bool> GetAvailableEssentialsOfClassiffication(int ClassifficationId)
         {
             await Task.Delay(500);
-
-            ClearAll();
 
             dynamic GetClassiffications = ClassifficationCommands.GetAll();
 
@@ -1584,11 +1585,21 @@ namespace testroom
                 //    Console.WriteLine($"{enabledEndpoint.name} is enabled");
                 //}
 
-                string json = "{\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, {\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, {\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}]}";
+                string json = "{\"DocumentName\": \"0001_13_12-09-2022_Košak\", " +
+                    "\"DocumentNumber\": \"13/12122022-24122022\", " +
+                    "\"CreatedDate\": \"12-09-2022\", " +
+                    "\"FromDate\": \"12-12-2022\", " +
+                    "\"ToDate\": \"24-12-2022\", " +
+                    "\"CustomerName\": \"Andraž Košak\", " +
+                    "\"CustomerAddress\": \"Braslovče 5b, 3314 Braslovče\", " +
+                    "\"CustomerContact\": \"kosak.andraz@gmail.com\", " +
+                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, " +
+                    "{\"Quantity\": 3, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, " +
+                    "{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}]}";
 
-                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+                dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
 
-                PDF pdf = new PDF(1, "Nekaj", "13/12122022-24122022", "12-09-2022", "12-12-2022", "24-12-2022", "Andraž Košak", "Braslovče 5b, 3314 Braslovče", "kosak.andraz@gmail.com", config);
+                PDF pdf = new PDF(1, pdfinfo);
 
                 CreateReservationGrid.Visibility = Visibility.Hidden;
                 ReservationsGrid.Visibility = Visibility.Visible;
