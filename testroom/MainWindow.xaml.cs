@@ -428,7 +428,11 @@ namespace testroom
 
                 foreach (var information in GetClassiffications)
                 {
-                    CreateReservationGridClassifficationCombobox.Items.Add(information.Name);
+                    ComboBoxItem item = new ComboBoxItem();
+                    item.Name = "ClassifficationId" + information.Id;
+                    item.Content = information.Name;
+
+                    CreateReservationGridClassifficationCombobox.Items.Add(item);
                 }
 
                 return true;
@@ -441,15 +445,17 @@ namespace testroom
             
         }
 
-        public async Task<bool> GetAvailableEssentialsOfClassiffication(int ClassifficationId)
+        public async Task<bool> GetAvailableEssentialsOfClassiffication()
         {
             await Task.Delay(500);
 
-            dynamic GetClassiffications = ClassifficationCommands.GetAll();
+            ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
+
+            dynamic AvailableEssentials = ReservationCommands.GetAvailableEssentials(item.Name.Replace("ClassifficationId", ""));
 
             int row = 0;
 
-            foreach (var information in GetClassiffications)
+            foreach (var information in AvailableEssentials)
             {
                 RowDefinition newrow = new RowDefinition();
                 newrow.Height = new GridLength(60);
@@ -461,7 +467,7 @@ namespace testroom
                 checkbox.Content = information.Name;
 
                 TextBox textbox = new TextBox();
-                textbox.Text = "0.00€";
+                textbox.Text = information.Price + "€";
                 textbox.Style = (Style)this.Resources["EssentialPrice"];
 
                 Grid.SetColumn(checkbox, 0);
@@ -1397,8 +1403,6 @@ namespace testroom
             //Fill the Combobox with all the classifficaitons
             var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
 
-            var isGetAvailableEssentials = await GetAvailableEssentialsOfClassiffication(1);
-
             //Switch displayed grids
             CreateReservationGrid.Visibility = Visibility.Visible;
             ReservationsGrid.Visibility = Visibility.Hidden;
@@ -1704,6 +1708,11 @@ namespace testroom
             }
 
             CreateReservationProgress -= 1;
+        }
+
+        private void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetAvailableEssentialsOfClassiffication();
         }
     }
 }
