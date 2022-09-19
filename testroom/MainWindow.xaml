@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="MainWindow" Height="696" Width="1339" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
+        Title="Kerieri Resort" Height="696" Width="1339" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -1028,7 +1028,7 @@
                 <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-311,0"/>
                 <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-858,0"/>
 
-                <Grid x:Name="CreateReservationGridReservationInformationGrid" Focusable="False" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridReservationInformationGrid" Focusable="False" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -1083,7 +1083,7 @@
                     <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-325" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
 
                 </Grid>
 

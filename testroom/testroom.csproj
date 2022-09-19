@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>Kerieri resort</AssemblyName>
+    <RootNamespace>resorttestroom</RootNamespace>
+    <ApplicationIcon>kerierilogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
