@@ -482,7 +482,7 @@ namespace testroom
                 CheckBox button = new CheckBox();
                 button.Name = "EssentialId" + information.Id;
                 button.Content = information.Name;
-                button.Style = (Style)this.Resources["CheckBoxGeneratedButton"];
+                button.Style = (Style)this.Resources["GeneratedCheckBox"];
 
                 TextBox textbox = new TextBox();
                 textbox.Text = information.Price + "€";
@@ -1730,10 +1730,13 @@ namespace testroom
 
         private void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CreateReservationGridAvailableEssentialsGrid.Children.Clear();
-            CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+            if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+            {
+                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
 
-            GetAvailableEssentialsOfClassiffication();
+                GetAvailableEssentialsOfClassiffication();
+            }
         }
 
         private void CheckBoxBtn_Click(object sender, RoutedEventArgs e)
