@@ -35,24 +35,23 @@
             <Grid Margin="10,10,10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="153*"/>
-                    <ColumnDefinition Width="210*"/>
-                    <ColumnDefinition Width="233*"/>
+                    <ColumnDefinition Width="77*"/>
+                    <ColumnDefinition Width="221*"/>
                 </Grid.ColumnDefinitions>
                 <Border BorderThickness="0" BorderBrush="Black" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150">
                     <Border.Background>
                         <ImageBrush ImageSource="/Images/kerierilogo.png"/>
                     </Border.Background>
                 </Border>
-                <Label Content="Document n.:" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="136"/>
-                <Label Content="Created date :" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2"/>
-                <Label Content="From date :" HorizontalAlignment="Right" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="117"/>
-                <Label Content="To date :" HorizontalAlignment="Right" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="2" Width="90"/>
+                <Label Content="Document n.:" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="1" Width="136"/>
+                <Label Content="Created date :" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="1" Width="141"/>
+                <Label Content="From date :" HorizontalAlignment="Right" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="1" Width="117"/>
+                <Label Content="To date :" HorizontalAlignment="Right" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="1" Width="90"/>
 
-                <Label x:Name="DocumentNumber" Content="00/000000000-00000000" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
-                <Label x:Name="CreatedDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
-                <Label x:Name="FromDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
-                <Label x:Name="ToDate" Content="00-00-0000" HorizontalAlignment="Stretch" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="3"/>
+                <Label x:Name="DocumentNumber" Content="00/000000000-00000000" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="2"/>
+                <Label x:Name="CreatedDate" Content="00-00-0000" Margin="0,35,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="2"/>
+                <Label x:Name="FromDate" Content="00-00-0000" Margin="0,70,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="2"/>
+                <Label x:Name="ToDate" Content="00-00-0000" Margin="0,105,0,0" VerticalAlignment="Top" FontSize="20" Height="34" Grid.Column="2"/>
             </Grid>
             <Border BorderThickness="0" BorderBrush="Black" Grid.Row="1" Background="#3e3e3e"/>
             <Grid Grid.Row="2" Margin="10,20,10,0">

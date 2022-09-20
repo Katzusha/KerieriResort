@@ -1290,7 +1290,7 @@
                     </Border>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
                     <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-535,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
 
@@ -1309,17 +1309,20 @@
                     <Label x:Name="CreateReservationGridMainGuestCountrylabel" Content="Country :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-140,-350,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestCountryInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-50,-650,0"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-45"/>
-                    <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-135" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-45"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,-135"/>
+                    
+                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-235"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-320" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-659,-45"/>
-                    <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-135"/>
+                    <Label x:Name="CreateReservationGridMainGuestCitylabel" Content="City :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-659,-235"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCityInput" Style="{DynamicResource TextBoxInput}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-320"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-235"/>
-                    <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-325" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-425"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0"/>
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0"/>
 
                 <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Button/>

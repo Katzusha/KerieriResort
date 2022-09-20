@@ -1610,16 +1610,16 @@ namespace testroom
                 //}
 
                 string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                    "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "-" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "") + "-" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "") + "\", " +
+                    "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "")  + "\", " +
                     "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
-                    "\"FromDate\": \"12-12-2022\", " +
-                    "\"ToDate\": \"24-12-2022\", " +
-                    "\"CustomerName\": \"Andraž Košak\", " +
-                    "\"CustomerAddress\": \"Braslovče 5b, 3314 Braslovče\", " +
-                    "\"CustomerContact\": \"kosak.andraz@gmail.com\", " +
-                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, " +
-                    "{\"Quantity\": 3, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}, " +
-                    "{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10.50\"}]}";
+                    "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                    "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                    "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                    "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + ", " + CreateReservationGridMainGuestPostNumberInput.Text + " " + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                    "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
+                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}, " +
+                    "{\"Quantity\": 3, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}, " +
+                    "{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}]}";
 
                 dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
 
