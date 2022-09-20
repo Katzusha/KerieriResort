@@ -14,7 +14,7 @@ namespace testroom
         //Retrive all classiffications from clients database
         public static dynamic GetAll()
         {
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ClassifficationsAPI/GetAll.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/GetAll.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
@@ -51,7 +51,7 @@ namespace testroom
         public static dynamic GetSearched(string searched)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ClassifficationsAPI/GetSearched.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/GetSearched.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
@@ -87,7 +87,7 @@ namespace testroom
         //Post classiffication information to clients database
         public static bool CreateClassiffication(string Name, string SerialNumber, string Price)
         {
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ClassifficationsAPI/PostClassiffication.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/PostClassiffication.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.

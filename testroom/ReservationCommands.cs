@@ -14,7 +14,7 @@ namespace testroom
         //TODO: Update API for new database
         public static dynamic GetAll()
         {
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ReservationsAPI/GetAll.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/GetAll.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
@@ -50,7 +50,7 @@ namespace testroom
         public static dynamic GetSearched(string searched)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ReservationsAPI/GetSearched.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/GetSearched.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
@@ -86,7 +86,7 @@ namespace testroom
         public static dynamic GetAvailableEssentials(string ClassifficationId)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/ReservationsAPI/GetAllEssentials.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/GetAllEssentials.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.

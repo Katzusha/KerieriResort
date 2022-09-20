@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>Kerieri resort</AssemblyName>
     <RootNamespace>resorttestroom</RootNamespace>
-    <ApplicationIcon>kerierilogo.ico</ApplicationIcon>
+    <ApplicationIcon>Images\kerierilogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,6 @@
     <None Remove="Images\dashboardicon.png" />
     <None Remove="Images\logouticon.png" />
     <None Remove="kerieri.png" />
-    <None Remove="kerierilogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +38,6 @@
     <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
-    <Resource Include="kerierilogo.png" />
   </ItemGroup>
 
   <ItemGroup>

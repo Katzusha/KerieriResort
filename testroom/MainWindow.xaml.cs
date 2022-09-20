@@ -36,6 +36,8 @@ namespace testroom
         public static string ClassifficationType = string.Empty;
 
         public static string DatabaseName = "";
+
+        public static string APIconnection = "https://kosakandraz.com/API";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
@@ -1607,9 +1609,9 @@ namespace testroom
                 //    Console.WriteLine($"{enabledEndpoint.name} is enabled");
                 //}
 
-                string json = "{\"DocumentName\": \"0001_13_12-09-2022_Košak\", " +
-                    "\"DocumentNumber\": \"13/12122022-24122022\", " +
-                    "\"CreatedDate\": \"12-09-2022\", " +
+                string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                    "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "-" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "") + "-" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "") + "\", " +
+                    "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
                     "\"FromDate\": \"12-12-2022\", " +
                     "\"ToDate\": \"24-12-2022\", " +
                     "\"CustomerName\": \"Andraž Košak\", " +

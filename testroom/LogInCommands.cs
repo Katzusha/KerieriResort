@@ -16,7 +16,7 @@ namespace testroom
         public static bool UserLogIn(string username, string password)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create("https://kosakandraz.com/API/LoginAPI/login.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/LoginAPI/login.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
