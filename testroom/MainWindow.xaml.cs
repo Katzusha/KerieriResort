@@ -218,7 +218,6 @@ namespace testroom
             HomeGridScrollViewer.RowDefinitions.Clear();
 
             CreateReservationGridClassifficationCombobox.Items.Clear();
-            CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
 
             CreateReservationGridFromDateCalendar.SelectedDates.Clear();
             CreateReservationGridToDateCalendar.SelectedDates.Clear();
@@ -466,21 +465,28 @@ namespace testroom
 
             int row = 0;
 
+
+
             foreach (var information in AvailableEssentials)
             {
+                if (information.Success == 0)
+                {
+                    break;
+                }
+
                 RowDefinition newrow = new RowDefinition();
                 newrow.Height = new GridLength(60);
                 CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Add(newrow);
 
 
-                Button button = new Button();
+                CheckBox button = new CheckBox();
                 button.Name = "EssentialId" + information.Id;
                 button.Content = information.Name;
-                button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                button.Style = (Style)this.Resources["CheckBoxGeneratedButton"];
 
                 TextBox textbox = new TextBox();
                 textbox.Text = information.Price + "€";
-                textbox.Style = (Style)this.Resources["EssentialPrice"];
+                textbox.Style = (Style)this.Resources["CheckBogGeneratedButtonPrice"];
 
                 Grid.SetColumn(button, 0);
                 Grid.SetRow(button, row);
@@ -1724,7 +1730,23 @@ namespace testroom
 
         private void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //GetAvailableEssentialsOfClassiffication();
+            CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+            CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+            GetAvailableEssentialsOfClassiffication();
+        }
+
+        private void CheckBoxBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromArgb(122, 0, 0, 255);
+            myColorAnimation.To = Color.FromArgb(255, 0, 0, 255);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            btn.Background = myBrush;            
         }
     }
 }
