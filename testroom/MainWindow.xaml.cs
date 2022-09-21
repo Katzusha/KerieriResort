@@ -1617,9 +1617,35 @@ namespace testroom
                     "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
                     "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + ", " + CreateReservationGridMainGuestPostNumberInput.Text + " " + CreateReservationGridMainGuestCityInput.Text + "\", " +
                     "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}, " +
-                    "{\"Quantity\": 3, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}, " +
-                    "{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}]}";
+                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}";
+
+                //bool secondobjectcheck = false;
+                //foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+                //{
+                //    if (secondobjectcheck == true)
+                //    {
+                //        json = json + ",";
+                //    }
+
+                //    if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                //    {
+                //        CheckBox checkbox = (CheckBox)child;
+
+                //        json = json + "{\"Quantity\": 1, \"Item\": \"Stupid shit\"";
+                //    }
+                //    else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                //    {
+                //        TextBox textbox = (TextBox)child;
+
+                //        json = json + ", \"Price\": \"10,50\"}";
+                //    }
+
+                //    secondobjectcheck = true;
+                //}
+
+                //json = json + "]";
+
+                //MessageBox.Show(json);
 
                 dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
 
