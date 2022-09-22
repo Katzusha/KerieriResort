@@ -1427,6 +1427,8 @@ namespace testroom
             CreateReservationGrid.Visibility = Visibility.Visible;
             ReservationsGrid.Visibility = Visibility.Hidden;
 
+            ///TODO: animatin for creation screen becouse currently the animation is set for grid to me screen.width + 1000 px of the screen when its runned the seccond time
+
             //Make sure that every grid will be displayed in the right order
             CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
             CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
@@ -1615,37 +1617,48 @@ namespace testroom
                     "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
                     "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
                     "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                    "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + ", " + CreateReservationGridMainGuestPostNumberInput.Text + " " + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                    "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
                     "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Stupid shit\", \"Price\": \"10,50\"}";
+                    "\"Items\":[";
 
-                //bool secondobjectcheck = false;
-                //foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
-                //{
-                //    if (secondobjectcheck == true)
-                //    {
-                //        json = json + ",";
-                //    }
+                bool secondobjectcheck = false;
+                bool ischeckedchek = false;
+                foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+                {
+                    if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                    {
+                        ischeckedchek = false;
 
-                //    if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
-                //    {
-                //        CheckBox checkbox = (CheckBox)child;
+                        if (secondobjectcheck == true)
+                        {
+                            json = json + ",";
+                        }
 
-                //        json = json + "{\"Quantity\": 1, \"Item\": \"Stupid shit\"";
-                //    }
-                //    else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
-                //    {
-                //        TextBox textbox = (TextBox)child;
+                        CheckBox checkbox = (CheckBox)child;
 
-                //        json = json + ", \"Price\": \"10,50\"}";
-                //    }
+                        if (checkbox.IsChecked == true)
+                        {
+                            json = json + "{\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
 
-                //    secondobjectcheck = true;
-                //}
+                            ischeckedchek = true;
+                        }
+                    }
+                    else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                    {
+                        TextBox textbox = (TextBox)child;
 
-                //json = json + "]";
+                        if (ischeckedchek == true)
+                        {
+                            json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
+                        }
+                    }
 
-                //MessageBox.Show(json);
+                    secondobjectcheck = true;
+                }
+
+                json = json + "]}";
+
+                MessageBox.Show(json);
 
                 dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
 
