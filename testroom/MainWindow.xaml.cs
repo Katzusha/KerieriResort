@@ -1612,16 +1612,15 @@ namespace testroom
                 //}
 
                 string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                    "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "")  + "\", " +
+                    "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
                     "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
                     "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
                     "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
                     "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
                     "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
                     "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                    "\"Items\":[";
+                    "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200,00\"}";
 
-                bool secondobjectcheck = false;
                 bool ischeckedchek = false;
                 foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
                 {
@@ -1629,16 +1628,11 @@ namespace testroom
                     {
                         ischeckedchek = false;
 
-                        if (secondobjectcheck == true)
-                        {
-                            json = json + ",";
-                        }
-
                         CheckBox checkbox = (CheckBox)child;
 
                         if (checkbox.IsChecked == true)
                         {
-                            json = json + "{\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
+                            json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
 
                             ischeckedchek = true;
                         }
@@ -1652,8 +1646,6 @@ namespace testroom
                             json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
                         }
                     }
-
-                    secondobjectcheck = true;
                 }
 
                 json = json + "]}";

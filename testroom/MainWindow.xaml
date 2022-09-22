@@ -368,14 +368,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                        <Border Name="Border" CornerRadius="25" Padding="2">
+                        <Border Name="Border" CornerRadius="25" Padding="0">
                             <Border.Background>
                                 <SolidColorBrush Color="#3e3e3e" />
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Transparent" />
                             </Border.BorderBrush>
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <ScrollViewer Margin="20, 0, 20, 0" x:Name="PART_ContentHost" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
