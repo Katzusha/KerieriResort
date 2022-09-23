@@ -1776,18 +1776,5 @@ namespace testroom
                 GetAvailableEssentialsOfClassiffication();
             }
         }
-
-        private void CheckBoxBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = (Button)sender;
-
-            SolidColorBrush myBrush = new SolidColorBrush();
-            ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(122, 0, 0, 255);
-            myColorAnimation.To = Color.FromArgb(255, 0, 0, 255);
-            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-            btn.Background = myBrush;            
-        }
     }
 }
