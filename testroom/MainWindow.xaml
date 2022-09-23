@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="Kerieri Resort" Height="696" Width="1339" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
+        Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -1311,7 +1311,7 @@
 
                     <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-45"/>
                     <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,-135"/>
-                    
+
                     <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-235"/>
                     <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-320" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 

@@ -1427,8 +1427,13 @@ namespace testroom
             CreateReservationGrid.Visibility = Visibility.Visible;
             ReservationsGrid.Visibility = Visibility.Hidden;
 
-            ///TODO: animatin for creation screen becouse currently the animation is set for grid to me screen.width + 1000 px of the screen when its runned the seccond time
-
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            
             //Make sure that every grid will be displayed in the right order
             CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
             CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
