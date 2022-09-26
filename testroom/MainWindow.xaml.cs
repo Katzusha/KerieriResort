@@ -184,11 +184,11 @@ namespace testroom
             InitializeComponent();
 
             ControlGrid.Visibility = Visibility.Hidden;
-            LogInGrid.Visibility = Visibility.Visible;
+            LogInScreen.Visibility = Visibility.Visible;
 
-            ReservationsGrid.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-            CreateReservationGrid.Visibility = Visibility.Hidden;
+            CreateReservationScreen.Visibility = Visibility.Hidden;
 
             InitializeComponent();
 
@@ -370,7 +370,7 @@ namespace testroom
 
             ClearAll();
 
-            ReservationsGrid.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
             //Get json file for the searched reservations
@@ -1224,7 +1224,7 @@ namespace testroom
                 LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to show control screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
@@ -1272,7 +1272,7 @@ namespace testroom
                     LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                    LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
@@ -1319,7 +1319,7 @@ namespace testroom
                     LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                    LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
@@ -1354,10 +1354,10 @@ namespace testroom
 
                 //Show the reservatons grid and hide no results label
                 ControlGrid.Visibility = Visibility.Visible;
-                ReservationsGrid.Visibility = Visibility.Visible;
-                ReservationsGrid.Margin = new Thickness(0, 0, 0, 0);
+                ReservationsScreen.Visibility = Visibility.Visible;
+                ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-                CreateReservationGrid.Visibility = Visibility.Hidden;
+                CreateReservationScreen.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1391,7 +1391,7 @@ namespace testroom
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
             LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
             //Animation to hide control screen
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
@@ -1400,7 +1400,7 @@ namespace testroom
             ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
-            LogInGrid.Visibility = Visibility.Visible;
+            LogInScreen.Visibility = Visibility.Visible;
             loginfaillabel.Visibility = Visibility.Hidden;
         }
         #endregion
@@ -1455,8 +1455,8 @@ namespace testroom
             var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
 
             //Switch displayed grids
-            CreateReservationGrid.Visibility = Visibility.Visible;
-            ReservationsGrid.Visibility = Visibility.Hidden;
+            CreateReservationScreen.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Hidden;
 
             //Animation to show main reservant information screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
@@ -1487,6 +1487,179 @@ namespace testroom
 
             //End the loading animation
             LoadedAnimation();
+        }
+
+        public int CreateReservationProgress = 1;
+        //NextGrid button on every grid inside of create reservation grid
+        private async void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CreateReservationProgress == 1)
+                {
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
+
+                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
+
+                    CreateReservationGridBackBtn.Content = "Back";
+                }
+                else if (CreateReservationProgress == 2)
+                {
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
+
+                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+                }
+                else if (CreateReservationProgress == 3)
+                {
+                    CreateReservationGridNextBtn.Content = "Done";
+
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
+
+                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+                }
+                else if (CreateReservationProgress == 4)
+                {
+                    LoadingAnimation();
+
+                    //Generate information about bill and customer
+                    string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                        "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
+                        "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
+                        "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                        "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                        "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                        "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                        "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
+                        "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200,00\"}";
+
+                    bool ischeckedchek = false;
+                    //Generate all the items that are being payed (property, breakfast...)
+                    foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+                    {
+                        if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                        {
+                            ischeckedchek = false;
+
+                            CheckBox checkbox = (CheckBox)child;
+
+                            if (checkbox.IsChecked == true)
+                            {
+                                json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
+
+                                ischeckedchek = true;
+                            }
+                        }
+                        else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                        {
+                            TextBox textbox = (TextBox)child;
+
+                            if (ischeckedchek == true)
+                            {
+                                json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
+                            }
+                        }
+                    }
+
+                    json = json + "]}";
+
+                    dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+                    //Generate pdf
+                    PDF pdf = new PDF(1, pdfinfo);
+
+                    //Return back to the reservations screen
+                    CreateReservationScreen.Visibility = Visibility.Hidden;
+                    ReservationsScreen.Visibility = Visibility.Visible;
+
+                    var isGetAllReservations = await GetAllReservations();
+
+                    LoadedAnimation();
+                }
+                else
+                {
+                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                }
+
+                CreateReservationProgress += 1;
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+            }
+        }
+
+        private async void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationProgress == 1)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                CreateReservationScreen.Visibility = Visibility.Hidden;
+                ReservationsScreen.Visibility = Visibility.Visible;
+
+                var isGetAllReservations = await GetAllReservations();
+
+                //End loading animation
+                LoadedAnimation();
+            }
+            else if (CreateReservationProgress == 2)
+            {
+                CreateReservationGridBackBtn.Content = "Cancel";
+
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridMainReservantInformationGrid, CreateReservationGridReservationInformationGrid);
+
+                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+            }
+            else if (CreateReservationProgress == 3)
+            {
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridSideReservantInformationGrid, CreateReservationGridMainReservantInformationGrid);
+
+                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+            }
+            else if (CreateReservationProgress == 4)
+            {
+                CreateReservationGridNextBtn.Content = "Next";
+
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridPaymentInformationGrid, CreateReservationGridSideReservantInformationGrid);
+
+                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+            }
+            else
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
+
+            CreateReservationProgress -= 1;
+        }
+
+        private async void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+            {
+                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+                var isGetAvailableEssentialsOfClassiffication = await GetAvailableEssentialsOfClassiffication();
+            }
         }
         #endregion
 
@@ -1561,173 +1734,5 @@ namespace testroom
         #endregion
 
         #endregion
-
-        public int CreateReservationProgress = 1;
-        private async void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (CreateReservationProgress == 1)
-                {
-                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
-
-                    SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
-
-                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
-
-                    CreateReservationGridBackBtn.Content = "Back";
-                }
-                else if (CreateReservationProgress == 2)
-                {
-                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
-
-                    SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
-
-                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
-                }
-                else if (CreateReservationProgress == 3)
-                {
-                    CreateReservationGridNextBtn.Content = "Done";
-
-                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
-
-                    SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
-
-                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
-                }
-                else if (CreateReservationProgress == 4)
-                {
-                    LoadingAnimation();
-
-                    string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                        "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
-                        "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
-                        "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
-                        "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
-                        "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                        "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
-                        "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                        "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200,00\"}";
-
-                    bool ischeckedchek = false;
-                    foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
-                    {
-                        if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
-                        {
-                            ischeckedchek = false;
-
-                            CheckBox checkbox = (CheckBox)child;
-
-                            if (checkbox.IsChecked == true)
-                            {
-                                json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
-
-                                ischeckedchek = true;
-                            }
-                        }
-                        else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
-                        {
-                            TextBox textbox = (TextBox)child;
-
-                            if (ischeckedchek == true)
-                            {
-                                json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
-                            }
-                        }
-                    }
-
-                    json = json + "]}";
-
-                    dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
-
-                    PDF pdf = new PDF(1, pdfinfo);
-
-                    CreateReservationGrid.Visibility = Visibility.Hidden;
-                    ReservationsGrid.Visibility = Visibility.Visible;
-
-                    var isGetAllReservations = await GetAllReservations();
-
-                    LoadedAnimation();
-                }
-                else
-                {
-                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
-                }
-
-                CreateReservationProgress += 1;                
-            }
-            catch (Exception ex)
-            {
-                PublicCommands.ShowError(ex.Message);
-            }
-        }
-
-        private void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (CreateReservationProgress == 1)
-            {
-                //Begin loading animation
-                LoadingAnimation();
-
-                CreateReservationGrid.Visibility = Visibility.Hidden;
-                ReservationsGrid.Visibility = Visibility.Visible;
-
-                GetAllReservations();
-
-                //End loading animation
-                LoadedAnimation();
-            }
-            else if (CreateReservationProgress == 2)
-            {
-                CreateReservationGridBackBtn.Content = "Cancel";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridMainReservantInformationGrid, CreateReservationGridReservationInformationGrid);
-
-                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 3)
-            {
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridSideReservantInformationGrid, CreateReservationGridMainReservantInformationGrid);
-
-                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 4)
-            {
-                CreateReservationGridNextBtn.Content = "Next";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridPaymentInformationGrid, CreateReservationGridSideReservantInformationGrid);
-
-                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-            }
-            else
-            {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
-            }
-
-            CreateReservationProgress -= 1;
-        }
-
-        private void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
-            {
-                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
-                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
-
-                GetAvailableEssentialsOfClassiffication();
-            }
-        }
     }
 }
