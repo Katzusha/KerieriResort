@@ -94,7 +94,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                MainWindow.ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
             }
 
             this.Close();

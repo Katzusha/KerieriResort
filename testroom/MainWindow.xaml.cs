@@ -277,7 +277,7 @@ namespace testroom
             {
                 Cursor = Cursors.Arrow;
 
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 return false;
             }
@@ -342,7 +342,7 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        ShowError(ex.Message);
+                        PublicCommands.ShowError(ex.Message);
                     }
                 }
                 else
@@ -357,7 +357,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 return false;
             }
@@ -450,7 +450,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
                 return false;
             }
             
@@ -513,13 +513,6 @@ namespace testroom
         //Public commands for showing other windows and their commands
         #region SHOW DIIALOG WINDOWS
         //Show errors and their exceptions
-        public static void ShowError(string errormessage)
-        {
-            ErrorWindow.ErrorMessage = errormessage;
-
-            ErrorWindow window = new ErrorWindow();
-            window.ShowDialog();
-        }
         #endregion
 
         //All the animations
@@ -1339,7 +1332,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 //End the loading animation
                 LoadedAnimation();
@@ -1407,7 +1400,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 //End the loading animation
                 LoadedAnimation();
@@ -1491,7 +1484,7 @@ namespace testroom
         //    }
         //    catch (Exception ex)
         //    {
-        //        ShowError(ex.Message);
+        //        PublicCommands.ShowError(ex.Message);
         //    }
         //}
 
@@ -1524,7 +1517,7 @@ namespace testroom
         //    }
         //    catch (Exception ex)
         //    {
-        //        ShowError(ex.Message);
+        //        PublicCommands.ShowError(ex.Message);
         //    }
         //}
         #endregion
@@ -1670,7 +1663,7 @@ namespace testroom
             }
             else
             {
-                ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
 
             CreateReservationProgress += 1;
@@ -1760,7 +1753,7 @@ namespace testroom
             }
             else
             {
-                ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
 
             CreateReservationProgress -= 1;
