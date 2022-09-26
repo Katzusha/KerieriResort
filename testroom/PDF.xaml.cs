@@ -49,7 +49,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
 
                     // Write pdf file
-                    FileStream fileStream = new FileStream("D:\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
@@ -80,9 +80,9 @@ namespace testroom
                     // Convert 
                     MemoryStream outStream = new MemoryStream();
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
-                    
+
                     // Write pdf file
-                    FileStream fileStream = new FileStream("\\Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
