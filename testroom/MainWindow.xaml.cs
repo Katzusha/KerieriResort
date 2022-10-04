@@ -29,6 +29,7 @@ namespace testroom
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region PUBLIC VALUES AND COMMANDS
         public static MySqlConnection conn = new MySqlConnection("server=152.89.234.155;user=kosakand_admin;database=kosakand_iAsistent;port=3306;" +
                     "password=uclWRX~uV2jq");
@@ -40,8 +41,8 @@ namespace testroom
 
         public static string APIconnection = "https://kosakandraz.com/API";
         #endregion
+        
 
-        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region ENCRYPTION AND DECRYPTION
         public string EncryptString(string plainText, byte[] key, byte[] iv)
         {
@@ -178,6 +179,7 @@ namespace testroom
         }
         #endregion
 
+
         public MainWindow()
         {
             //When application start we need to make sure that the login window is the first window that we show
@@ -195,9 +197,11 @@ namespace testroom
 
             StartClock();
 
-            PublicCommands.ShowError(ConfigurationManager.AppSettings["isFirst"].ToString());
+            PublicCommands.ShowError(Dns.GetHostName());
         }
 
+
+        #region Clock and Date
         private void StartClock()
         {
             DispatcherTimer timer = new DispatcherTimer();
@@ -211,6 +215,8 @@ namespace testroom
             MenuClock.Content = DateTime.Now.ToString("HH:mm");
             MenuDate.Content = DateTime.Now.ToString("dd.MM.yyyy");
         }
+        #endregion
+
 
         #region PUBLIC COMMANDS
         //Public command to reset all variables and grid children
@@ -516,7 +522,7 @@ namespace testroom
 
         #endregion
 
-        //All the animations
+
         #region ANIMATIONS
         //Enter and leave animations for red buttons
         #region RED BUTTON animations
@@ -1201,6 +1207,7 @@ namespace testroom
         #endregion
         #endregion
 
+
         #region LOGIN SCREEN
         //Exit button on login screen
         private void loginexitbutton_Click(object sender, RoutedEventArgs e)
@@ -1349,6 +1356,7 @@ namespace testroom
         }
         #endregion
 
+
         #region MENU BUTTONS
         //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
@@ -1410,6 +1418,7 @@ namespace testroom
             loginfaillabel.Visibility = Visibility.Hidden;
         }
         #endregion
+
 
         #region RESERVATIONS GRID ACTIONS
         //SearchBox on reservations grid
@@ -1670,6 +1679,7 @@ namespace testroom
             }
         }
         #endregion
+
 
         #region CLASSIFFICATIONS GRID ACTIONS
 
