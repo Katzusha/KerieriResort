@@ -49,7 +49,7 @@ namespace testroom
                     PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
 
                     // Write pdf file
-                    FileStream fileStream = new FileStream("Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
+                    FileStream fileStream = new FileStream("C:\\Users\\kosak\\OneDrive\\Documents\\" + pdfinfo.DocumentName + ".pdf", FileMode.Create);
                     outStream.CopyTo(fileStream);
 
                     // Clean up
