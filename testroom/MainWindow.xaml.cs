@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Dynamic;
 using Newtonsoft.Json.Converters;
+using System.Configuration;
 
 namespace testroom
 {
@@ -193,6 +194,8 @@ namespace testroom
             InitializeComponent();
 
             StartClock();
+
+            PublicCommands.ShowError(ConfigurationManager.AppSettings["isFirst"].ToString());
         }
 
         private void StartClock()
