@@ -35,12 +35,11 @@ namespace testroom
             Button button = (Button)sender;
 
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = button.Width * 1.2;
+            myDoubleAnimation.To = 150 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-
-            myDoubleAnimation.To = button.Height * 1.2;
+            myDoubleAnimation.To = 50 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
@@ -50,12 +49,11 @@ namespace testroom
             Button button = (Button)sender;
 
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = button.Width / 1.2;
+            myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-
-            myDoubleAnimation.To = button.Height / 1.2;
+            myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);

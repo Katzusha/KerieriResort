@@ -198,7 +198,7 @@ namespace testroom
         private void StartClock()
         {
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += tickevent;
             timer.Start();
         }
@@ -387,33 +387,36 @@ namespace testroom
 
                 foreach (var information in GetSearched)
                 {
-                    if (col == 4)
+                    if (information.Success == 1)
                     {
-                        //If there are four children in previus row generate new row same as privius
-                        newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
-                        HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                        if (col == 4)
+                        {
+                            //If there are four children in previus row generate new row same as privius
+                            newrow = new RowDefinition();
+                            newrow.Height = new GridLength(250);
+                            HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
-                        col = 0;
-                        row++;
+                            col = 0;
+                            row++;
+                        }
+
+                        //Declare children speciffications
+                        Button button = new Button();
+                        button.Name = "ReservationId" + information.Id;
+                        string firstname = information.Firstname.ToString();
+                        button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                        button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                        //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                        button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
+
+                        //Add generated children to the grid
+                        Grid.SetColumn(button, col);
+                        Grid.SetRow(button, row);
+                        HomeGridScrollViewer.Children.Add(button);
+
+                        col++;
                     }
-
-                    //Declare children speciffications
-                    Button button = new Button();
-                    button.Name = "ReservationId" + information.Id;
-                    string firstname = information.Firstname.ToString();
-                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                    button.Style = (Style)this.Resources["HomeGeneratedButton"];
-                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                    button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
-
-                    //Add generated children to the grid
-                    Grid.SetColumn(button, col);
-                    Grid.SetRow(button, row);
-                    HomeGridScrollViewer.Children.Add(button);
-
-                    col++;
                 }
 
                 return true;
@@ -1442,6 +1445,8 @@ namespace testroom
 
                 //End the loading animation
                 LoadedAnimation();
+
+                HomeGridNoResultsLabel.Visibility = Visibility.Visible;
             }
         }
 
