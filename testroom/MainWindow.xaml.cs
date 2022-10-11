@@ -1754,24 +1754,40 @@ namespace testroom
 
         private void CreateReservationGridSideGuestAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            TextBox textbox = new TextBox();
-            textbox.Text = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
-                "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd.MM.yyyy");
+            try
+            {
+                if (CreateReservationGridSideGuestFirstnameInput.Text != "" && CreateReservationGridSideGuestSurnameInput.Text != ""
+                    && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
+                {
+                    //Declare children speciffications
+                    Button button = new Button();
+                    button.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
+                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd.MM.yyyy");
+                    button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                    button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
 
-            //Declare children speciffications
-            Button button = new Button();
-            button.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
-                "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd.MM.yyyy");
-            button.Style = (Style)this.Resources["HomeGeneratedButton"];
-            //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-            button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
+                    RowDefinition newrow = new RowDefinition();
+                    newrow.Height = new GridLength(150);
+                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
-            RowDefinition newrow = new RowDefinition();
-            newrow.Height = new GridLength(150);
-            CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
+                    Grid.SetRow(button, CreateReservationGridSideGuestAddedGrid.Children.Count);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(button);
 
-            Grid.SetRow(button, CreateReservationGridSideGuestAddedGrid.Children.Count);
-            CreateReservationGridSideGuestAddedGrid.Children.Add(button);
+                    CreateReservationGridSideGuestFirstnameInput.Clear();
+                    CreateReservationGridSideGuestSurnameInput.Clear();
+                    CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
+                }
+
+                else
+                {
+                    Console.Write("nigger");
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+            }
         }
     }
 }
