@@ -1344,7 +1344,7 @@
                     <Calendar Grid.Column="1" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridSideGuestBirthCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,-400,0"/>
 
                     <Button x:Name="CreateReservationGridSideGuestAddBtn" Grid.Column="1" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
-                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    Background="#3e3e3e" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-500,-400" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridSideGuestAddBtn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -1353,7 +1353,7 @@
                         </Button.Resources>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Background" Value="#3e3e3e"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
