@@ -935,48 +935,50 @@
     </Window.Resources>
 
     <!--BACKGROUND GRID-->
-    <Grid x:Name="BackGroundGrid">
-        <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-
+    <Grid>
+        <Grid  x:Name="BackGroundGrid" Visibility="Hidden">
+            <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+        </Grid>
+        
 
 
 
@@ -1290,7 +1292,7 @@
                     </Border>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-535,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
 
@@ -1322,7 +1324,54 @@
                     <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0"/>
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Grid x:Name="CreateReservationGridSideGuestAddedGrid" Margin="10, 10, 10, 10"></Grid>
+                    </ScrollViewer>
+
+                    <Label x:Name="CreateReservationGridSideGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-195,0,0"/>
+                    <TextBox x:Name="CreateReservationGridSideGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-400,-100,0,0"/>
+
+                    <Label x:Name="CreateReservationGridSideGuestSurnamelabel" Content="Surname :" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-15,0,0"/>
+                    <TextBox x:Name="CreateReservationGridSideGuestSurnameInput" Style="{DynamicResource TextBoxInput}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-400,0,0,-75"/>
+
+                    <Label Grid.Column="1" x:Name="CreateReservationGridSideGuestBirthlabel" Content="Date of birth :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-315.6,-300,0"/>
+                    <Calendar Grid.Column="1" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridSideGuestBirthCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,-400,0"/>
+
+                    <Button x:Name="CreateReservationGridSideGuestAddBtn" Grid.Column="1" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-500,-400" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridSideGuestAddBtn_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
 
                 <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Button/>
