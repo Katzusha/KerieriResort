@@ -1092,7 +1092,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(62, 62, 62);
-            myColorAnimation.To = Color.FromRgb(112, 112, 112);
+            myColorAnimation.To = Color.FromRgb(101, 101, 255);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1112,7 +1112,7 @@ namespace testroom
             //Animation for buttons background to transforme it back from blue to kinda transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(112, 112, 112);
+            myColorAnimation.From = Color.FromRgb(101, 101, 255);
             myColorAnimation.To = Color.FromRgb(62, 62, 62);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
