@@ -245,6 +245,11 @@ namespace testroom
             CreateReservationGridMainGuestPostNumberInput.Clear();
             CreateReservationGridMainGuestAddressInput.Clear();
             CreateReservationGridMainGuestCertifiedNumberInput.Clear();
+            CreateReservationGridSideGuestAddedGrid.Children.Clear();
+            CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+            CreateReservationGridSideGuestFirstnameInput.Clear();
+            CreateReservationGridSideGuestSurnameInput.Clear();
+            CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -337,9 +342,8 @@ namespace testroom
                             string firstname = information.Firstname.ToString();
                             button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
                                 "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                            button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
 
                             //Add generated children to the grid
                             Grid.SetColumn(button, col);
@@ -415,9 +419,8 @@ namespace testroom
                         string firstname = information.Firstname.ToString();
                         button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
                                     "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                        button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                        button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                         //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                        button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
 
                         //Add generated children to the grid
                         Grid.SetColumn(button, col);
@@ -1031,7 +1034,7 @@ namespace testroom
 
         //Enter and leave animations for generated buttons
         #region GENERATED BUTTON animations
-        private void GeneratedBtn_Enter(object sender, MouseEventArgs e)
+        private void GeneratedCassifficationAndReservationBtn_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
@@ -1046,13 +1049,13 @@ namespace testroom
             //Animation for buttons background to transforme it from kinda transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(127, 0, 0, 255);
-            myColorAnimation.To = Color.FromArgb(255, 0, 0, 255);
+            myColorAnimation.From = Color.FromArgb(127, 101, 101, 255);
+            myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
         }
-        private void GeneratedBtn_Leave(object sender, MouseEventArgs e)
+        private void GeneratedCassifficationAndReservationBtn_Leave(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
@@ -1067,8 +1070,92 @@ namespace testroom
             //Animation for buttons background to transforme it back from blue to kinda transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 0, 0, 255);
-            myColorAnimation.To = Color.FromArgb(127, 0, 0, 255);
+            myColorAnimation.From = Color.FromArgb(255, 101, 101, 255);
+            myColorAnimation.To = Color.FromArgb(127, 101, 101, 255);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(5, 5, 0, 5);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(62, 62, 62);
+            myColorAnimation.To = Color.FromRgb(112, 112, 112);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(10, 10, 0, 10);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(112, 112, 112);
+            myColorAnimation.To = Color.FromRgb(62, 62, 62);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestDeleteBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(0, 5, 5, 5);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(62, 62, 62);
+            myColorAnimation.To = Color.FromRgb(245, 83, 83);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestDeleteBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(0, 10, 10, 10);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(245, 83, 83);
+            myColorAnimation.To = Color.FromRgb(62, 62, 62);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1760,19 +1847,26 @@ namespace testroom
                     && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
                 {
                     //Declare children speciffications
-                    Button button = new Button();
-                    button.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
+                    Button buttonAddedSideGuest = new Button();
+                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
                         "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd.MM.yyyy");
-                    button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                    buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
                     //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                    button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
 
                     RowDefinition newrow = new RowDefinition();
                     newrow.Height = new GridLength(150);
                     CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
-                    Grid.SetRow(button, CreateReservationGridSideGuestAddedGrid.Children.Count);
-                    CreateReservationGridSideGuestAddedGrid.Children.Add(button);
+                    Grid.SetRow(buttonAddedSideGuest, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
+                    Grid.SetColumn(buttonAddedSideGuest, 0);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
+
+                    Button buttonAddedSideGuestDelete = new Button();
+                    buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
+
+                    Grid.SetRow(buttonAddedSideGuestDelete, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
+                    Grid.SetColumn(buttonAddedSideGuestDelete, 1);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
 
                     CreateReservationGridSideGuestFirstnameInput.Clear();
                     CreateReservationGridSideGuestSurnameInput.Clear();

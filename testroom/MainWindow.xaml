@@ -8,12 +8,12 @@
         WindowStyle="None"
         Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
     <Window.Resources>
-        <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
+        <Style x:Key="GeneratedReservationAndClassifficationButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
-            <EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>
-            <EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>
+            <EventSetter Event="MouseEnter" Handler="GeneratedCassifficationAndReservationBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Background" Value="#7F0000FF"/>
+            <Setter Property="Background" Value="#7F6565ff"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -24,6 +24,77 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 0, 0" BorderBrush="#FF0074FF">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="GeneratedAddedSideGuestButton" TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3f3f3f"/>
+            <Setter Property="Margin" Value="10, 10, 0, 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 0, 0, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 0, 0" BorderBrush="#6e6e6e">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="GeneratedAddedSideGuestDeleteButton" TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestDeleteBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestDeleteBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3e3e3e"/>
+            <Setter Property="Content" Value="⨉"/>
+            <Setter Property="Margin" Value="0, 10, 10, 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="0, 25, 25, 0" Background="{TemplateBinding Background}" BorderThickness="2, 3, 0, 0" BorderBrush="#6e6e6e">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="BlueButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
+            <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#6565ff"/>
+            <Setter Property="Content" Value="⨉"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 2, 2" BorderBrush="#6565ff">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -1331,7 +1402,12 @@
                     </Grid.ColumnDefinitions>
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <Grid x:Name="CreateReservationGridSideGuestAddedGrid" Margin="10, 10, 10, 10"></Grid>
+                        <Grid x:Name="CreateReservationGridSideGuestAddedGrid" Margin="10, 10, 10, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
                     </ScrollViewer>
 
                     <Label x:Name="CreateReservationGridSideGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-195,0,0"/>
