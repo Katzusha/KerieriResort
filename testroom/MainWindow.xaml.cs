@@ -768,7 +768,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 480;
+            myDoubleAnimation.To = 470;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -776,7 +776,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -799,7 +799,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -816,7 +816,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 440;
+            myDoubleAnimation.To = 420;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -824,7 +824,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -847,7 +847,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -865,7 +865,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 650;
+            myDoubleAnimation.To = 620;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -873,7 +873,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -895,7 +895,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -1589,6 +1589,10 @@ namespace testroom
             CreateReservationGridNextBtn.Content = "Next";
             CreateReservationGridBackBtn.Content = "Cancel";
 
+            RowDefinition newrow = new RowDefinition();
+            newrow.Height = new GridLength(150);
+            CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
+
             //End the loading animation
             LoadedAnimation();
         }
@@ -1765,6 +1769,68 @@ namespace testroom
                 var isGetAvailableEssentialsOfClassiffication = await GetAvailableEssentialsOfClassiffication();
             }
         }
+
+        private void CreateReservationGridSideGuestAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CreateReservationGridSideGuestFirstnameInput.Text != "" && CreateReservationGridSideGuestSurnameInput.Text != ""
+                    && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
+                {
+                    //Declare children speciffications
+                    Button buttonAddedSideGuest = new Button();
+                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
+                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd/MM/yyyy");
+                    buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
+                    buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuest);
+
+                    RowDefinition newrow = new RowDefinition();
+                    newrow.Height = new GridLength(150);
+                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
+
+                    Grid.SetRow(buttonAddedSideGuest, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
+                    Grid.SetColumn(buttonAddedSideGuest, 0);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
+
+                    Button buttonAddedSideGuestDelete = new Button();
+                    buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
+
+                    Grid.SetRow(buttonAddedSideGuestDelete, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
+                    Grid.SetColumn(buttonAddedSideGuestDelete, 1);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
+
+                    CreateReservationGridSideGuestFirstnameInput.Clear();
+                    CreateReservationGridSideGuestSurnameInput.Clear();
+                    CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
+                }
+
+                else
+                {
+                    Console.Write("nigger");
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+            }
+        }
+
+        private void EditAddedSideGuest(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            string[] btninfo = btn.Content.ToString().Split('\n');
+            string[] userinfo = btninfo[0].Split(' ');
+
+            CreateReservationGridSideGuestFirstnameInput.Text = userinfo[0].ToString();
+            CreateReservationGridSideGuestSurnameInput.Text = userinfo[1].ToString();
+            CreateReservationGridSideGuestBirthCalendar.SelectedDate = DateTime.Parse(btninfo[1]);
+
+            //CreateReservationGridSideGuestAddedGrid.RowDefinitions.RemoveAt(Grid.GetRow(btn));
+            CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(Grid.GetRow(btn));
+
+            PublicCommands.ShowError(CreateReservationGridSideGuestAddedGrid.Children.Count.ToString());
+        }
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS
@@ -1839,49 +1905,5 @@ namespace testroom
 
         #endregion
 
-        private void CreateReservationGridSideGuestAddBtn_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (CreateReservationGridSideGuestFirstnameInput.Text != "" && CreateReservationGridSideGuestSurnameInput.Text != ""
-                    && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
-                {
-                    //Declare children speciffications
-                    Button buttonAddedSideGuest = new Button();
-                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
-                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd.MM.yyyy");
-                    buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
-                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-
-                    RowDefinition newrow = new RowDefinition();
-                    newrow.Height = new GridLength(150);
-                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
-
-                    Grid.SetRow(buttonAddedSideGuest, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
-                    Grid.SetColumn(buttonAddedSideGuest, 0);
-                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
-
-                    Button buttonAddedSideGuestDelete = new Button();
-                    buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
-
-                    Grid.SetRow(buttonAddedSideGuestDelete, CreateReservationGridSideGuestAddedGrid.Children.Count / 2);
-                    Grid.SetColumn(buttonAddedSideGuestDelete, 1);
-                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
-
-                    CreateReservationGridSideGuestFirstnameInput.Clear();
-                    CreateReservationGridSideGuestSurnameInput.Clear();
-                    CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
-                }
-
-                else
-                {
-                    Console.Write("nigger");
-                }
-            }
-            catch (Exception ex)
-            {
-                PublicCommands.ShowError(ex.Message);
-            }
-        }
     }
 }

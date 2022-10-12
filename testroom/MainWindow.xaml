@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized">
+        Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" MaxWidth="2560" MaxHeight="1439">
     <Window.Resources>
         <Style x:Key="GeneratedReservationAndClassifficationButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -83,8 +83,7 @@
             <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
             <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#6565ff"/>
-            <Setter Property="Content" Value="⨉"/>
+            <Setter Property="Background" Value="#0000FF"/>
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -94,7 +93,30 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 2, 2" BorderBrush="#6565ff">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="0, 0, 0, 0" BorderBrush="#0000FF">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="RedButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
+            <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#00000000"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 3, 3" BorderBrush="#FF0000">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -778,8 +800,8 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="TodayBackground" Fill="#FF000072" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
-                            <Rectangle x:Name="SelectedBackground" Fill="#FF5D5DFF" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="TodayBackground" Fill="#323264" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="SelectedBackground" Fill="#6565FF" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
                             <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Focusable="False"/>
                             <Rectangle x:Name="HighlightBackground" Fill="#3333ff" Opacity="0" RadiusX="25" RadiusY="25"/>
                             <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Focusable="False" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -1121,59 +1143,12 @@
                    FontSize="20"/>
             <Label x:Name="loginpasswordlabel" Content="Password :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,20,0,0" Foreground="White" 
                    FontSize="20"/>
-            <Button x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+            <Button Style="{DynamicResource BlueButton}" x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
                     Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="25"></Setter>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Blue"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave"/>
+            <Button Style="{DynamicResource RedButton}" x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="25"/>
-                        <Setter Property="BorderBrush" Value="Red"/>
-                        <Setter Property="BorderThickness" Value="3"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
+                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave"/>
             <TextBox x:Name="loginfaillabel" Visibility="Hidden" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Unvalid username or password!" 
                      VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" SelectionBrush="{x:Null}" 
                      SelectionTextBrush="{x:Null}" FontSize="24" FontFamily="Arial" TextAlignment="Center" VerticalContentAlignment="Center" 
@@ -1397,8 +1372,8 @@
 
                 <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="8*"/>
                     </Grid.ColumnDefinitions>
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -1454,59 +1429,13 @@
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
-                    <Button x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+                    <Button Style="{DynamicResource BlueButton}" x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
                     Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-160,0" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="25"></Setter>
-                            </Style>
-                        </Button.Resources>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Blue"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Cursor" Value="Hand"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-160,0" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click"/>
+                    
+                    <Button Style="{DynamicResource RedButton}" x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="25"/>
-                                <Setter Property="BorderBrush" Value="Red"/>
-                                <Setter Property="BorderThickness" Value="3"/>
-                            </Style>
-                        </Button.Resources>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    FontFamily="Arial" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click"/>
                 </Grid>
             </Grid>
             <!--#endregion-->
@@ -1519,7 +1448,7 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1557,7 +1486,7 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1596,7 +1525,7 @@
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1666,7 +1595,7 @@
                     <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
-            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="12:00" FontWeight="Bold" Padding="-10"/>
+            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="00:00" FontWeight="Bold" Padding="-10"/>
             <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1999" VerticalAlignment="Bottom"/>
             <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <!--#endregion-->
