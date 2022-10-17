@@ -1782,25 +1782,23 @@ namespace testroom
                     buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
                         "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd/MM/yyyy");
                     buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
-                    buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuest);
+                    buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuestBtn_Click);
+
+                    int rows = CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count;
 
                     RowDefinition newrow = new RowDefinition();
-                    //newrow.Height = new GridLength(150);
+                    newrow.Height = new GridLength(150);
                     CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
-                    int row = CreateReservationGridSideGuestAddedGrid.Children.Count;
-
-                    Grid.SetRow(buttonAddedSideGuest, row / 2);
+                    Grid.SetRow(buttonAddedSideGuest, rows);
                     Grid.SetColumn(buttonAddedSideGuest, 0);
                     CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
 
                     Button buttonAddedSideGuestDelete = new Button();
                     buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
+                    buttonAddedSideGuestDelete.Click += new RoutedEventHandler(EditAddedSideGuestDeleteBtn_Click);
 
-
-                    MessageBox.Show(CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count.ToString());
-
-                    Grid.SetRow(buttonAddedSideGuestDelete, row / 2);
+                    Grid.SetRow(buttonAddedSideGuestDelete, rows);
                     Grid.SetColumn(buttonAddedSideGuestDelete, 1);
                     CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
 
@@ -1820,9 +1818,48 @@ namespace testroom
             }
         }
 
-        private void EditAddedSideGuest(object sender, RoutedEventArgs e)
+        private void EditAddedSideGuestBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
+            Grid parent = (Grid)btn.Parent;
+
+            int index = parent.Children.IndexOf(btn);
+            int rowindex = Grid.GetRow(btn);
+
+            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+
+            try
+            {
+                if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
+                {
+                    CreateReservationGridSideGuestAddedGrid.Children.Clear();
+                    //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+                }
+                else
+                {
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                    row.Height = new GridLength(0);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditAddedSideGuestDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Grid parent = (Grid)btn.Parent;
+
+            int index = parent.Children.IndexOf(btn);
+            index--;
+            int rowindex = Grid.GetRow(btn);
+
+            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
 
             string[] btninfo = btn.Content.ToString().Split('\n');
             string[] userinfo = btninfo[0].Split(' ');
@@ -1831,27 +1868,26 @@ namespace testroom
             CreateReservationGridSideGuestSurnameInput.Text = userinfo[1].ToString();
             CreateReservationGridSideGuestBirthCalendar.SelectedDate = DateTime.Parse(btninfo[1]);
 
-            int row = Grid.GetRow(btn);
-            
             try
             {
                 if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
                 {
                     CreateReservationGridSideGuestAddedGrid.Children.Clear();
-                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+                    //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
                 }
                 else
                 {
-                    CreateReservationGridSideGuestAddedGrid.Children.RemoveRange((row * 2), 2);
-                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.RemoveAt(0);
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                    row.Height = new GridLength(0);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            //PublicCommands.ShowError(CreateReservationGridSideGuestAddedGrid.Children.Count.ToString());
         }
         #endregion
 
