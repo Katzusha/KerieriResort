@@ -1861,13 +1861,6 @@ namespace testroom
 
             RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
 
-            string[] btninfo = btn.Content.ToString().Split('\n');
-            string[] userinfo = btninfo[0].Split(' ');
-
-            CreateReservationGridSideGuestFirstnameInput.Text = userinfo[0].ToString();
-            CreateReservationGridSideGuestSurnameInput.Text = userinfo[1].ToString();
-            CreateReservationGridSideGuestBirthCalendar.SelectedDate = DateTime.Parse(btninfo[1]);
-
             try
             {
                 if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
