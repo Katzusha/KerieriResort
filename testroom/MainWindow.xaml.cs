@@ -1810,7 +1810,7 @@ namespace testroom
 
                 else
                 {
-                    Console.Write("nigger");
+                    PublicCommands.ShowError("Please fill every information box before saving!");
                 }
             }
             catch (Exception ex)
@@ -1946,6 +1946,5 @@ namespace testroom
         #endregion
 
         #endregion
-
     }
 }

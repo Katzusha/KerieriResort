@@ -62,7 +62,7 @@
         </TextBox>
         <!--ERROR BUTTON-->
         <!--ERROR IMAGE LABEL-->
-        <Label Content="(ノò⁔ó)ノ︵ ┻━━┻" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red" FontSize="48" Height="80" Margin="0,10,0,0" FontWeight="Bold"/>
+        <Label Content="(╯°□°）╯︵ ┻━┻" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Red" FontSize="48" Height="89" Margin="0,10,0,0" FontWeight="Bold"/>
         <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="180" Height="70">
             <Button x:Name="okbutton" Content="OK" Cursor="Hand" VerticalAlignment="Center" Background="Blue" BorderBrush="Transparent" Foreground="White" Height="45" Width="150" HorizontalAlignment="Center" FontSize="24" Margin="0,0,0,0" Click="okbutton_Click" MouseEnter="BlueButton_Enter" MouseLeave="BlueButton_Leave">
                 <Button.Resources>
