@@ -1839,18 +1839,10 @@ namespace testroom
 
             try
             {
-                //if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
-                //{
-                //    CreateReservationGridSideGuestAddedGrid.Children.Clear();
-                //}
-                //else
-                //{
-                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
-                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
 
-                    row.Height = new GridLength(0);
-                //}
-
+                row.Height = new GridLength(0);
             }
             catch (Exception ex)
             {
@@ -1871,18 +1863,10 @@ namespace testroom
 
             try
             {
-                //if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
-                //{
-                //    CreateReservationGridSideGuestAddedGrid.Children.Clear();
-                //}
-                //else
-                //{
-                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
-                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
 
-                    row.Height = new GridLength(0);
-                //}
-
+                row.Height = new GridLength(0);
             }
             catch (Exception ex)
             {
