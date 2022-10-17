@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>Kerieri resort</AssemblyName>
+    <RootNamespace>resorttestroom</RootNamespace>
+    <ApplicationIcon>Images\kerierilogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +17,6 @@
     <None Remove="Images\dashboardicon.png" />
     <None Remove="Images\logouticon.png" />
     <None Remove="kerieri.png" />
-    <None Remove="kerierilogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +25,10 @@
     <PackageReference Include="jsreport.Client" Version="3.2.1" />
     <PackageReference Include="jsreport.Embedded" Version="1.0.5" />
     <PackageReference Include="jsreport.Local" Version="2.3.1" />
+    <PackageReference Include="kenjiuno.PdfSharp.Xps" Version="1.1.10" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MySql.Data" Version="8.0.29" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="20.2.0.38" />
   </ItemGroup>
 
@@ -34,6 +38,10 @@
     <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Documents\" />
   </ItemGroup>
 
 </Project>

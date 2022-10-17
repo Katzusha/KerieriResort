@@ -17,6 +17,10 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Dynamic;
+using Newtonsoft.Json.Converters;
+using System.Configuration;
 
 namespace testroom
 {
@@ -25,6 +29,7 @@ namespace testroom
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region PUBLIC VALUES AND COMMANDS
         public static MySqlConnection conn = new MySqlConnection("server=152.89.234.155;user=kosakand_admin;database=kosakand_iAsistent;port=3306;" +
                     "password=uclWRX~uV2jq");
@@ -33,9 +38,11 @@ namespace testroom
         public static string ClassifficationType = string.Empty;
 
         public static string DatabaseName = "";
-        #endregion
 
-        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
+        public static string APIconnection = "https://kosakandraz.com/API";
+        #endregion
+        
+
         #region ENCRYPTION AND DECRYPTION
         public string EncryptString(string plainText, byte[] key, byte[] iv)
         {
@@ -171,7 +178,8 @@ namespace testroom
             return decrypted;
         }
         #endregion
-        
+
+
         public MainWindow()
         {
             //When application start we need to make sure that the login window is the first window that we show
@@ -179,12 +187,36 @@ namespace testroom
             InitializeComponent();
 
             ControlGrid.Visibility = Visibility.Hidden;
-            LogInGrid.Visibility = Visibility.Visible;
+            LogInScreen.Visibility = Visibility.Visible;
 
-            ReservationsGrid.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-            CreateReservationGrid.Visibility = Visibility.Hidden;
+            CreateReservationScreen.Visibility = Visibility.Hidden;
+
+            InitializeComponent();
+
+            StartClock();
+
+            //PublicCommands.ShowError(Dns.GetHostName());
         }
+
+
+        #region Clock and Date
+        private void StartClock()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick += tickevent;
+            timer.Start();
+        }
+
+        private void tickevent(object sender, EventArgs e)
+        {
+            MenuClock.Content = DateTime.Now.ToString("HH:mm");
+            MenuDate.Content = DateTime.Now.ToString("dd.MM.yyyy");
+        }
+        #endregion
+
 
         #region PUBLIC COMMANDS
         //Public command to reset all variables and grid children
@@ -195,6 +227,34 @@ namespace testroom
 
             HomeGridScrollViewer.Children.Clear();
             HomeGridScrollViewer.RowDefinitions.Clear();
+
+            CreateReservationGridClassifficationCombobox.Items.Clear();
+
+            CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+            CreateReservationGridToDateCalendar.SelectedDates.Clear();
+
+            CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+            CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+            CreateReservationGridMainGuestFirstnameInput.Clear();
+            CreateReservationGridMainGuestSurnameInput.Clear();
+            CreateReservationGridMainReservantBirthCalendar.SelectedDates.Clear();
+            CreateReservationGridMainGuestEmailInput.Clear();
+            CreateReservationGridMainGuestPhoneNumberInput.Clear();
+            CreateReservationGridMainGuestCountryInput.Clear();
+            CreateReservationGridMainGuestPostNumberInput.Clear();
+            CreateReservationGridMainGuestAddressInput.Clear();
+            CreateReservationGridMainGuestCertifiedNumberInput.Clear();
+            CreateReservationGridSideGuestAddedGrid.Children.Clear();
+            CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+            CreateReservationGridSideGuestFirstnameInput.Clear();
+            CreateReservationGridSideGuestSurnameInput.Clear();
+            CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            loginusernamelabel.Content = DateTime.Now.ToString("HH:mm:ss");
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
@@ -231,7 +291,7 @@ namespace testroom
             {
                 Cursor = Cursors.Arrow;
 
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 return false;
             }
@@ -282,9 +342,8 @@ namespace testroom
                             string firstname = information.Firstname.ToString();
                             button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
                                 "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["HomeGeneratedButton"];
+                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                            button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
 
                             //Add generated children to the grid
                             Grid.SetColumn(button, col);
@@ -296,7 +355,7 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        ShowError(ex.Message);
+                        PublicCommands.ShowError(ex.Message);
                     }
                 }
                 else
@@ -311,7 +370,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 return false;
             }
@@ -322,10 +381,10 @@ namespace testroom
         {
             await Task.Delay(500);
 
-            ReservationsGrid.Visibility = Visibility.Visible;
-            HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-
             ClearAll();
+
+            ReservationsScreen.Visibility = Visibility.Visible;
+            HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
             //Get json file for the searched reservations
             dynamic GetSearched = ReservationCommands.GetSearched(HomeGridSearch.Text);
@@ -341,33 +400,35 @@ namespace testroom
 
                 foreach (var information in GetSearched)
                 {
-                    if (col == 4)
+                    if (information.Success == 1)
                     {
-                        //If there are four children in previus row generate new row same as privius
-                        newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
-                        HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                        if (col == 4)
+                        {
+                            //If there are four children in previus row generate new row same as privius
+                            newrow = new RowDefinition();
+                            newrow.Height = new GridLength(250);
+                            HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
-                        col = 0;
-                        row++;
+                            col = 0;
+                            row++;
+                        }
+
+                        //Declare children speciffications
+                        Button button = new Button();
+                        button.Name = "ReservationId" + information.Id;
+                        string firstname = information.Firstname.ToString();
+                        button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                        button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
+                        //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+
+                        //Add generated children to the grid
+                        Grid.SetColumn(button, col);
+                        Grid.SetRow(button, row);
+                        HomeGridScrollViewer.Children.Add(button);
+
+                        col++;
                     }
-
-                    //Declare children speciffications
-                    Button button = new Button();
-                    button.Name = "ReservationId" + information.Id;
-                    string firstname = information.Firstname.ToString();
-                    button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                    button.Style = (Style)this.Resources["HomeGeneratedButton"];
-                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-                    button.Background = new SolidColorBrush(Color.FromArgb(127, 0, 0, 255));
-
-                    //Add generated children to the grid
-                    Grid.SetColumn(button, col);
-                    Grid.SetRow(button, row);
-                    HomeGridScrollViewer.Children.Add(button);
-
-                    col++;
                 }
 
                 return true;
@@ -378,25 +439,93 @@ namespace testroom
             }
         }
 
-        #endregion
-
-        #endregion
-
-        #endregion
-
-        //Public commands for showing other windows and their commands
-        #region SHOW DIIALOG WINDOWS
-        //Show errors and their exceptions
-        public static void ShowError(string errormessage)
+        //Generate children for CreateReservation combobox
+        public async Task<bool> GetAllClassifficaitonsForCombobox()
         {
-            ErrorWindow.ErrorMessage = errormessage;
+            await Task.Delay(500);
 
-            ErrorWindow window = new ErrorWindow();
-            window.ShowDialog();
+            try
+            {
+                ClearAll();
+
+                CreateReservationGridClassifficationCombobox.Items.Add("None");
+
+                dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+                foreach (var information in GetClassiffications)
+                {
+                    ComboBoxItem item = new ComboBoxItem();
+                    item.Name = "ClassifficationId" + information.Id;
+                    item.Content = information.Name;
+
+                    CreateReservationGridClassifficationCombobox.Items.Add(item);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+                return false;
+            }
+            
         }
+
+        //TODO: Generate available essentials
+        public async Task<bool> GetAvailableEssentialsOfClassiffication()
+        {
+            await Task.Delay(500);
+
+            ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
+
+            dynamic AvailableEssentials = ReservationCommands.GetAvailableEssentials(item.Name.Replace("ClassifficationId", ""));
+
+            int row = 0;
+
+
+
+            foreach (var information in AvailableEssentials)
+            {
+                if (information.Success == 0)
+                {
+                    break;
+                }
+
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(60);
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Add(newrow);
+
+
+                CheckBox button = new CheckBox();
+                button.Name = "EssentialId" + information.Id;
+                button.Content = information.Name;
+                button.Style = (Style)this.Resources["GeneratedCheckBox"];
+
+                TextBox textbox = new TextBox();
+                textbox.Text = information.Price + "€";
+                textbox.Style = (Style)this.Resources["CheckBogGeneratedButtonPrice"];
+
+                Grid.SetColumn(button, 0);
+                Grid.SetRow(button, row);
+                CreateReservationGridAvailableEssentialsGrid.Children.Add(button);
+
+                Grid.SetColumn(textbox, 1);
+                Grid.SetRow(textbox, row);
+                CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
+
+                row++;
+            }
+
+            return false;
+        }
+
         #endregion
 
-        //All the animations
+        #endregion
+
+        #endregion
+
+
         #region ANIMATIONS
         //Enter and leave animations for red buttons
         #region RED BUTTON animations
@@ -639,7 +768,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 480;
+            myDoubleAnimation.To = 470;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -647,7 +776,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -670,7 +799,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -687,7 +816,7 @@ namespace testroom
             //Animation for buttons size to transforme to 500px it's width
             button.Background = Brushes.Blue;
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 440;
+            myDoubleAnimation.To = 420;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -695,7 +824,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -718,7 +847,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -736,7 +865,7 @@ namespace testroom
 
             //Animation for buttons size to transforme to 500px it's width
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 650;
+            myDoubleAnimation.To = 620;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
 
@@ -744,7 +873,7 @@ namespace testroom
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
             myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(0, 0, 225);
+            myColorAnimation.To = Color.FromRgb(50, 50, 100);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -766,7 +895,7 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(0, 0, 255);
+            myColorAnimation.From = Color.FromRgb(50, 50, 100);
             myColorAnimation.To = Color.FromRgb(23, 23, 23);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
@@ -905,7 +1034,7 @@ namespace testroom
 
         //Enter and leave animations for generated buttons
         #region GENERATED BUTTON animations
-        private void GeneratedBtn_Enter(object sender, MouseEventArgs e)
+        private void GeneratedCassifficationAndReservationBtn_Enter(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
@@ -920,13 +1049,13 @@ namespace testroom
             //Animation for buttons background to transforme it from kinda transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(127, 0, 0, 255);
-            myColorAnimation.To = Color.FromArgb(255, 0, 0, 255);
+            myColorAnimation.From = Color.FromArgb(127, 101, 101, 255);
+            myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
         }
-        private void GeneratedBtn_Leave(object sender, MouseEventArgs e)
+        private void GeneratedCassifficationAndReservationBtn_Leave(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
 
@@ -941,8 +1070,92 @@ namespace testroom
             //Animation for buttons background to transforme it back from blue to kinda transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 0, 0, 255);
-            myColorAnimation.To = Color.FromArgb(127, 0, 0, 255);
+            myColorAnimation.From = Color.FromArgb(255, 101, 101, 255);
+            myColorAnimation.To = Color.FromArgb(127, 101, 101, 255);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(5, 5, 0, 5);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(62, 62, 62);
+            myColorAnimation.To = Color.FromRgb(101, 101, 255);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(10, 10, 0, 10);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(101, 101, 255);
+            myColorAnimation.To = Color.FromRgb(62, 62, 62);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestDeleteBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(0, 5, 5, 5);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(62, 62, 62);
+            myColorAnimation.To = Color.FromRgb(245, 83, 83);
+            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+            button.Background = myBrush;
+        }
+        private void GeneratedAddedSideGuestDeleteBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            Cursor = Cursors.Arrow;
+
+            //Animation for buttons size to transforme it for 5px smaller
+            ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
+            thicknessAnimation.To = new Thickness(0, 10, 10, 10);
+            thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(MarginProperty, thicknessAnimation);
+
+            //Animation for buttons background to transforme it back from blue to kinda transparent
+            SolidColorBrush myBrush = new SolidColorBrush();
+            ColorAnimation myColorAnimation = new ColorAnimation();
+            myColorAnimation.From = Color.FromRgb(245, 83, 83);
+            myColorAnimation.To = Color.FromRgb(62, 62, 62);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1036,7 +1249,51 @@ namespace testroom
             BackgroundTopLight.Background = MyBrushLight;
         }
         #endregion
+
+        //Next and back
+        #region GRIDSWIPE animation
+        private void SwipeGridLeft(object currentgrid, object nextgrid)
+        {
+            Grid CurrentGrid = (Grid)currentgrid;
+            Grid NextGrid = (Grid)nextgrid;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            NextGrid    .BeginAnimation(MarginProperty, LogInAnimation);
+
+            //Animation to hide reservation information screen
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.To = new Thickness(-(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
+            ControlAnimation.From = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CurrentGrid.BeginAnimation(MarginProperty, ControlAnimation);
+        }
+
+        private void SwipeGridRight(object currentgrid, object previusgrid)
+        {
+            Grid CurrentGrid = (Grid)currentgrid;
+            Grid PreviusGrid = (Grid)previusgrid;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.From = new Thickness(0, 0, 0, 0);
+            LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CurrentGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+            //Animation to hide reservation information screen
+            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+            ControlAnimation.From = new Thickness(-(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
+            ControlAnimation.To = new Thickness(0, 0, 0, 0);
+            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            PreviusGrid.BeginAnimation(MarginProperty, ControlAnimation);
+        }
         #endregion
+        #endregion
+
 
         #region LOGIN SCREEN
         //Exit button on login screen
@@ -1064,17 +1321,19 @@ namespace testroom
 
                 //Animation to hide login screen
                 ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                 LogInAnimation.From = new Thickness(0, 0, 0, 0);
                 LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                 //Animation to show control screen
                 ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                 ControlAnimation.To = new Thickness(0, 0, 0, 0);
                 ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                 ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                loginfaillabel.Visibility = Visibility.Hidden;
 
                 //End the loading animation
                 LoadedAnimation();
@@ -1110,14 +1369,14 @@ namespace testroom
 
                     //Animation to hide login screen
                     ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                    LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                     ControlAnimation.To = new Thickness(0, 0, 0, 0);
                     ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1157,14 +1416,14 @@ namespace testroom
 
                     //Animation to hide login screen
                     ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
                     LogInAnimation.From = new Thickness(0, 0, 0, 0);
                     LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+                    LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
                     //Animation to show control screen
                     ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
                     ControlAnimation.To = new Thickness(0, 0, 0, 0);
                     ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
@@ -1184,6 +1443,7 @@ namespace testroom
         }
         #endregion
 
+
         #region MENU BUTTONS
         //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
@@ -1195,10 +1455,10 @@ namespace testroom
 
                 //Show the reservatons grid and hide no results label
                 ControlGrid.Visibility = Visibility.Visible;
-                ReservationsGrid.Visibility = Visibility.Visible;
-                ReservationsGrid.Margin = new Thickness(0, 0, 0, 0);
+                ReservationsScreen.Visibility = Visibility.Visible;
+                ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-                CreateReservationGrid.Visibility = Visibility.Hidden;
+                CreateReservationScreen.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1211,7 +1471,7 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 //End the loading animation
                 LoadedAnimation();
@@ -1230,20 +1490,22 @@ namespace testroom
             //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
-            LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
+            LogInAnimation.From = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            LogInGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
             //Animation to hide control screen
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            ControlAnimation.To = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
+            ControlAnimation.To = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
             ControlAnimation.From = new Thickness(0, 0, 0, 0);
             ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
             ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
-            LogInGrid.Visibility = Visibility.Visible;
+            LogInScreen.Visibility = Visibility.Visible;
+            loginfaillabel.Visibility = Visibility.Hidden;
         }
         #endregion
+
 
         #region RESERVATIONS GRID ACTIONS
         //SearchBox on reservations grid
@@ -1278,57 +1540,338 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                ShowError(ex.Message);
+                PublicCommands.ShowError(ex.Message);
 
                 //End the loading animation
                 LoadedAnimation();
+
+                HomeGridNoResultsLabel.Visibility = Visibility.Visible;
             }
         }
 
         //Add reservation button on reservations grid
-        private void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-            CreateReservationGrid.Visibility = Visibility.Visible;
-            ReservationsGrid.Visibility = Visibility.Hidden;
+            //Begin loading animation
+            LoadingAnimation();
 
+            //Fill the Combobox with all the classifficaitons
+            var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
+
+            //Switch displayed grids
+            CreateReservationScreen.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Hidden;
+
+            //Animation to show main reservant information screen
+            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+            LogInAnimation.To = new Thickness(0, 0, 0, 0);
+            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
+            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            
+            //Make sure that every grid will be displayed in the right order
             CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
             CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
             CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
             CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
 
+            //Resert progression bar
             CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
             CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
 
-            ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            ControlAnimation.To = new Thickness(0, 0, 0, 0);
-            ControlAnimation.From = new Thickness(0, 0, 0, 0);
-            ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
+            //Start the progress bar
             CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
 
+            //Reset all the values needed for the Creation
             CreateReservationProgress = 1;
             CreateReservationGridNextBtn.Content = "Next";
             CreateReservationGridBackBtn.Content = "Cancel";
 
-            ////Animation to hide login screen
-            //ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-            //LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 100, 0, 0);
-            //LogInAnimation.From = new Thickness(0, 0, 0, 0);
-            //LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            //ReservationsGrid.BeginAnimation(MarginProperty, LogInAnimation);
+            //RowDefinition newrow = new RowDefinition();
+            //newrow.Height = new GridLength(150);
+            //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
-            ////Animation to show control screen
-            //ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-            //ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 100);
-            //ControlAnimation.To = new Thickness(0, 0, 0, 0);
-            //ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-            //CreateReservationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-            ////End the loading animation
+            //End the loading animation
             LoadedAnimation();
+        }
+
+        public int CreateReservationProgress = 1;
+        //NextGrid button on every grid inside of create reservation grid
+        private async void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CreateReservationProgress == 1)
+                {
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
+
+                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
+
+                    CreateReservationGridBackBtn.Content = "Back";
+                }
+                else if (CreateReservationProgress == 2)
+                {
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
+
+                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+                }
+                else if (CreateReservationProgress == 3)
+                {
+                    CreateReservationGridNextBtn.Content = "Done";
+
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
+
+                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+                }
+                else if (CreateReservationProgress == 4)
+                {
+                    LoadingAnimation();
+
+                    //Generate information about bill and customer
+                    string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                        "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
+                        "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
+                        "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                        "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                        "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                        "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                        "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
+                        "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}";
+
+                    bool ischeckedchek = false;
+                    //Generate all the items that are being payed (property, breakfast...)
+                    foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+                    {
+                        if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                        {
+                            ischeckedchek = false;
+
+                            CheckBox checkbox = (CheckBox)child;
+
+                            if (checkbox.IsChecked == true)
+                            {
+                                json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
+
+                                ischeckedchek = true;
+                            }
+                        }
+                        else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                        {
+                            TextBox textbox = (TextBox)child;
+
+                            if (ischeckedchek == true)
+                            {
+                                json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
+                            }
+                        }
+                    }
+
+                    json = json + "]}";
+
+                    dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+                    //Generate pdf
+                    PDF pdf = new PDF(1, pdfinfo);
+
+                    //Return back to the reservations screen
+                    CreateReservationScreen.Visibility = Visibility.Hidden;
+                    ReservationsScreen.Visibility = Visibility.Visible;
+
+                    var isGetAllReservations = await GetAllReservations();
+
+                    LoadedAnimation();
+                }
+                else
+                {
+                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                }
+
+                CreateReservationProgress += 1;
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+            }
+        }
+
+        private async void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationProgress == 1)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                CreateReservationScreen.Visibility = Visibility.Hidden;
+                ReservationsScreen.Visibility = Visibility.Visible;
+
+                var isGetAllReservations = await GetAllReservations();
+
+                //End loading animation
+                LoadedAnimation();
+            }
+            else if (CreateReservationProgress == 2)
+            {
+                CreateReservationGridBackBtn.Content = "Cancel";
+
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridMainReservantInformationGrid, CreateReservationGridReservationInformationGrid);
+
+                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+            }
+            else if (CreateReservationProgress == 3)
+            {
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridSideReservantInformationGrid, CreateReservationGridMainReservantInformationGrid);
+
+                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+            }
+            else if (CreateReservationProgress == 4)
+            {
+                CreateReservationGridNextBtn.Content = "Next";
+
+                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+                SwipeGridRight(CreateReservationGridPaymentInformationGrid, CreateReservationGridSideReservantInformationGrid);
+
+                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+            }
+            else
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
+
+            CreateReservationProgress -= 1;
+        }
+
+        private async void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+            {
+                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+                var isGetAvailableEssentialsOfClassiffication = await GetAvailableEssentialsOfClassiffication();
+            }
+        }
+
+        private void CreateReservationGridSideGuestAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (CreateReservationGridSideGuestFirstnameInput.Text != "" && CreateReservationGridSideGuestSurnameInput.Text != ""
+                    && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
+                {
+                    //Declare children speciffications
+                    Button buttonAddedSideGuest = new Button();
+                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
+                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd/MM/yyyy");
+                    buttonAddedSideGuest.Name = CreateReservationGridSideGuestFirstnameInput.Text.Replace(' ', '_');
+                    buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
+                    buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuestBtn_Click);
+
+                    int rows = CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count;
+
+                    RowDefinition newrow = new RowDefinition();
+                    newrow.Height = new GridLength(150);
+                    CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
+
+                    Grid.SetRow(buttonAddedSideGuest, rows);
+                    Grid.SetColumn(buttonAddedSideGuest, 0);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
+
+                    Button buttonAddedSideGuestDelete = new Button();
+                    buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
+                    buttonAddedSideGuestDelete.Click += new RoutedEventHandler(EditAddedSideGuestDeleteBtn_Click);
+
+                    Grid.SetRow(buttonAddedSideGuestDelete, rows);
+                    Grid.SetColumn(buttonAddedSideGuestDelete, 1);
+                    CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
+
+                    CreateReservationGridSideGuestFirstnameInput.Clear();
+                    CreateReservationGridSideGuestSurnameInput.Clear();
+                    CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
+                }
+
+                else
+                {
+                    PublicCommands.ShowError("Please fill every information box before saving!");
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+            }
+        }
+
+        private void EditAddedSideGuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Grid parent = (Grid)btn.Parent;
+
+            int index = parent.Children.IndexOf(btn);
+            int rowindex = Grid.GetRow(btn);
+
+            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+
+            string[] buttoninfo = btn.Content.ToString().Split('\n');
+
+            CreateReservationGridSideGuestFirstnameInput.Text = btn.Name.Replace('_', ' ');
+            CreateReservationGridSideGuestSurnameInput.Text = buttoninfo[0].ToString().Substring(3);
+            DateTime datetime = new DateTime();
+            datetime = DateTime.Parse(buttoninfo[1]);
+            CreateReservationGridSideGuestBirthCalendar.SelectedDate = datetime;
+
+            try
+            {
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                row.Height = new GridLength(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditAddedSideGuestDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            Grid parent = (Grid)btn.Parent;
+
+            int index = parent.Children.IndexOf(btn);
+            index--;
+            int rowindex = Grid.GetRow(btn);
+
+            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+
+            try
+            {
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                row.Height = new GridLength(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
 
@@ -1364,7 +1907,7 @@ namespace testroom
         //    }
         //    catch (Exception ex)
         //    {
-        //        ShowError(ex.Message);
+        //        PublicCommands.ShowError(ex.Message);
         //    }
         //}
 
@@ -1397,176 +1940,11 @@ namespace testroom
         //    }
         //    catch (Exception ex)
         //    {
-        //        ShowError(ex.Message);
+        //        PublicCommands.ShowError(ex.Message);
         //    }
         //}
         #endregion
 
         #endregion
-
-        public int CreateReservationProgress = 1;
-        private void CreateReservationGridNextBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (CreateReservationProgress == 1)
-            {
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.From = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
-
-                CreateReservationGridBackBtn.Content = "Back";
-            }
-            else if (CreateReservationProgress == 2)
-            {
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.From = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
-            }
-            else if (CreateReservationProgress == 3)
-            {
-                CreateReservationGridNextBtn.Content = "Done";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, 0, 0, 0);
-                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridPaymentInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.To = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.From = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
-            }
-            else if (CreateReservationProgress == 4)
-            {
-                CreateReservationGrid.Visibility = Visibility.Hidden;
-                ReservationsGrid.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                ShowError("Something went wrong. Please contact system support.");
-            }
-
-            CreateReservationProgress += 1;
-        }
-
-        private void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (CreateReservationProgress == 1)
-            {
-                CreateReservationGrid.Visibility = Visibility.Hidden;
-                ReservationsGrid.Visibility = Visibility.Visible;
-            }
-            else if (CreateReservationProgress == 2)
-            {
-                CreateReservationGridBackBtn.Content = "Cancel";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.To = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 3)
-            {
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.To = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridMainReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 4)
-            {
-                CreateReservationGridNextBtn.Content = "Next";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
-
-                //Animation to show main reservant information screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridPaymentInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to hide reservation information screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, System.Windows.SystemParameters.PrimaryScreenWidth + 100, 0);
-                ControlAnimation.To = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-                CreateReservationGridSideReservantInformationGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-            }
-            else
-            {
-                ShowError("Something went wrong. Please contact system support.");
-            }
-
-            CreateReservationProgress -= 1;
-        }
     }
 }

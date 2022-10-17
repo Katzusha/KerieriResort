@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="MainWindow" Height="1080" Width="1920" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="700" WindowState="Maximized">
+        Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" MaxWidth="2560" MaxHeight="1439">
     <Window.Resources>
-        <Style x:Key="HomeGeneratedButton" TargetType="{x:Type Button}">
+        <Style x:Key="GeneratedReservationAndClassifficationButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
-            <EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>
-            <EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>
+            <EventSetter Event="MouseEnter" Handler="GeneratedCassifficationAndReservationBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Background" Value="#7F0000FF"/>
+            <Setter Property="Background" Value="#7F6565ff"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -31,97 +31,1056 @@
             </Setter>
             <Setter Property="TextBlock.TextAlignment" Value="Center"/>
         </Style>
+
+        <Style x:Key="GeneratedAddedSideGuestButton" TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3f3f3f"/>
+            <Setter Property="Margin" Value="10, 10, 0, 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 0, 0, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 0, 0" BorderBrush="#6e6e6e">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="GeneratedAddedSideGuestDeleteButton" TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestDeleteBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestDeleteBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3e3e3e"/>
+            <Setter Property="Content" Value="⨉"/>
+            <Setter Property="Margin" Value="0, 10, 10, 10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="0, 25, 25, 0" Background="{TemplateBinding Background}" BorderThickness="2, 3, 0, 0" BorderBrush="#6e6e6e">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="BlueButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
+            <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0000FF"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="0, 0, 0, 0" BorderBrush="#0000FF">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="RedButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
+            <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#00000000"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 3, 3" BorderBrush="#FF0000">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="CheckBoxGeneratedButton" TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="5, 5, 5, 5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border"
+                                    Width="15"
+                                    Height="15"
+                                    CornerRadius="1"
+                                    BorderThickness="0">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="#3e3e3e"
+                                    Offset="0.0" />
+                                                    <GradientStop Color="#3e3e3e"
+                                    Offset="1.0" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="0,1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="Gray" />
+                                                    <GradientStop Color="Gray"
+                                    Offset="1.0" />
+                                                </GradientStopCollection>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+
+                                    </Border.Background>
+                                    <Grid>
+                                        <Path Visibility="Collapsed"
+                                            Width="5"
+                                            Height="5"
+                                            x:Name="CheckMark"
+                                            Data="M 0 7 L 7 0">
+                                            <Path.Stroke>
+                                                <SolidColorBrush Color="Blue" />
+                                            </Path.Stroke>
+                                        </Path>
+                                        <Path Visibility="Collapsed"
+                                            Width="7"
+                                            Height="7"
+                                            x:Name="InderminateMark"
+                                            SnapsToDevicePixels="False"
+                                            StrokeThickness="2"
+                                            Data="M 0 7 L 7 0">
+                                            <Path.Stroke>
+                                                <SolidColorBrush Color="Purple" />
+                                            </Path.Stroke>
+                                        </Path>
+                                    </Grid>
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="Blue" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Panel.Background).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="Blue" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).
+                      (GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="Blue" />
+                                            </ColorAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.BorderBrush).
+                      (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                <EasingColorKeyFrame KeyTime="0"
+                                         Value="Blue" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="InderminateMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True" />
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CheckBogGeneratedButtonPrice" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="25"
+                  Background="#FF3F3F3F"
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="0" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="25, 0, 0, 25" 
+                  Margin="1" 
+                  Background="#FF3F3F3F" 
+                  BorderBrush="#FF97A0A5"
+                  BorderThickness="0,0,0,0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="White"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                />
+            </Grid>
+            <!--<ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#808080" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                <Setter Property="Foreground" Value="#888888"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="#888888" />
+            </Trigger>
+        </ControlTemplate.Triggers>-->
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="25,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="25,3,23,3"
+                            Focusable="True" 
+                            Background="#3e3e3e"
+                            Foreground="White"
+                            Visibility="Hidden"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                x:Name="DropDownBorder"
+                                Background="#3e3e3e"
+                                CornerRadius="25"
+                                BorderThickness="0"
+                                BorderBrush="#888888"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TextBoxInput" TargetType="{x:Type TextBox}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="AllowDrop" Value="False" />
+            <Setter Property="FontSize" Value="24px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border" CornerRadius="25" Padding="0">
+                            <Border.Background>
+                                <SolidColorBrush Color="#3e3e3e" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.BorderBrush>
+                            <ScrollViewer Margin="20, 0, 20, 0" x:Name="PART_ContentHost" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="CalendarItemTemplate1" TargetType="{x:Type CalendarItem}">
+            <ControlTemplate.Resources>
+                <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                    <TextBlock FontWeight="Bold" FontFamily="Verdana" Foreground="White" FontSize="12" HorizontalAlignment="Center" Margin="0, 0, 0, 0" Text="{Binding}" VerticalAlignment="Center"/>
+                </DataTemplate>
+            </ControlTemplate.Resources>
+            <Grid x:Name="PART_Root" Width="275" Height="275" Focusable="False">
+                <Grid.Resources>
+                    <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF"/>
+                </Grid.Resources>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="Disabled">
+                            <Storyboard>
+                                <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" Storyboard.TargetProperty="Opacity" To="1"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Border Background="#3e3e3e"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="25">
+                    <Border BorderThickness="0" BorderBrush="#FFFFFFFF" CornerRadius="25">
+                        <Grid>
+                            <Grid.Resources>
+                                <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#9191ff"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)" To=".5"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle Fill="Blue" Opacity="1" Stretch="Fill"/>
+                                        <Grid>
+                                            <Path x:Name="path" Fill="white" HorizontalAlignment="center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                                <ControlTemplate x:Key="NextButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" To="#9191ff"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)" To=".5"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle Fill="Transparent" Opacity="1" Stretch="Fill"/>
+                                        <Grid>
+                                            <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="White" HorizontalAlignment="Center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                                <ControlTemplate x:Key="HeaderButtonTemplate" TargetType="{x:Type Button}">
+                                    <Grid Cursor="Hand">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" Storyboard.TargetName="buttonContent" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#9191ff"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="buttonContent" Storyboard.TargetProperty="Opacity" To=".5"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="PART_PreviousButton" Grid.Column="0" Focusable="False" HorizontalContentAlignment="Center" Padding="0, 0, 3, 2" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="25" Grid.Row="0" Content="◀" Foreground="White" BorderThickness="0" Background="Blue" Width="40">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="15"></Setter>
+                                    </Style>
+                                </Button.Resources>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button x:Name="PART_HeaderButton" Grid.Column="1" Focusable="False" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Grid.Row="0" Template="{StaticResource HeaderButtonTemplate}" VerticalAlignment="Center"/>
+                            <Button x:Name="PART_NextButton" Grid.Column="2" Focusable="False" HorizontalContentAlignment="Center" Padding="3, 0, 0, 2" HorizontalAlignment="Center" Height="25" Grid.Row="0" Background="Blue" Foreground="White" BorderThickness="0" Content="▶" Width="40">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="15"></Setter>
+                                    </Style>
+                                </Button.Resources>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Grid x:Name="PART_MonthView" Focusable="False" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                            <Grid x:Name="PART_YearView" Focusable="False" Grid.ColumnSpan="3" Width="265" Height="230" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0" Grid.Row="1" Visibility="Hidden">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Border>
+                <Rectangle x:Name="PART_DisabledVisual" Fill="{StaticResource DisabledColor}" Opacity="0" RadiusX="2" RadiusY="2" StrokeThickness="1" Stretch="Fill" Stroke="{StaticResource DisabledColor}" Visibility="Collapsed"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Visibility" TargetName="PART_DisabledVisual" Value="Visible"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Year">
+                    <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
+                    <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}" Value="Decade">
+                    <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
+                    <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
+                            <CalendarItem Template="{DynamicResource CalendarItemTemplate1}" x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Style="{TemplateBinding CalendarItemStyle}"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CalendarCalendarDayButtonStyle1" TargetType="{x:Type CalendarDayButton}">
+            <Setter Property="MinWidth" Value="5"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="MinHeight" Value="5"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CalendarDayButton}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.1"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="HighlightBackground" Storyboard.TargetProperty="Opacity" To="0.5"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="HighlightBackground" Storyboard.TargetProperty="Opacity" To="0.5"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="HighlightBackground" Storyboard.TargetProperty="Opacity" To="0"/>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="Opacity" To=".35"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="SelectedBackground" Storyboard.TargetProperty="Opacity" To=".75"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CalendarButtonFocusStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="CalendarButtonFocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DayButtonFocusVisual" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CalendarButtonUnfocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="DayButtonFocusVisual" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ActiveStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Active"/>
+                                    <VisualState x:Name="Inactive">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#FF777777"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DayStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="RegularDay"/>
+                                    <VisualState x:Name="Today">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="TodayBackground" Storyboard.TargetProperty="Opacity" To="1"/>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#FFFFFFFF"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="BlackoutDayStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="NormalDay"/>
+                                    <VisualState x:Name="BlackoutDay">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="Blackout" Storyboard.TargetProperty="Opacity" To=".2"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="TodayBackground" Fill="#323264" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="SelectedBackground" Fill="#6565FF" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Focusable="False"/>
+                            <Rectangle x:Name="HighlightBackground" Fill="#3333ff" Opacity="0" RadiusX="25" RadiusY="25"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Focusable="False" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Path x:Name="Blackout" Focusable="False" Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z" Fill="#FF000000" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
+                            <Rectangle x:Name="DayButtonFocusVisual" Focusable="False" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CalendarCalendarButtonStyle1" TargetType="{x:Type CalendarButton}">
+            <Setter Property="Background" Value="#3333ff"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="MinWidth" Value="40"/>
+            <Setter Property="MinHeight" Value="42"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CalendarButton}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.1"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="Background" Storyboard.TargetProperty="Opacity" To=".5"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="Background" Storyboard.TargetProperty="Opacity" To=".5"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Unselected"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="SelectedBackground" Storyboard.TargetProperty="Opacity" To=".75"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ActiveStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Active"/>
+                                    <VisualState x:Name="Inactive">
+                                        <Storyboard>
+                                            <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" To="#FF777777"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CalendarButtonFocusStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="CalendarButtonFocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="CalendarButtonFocusVisual" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CalendarButtonUnfocused">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="CalendarButtonFocusVisual" Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle x:Name="SelectedBackground" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="Background" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,0,1,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="CalendarButtonFocusVisual" IsHitTestVisible="false" Focusable="False" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Visibility" TargetName="CalendarButtonFocusVisual" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComboBoxItemContainerStyle1" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Border" Padding="20, 0, 0, 0" SnapsToDevicePixels="true" CornerRadius="15">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Background" TargetName="Border" Value="#FF4F4F4F"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="OptionMarkFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <Style x:Key="GeneratedCheckBox" TargetType="{x:Type CheckBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Height="45" Background="Transparent" Margin="10, 0, 0, 0" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="Center">
+                                <Grid x:Name="markGrid" VerticalAlignment="Center" Width="25" Height="25">
+                                    <Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="{StaticResource OptionMark.Static.Glyph}" Margin="1" Opacity="0" VerticalAlignment="Center" Width="25" Height="25" Stretch="Fill"/>
+                                    <Rectangle x:Name="indeterminateMark" Fill="Transparent" Margin="2" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                                <Setter Property="Padding" Value="4,-1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.MouseOver.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Pressed.Border}"/>
+                                <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                                <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Pressed.Glyph}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="{x:Null}">
+                                <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
+                                <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <!--BACKGROUND GRID-->
-    <Grid x:Name="BackGroundGrid">
-        <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-        <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-30"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-        </Border>
-
+    <Grid>
+        <Grid  x:Name="BackGroundGrid" Visibility="Hidden">
+            <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-30"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+        </Grid>
+        
 
 
 
         <!-- LOGIN GRID -->
-        <Grid x:Name="LogInGrid" Visibility="Hidden">
+        <Grid x:Name="LogInScreen" Visibility="Hidden">
             <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
                      Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="SnapsToDevicePixels"
-                            Value="True" />
-                        <Setter Property="OverridesDefaultStyle"
-                            Value="True" />
-                        <Setter Property="KeyboardNavigation.TabNavigation"
-                            Value="None" />
-                        <Setter Property="FocusVisualStyle"
-                            Value="{x:Null}" />
-                        <Setter Property="MinWidth"
-                            Value="0" />
-                        <Setter Property="MinHeight"
-                            Value="0" />
-                        <Setter Property="AllowDrop"
-                            Value="False" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                                    <Border Name="Border"
-                                        CornerRadius="25"
-                                        Padding="2">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="#3e3e3e" />
-                                        </Border.Background>
-                                        <Border.BorderBrush>
-                                            <SolidColorBrush Color="Transparent" />
-                                        </Border.BorderBrush>
-                                        <ScrollViewer Margin="0"
-                                            x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
             <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
                          Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
@@ -184,59 +1143,12 @@
                    FontSize="20"/>
             <Label x:Name="loginpasswordlabel" Content="Password :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,20,0,0" Foreground="White" 
                    FontSize="20"/>
-            <Button x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+            <Button Style="{DynamicResource BlueButton}" x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
                     Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="25"></Setter>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Blue"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave"/>
+            <Button Style="{DynamicResource RedButton}" x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="25"/>
-                        <Setter Property="BorderBrush" Value="Red"/>
-                        <Setter Property="BorderThickness" Value="3"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
+                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave"/>
             <TextBox x:Name="loginfaillabel" Visibility="Hidden" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Unvalid username or password!" 
                      VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" SelectionBrush="{x:Null}" 
                      SelectionTextBrush="{x:Null}" FontSize="24" FontFamily="Arial" TextAlignment="Center" VerticalContentAlignment="Center" 
@@ -295,13 +1207,11 @@
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Background="#FF171717"/>
-            <Image Grid.Column="0" Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsGrid" Grid.Column="1" Visibility="Visible">
+            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -391,34 +1301,102 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationGrid" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="857*"/>
                     <RowDefinition Height="123*"/>
                 </Grid.RowDefinitions>
-                <Label x:Name="CreateReservationGridReservationInformationProgress" Content="Reservation info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" Margin="211,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{x:Null}"/>
-                <Label x:Name="CreateReservationGridMainReservantInformationProgress" Content="Main guest info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="565,0,0,0"/>
-                <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info ——" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="901,0,0,0"/>
-                <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="1276,0,0,0"/>
+                <Label x:Name="CreateReservationGridReservationInformationProgress" Content="Reservation info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" Margin="-930,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{x:Null}"/>
+                <Label x:Name="CreateReservationGridMainReservantInformationProgress" Content="Main guest info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-317,0,0,0"/>
+                <Label x:Name="CreateReservationGridSideGuestsInformationProgress" Content="Other guests info —" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-311,0"/>
+                <Label x:Name="CreateReservationGridPaymentInformationProgress" Content="Payment info" Grid.RowSpan="1" Foreground="#FF787878" FontSize="36" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,-858,0"/>
 
-                <Grid x:Name="CreateReservationGridReservationInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
+                <Grid x:Name="CreateReservationGridReservationInformationGrid" Focusable="False" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="CreateReservationGridFromDateLabel" Grid.Column="0" Content="From date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
+                   FontSize="20" Margin="-1035,-165,0,0"/>
+
+                    <Label x:Name="CreateReservationGridToDateLabel" Grid.Column="0" Content="To date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
+                   FontSize="20" Margin="-450,-156,0,0"/>
+                    <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
+                   FontSize="20" Margin="-950,-390,0,0"/>
+                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectedIndex="0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged"/>
+                    <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridFromDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-925,0,0,-145"/>
+                    <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridToDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-316,0,0,-145"/>
+                    <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
+                        <ScrollViewer Margin="0,25,0,25" VerticalScrollBarVisibility="Auto">
+                            <Grid x:Name="CreateReservationGridAvailableEssentialsGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
                 </Grid>
+
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
-                </Grid>
-                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
-                </Grid>
-                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
+                    <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-535,0,0"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestSurnamelabel" Content="Surname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-345,0,0"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestSurnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-252,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestBirthlabel" Content="Date of birth :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-140,0,0"/>
+                    <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridMainReservantBirthCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-650,0,0,-179"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestEmaillabel" Content="eMail :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-535,-350,0"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestEmailInput" Style="{DynamicResource TextBoxInput}" Margin="0,-448,-650,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestPhoneNumberlabel" Content="Phone n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-345,-350,0"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestPhoneNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,-252,-650,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestCountrylabel" Content="Country :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-140,-350,0"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCountryInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-50,-650,0"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-45"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,-135"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-235"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-320" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestCitylabel" Content="City :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-659,-235"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCityInput" Style="{DynamicResource TextBoxInput}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-320"/>
+
+                    <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-350,-425"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
-                    <Button x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
-                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-160,0" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click">
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Grid x:Name="CreateReservationGridSideGuestAddedGrid" Margin="10, 10, 10, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+
+                    <Label x:Name="CreateReservationGridSideGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-195,0,0"/>
+                    <TextBox x:Name="CreateReservationGridSideGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-400,-100,0,0"/>
+
+                    <Label x:Name="CreateReservationGridSideGuestSurnamelabel" Content="Surname :" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-15,0,0"/>
+                    <TextBox x:Name="CreateReservationGridSideGuestSurnameInput" Style="{DynamicResource TextBoxInput}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-400,0,0,-75"/>
+
+                    <Label Grid.Column="1" x:Name="CreateReservationGridSideGuestBirthlabel" Content="Date of birth :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-315.6,-300,0"/>
+                    <Calendar Grid.Column="1" CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridSideGuestBirthCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="0,0,-400,0"/>
+
+                    <Button x:Name="CreateReservationGridSideGuestAddBtn" Grid.Column="1" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+                    Background="#3e3e3e" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-500,-400" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridSideGuestAddBtn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="25"></Setter>
@@ -426,7 +1404,7 @@
                         </Button.Resources>
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Blue"/>
+                                <Setter Property="Background" Value="#3e3e3e"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
@@ -444,39 +1422,144 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
+                </Grid>
+
+                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                    <Button/>
+                </Grid>
+
+                <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
+                    <Button Style="{DynamicResource BlueButton}" x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
+                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-160,0" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click"/>
+                    
+                    <Button Style="{DynamicResource RedButton}" x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="25"/>
-                                <Setter Property="BorderBrush" Value="Red"/>
-                                <Setter Property="BorderThickness" Value="3"/>
-                            </Style>
-                        </Button.Resources>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    FontFamily="Arial" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click"/>
                 </Grid>
             </Grid>
             <!--#endregion-->
 
             <!--#region MENU BUTTONS-->
+            <Border Background="#FF171717"/>
+            <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="340"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/dashboardicon.png" />
+                        </Image.Source>
+                    </Image>
+                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                </Grid>
+            </Button>
+            <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="300px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/reservations.png" />
+                        </Image.Source>
+                    </Image>
+                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                </Grid>
+            </Button>
+            <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
+                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                    FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,360,-1000,0" 
+                    Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
+                        <Setter Property="BorderBrush" Value="#323264"/>
+                        <Setter Property="BorderThickness" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid Height="70" Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140px"/>
+                        <ColumnDefinition Width="520px"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
+                        <Image.Source>
+                            <BitmapImage DecodePixelWidth="150"  
+                            UriSource="Images/classifficationsicon.png"/>
+                        </Image.Source>
+                    </Image>
+                    <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                </Grid>
+            </Button>
             <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,30" Click="MenuLogOutBtn_Click">
+                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,94" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
@@ -512,123 +1595,10 @@
                     <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
-            <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,360,-1000,0" 
-                    Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
-                        <Setter Property="BorderThickness" Value="4"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid Height="70" Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="520px"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
-                        <Image.Source>
-                            <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/classifficationsicon.png"/>
-                        </Image.Source>
-                    </Image>
-                    <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
-                </Grid>
-            </Button>
-            <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
-                        <Setter Property="BorderThickness" Value="4"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid Height="70" Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="300px"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
-                        <Image.Source>
-                            <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/reservations.png" />
-                        </Image.Source>
-                    </Image>
-                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
-                </Grid>
-            </Button>
-            <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="Blue"/>
-                        <Setter Property="BorderThickness" Value="4"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid Height="70" Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="140px"/>
-                        <ColumnDefinition Width="340"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.ColumnSpan="1" Margin="0,0,0,5">
-                        <Image.Source>
-                            <BitmapImage DecodePixelWidth="150"  
-                            UriSource="Images/dashboardicon.png" />
-                        </Image.Source>
-                    </Image>
-                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
-                </Grid>
-            </Button>
+            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="00:00" FontWeight="Bold" Padding="-10"/>
+            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1999" VerticalAlignment="Bottom"/>
+            <Image Source="/Images/kerierilogo.png" Grid.Column="0" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <!--#endregion-->
-
         </Grid>
     </Grid>
 </Window>

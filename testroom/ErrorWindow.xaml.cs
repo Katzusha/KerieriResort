@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,30 @@ namespace testroom
     public partial class ErrorWindow : Window
     {
         public static string ErrorMessage;
+        System.Media.SoundPlayer player;
 
         public ErrorWindow()
         {
             InitializeComponent();
 
             ErrorMessageOutput.Text = ErrorMessage;
+
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (configuration.AppSettings.Settings["HaHaFunny"].Value == "true")
+            {
+                string[] randomerror = {"I have no clue what just went wrong. Just do the basic procedures and check things up like" +
+            " like internet and stuf \nHere is some useles error code: C30034", "Something went wrong with the output. Please check all the inserted " +
+            "data and try again.\nError code: C40012", "Opsie wipsie something went wrong!\nPlease check some useles internet stuf and go cry in ur room.\n" +
+            "Here is the error code becouse I Will Not explain it to you: C42069", "Error.... \n\n Just error"};
+
+                Random rand = new Random();
+                int index = rand.Next(randomerror.Length);
+
+                ErrorMessageOutput.Text = randomerror[index];
+
+                player = new System.Media.SoundPlayer(@"D:\Projects\Kerieri\Kerieri\Sounds\errorsound.wav");
+                player.Play();
+            }
         }
 
         #region ANIMATIONS
@@ -35,12 +54,11 @@ namespace testroom
             Button button = (Button)sender;
 
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = button.Width * 1.2;
+            myDoubleAnimation.To = 150 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-
-            myDoubleAnimation.To = button.Height * 1.2;
+            myDoubleAnimation.To = 50 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
@@ -50,12 +68,11 @@ namespace testroom
             Button button = (Button)sender;
 
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = button.Width / 1.2;
+            myDoubleAnimation.To = 150;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-
-            myDoubleAnimation.To = button.Height / 1.2;
+            myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
