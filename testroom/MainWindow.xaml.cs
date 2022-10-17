@@ -1779,8 +1779,9 @@ namespace testroom
                 {
                     //Declare children speciffications
                     Button buttonAddedSideGuest = new Button();
-                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text + " " + CreateReservationGridSideGuestSurnameInput.Text +
+                    buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
                         "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd/MM/yyyy");
+                    buttonAddedSideGuest.Name = CreateReservationGridSideGuestFirstnameInput.Text.Replace(' ', '_');
                     buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
                     buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuestBtn_Click);
 
@@ -1828,20 +1829,27 @@ namespace testroom
 
             RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
 
+            string[] buttoninfo = btn.Content.ToString().Split('\n');
+
+            CreateReservationGridSideGuestFirstnameInput.Text = btn.Name.Replace('_', ' ');
+            CreateReservationGridSideGuestSurnameInput.Text = buttoninfo[0].ToString().Substring(3);
+            DateTime datetime = new DateTime();
+            datetime = DateTime.Parse(buttoninfo[1]);
+            CreateReservationGridSideGuestBirthCalendar.SelectedDate = datetime;
+
             try
             {
-                if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
-                {
-                    CreateReservationGridSideGuestAddedGrid.Children.Clear();
-                    //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
-                }
-                else
-                {
+                //if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
+                //{
+                //    CreateReservationGridSideGuestAddedGrid.Children.Clear();
+                //}
+                //else
+                //{
                     CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
                     CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
 
                     row.Height = new GridLength(0);
-                }
+                //}
 
             }
             catch (Exception ex)
@@ -1863,18 +1871,17 @@ namespace testroom
 
             try
             {
-                if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
-                {
-                    CreateReservationGridSideGuestAddedGrid.Children.Clear();
-                    //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
-                }
-                else
-                {
+                //if (CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count == 0)
+                //{
+                //    CreateReservationGridSideGuestAddedGrid.Children.Clear();
+                //}
+                //else
+                //{
                     CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
                     CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
 
                     row.Height = new GridLength(0);
-                }
+                //}
 
             }
             catch (Exception ex)
