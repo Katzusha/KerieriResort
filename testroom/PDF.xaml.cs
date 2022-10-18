@@ -96,20 +96,30 @@ namespace testroom
 
                 else if (id == 3)
                 {
-                    var bmp = new RenderTargetBitmap(816, 1123, 96, 96, PixelFormats.Default);
+                    MemoryStream lMemoryStream = new MemoryStream();
+                    Package package = Package.Open(lMemoryStream, FileMode.Create);
+                    XpsDocument doc = new XpsDocument(package);
+                    XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
 
-                    bmp.Render(print);
+                    // This is your window
+                    writer.Write(print);
 
-                    using (var stream = new MemoryStream())
-                    {
-                        var encoder = new JpegBitmapEncoder();
+                    doc.Close();
+                    package.Close();
 
-                        encoder.Frames.Add(BitmapFrame.Create(bmp));
-                        encoder.QualityLevel = 100;
-                        encoder.Save(stream);
+                    // Convert 
+                    MemoryStream outStream = new MemoryStream();
+                    PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
 
-                        File.WriteAllBytes("D:\\preview.png", stream.ToArray());
-                    }
+                    // Write pdf file
+                    FileStream fileStream = new FileStream("D:\\preview.pdf", FileMode.Create);
+                    outStream.CopyTo(fileStream);
+
+                    // Clean up
+                    outStream.Flush();
+                    outStream.Close();
+                    fileStream.Flush();
+                    fileStream.Close();
                 }
             }
             catch (Exception ex)

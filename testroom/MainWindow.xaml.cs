@@ -1965,7 +1965,53 @@ namespace testroom
 
         private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            //Generate information about bill and customer
+            string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
+                "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
+                "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
+                "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}";
+
+            bool ischeckedchek = false;
+            //Generate all the items that are being payed (property, breakfast...)
+            foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+            {
+                if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                {
+                    ischeckedchek = false;
+
+                    CheckBox checkbox = (CheckBox)child;
+
+                    if (checkbox.IsChecked == true)
+                    {
+                        json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
+
+                        ischeckedchek = true;
+                    }
+                }
+                else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                {
+                    TextBox textbox = (TextBox)child;
+
+                    if (ischeckedchek == true)
+                    {
+                        json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
+                    }
+                }
+            }
+
+            json = json + "]}";
+
+            dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+            //Generate pdf
+            PDF pdf = new PDF(3, pdfinfo);
+
+            pdfViewer.LoadDocument("D:\\preview.pdf");
         }
 
     }

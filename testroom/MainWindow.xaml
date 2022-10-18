@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:testroom"
         mc:Ignorable="d"
+        xmlns:Wpf="clr-namespace:Patagames.Pdf.Net.Controls.Wpf;assembly=Patagames.Pdf.Wpf"
+        xmlns:Toolbars="clr-namespace:Patagames.Pdf.Net.Controls.Wpf.ToolBars;assembly=Patagames.Pdf.Wpf"
         WindowStyle="None"
         Title="Kerieri Resort" Height="237" Width="1102" Background="#252526" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" MaxWidth="2560" MaxHeight="1439">
     <Window.Resources>
@@ -1453,27 +1455,25 @@
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
-                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-800,-150,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1000,-150,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label.Background>
                             <ImageBrush ImageSource="/Images/creditcardicon.png"/>
                         </Label.Background>
                     </Label>
-                    <CheckBox x:Name="CreateReservationGridPaymentInformationCreditCardCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Credit card" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-500,-150,0,0" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCreditCardCheckBox_Checked"/>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCreditCardCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Credit card" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-700,-150,0,0" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCreditCardCheckBox_Checked"/>
 
-                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-800,0,0,-150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1000,0,0,-150" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Label.Background>
                             <ImageBrush ImageSource="/Images/cashicon.png"/>
                         </Label.Background>
                     </Label>
-                    <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-500,0,0,-150" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-700,0,0,-150" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
 
-                    <Button Style="{DynamicResource GrayButton}" Content="SAVE" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-225,0,0"/>
-                    <Button Style="{DynamicResource GrayButton}" Content="PRINT" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-75,0,0"/>
-                    <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" Width="200" Margin="0,0,0,-75" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button x:Name="CreateReservationGridPaymentInformationPreviewBtn" Style="{DynamicResource GrayButton}" Content="Preview" Width="200" Margin="0,0,0,-225" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CreateReservationGridPaymentInformationPreviewBtn_Click"/>
-                    <Viewbox>
-                        <WebBrowser x:Name="pdfWebViewer" Width="85" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,100,0"/>
-                    </Viewbox>
+                    <Button Style="{DynamicResource GrayButton}" Content="SAVE" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-200,-225,0,0"/>
+                    <Button Style="{DynamicResource GrayButton}" Content="PRINT" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-200,-75,0,0"/>
+                    <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" Width="200" Margin="-200,0,0,-75" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="CreateReservationGridPaymentInformationPreviewBtn" Style="{DynamicResource GrayButton}" Content="Preview" Width="200" Margin="-200,0,0,-225" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CreateReservationGridPaymentInformationPreviewBtn_Click"/>
+                    <Wpf:PdfViewer x:Name="pdfViewer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,-700,0" Width="408" Height="561.5"></Wpf:PdfViewer>
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
