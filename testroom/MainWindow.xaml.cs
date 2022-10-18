@@ -1978,5 +1978,10 @@ namespace testroom
             return pdfinfo;
         }
 
+        private void LogoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow window = new SettingsWindow();
+            window.Show();
+        }
     }
 }

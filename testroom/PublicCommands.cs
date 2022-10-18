@@ -17,7 +17,7 @@ namespace testroom
             window.ShowDialog();
         }
 
-        public static void UpdateAppSettingsValue(string key, string value)
+        public static void UpdateAppSettingsValue(string key, string value) 
         {
             //Change appsettings
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
