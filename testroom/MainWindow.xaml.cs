@@ -1980,7 +1980,7 @@ namespace testroom
 
         private void LogoBtn_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow window = new SettingsWindow();
+            resorttestroom.SettingsWindow window = new resorttestroom.SettingsWindow();
             window.Show();
         }
     }

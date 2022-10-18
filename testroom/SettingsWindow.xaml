@@ -5,9 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:resorttestroom"
         mc:Ignorable="d"
-        WindowStyle="None"
-        Title="SettingsWindow" Height="435" Width="756" Background="#252526">
+         WindowStyle="None"
+        Title="SettingsWindow" Height="435" Width="756" Background="#252526" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <Style x:Key="BlueButton" TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter" Handler="BlueBtn_Enter"/>
+            <EventSetter Event="MouseLeave" Handler="BlueBtn_Leave"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0000FF"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="0, 0, 0, 0" BorderBrush="#0000FF">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Key="CheckBoxGeneratedButton" TargetType="{x:Type CheckBox}">
             <Setter Property="SnapsToDevicePixels"
                 Value="true" />
@@ -256,9 +280,17 @@
             </Border.Background>
         </Border>
         <Grid Background="#BF252526">
-            <Label Content="Price calculation!" FontSize="32" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-300,0,0"/>
-            <CheckBox Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="-45,0,0,0"/>
-            <CheckBox Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="-45,-100,0,0"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
+            <CheckBox Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center"/>
+            <CheckBox Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="0,-200,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="Button_Click"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
+
