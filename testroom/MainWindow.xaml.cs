@@ -197,6 +197,9 @@ namespace testroom
 
             StartClock();
 
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            PublicCommands.ShowError(configuration.AppSettings.Settings["CalculatePerNight"].Value);
+
             //PublicCommands.ShowError(Dns.GetHostName());
         }
 

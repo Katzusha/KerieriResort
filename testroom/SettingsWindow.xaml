@@ -270,6 +270,39 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="TextBoxInput" TargetType="{x:Type TextBox}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="AllowDrop" Value="False" />
+            <Setter Property="FontSize" Value="24px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border" CornerRadius="25" Padding="0">
+                            <Border.Background>
+                                <SolidColorBrush Color="#3e3e3e" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.BorderBrush>
+                            <ScrollViewer Margin="20, 0, 20, 0" x:Name="PART_ContentHost" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
 
@@ -285,8 +318,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
-            <CheckBox Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center"/>
-            <CheckBox Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="0,-200,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <CheckBox x:Name="CalculatePricePerNight" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="0,-200,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked"/>
+            <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked"/>
+            <Label Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
+            <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
             <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <Button Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="Button_Click"/>
             </Grid>

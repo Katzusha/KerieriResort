@@ -1645,7 +1645,7 @@
 
             <Button x:Name="LogoBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150"  
                 BorderBrush="{x:Null}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="0,0, 0,0" FontWeight="Bold" Foreground="{x:Null}" Click="LogoBtn_Click">
+                    FontFamily="Arial" Margin="0,0, 0,0" FontWeight="Bold" Cursor="Hand" Foreground="{x:Null}" Click="LogoBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0"/>

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using jsreport.Types;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Configuration = System.Configuration.Configuration;
 
 namespace resorttestroom
 {
@@ -23,6 +27,29 @@ namespace resorttestroom
         public SettingsWindow()
         {
             InitializeComponent();
+
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
+            CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
+
+            if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
+            {
+                CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+
+                if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
+                {
+                    AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+                }
+                else
+                {
+                    AgeLimit.IsEnabled = false;
+                }
+            }
+            else
+            {
+                CalculateUnderaged.IsEnabled = false;
+            }
         }
 
         private void BlueBtn_Enter(object sender, MouseEventArgs e)
@@ -58,7 +85,69 @@ namespace resorttestroom
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (CalculatePricePerNight.IsChecked == true)
+            {
+                configuration.AppSettings.Settings["CalculatePerNight"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculatePerNight"].Value = "false";
+            }
+
+            if (CalculatePricePerPearson.IsChecked == true)
+            {
+                configuration.AppSettings.Settings["CalculatePerPearson"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculatePerPearson"].Value = "false";
+            }
+
+            if (CalculateUnderaged.IsChecked == true)
+            {
+                configuration.AppSettings.Settings["CalculateUnderaged"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculateUnderaged"].Value = "false";
+            }
+
+            configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
+
+            configuration.Save();
+            ConfigurationManager.RefreshSection("appSettings");
+
             this.Close();
+        }
+
+        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void CalculatePricePerPearson_Checked(object sender, RoutedEventArgs e)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+
+            if (CalculateUnderaged.IsChecked == true)
+            {
+                AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+            }
+            else
+            {
+                AgeLimit.IsEnabled = false;
+            }
+        }
+
+        private void CalculateUnderaged_Checked(object sender, RoutedEventArgs e)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
         }
     }
 }
