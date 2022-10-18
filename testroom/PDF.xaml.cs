@@ -23,15 +23,15 @@ namespace testroom
 
             try
             {
-                //DocumentNumber.Content = pdfinfo.DocumentNumber;
-                //CreatedDate.Content = pdfinfo.CreatedDate;
-                //FromDate.Content = pdfinfo.FromDate;
-                //ToDate.Content = pdfinfo.ToDate;
-                //CustomerName.Content = pdfinfo.CustomerName;
-                //CustomerAddress.Content = pdfinfo.CustomerAddress;
-                //CustomerContact.Content = pdfinfo.CustomerContact;
+                DocumentNumber.Content = pdfinfo.DocumentNumber;
+                CreatedDate.Content = pdfinfo.CreatedDate;
+                FromDate.Content = pdfinfo.FromDate;
+                ToDate.Content = pdfinfo.ToDate;
+                CustomerName.Content = pdfinfo.CustomerName;
+                CustomerAddress.Content = pdfinfo.CustomerAddress;
+                CustomerContact.Content = pdfinfo.CustomerContact;
 
-                //GenerateItems(pdfinfo);
+                GenerateItems(pdfinfo);
 
                 if (id == 1)
                 { 
@@ -132,13 +132,16 @@ namespace testroom
 
         private void GenerateItems(dynamic pdfinfo)
         {
+            ItemsGrid.Children.Clear();
+            ItemsGrid.RowDefinitions.Clear();
+
             decimal totalprice = 0.00m;
 
             RowDefinition newrow = new RowDefinition();
             newrow.Height = new GridLength(30);
             ItemsGrid.RowDefinitions.Add(newrow);
 
-            int row = 1;
+            int row = 0;
 
             foreach(var info in pdfinfo.Items)
             {

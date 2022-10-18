@@ -1059,7 +1059,7 @@
 
     <!--BACKGROUND GRID-->
     <Grid>
-        <Grid  x:Name="BackGroundGrid" Visibility="Hidden">
+        <Grid  x:Name="BackGroundGrid" Visibility="Visible">
             <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
                 <Border.RenderTransform>
                     <TransformGroup>
