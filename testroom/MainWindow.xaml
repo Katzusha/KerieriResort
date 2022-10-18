@@ -87,7 +87,8 @@
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -110,13 +111,38 @@
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 3, 3" BorderBrush="#FF0000">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="GrayButton" TargetType="{x:Type Button}">
+            <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
+            <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#3e3e3e"/>
+            <Setter Property="Margin" Value="0, 0, 0, 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="24px"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="0, 0, 0, 0" BorderBrush="#0000FF">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -962,6 +988,8 @@
         <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+
+
         <Style x:Key="GeneratedCheckBox" TargetType="{x:Type CheckBox}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -975,9 +1003,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <Grid x:Name="templateRoot" Height="45" Background="Transparent" Margin="10, 0, 0, 0" SnapsToDevicePixels="True">
+                        <Grid x:Name="templateRoot" Height="50" Background="Transparent" Margin="10, 0, 0, 0" SnapsToDevicePixels="True">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="45"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border x:Name="checkBoxBorder" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="Center">
@@ -1071,7 +1099,7 @@
                 </Border.RenderTransform>
             </Border>
         </Grid>
-        
+
 
 
 
@@ -1370,7 +1398,7 @@
                     <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridSideReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="3*"/>
@@ -1424,18 +1452,34 @@
                     </Button>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Button/>
+                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-800,-150,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label.Background>
+                            <ImageBrush ImageSource="/Images/creditcardicon.png"/>
+                        </Label.Background>
+                    </Label>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCreditCardCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Credit card" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-500,-150,0,0" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCreditCardCheckBox_Checked"/>
+
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-800,0,0,-150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label.Background>
+                            <ImageBrush ImageSource="/Images/cashicon.png"/>
+                        </Label.Background>
+                    </Label>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-500,0,0,-150" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
+
+                    <Button Style="{DynamicResource GrayButton}" Content="SAVE" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-225,0,0"/>
+                    <Button Style="{DynamicResource GrayButton}" Content="PRINT" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-75,0,0"/>
+                    <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" Width="200" Margin="0,0,0,-75" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button x:Name="CreateReservationGridPaymentInformationPreviewBtn" Style="{DynamicResource GrayButton}" Content="Preview" Width="200" Margin="0,0,0,-225" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CreateReservationGridPaymentInformationPreviewBtn_Click"/>
+                    <Viewbox>
+                        <WebBrowser x:Name="pdfWebViewer" Width="85" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,100,0"/>
+                    </Viewbox>
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
-                    <Button Style="{DynamicResource BlueButton}" x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
-                    Background="Blue" BorderBrush="Blue" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-160,0" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click"/>
-                    
-                    <Button Style="{DynamicResource RedButton}" x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click"/>
+                    <Button Style="{DynamicResource BlueButton}" x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" Width="150" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click" Margin="0,0,-170,0"/>
+
+                    <Button Style="{DynamicResource RedButton}" x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click"/>
                 </Grid>
             </Grid>
             <!--#endregion-->

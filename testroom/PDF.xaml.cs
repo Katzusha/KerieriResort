@@ -5,6 +5,8 @@ using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 
@@ -21,15 +23,15 @@ namespace testroom
 
             try
             {
-                DocumentNumber.Content = pdfinfo.DocumentNumber;
-                CreatedDate.Content = pdfinfo.CreatedDate;
-                FromDate.Content = pdfinfo.FromDate;
-                ToDate.Content = pdfinfo.ToDate;
-                CustomerName.Content = pdfinfo.CustomerName;
-                CustomerAddress.Content = pdfinfo.CustomerAddress;
-                CustomerContact.Content = pdfinfo.CustomerContact;
+                //DocumentNumber.Content = pdfinfo.DocumentNumber;
+                //CreatedDate.Content = pdfinfo.CreatedDate;
+                //FromDate.Content = pdfinfo.FromDate;
+                //ToDate.Content = pdfinfo.ToDate;
+                //CustomerName.Content = pdfinfo.CustomerName;
+                //CustomerAddress.Content = pdfinfo.CustomerAddress;
+                //CustomerContact.Content = pdfinfo.CustomerContact;
 
-                GenerateItems(pdfinfo);
+                //GenerateItems(pdfinfo);
 
                 if (id == 1)
                 { 
@@ -90,6 +92,24 @@ namespace testroom
                     outStream.Close();
                     fileStream.Flush();
                     fileStream.Close();
+                }
+
+                else if (id == 3)
+                {
+                    var bmp = new RenderTargetBitmap(816, 1123, 96, 96, PixelFormats.Default);
+
+                    bmp.Render(print);
+
+                    using (var stream = new MemoryStream())
+                    {
+                        var encoder = new JpegBitmapEncoder();
+
+                        encoder.Frames.Add(BitmapFrame.Create(bmp));
+                        encoder.QualityLevel = 100;
+                        encoder.Save(stream);
+
+                        File.WriteAllBytes("D:\\preview.png", stream.ToArray());
+                    }
                 }
             }
             catch (Exception ex)

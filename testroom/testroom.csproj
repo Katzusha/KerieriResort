@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="cashicon.png" />
+    <None Remove="creditcardicon.png" />
     <None Remove="home.png" />
     <None Remove="icons8-home-500.png" />
     <None Remove="image.png" />
@@ -33,6 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\cashicon.png" />
+    <Resource Include="Images\creditcardicon.png" />
     <Resource Include="Images\classifficationsicon.png" />
     <Resource Include="Images\dashboardicon.png" />
     <Resource Include="Images\logouticon.png" />

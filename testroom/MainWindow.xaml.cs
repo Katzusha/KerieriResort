@@ -1946,5 +1946,28 @@ namespace testroom
         #endregion
 
         #endregion
+
+        private void CreateReservationGridPaymentInformationCreditCardCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
+            {
+                CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
+            }
+        }
+
+        private void CreateReservationGridPaymentInformationCashCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true)
+            {
+                CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
+            }
+        }
+
+        private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
     }
+}
 }
