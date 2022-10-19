@@ -1328,6 +1328,21 @@
             </Grid>
 
 
+            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
+                <CheckBox x:Name="CalculatePricePerNight" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="0,-200,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked" Unchecked="CalculatePricePerPearson_Unchecked"/>
+                <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
+                <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
+                <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
+                <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="Button_Click"/>
+                </Grid>
+            </Grid>
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
@@ -1473,7 +1488,7 @@
                     <Button Style="{DynamicResource GrayButton}" Content="PRINT" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-200,-75,0,0"/>
                     <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" Width="200" Margin="-200,0,0,-75" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Button x:Name="CreateReservationGridPaymentInformationPreviewBtn" Style="{DynamicResource GrayButton}" Content="Preview" Width="200" Margin="-200,0,0,-225" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CreateReservationGridPaymentInformationPreviewBtn_Click"/>
-                    <Wpf:PdfViewer x:Name="pdfViewer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,-700,0" Width="408" Height="561.5"></Wpf:PdfViewer>
+                    <Wpf:PdfViewer x:Name="pdfViewer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,-700,0" Width="408" Height="561.5" Background="#00A0A0A0" Foreground="Black"></Wpf:PdfViewer>
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">

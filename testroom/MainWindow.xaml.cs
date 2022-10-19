@@ -192,6 +192,7 @@ namespace testroom
             ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
+            SettingsScreen.Visibility = Visibility.Hidden;
 
             InitializeComponent();
 
@@ -1462,6 +1463,7 @@ namespace testroom
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
+                SettingsScreen.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1833,6 +1835,118 @@ namespace testroom
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void CreateReservationGridPaymentInformationCreditCardCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
+            {
+                CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
+            }
+        }
+
+        private void CreateReservationGridPaymentInformationCashCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true)
+            {
+                CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
+            }
+        }
+
+        private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            pdfViewer.CloseDocument();
+            //Generate pdf
+            PDF pdf = new PDF(3, CalculateReceipt());
+
+            pdfViewer.LoadDocument("D:\\preview.pdf");
+        }
+
+        public dynamic CalculateReceipt()
+        {
+            //Generate information about bill and customer
+            string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
+                "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
+                "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
+                "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
+                "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
+                "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}";
+
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
+            {
+                if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
+                {
+                    int NumberOfGuests = 0;
+
+                    foreach (var sender in CreateReservationGridSideGuestAddedGrid.Children)
+                    {
+                        Button btn = (Button)sender;
+                        Grid parent = (Grid)btn.Parent;
+
+                        if ((parent.Children.IndexOf(btn) % 2) == 0)
+                        {
+                            string[] buttoninfo = btn.Content.ToString().Split('\n');
+
+                            CreateReservationGridSideGuestFirstnameInput.Text = btn.Name.Replace('_', ' ');
+                            CreateReservationGridSideGuestSurnameInput.Text = buttoninfo[0].ToString().Substring(3);
+                            DateTime datetime = new DateTime();
+                            datetime = DateTime.Parse(buttoninfo[1]);
+
+                            if (datetime < (DateTime.Today.AddYears(Int32.Parse(configuration.AppSettings.Settings["CalculateUnderagedAge"].Value))))
+                            {
+
+                            }
+                        }
+                    }
+
+                    json = json + ",{\"Quantity\": \"" + NumberOfGuests.ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
+                }
+                else
+                {
+                    json = json + ",{\"Quantity\": \"" + (CreateReservationGridSideGuestAddedGrid.Children.Count / 2).ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
+                }
+            }
+
+
+            bool ischeckedchek = false;
+            //Generate all the items that are being payed (property, breakfast...)
+            foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+            {
+                if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                {
+                    CheckBox checkbox = (CheckBox)child;
+
+                    ischeckedchek = false;
+
+                    if (checkbox.IsChecked == true)
+                    {
+                        json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
+
+                        ischeckedchek = true;
+                    }
+                }
+                else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                {
+                    TextBox textbox = (TextBox)child;
+
+                    if (ischeckedchek == true)
+                    {
+                        json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
+                    }
+                }
+            }
+
+            json = json + "]}";
+
+            dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
+
+            return pdfinfo;
+        }
+
+
         #endregion
 
         #region CLASSIFFICATIONS GRID ACTIONS
@@ -1907,84 +2021,123 @@ namespace testroom
 
         #endregion
 
-        private void CreateReservationGridPaymentInformationCreditCardCheckBox_Checked(object sender, RoutedEventArgs e)
+        #region SETTINGS GRID ACTIONS
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (CalculatePricePerNight.IsChecked == true)
             {
-                CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
+                configuration.AppSettings.Settings["CalculatePerNight"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculatePerNight"].Value = "false";
+            }
+
+            if (CalculatePricePerPearson.IsChecked == true)
+            {
+                configuration.AppSettings.Settings["CalculatePerPearson"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculatePerPearson"].Value = "false";
+            }
+
+            if (CalculateUnderaged.IsChecked == true)
+            {
+                configuration.AppSettings.Settings["CalculateUnderaged"].Value = "true";
+            }
+            else
+            {
+                configuration.AppSettings.Settings["CalculateUnderaged"].Value = "false";
+            }
+
+            configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
+
+            configuration.Save();
+            ConfigurationManager.RefreshSection("appSettings");
+
+            this.Close();
+        }
+
+        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void CalculatePricePerPearson_Checked(object sender, RoutedEventArgs e)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            CalculateUnderaged.IsEnabled = true;
+            CalculateUnderaged.Foreground = Brushes.White;
+
+            if (CalculateUnderaged.IsChecked == false)
+            {
+                AgeLimit.IsEnabled = false;
+                AgeLimitLabel.Foreground = Brushes.Gray;
+            }
+            else
+            {
+                AgeLimit.IsEnabled = true;
+                AgeLimitLabel.Foreground = Brushes.White;
             }
         }
 
-        private void CreateReservationGridPaymentInformationCashCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CalculateUnderaged_Checked(object sender, RoutedEventArgs e)
         {
-            if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true)
-            {
-                CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
-            }
+            AgeLimit.IsEnabled = true;
+            AgeLimitLabel.Foreground = Brushes.White;
         }
 
-        private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
+        private void CalculatePricePerPearson_Unchecked(object sender, RoutedEventArgs e)
         {
-            pdfViewer.CloseDocument();
-            //Generate pdf
-            PDF pdf = new PDF(3, CalculateReceipt());
-
-            pdfViewer.LoadDocument("D:\\preview.pdf");
+            CalculateUnderaged.IsEnabled = false;
+            CalculateUnderaged.Foreground = Brushes.Gray;
+            AgeLimitLabel.Foreground = Brushes.Gray;
+            AgeLimit.IsEnabled = false;
         }
 
-        public dynamic CalculateReceipt()
+        private void CalculateUnderaged_Unchecked(object sender, RoutedEventArgs e)
         {
-            //Generate information about bill and customer
-            string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
-                "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
-                "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
-                "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
-                "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
-                "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}," +
-                "{\"Quantity\": \"" + (CreateReservationGridSideGuestAddedGrid.Children.Count / 2).ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
-
-            bool ischeckedchek = false;
-            //Generate all the items that are being payed (property, breakfast...)
-            foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
-            {
-                if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
-                {
-                    CheckBox checkbox = (CheckBox)child;
-
-                    ischeckedchek = false;
-
-                    if (checkbox.IsChecked == true)
-                    {
-                        json = json + ", {\"Quantity\": 1, \"Item\": \"" + checkbox.Content + "\"";
-
-                        ischeckedchek = true;
-                    }
-                }
-                else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
-                {
-                    TextBox textbox = (TextBox)child;
-
-                    if (ischeckedchek == true)
-                    {
-                        json = json + ", \"Price\": \"" + textbox.Text.Replace("€", "") + "\"}";
-                    }
-                }
-            }
-
-            json = json + "]}";
-
-            dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
-
-            return pdfinfo;
+            AgeLimit.IsEnabled = false;
+            AgeLimitLabel.Foreground = Brushes.Gray;
         }
-
+        #endregion
         private void LogoBtn_Click(object sender, RoutedEventArgs e)
         {
-            resorttestroom.SettingsWindow window = new resorttestroom.SettingsWindow();
-            window.Show();
+            ReservationsScreen.Visibility = Visibility.Hidden;
+            CreateReservationScreen.Visibility = Visibility.Hidden;
+            SettingsScreen.Visibility = Visibility.Visible;
+
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
+            CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
+            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+
+            if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
+            {
+
+
+                if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
+                {
+
+                }
+                else
+                {
+                    AgeLimit.IsEnabled = false;
+                    AgeLimitLabel.Foreground = Brushes.Gray;
+                }
+            }
+            else
+            {
+                CalculateUnderaged.IsEnabled = false;
+                CalculateUnderaged.Foreground = Brushes.Gray;
+            }
         }
     }
 }

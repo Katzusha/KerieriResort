@@ -32,23 +32,27 @@ namespace resorttestroom
 
             CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
             CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
+            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
 
             if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
             {
-                CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+                
 
                 if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
                 {
-                    AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+                    
                 }
                 else
                 {
                     AgeLimit.IsEnabled = false;
+                    AgeLimitLabel.Foreground = Brushes.Gray;
                 }
             }
             else
             {
                 CalculateUnderaged.IsEnabled = false;
+                CalculateUnderaged.Foreground = Brushes.Gray;
             }
         }
 
@@ -132,22 +136,39 @@ namespace resorttestroom
         {
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+            CalculateUnderaged.IsEnabled = true;
+            CalculateUnderaged.Foreground = Brushes.White;
 
-            if (CalculateUnderaged.IsChecked == true)
+            if (CalculateUnderaged.IsChecked == false)
             {
-                AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+                AgeLimit.IsEnabled = false;
+                AgeLimitLabel.Foreground = Brushes.Gray;
             }
             else
             {
-                AgeLimit.IsEnabled = false;
+                AgeLimit.IsEnabled = true;
+                AgeLimitLabel.Foreground = Brushes.White;
             }
         }
 
         private void CalculateUnderaged_Checked(object sender, RoutedEventArgs e)
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+            AgeLimit.IsEnabled = true;
+            AgeLimitLabel.Foreground = Brushes.White;
+        }
+
+        private void CalculatePricePerPearson_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CalculateUnderaged.IsEnabled = false;
+            CalculateUnderaged.Foreground = Brushes.Gray;
+            AgeLimitLabel.Foreground = Brushes.Gray;
+            AgeLimit.IsEnabled = false;
+        }
+
+        private void CalculateUnderaged_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AgeLimit.IsEnabled = false;
+            AgeLimitLabel.Foreground = Brushes.Gray;
         }
     }
 }
