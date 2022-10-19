@@ -160,13 +160,13 @@ namespace testroom
                 ItemsGrid.Children.Add(button);
 
                 button = new Label();
-                button.Content = (decimal.Parse(info.Price.Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())) + "€";
+                button.Content = (decimal.Parse(info.Price) * decimal.Parse(info.Quantity.ToString())) + "€";
                 button.Style = (Style)this.Resources["Item"];
                 Grid.SetColumn(button, 2);
                 Grid.SetRow(button, row);
                 ItemsGrid.Children.Add(button);
 
-                totalprice = totalprice + ((decimal.Parse(info.Price.ToString().Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())));
+                totalprice = totalprice + ((decimal.Parse(info.Price.ToString()) * decimal.Parse(info.Quantity.ToString())));
 
                 row++;
 
@@ -175,7 +175,7 @@ namespace testroom
                 ItemsGrid.RowDefinitions.Add(newrow);
             }
 
-            TotalPrice.Content = totalprice.ToString().Replace(',', '.') + "€";
+            TotalPrice.Content = totalprice.ToString() + "€";
         }
     }
 }

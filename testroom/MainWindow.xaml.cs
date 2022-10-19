@@ -1575,7 +1575,9 @@ namespace testroom
         }
         #endregion
 
-        #region RESERVATIONS GRID ACTIONS
+
+        #region GRID ACTIONS
+        #region RESERVATIONS GRID actions
         //SearchBox on reservations grid
         private async void HomeGridSearch_KeyUp(object sender, KeyEventArgs e)
         {
@@ -1969,11 +1971,11 @@ namespace testroom
             //If the CalculatePerPearson is true
             if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
             {
+                int NumberOfGuests = 1;
+
                 //If the Calculate Underaged is true, check teh underaged age settings and calculate how many people is abowe that age
                 if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
                 {
-                    int NumberOfGuests = 0;
-
                     //For each add one to NumberOfGuests
                     foreach (var sender in CreateReservationGridSideGuestAddedGrid.Children)
                     {
@@ -1989,7 +1991,7 @@ namespace testroom
                             DateTime datetime = new DateTime();
                             datetime = DateTime.Parse(buttoninfo[1]);
 
-                            if (datetime < (DateTime.Today.AddYears(Int32.Parse(configuration.AppSettings.Settings["CalculateUnderagedAge"].Value))))
+                            if (datetime < (DateTime.Today.AddYears(-(Int32.Parse(configuration.AppSettings.Settings["CalculateUnderagedAge"].Value)))))
                             {
                                 NumberOfGuests++;
                             }
@@ -2002,7 +2004,7 @@ namespace testroom
                 else
                 {
                     //Add json string with generated data
-                    json = json + ",{\"Quantity\": \"" + (CreateReservationGridSideGuestAddedGrid.Children.Count / 2).ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
+                    json = json + ",{\"Quantity\": \"" + ((CreateReservationGridSideGuestAddedGrid.Children.Count / 2) + 1).ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
                 }
             }
 
@@ -2046,7 +2048,8 @@ namespace testroom
 
         #endregion
 
-        #region CLASSIFFICATIONS GRID ACTIONS
+
+        #region CLASSIFFICATIONS GRID actions
 
         #region Preview Classiffication Price input
         //string PreviewClassifficationPriceInputString = "";
@@ -2118,8 +2121,9 @@ namespace testroom
 
         #endregion
 
-        #region SETTINGS GRID ACTIONS
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        #region SETTINGS GRID actions
+        private void SettingsSaveBtn_Click(object sender, RoutedEventArgs e)
         {
             //Load app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -2156,7 +2160,8 @@ namespace testroom
             configuration.Save();
             ConfigurationManager.RefreshSection("appSettings");
 
-            this.Close();
+            SettingsScreen.Visibility = Visibility.Hidden;
+            ReservationsScreen.Visibility = Visibility.Visible;
         }
 
         //Preview for numbers only input
@@ -2212,6 +2217,7 @@ namespace testroom
             AgeLimit.IsEnabled = false;
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
+        #endregion
         #endregion
     }
 }

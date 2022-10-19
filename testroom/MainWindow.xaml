@@ -1340,7 +1340,7 @@
                 <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
                 <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
                 <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <Button Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="Button_Click"/>
+                    <Button x:Name="SettingsSaveBtn" Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="SettingsSaveBtn_Click"/>
                 </Grid>
             </Grid>
             <!--#endregion-->
