@@ -1192,9 +1192,114 @@ namespace testroom
         }
         #endregion
 
+        //Enter and leave animations for PDF preview buttons
+        #region PDF PREVIEW animations
+        //Enter and leave animations for preview load
+        #region PREVIEW BUTTON animations
+        private void PreviewBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it to 110% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 55;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 55;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Hand;
+        }
+        private void PreviewBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it back to 100% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Arrow;
+        }
+        #endregion
+
+
+        #region PRINT AND SAVE BUTTON animations
+        private void SaveAndPrintBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it to 110% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 205;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 55;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Hand;
+        }
+        private void SaveAndPrintBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it back to 100% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 200;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Arrow;
+        }
+        #endregion
+
+
+        #region SAVE BUTTON animations
+        private void SaveBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it to 110% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 125;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 55;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Hand;
+        }
+        private void SaveBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Button button = (Button)sender;
+
+            //Animation for buttons size to make transformate it back to 100% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 120;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+
+            Cursor = Cursors.Arrow;
+        }
+        #endregion
+        #endregion
+
         //Loading animations for all times where application needs to proccess something
         #region LOADING animation
-        public  void LoadingAnimation()
+        public void LoadingAnimation()
         {
             //Animations for background lines to transforme it to black and white
             SolidColorBrush MyBrushLight = new SolidColorBrush();
