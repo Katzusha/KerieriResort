@@ -1618,7 +1618,7 @@
             </Button>
             <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
                 BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,94" Click="MenuLogOutBtn_Click">
+                FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,150" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
@@ -1654,13 +1654,43 @@
                     <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
+
+            <Button x:Name="MenuSettingsBtn" Content="⚙" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50" 
+                    Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="SettingsBtn_Enter" MouseLeave="SettingsBtn_Leave" Click="SettingsBtn_Click" Margin="0,0,0,90">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="25"></Setter>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#3e3e3e"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
             <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="00:00" FontWeight="Bold" Padding="-10"/>
             <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1999" VerticalAlignment="Bottom"/>
             <!--<Image Source="/Images/kerierilogo.png" Grid.Column="0" Height="150" VerticalAlignment="Top"/>-->
 
             <Button x:Name="LogoBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150"  
                 BorderBrush="{x:Null}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="0,0, 0,0" FontWeight="Bold" Cursor="Hand" Foreground="{x:Null}" Click="LogoBtn_Click">
+                    FontFamily="Arial" Margin="0,0, 0,0" FontWeight="Bold" Cursor="Hand" Foreground="{x:Null}" Click="SettingsBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0"/>

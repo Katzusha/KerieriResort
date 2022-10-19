@@ -197,11 +197,6 @@ namespace testroom
             InitializeComponent();
 
             StartClock();
-
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            PublicCommands.ShowError(configuration.AppSettings.Settings["CalculatePerNight"].Value);
-
-            //PublicCommands.ShowError(Dns.GetHostName());
         }
 
 
@@ -700,6 +695,40 @@ namespace testroom
 
             //Change its text from "Add" back to "+"
             button.Content = "+";
+        }
+        #endregion
+
+        //Enter and leave animations for Settings btn
+        #region SETTINGS BUTTON animations
+        private void SettingsBtn_Enter(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Hand;
+
+            Button button = (Button)sender;
+
+            //Animation for buttons size to transforme it to 100px width
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 120;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+
+            //Change its text from "+" to "Add"
+            button.Content = "Settings";
+        }
+        private void SettingsBtn_Leave(object sender, MouseEventArgs e)
+        {
+            Cursor = Cursors.Arrow;
+
+            Button button = (Button)sender;
+
+            //Animation for buttons size to transforme it back to 50px width
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            button.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+
+            //Change its text from "Add" back to "+"
+            button.Content = "⚙";
         }
         #endregion
 
@@ -2106,7 +2135,7 @@ namespace testroom
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
         #endregion
-        private void LogoBtn_Click(object sender, RoutedEventArgs e)
+        private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             ReservationsScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
