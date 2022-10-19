@@ -29,7 +29,6 @@ namespace testroom
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region PUBLIC VALUES AND COMMANDS
         public static MySqlConnection conn = new MySqlConnection("server=152.89.234.155;user=kosakand_admin;database=kosakand_iAsistent;port=3306;" +
                     "password=uclWRX~uV2jq");
@@ -41,8 +40,8 @@ namespace testroom
 
         public static string APIconnection = "https://kosakandraz.com/API";
         #endregion
-        
 
+        //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
         #region ENCRYPTION AND DECRYPTION
         public string EncryptString(string plainText, byte[] key, byte[] iv)
         {
@@ -182,8 +181,7 @@ namespace testroom
 
         public MainWindow()
         {
-            //When application start we need to make sure that the login window is the first window that we show
-            //Regardles of programming activity
+            //When application start we need to make sure that the login window is the first window that we show regardles of programming activity
             InitializeComponent();
 
             ControlGrid.Visibility = Visibility.Hidden;
@@ -199,11 +197,14 @@ namespace testroom
             StartClock();
         }
 
-
+        //In bottom left corner Update commands for date and time
         #region Clock and Date
         private void StartClock()
         {
+            //Declare new clock
             DispatcherTimer timer = new DispatcherTimer();
+
+            //Update clock every 5 seconds
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += tickevent;
             timer.Start();
@@ -211,6 +212,7 @@ namespace testroom
 
         private void tickevent(object sender, EventArgs e)
         {
+            //Update clock and date
             MenuClock.Content = DateTime.Now.ToString("HH:mm");
             MenuDate.Content = DateTime.Now.ToString("dd.MM.yyyy");
         }
@@ -249,11 +251,6 @@ namespace testroom
             CreateReservationGridSideGuestFirstnameInput.Clear();
             CreateReservationGridSideGuestSurnameInput.Clear();
             CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            loginusernamelabel.Content = DateTime.Now.ToString("HH:mm:ss");
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
@@ -1290,14 +1287,14 @@ namespace testroom
             Grid CurrentGrid = (Grid)currentgrid;
             Grid NextGrid = (Grid)nextgrid;
 
-            //Animation to show main reservant information screen
+            //Animation to move right grid to the display
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
             LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
             NextGrid    .BeginAnimation(MarginProperty, LogInAnimation);
 
-            //Animation to hide reservation information screen
+            //Animation to move displayed grid to the left
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
             ControlAnimation.To = new Thickness(-(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
             ControlAnimation.From = new Thickness(0, 0, 0, 0);
@@ -1310,14 +1307,14 @@ namespace testroom
             Grid CurrentGrid = (Grid)currentgrid;
             Grid PreviusGrid = (Grid)previusgrid;
 
-            //Animation to show main reservant information screen
+            //Animation to move the left grid to the display
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.From = new Thickness(0, 0, 0, 0);
             LogInAnimation.To = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
             CurrentGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
-            //Animation to hide reservation information screen
+            //Animation to move the displayed grid to the right
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
             ControlAnimation.From = new Thickness(-(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0, System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0);
             ControlAnimation.To = new Thickness(0, 0, 0, 0);
@@ -1521,6 +1518,11 @@ namespace testroom
         //LogOut button on control screen
         private void MenuLogOutBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Reset the grid view
+            ReservationsScreen.Visibility = Visibility.Visible;
+            CreateReservationScreen.Visibility = Visibility.Hidden;
+            SettingsScreen.Visibility = Visibility.Hidden;
+
             //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
@@ -1538,8 +1540,40 @@ namespace testroom
             LogInScreen.Visibility = Visibility.Visible;
             loginfaillabel.Visibility = Visibility.Hidden;
         }
-        #endregion
 
+        //Settings button on control screen
+        private void SettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Hide all posible grids and make sure the settings grid is the only one visible
+            ReservationsScreen.Visibility = Visibility.Hidden;
+            CreateReservationScreen.Visibility = Visibility.Hidden;
+            SettingsScreen.Visibility = Visibility.Visible;
+
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            //Set all the variables from app.config file
+            CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
+            CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
+            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
+            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+
+            //Check what needs to be disabled
+            if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
+            {
+                if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value) == false)
+                {
+                    AgeLimit.IsEnabled = false;
+                    AgeLimitLabel.Foreground = Brushes.Gray;
+                }
+            }
+            else
+            {
+                CalculateUnderaged.IsEnabled = false;
+                CalculateUnderaged.Foreground = Brushes.Gray;
+            }
+        }
+        #endregion
 
         #region RESERVATIONS GRID ACTIONS
         //SearchBox on reservations grid
@@ -1778,22 +1812,27 @@ namespace testroom
 
                     int rows = CreateReservationGridSideGuestAddedGrid.RowDefinitions.Count;
 
+                    //Create new row
                     RowDefinition newrow = new RowDefinition();
                     newrow.Height = new GridLength(150);
                     CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
+                    //Add children to grid
                     Grid.SetRow(buttonAddedSideGuest, rows);
                     Grid.SetColumn(buttonAddedSideGuest, 0);
                     CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuest);
 
+                    //Declare children speciffications
                     Button buttonAddedSideGuestDelete = new Button();
                     buttonAddedSideGuestDelete.Style = (Style)this.Resources["GeneratedAddedSideGuestDeleteButton"];
                     buttonAddedSideGuestDelete.Click += new RoutedEventHandler(EditAddedSideGuestDeleteBtn_Click);
 
+                    //Add children to row
                     Grid.SetRow(buttonAddedSideGuestDelete, rows);
                     Grid.SetColumn(buttonAddedSideGuestDelete, 1);
                     CreateReservationGridSideGuestAddedGrid.Children.Add(buttonAddedSideGuestDelete);
 
+                    //Clear all inputs
                     CreateReservationGridSideGuestFirstnameInput.Clear();
                     CreateReservationGridSideGuestSurnameInput.Clear();
                     CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
@@ -1806,67 +1845,84 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError("Please contact system support!");
             }
         }
 
         private void EditAddedSideGuestBtn_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            Grid parent = (Grid)btn.Parent;
-
-            int index = parent.Children.IndexOf(btn);
-            int rowindex = Grid.GetRow(btn);
-
-            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
-
-            string[] buttoninfo = btn.Content.ToString().Split('\n');
-
-            CreateReservationGridSideGuestFirstnameInput.Text = btn.Name.Replace('_', ' ');
-            CreateReservationGridSideGuestSurnameInput.Text = buttoninfo[0].ToString().Substring(3);
-            DateTime datetime = new DateTime();
-            datetime = DateTime.Parse(buttoninfo[1]);
-            CreateReservationGridSideGuestBirthCalendar.SelectedDate = datetime;
-
             try
             {
-                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
-                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                //Get children info
+                Button btn = (Button)sender;
+                Grid parent = (Grid)btn.Parent;
+                int index = parent.Children.IndexOf(btn);
+                int rowindex = Grid.GetRow(btn);
+                RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+                string[] buttoninfo = btn.Content.ToString().Split('\n');
 
-                row.Height = new GridLength(0);
+                //Fill all the inuts from children info
+                CreateReservationGridSideGuestFirstnameInput.Text = btn.Name.Replace('_', ' ');
+                CreateReservationGridSideGuestSurnameInput.Text = buttoninfo[0].ToString().Substring(3);
+                DateTime datetime = new DateTime();
+                datetime = DateTime.Parse(buttoninfo[1]);
+                CreateReservationGridSideGuestBirthCalendar.SelectedDate = datetime;
+
+                try
+                {
+                    //Delete children and their delete button
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                    //Hide the row
+                    row.Height = new GridLength(0);
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError("Please contact system support!");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                PublicCommands.ShowError("Something is wrong with the inputed data.");
             }
         }
 
         private void EditAddedSideGuestDeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-            Grid parent = (Grid)btn.Parent;
-
-            int index = parent.Children.IndexOf(btn);
-            index--;
-            int rowindex = Grid.GetRow(btn);
-
-            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
-
             try
             {
-                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
-                CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                //Get children information
+                Button btn = (Button)sender;
+                Grid parent = (Grid)btn.Parent;
+                int index = parent.Children.IndexOf(btn);
+                index--;
+                int rowindex = Grid.GetRow(btn);
+                RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
 
-                row.Height = new GridLength(0);
+                try
+                {
+                    //Delete children and their delete button
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+                    CreateReservationGridSideGuestAddedGrid.Children.RemoveAt(index);
+
+                    //Hide the row
+                    row.Height = new GridLength(0);
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError("Please contact system support!");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                PublicCommands.ShowError("Please contact system support!");
             }
         }
 
         private void CreateReservationGridPaymentInformationCreditCardCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            //If the checkbox is checked than uncheck the other
             if (CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
             {
                 CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
@@ -1875,6 +1931,7 @@ namespace testroom
 
         private void CreateReservationGridPaymentInformationCashCheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            //If the checkbox is checked than uncheck the other
             if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true)
             {
                 CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
@@ -1883,10 +1940,13 @@ namespace testroom
 
         private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Make sure that the document isn't open at the time
             pdfViewer.CloseDocument();
+
             //Generate pdf
             PDF pdf = new PDF(3, CalculateReceipt());
 
+            //Show the pdf preview
             pdfViewer.LoadDocument("D:\\preview.pdf");
         }
 
@@ -1903,13 +1963,18 @@ namespace testroom
                 "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
                 "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}";
 
+            //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            //If the CalculatePerPearson is true
             if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
             {
+                //If the Calculate Underaged is true, check teh underaged age settings and calculate how many people is abowe that age
                 if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
                 {
                     int NumberOfGuests = 0;
 
+                    //For each add one to NumberOfGuests
                     foreach (var sender in CreateReservationGridSideGuestAddedGrid.Children)
                     {
                         Button btn = (Button)sender;
@@ -1926,15 +1991,17 @@ namespace testroom
 
                             if (datetime < (DateTime.Today.AddYears(Int32.Parse(configuration.AppSettings.Settings["CalculateUnderagedAge"].Value))))
                             {
-
+                                NumberOfGuests++;
                             }
                         }
                     }
 
+                    //Add json string with generated data
                     json = json + ",{\"Quantity\": \"" + NumberOfGuests.ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
                 }
                 else
                 {
+                    //Add json string with generated data
                     json = json + ",{\"Quantity\": \"" + (CreateReservationGridSideGuestAddedGrid.Children.Count / 2).ToString() + "\", \"Item\": \"Guests\", \"Price\": \"20.50\"}";
                 }
             }
@@ -1970,6 +2037,7 @@ namespace testroom
 
             json = json + "]}";
 
+            //Convert string to json
             dynamic pdfinfo = JsonConvert.DeserializeObject<ExpandoObject>(json, new ExpandoObjectConverter());
 
             return pdfinfo;
@@ -2053,8 +2121,10 @@ namespace testroom
         #region SETTINGS GRID ACTIONS
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Load app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
+            //Set every object to the right state (enabled, disabled) and right value (checked, unchecked)
             if (CalculatePricePerNight.IsChecked == true)
             {
                 configuration.AppSettings.Settings["CalculatePerNight"].Value = "true";
@@ -2063,7 +2133,6 @@ namespace testroom
             {
                 configuration.AppSettings.Settings["CalculatePerNight"].Value = "false";
             }
-
             if (CalculatePricePerPearson.IsChecked == true)
             {
                 configuration.AppSettings.Settings["CalculatePerPearson"].Value = "true";
@@ -2072,7 +2141,6 @@ namespace testroom
             {
                 configuration.AppSettings.Settings["CalculatePerPearson"].Value = "false";
             }
-
             if (CalculateUnderaged.IsChecked == true)
             {
                 configuration.AppSettings.Settings["CalculateUnderaged"].Value = "true";
@@ -2084,12 +2152,14 @@ namespace testroom
 
             configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
 
+            //Save app.config chages
             configuration.Save();
             ConfigurationManager.RefreshSection("appSettings");
 
             this.Close();
         }
 
+        //Preview for numbers only input
         private void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -2098,18 +2168,23 @@ namespace testroom
 
         private void CalculatePricePerPearson_Checked(object sender, RoutedEventArgs e)
         {
+            //Load app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
+            //Enable checkbox
             CalculateUnderaged.IsEnabled = true;
             CalculateUnderaged.Foreground = Brushes.White;
 
+            //If underaged isn't checked
             if (CalculateUnderaged.IsChecked == false)
             {
+                //Disable age limit input
                 AgeLimit.IsEnabled = false;
                 AgeLimitLabel.Foreground = Brushes.Gray;
             }
             else
             {
+                //Enable age limit
                 AgeLimit.IsEnabled = true;
                 AgeLimitLabel.Foreground = Brushes.White;
             }
@@ -2117,12 +2192,14 @@ namespace testroom
 
         private void CalculateUnderaged_Checked(object sender, RoutedEventArgs e)
         {
+            //Enable age limit input
             AgeLimit.IsEnabled = true;
             AgeLimitLabel.Foreground = Brushes.White;
         }
 
         private void CalculatePricePerPearson_Unchecked(object sender, RoutedEventArgs e)
         {
+            //Disable underaged checkbox and age limit input
             CalculateUnderaged.IsEnabled = false;
             CalculateUnderaged.Foreground = Brushes.Gray;
             AgeLimitLabel.Foreground = Brushes.Gray;
@@ -2131,42 +2208,10 @@ namespace testroom
 
         private void CalculateUnderaged_Unchecked(object sender, RoutedEventArgs e)
         {
+            //Disable age limit input
             AgeLimit.IsEnabled = false;
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
         #endregion
-        private void SettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ReservationsScreen.Visibility = Visibility.Hidden;
-            CreateReservationScreen.Visibility = Visibility.Hidden;
-            SettingsScreen.Visibility = Visibility.Visible;
-
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
-            CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
-            CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
-            AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
-
-            if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
-            {
-
-
-                if (bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value))
-                {
-
-                }
-                else
-                {
-                    AgeLimit.IsEnabled = false;
-                    AgeLimitLabel.Foreground = Brushes.Gray;
-                }
-            }
-            else
-            {
-                CalculateUnderaged.IsEnabled = false;
-                CalculateUnderaged.Foreground = Brushes.Gray;
-            }
-        }
     }
 }
