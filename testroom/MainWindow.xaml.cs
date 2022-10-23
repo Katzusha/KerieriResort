@@ -1755,12 +1755,23 @@ namespace testroom
             CreateReservationGridNextBtn.Content = "Next";
             CreateReservationGridBackBtn.Content = "Cancel";
 
+            BlackOutPastDates();
+
             //RowDefinition newrow = new RowDefinition();
             //newrow.Height = new GridLength(150);
             //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
 
             //End the loading animation
             LoadedAnimation();
+        }
+
+        public void BlackOutPastDates()
+        {
+            CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+
+            CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
+            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
         }
 
         public int CreateReservationProgress = 1;
@@ -2320,5 +2331,16 @@ namespace testroom
         #endregion
 
         #endregion
+
+        private void CreateReservationGridToDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1),  (DateTime)CreateReservationGridFromDateCalendar.SelectedDate));
+        }
     }
 }
