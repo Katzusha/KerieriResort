@@ -1503,19 +1503,23 @@
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
-                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1100,-150,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1100,-250,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label.Background>
                             <ImageBrush ImageSource="/Images/creditcardicon.png"/>
                         </Label.Background>
                     </Label>
-                    <CheckBox x:Name="CreateReservationGridPaymentInformationCreditCardCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Credit card" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,-150,0,0" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCreditCardCheckBox_Checked"/>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCreditCardCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Credit card" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,-250,0,0" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCreditCardCheckBox_Checked"/>
 
-                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1100,0,0,-150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1100,0,0,-50" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Label.Background>
                             <ImageBrush ImageSource="/Images/cashicon.png"/>
                         </Label.Background>
                     </Label>
-                    <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,0,0,-150" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
+                    <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,0,0,-50" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
+
+                    <Label Grid.Column="1" Content="DDV in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-1045,0,0,-250"/>
+                    <TextBox x:Name="CreateReservationGridPaymentInfoDdvInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                             PreviewTextInput="PreviewCreateReservationGridPaymentInfoDdvInput" Margin="-950,0,0,-335" Width="200"/>
 
                     <Button Style="{DynamicResource GrayButton}" Content="SAVE" MouseEnter="SaveBtn_Enter" MouseLeave="SaveBtn_Leave" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-180,-500"/>
                     <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" MouseEnter="SaveAndPrintBtn_Enter" MouseLeave="SaveAndPrintBtn_Leave" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-170,0,0,-500"/>

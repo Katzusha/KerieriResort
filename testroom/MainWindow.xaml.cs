@@ -1,32 +1,23 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
+using System.Configuration;
+using System.Dynamic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using jsreport.Client;
-using System.Net;
-using jsreport.Local;
-using jsreport.Binary;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Dynamic;
-using Newtonsoft.Json.Converters;
-using System.Configuration;
 
 namespace testroom
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         #region PUBLIC VALUES AND COMMANDS
@@ -464,7 +455,7 @@ namespace testroom
                 PublicCommands.ShowError(ex.Message);
                 return false;
             }
-            
+
         }
 
         //TODO: Generate available essentials
@@ -1397,7 +1388,7 @@ namespace testroom
             LogInAnimation.To = new Thickness(0, 0, 0, 0);
             LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-            NextGrid    .BeginAnimation(MarginProperty, LogInAnimation);
+            NextGrid.BeginAnimation(MarginProperty, LogInAnimation);
 
             //Animation to move displayed grid to the left
             ThicknessAnimation ControlAnimation = new ThicknessAnimation();
@@ -1445,7 +1436,7 @@ namespace testroom
             LoadingAnimation();
 
             var isLogIn = await LogIn();
-            
+
             //If there is a user start this loop
             if (isLogIn)
             {
@@ -1743,7 +1734,7 @@ namespace testroom
             LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
             LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
             CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-            
+
             //Make sure that every grid will be displayed in the right order
             CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
             CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
@@ -2150,7 +2141,11 @@ namespace testroom
             return pdfinfo;
         }
 
-
+        private void PreviewCreateReservationGridPaymentInfoDdvInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         #endregion
 
 
@@ -2323,6 +2318,7 @@ namespace testroom
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
         #endregion
+
         #endregion
     }
 }
