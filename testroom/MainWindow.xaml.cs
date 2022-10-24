@@ -247,44 +247,6 @@ namespace testroom
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
         #region PUBLIC TASKS
 
-        #region LogIn
-        //Check if the user is in database and retryve information in what company this user works
-        public async Task<bool> LogIn()
-        {
-            await Task.Delay(500);
-
-            string username = Encryption(loginusernameinput.Text);
-            string password = Encryption(loginpasswordinput.Password.ToString());
-
-            try
-            {
-                Cursor = Cursors.Wait;
-                if (LogInCommands.UserLogIn(username, password))
-                {
-                    Cursor = Cursors.Arrow;
-
-                    return true;
-                }
-                else
-                {
-                    Cursor = Cursors.Arrow;
-
-                    return false;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                Cursor = Cursors.Arrow;
-
-                PublicCommands.ShowError(ex.Message);
-
-                return false;
-            }
-        }
-        #endregion
-
         #region Reservations
         //Generate buttons for all the Reservations in json file
         public async Task<bool> GetAllReservations()
@@ -427,84 +389,6 @@ namespace testroom
         }
 
         //Generate children for CreateReservation combobox
-        public async Task<bool> GetAllClassifficaitonsForCombobox()
-        {
-            await Task.Delay(500);
-
-            try
-            {
-                ClearAll();
-
-                CreateReservationGridClassifficationCombobox.Items.Add("None");
-
-                dynamic GetClassiffications = ClassifficationCommands.GetAll();
-
-                foreach (var information in GetClassiffications)
-                {
-                    ComboBoxItem item = new ComboBoxItem();
-                    item.Name = "ClassifficationId" + information.Id;
-                    item.Content = information.Name;
-
-                    CreateReservationGridClassifficationCombobox.Items.Add(item);
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                PublicCommands.ShowError(ex.Message);
-                return false;
-            }
-
-        }
-
-        //TODO: Generate available essentials
-        public async Task<bool> GetAvailableEssentialsOfClassiffication()
-        {
-            await Task.Delay(500);
-
-            ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
-
-            dynamic AvailableEssentials = ReservationCommands.GetAvailableEssentials(item.Name.Replace("ClassifficationId", ""));
-
-            int row = 0;
-
-
-
-            foreach (var information in AvailableEssentials)
-            {
-                if (information.Success == 0)
-                {
-                    break;
-                }
-
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(60);
-                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Add(newrow);
-
-
-                CheckBox button = new CheckBox();
-                button.Name = "EssentialId" + information.Id;
-                button.Content = information.Name;
-                button.Style = (Style)this.Resources["GeneratedCheckBox"];
-
-                TextBox textbox = new TextBox();
-                textbox.Text = information.Price + "€";
-                textbox.Style = (Style)this.Resources["CheckBogGeneratedButtonPrice"];
-
-                Grid.SetColumn(button, 0);
-                Grid.SetRow(button, row);
-                CreateReservationGridAvailableEssentialsGrid.Children.Add(button);
-
-                Grid.SetColumn(textbox, 1);
-                Grid.SetRow(textbox, row);
-                CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
-
-                row++;
-            }
-
-            return false;
-        }
 
         #endregion
 
@@ -1435,58 +1319,14 @@ namespace testroom
             //Begin loading animation
             LoadingAnimation();
 
-            var isLogIn = await LogIn();
+            await Task.Delay(500);
 
-            //If there is a user start this loop
-            if (isLogIn)
+            string username = Encryption(loginusernameinput.Text);
+            string password = Encryption(loginpasswordinput.Password.ToString());
+
+            try
             {
-                //Generate all reservations from users database
-                var isGetAllSearched = await GetAllReservations();
-
-                ControlGrid.Visibility = Visibility.Visible;
-
-                //Animation to hide login screen
-                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
-                LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
-
-                //Animation to show control screen
-                ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
-                ControlAnimation.To = new Thickness(0, 0, 0, 0);
-                ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
-
-                loginfaillabel.Visibility = Visibility.Hidden;
-
-                //End the loading animation
-                LoadedAnimation();
-            }
-            else
-            {
-                //If there is no user in database then show error label
-                loginfaillabel.Visibility = Visibility.Visible;
-
-                //End the loading animation
-                LoadedAnimation();
-            }
-        }
-
-        //Username input on login screen
-        private async void loginusernameinput_KeyUp(object sender, KeyEventArgs e)
-        {
-            //If Key.Enter is clicked while username input is focused
-            if (e.Key == Key.Enter)
-            {
-                //Begin loading animation
-                LoadingAnimation();
-
-                var isLogIn = await LogIn();
-
-                //If there is a user start this loop
-                if (isLogIn)
+                if (LogInCommands.UserLogIn(username, password))
                 {
                     //Generate all reservations from users database
                     var isGetAllSearched = await GetAllReservations();
@@ -1507,6 +1347,8 @@ namespace testroom
                     ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
+                    loginfaillabel.Visibility = Visibility.Hidden;
+
                     //End the loading animation
                     LoadedAnimation();
                 }
@@ -1517,6 +1359,72 @@ namespace testroom
 
                     //End the loading animation
                     LoadedAnimation();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
+        }
+
+        //Username input on login screen
+        private async void loginusernameinput_KeyUp(object sender, KeyEventArgs e)
+        {
+            //If Key.Enter is clicked while username input is focused
+            if (e.Key == Key.Enter)
+            {
+                //Begin loading animation
+                LoadingAnimation();
+
+                await Task.Delay(500);
+
+                string username = Encryption(loginusernameinput.Text);
+                string password = Encryption(loginpasswordinput.Password.ToString());
+
+                try
+                {
+                    if (LogInCommands.UserLogIn(username, password))
+                    {
+                        //Generate all reservations from users database
+                        var isGetAllSearched = await GetAllReservations();
+
+                        ControlGrid.Visibility = Visibility.Visible;
+
+                        //Animation to hide login screen
+                        ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                        LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
+                        LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                        LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                        LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
+
+                        //Animation to show control screen
+                        ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                        ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
+                        ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                        ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                        ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+
+                        loginfaillabel.Visibility = Visibility.Hidden;
+
+                        //End the loading animation
+                        LoadedAnimation();
+                    }
+                    else
+                    {
+                        //If there is no user in database then show error label
+                        loginfaillabel.Visibility = Visibility.Visible;
+
+                        //End the loading animation
+                        LoadedAnimation();
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
                 }
             }
         }
@@ -1530,40 +1438,53 @@ namespace testroom
                 //Begin loading animation
                 LoadingAnimation();
 
-                var isLogIn = await LogIn();
+                await Task.Delay(500);
 
-                //If there is a user start this loop
-                if (isLogIn)
+                string username = Encryption(loginusernameinput.Text);
+                string password = Encryption(loginpasswordinput.Password.ToString());
+
+                try
                 {
-                    //Generate all reservations from users database
-                    var isGetAllSearched = await GetAllReservations();
+                    if (LogInCommands.UserLogIn(username, password))
+                    {
+                        //Generate all reservations from users database
+                        var isGetAllSearched = await GetAllReservations();
 
-                    ControlGrid.Visibility = Visibility.Visible;
+                        ControlGrid.Visibility = Visibility.Visible;
 
-                    //Animation to hide login screen
-                    ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-                    LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
-                    LogInAnimation.From = new Thickness(0, 0, 0, 0);
-                    LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
+                        //Animation to hide login screen
+                        ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                        LogInAnimation.To = new Thickness(0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000, 0, 0);
+                        LogInAnimation.From = new Thickness(0, 0, 0, 0);
+                        LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                        LogInScreen.BeginAnimation(MarginProperty, LogInAnimation);
 
-                    //Animation to show control screen
-                    ThicknessAnimation ControlAnimation = new ThicknessAnimation();
-                    ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
-                    ControlAnimation.To = new Thickness(0, 0, 0, 0);
-                    ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
-                    ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
+                        //Animation to show control screen
+                        ThicknessAnimation ControlAnimation = new ThicknessAnimation();
+                        ControlAnimation.From = new Thickness(0, 0, 0, System.Windows.SystemParameters.PrimaryScreenHeight + 1000);
+                        ControlAnimation.To = new Thickness(0, 0, 0, 0);
+                        ControlAnimation.Duration = new Duration(TimeSpan.FromSeconds(.3));
+                        ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
-                    //End the loading animation
-                    LoadedAnimation();
+                        loginfaillabel.Visibility = Visibility.Hidden;
+
+                        //End the loading animation
+                        LoadedAnimation();
+                    }
+                    else
+                    {
+                        //If there is no user in database then show error label
+                        loginfaillabel.Visibility = Visibility.Visible;
+
+                        //End the loading animation
+                        LoadedAnimation();
+                    }
+
+
                 }
-                else
+                catch (Exception ex)
                 {
-                    //If there is no user in database then show error label
-                    loginfaillabel.Visibility = Visibility.Visible;
-
-                    //End the loading animation
-                    LoadedAnimation();
+                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
                 }
             }
         }
@@ -1722,7 +1643,29 @@ namespace testroom
             LoadingAnimation();
 
             //Fill the Combobox with all the classifficaitons
-            var isGetAllClassiffications = await GetAllClassifficaitonsForCombobox();
+            await Task.Delay(500);
+
+            try
+            {
+                ClearAll();
+
+                CreateReservationGridClassifficationCombobox.Items.Add("None");
+
+                dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+                foreach (var information in GetClassiffications)
+                {
+                    ComboBoxItem item = new ComboBoxItem();
+                    item.Name = "ClassifficationId" + information.Id;
+                    item.Content = information.Name;
+
+                    CreateReservationGridClassifficationCombobox.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
 
             //Switch displayed grids
             CreateReservationScreen.Visibility = Visibility.Visible;
@@ -1895,12 +1838,61 @@ namespace testroom
 
         private async void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+            try
             {
-                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
-                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+                if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+                {
+                    LoadingAnimation();
 
-                var isGetAvailableEssentialsOfClassiffication = await GetAvailableEssentialsOfClassiffication();
+                    CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                    CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+                    await Task.Delay(500);
+
+                    ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
+
+                    dynamic AvailableEssentials = ReservationCommands.GetAvailableEssentials(item.Name.Replace("ClassifficationId", ""));
+
+                    int row = 0;
+
+                    foreach (var information in AvailableEssentials)
+                    {
+                        if (information.Success == 0)
+                        {
+                            break;
+                        }
+
+                        RowDefinition newrow = new RowDefinition();
+                        newrow.Height = new GridLength(60);
+                        CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Add(newrow);
+
+
+                        CheckBox button = new CheckBox();
+                        button.Name = "EssentialId" + information.Id;
+                        button.Content = information.Name;
+                        button.Style = (Style)this.Resources["GeneratedCheckBox"];
+
+                        TextBox textbox = new TextBox();
+                        textbox.Text = information.Price + "€";
+                        textbox.Style = (Style)this.Resources["CheckBogGeneratedButtonPrice"];
+
+                        Grid.SetColumn(button, 0);
+                        Grid.SetRow(button, row);
+                        CreateReservationGridAvailableEssentialsGrid.Children.Add(button);
+
+                        Grid.SetColumn(textbox, 1);
+                        Grid.SetRow(textbox, row);
+                        CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
+
+                        row++;
+                    }
+
+                    LoadedAnimation();
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
         }
 
