@@ -214,34 +214,57 @@ namespace testroom
         //Public command to reset all variables and grid children
         public void ClearAll()
         {
-            loginusernameinput.Clear();
-            loginpasswordinput.Clear();
+            try
+            {
+                loginusernameinput.Clear();
+                loginpasswordinput.Clear();
 
-            HomeGridScrollViewer.Children.Clear();
-            HomeGridScrollViewer.RowDefinitions.Clear();
+                HomeGridScrollViewer.Children.Clear();
+                HomeGridScrollViewer.RowDefinitions.Clear();
 
-            CreateReservationGridClassifficationCombobox.Items.Clear();
+                CreateReservationGridClassifficationCombobox.Items.Clear();
 
-            CreateReservationGridFromDateCalendar.SelectedDates.Clear();
-            CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                try
+                {
+                    CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                    CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                    CreateReservationGridFromDateCalendar.DisplayDate = DateTime.Today;
+                    CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+                    CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                    CreateReservationGridToDateCalendar.DisplayDate = DateTime.Today;
+                }
+                catch { }
 
-            CreateReservationGridAvailableEssentialsGrid.Children.Clear();
-            CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
 
-            CreateReservationGridMainGuestFirstnameInput.Clear();
-            CreateReservationGridMainGuestSurnameInput.Clear();
-            CreateReservationGridMainReservantBirthCalendar.SelectedDates.Clear();
-            CreateReservationGridMainGuestEmailInput.Clear();
-            CreateReservationGridMainGuestPhoneNumberInput.Clear();
-            CreateReservationGridMainGuestCountryInput.Clear();
-            CreateReservationGridMainGuestPostNumberInput.Clear();
-            CreateReservationGridMainGuestAddressInput.Clear();
-            CreateReservationGridMainGuestCertifiedNumberInput.Clear();
-            CreateReservationGridSideGuestAddedGrid.Children.Clear();
-            CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
-            CreateReservationGridSideGuestFirstnameInput.Clear();
-            CreateReservationGridSideGuestSurnameInput.Clear();
-            CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
+                CreateReservationGridMainGuestFirstnameInput.Clear();
+                CreateReservationGridMainGuestSurnameInput.Clear();
+                CreateReservationGridMainReservantBirthCalendar.SelectedDates.Clear();
+                CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridMainGuestEmailInput.Clear();
+                CreateReservationGridMainGuestPhoneNumberInput.Clear();
+                CreateReservationGridMainGuestCountryInput.Clear();
+                CreateReservationGridMainGuestPostNumberInput.Clear();
+                CreateReservationGridMainGuestAddressInput.Clear();
+                CreateReservationGridMainGuestCertifiedNumberInput.Clear();
+                CreateReservationGridSideGuestAddedGrid.Children.Clear();
+                CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+                CreateReservationGridSideGuestFirstnameInput.Clear();
+                CreateReservationGridSideGuestSurnameInput.Clear();
+                CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
+                CreateReservationGridSideGuestBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
+                CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
+                CreateReservationGridPaymentInfoDdvInput.Text = "22";
+                CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
+                CreateReservationGridPaymentInformationPriceInput.Clear();
+                CreateReservationGridPaymentInformationCommentInput.Clear();
+            }
+            catch
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
@@ -2042,13 +2065,13 @@ namespace testroom
         private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
         {
             //Make sure that the document isn't open at the time
-            pdfViewer.CloseDocument();
+            CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
 
             //Generate pdf
             PDF pdf = new PDF(3, CalculateReceipt());
 
             //Show the pdf preview
-            pdfViewer.LoadDocument("D:\\preview.pdf");
+            CreateReservationGridPaymentInformationPdfPreview.LoadDocument("D:\\preview.pdf");
         }
 
         public dynamic CalculateReceipt()
@@ -2331,6 +2354,11 @@ namespace testroom
 
         private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CreateReservationGridFromDateCalendar.SelectedDate >= CreateReservationGridToDateCalendar.SelectedDate)
+            {
+                CreateReservationGridToDateCalendar.SelectedDates.Clear();
+            }
+
             CreateReservationGridToDateCalendar.BlackoutDates.Clear();
             CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1),  (DateTime)CreateReservationGridFromDateCalendar.SelectedDate));
         }
