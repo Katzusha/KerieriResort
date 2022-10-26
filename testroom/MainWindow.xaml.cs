@@ -2149,6 +2149,12 @@ namespace testroom
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate));
+        }
         #endregion
 
 
@@ -2329,10 +2335,11 @@ namespace testroom
 
         }
 
-        private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void Calendar_GotFocus(object sender, RoutedEventArgs e)
         {
-            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
-            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1),  (DateTime)CreateReservationGridFromDateCalendar.SelectedDate));
+            Calendar calendar = (Calendar)sender;
+
+            FocusManager.SetFocusedElement(calendar, null);
         }
     }
 }
