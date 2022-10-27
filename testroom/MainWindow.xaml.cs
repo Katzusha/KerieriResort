@@ -186,6 +186,16 @@ namespace testroom
             InitializeComponent();
 
             StartClock();
+
+            RotateTransform rt = new RotateTransform();
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 360;
+            da.Duration = new Duration(TimeSpan.FromSeconds(1));
+            da.RepeatBehavior = RepeatBehavior.Forever;
+            LoadingCircle.RenderTransformOrigin = new Point(0.5, 0.5);
+            LoadingCircle.RenderTransform = rt;
+            rt.BeginAnimation(RotateTransform.AngleProperty, da);
         }
 
         //In bottom left corner Update commands for date and time
