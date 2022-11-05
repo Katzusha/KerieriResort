@@ -1540,8 +1540,8 @@
                 </Grid>
             </Grid>
             <!--#endregion-->
-            
-            
+
+
             <!--#region MENU BUTTONS-->
             <Border Background="#FF171717"/>
             <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
@@ -1760,11 +1760,6 @@
                 </Button.Style>
             </Button>
             <!--#endregion-->
-        </Grid>
-        <Grid x:Name="LoadingGrid" Background="#7F000000">
-            <Ellipse x:Name="LoadingCircle" StrokeDashArray="45" Stroke="White" Width="200" Height="200" StrokeThickness="10">
-                
-            </Ellipse>
         </Grid>
     </Grid>
 </Window>
