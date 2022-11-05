@@ -1092,7 +1092,7 @@
 
     <!--BACKGROUND GRID-->
     <Grid>
-        <Grid  x:Name="BackGroundGrid" Visibility="Visible">
+        <Grid  x:Name="BackGroundGrid" Visibility="Hidden">
             <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
                 <Border.RenderTransform>
                     <TransformGroup>
@@ -1760,6 +1760,9 @@
                 </Button.Style>
             </Button>
             <!--#endregion-->
+        </Grid>
+        <Grid x:Name="LoadingSpinnerGrid" Background="#3F3E3E3E" Visibility="Hidden">
+            <Ellipse x:Name="LoadingSpinner" Height="200" Width="200" Stroke="#5656FF" StrokeThickness="15" StrokeDashArray="29" StrokeDashCap="Round"/>
         </Grid>
     </Grid>
 </Window>

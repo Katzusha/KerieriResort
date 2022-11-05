@@ -186,6 +186,15 @@ namespace testroom
             InitializeComponent();
 
             StartClock();
+
+            LoadingSpinnerGrid.Visibility = Visibility.Hidden;
+
+            var doubleanimation = new DoubleAnimation(360, 0, new Duration(TimeSpan.FromSeconds(2)));
+            var rotatetransform = new RotateTransform();
+            LoadingSpinner.RenderTransform = rotatetransform;
+            LoadingSpinner.RenderTransformOrigin = new Point(0.5, 0.5);
+            doubleanimation.RepeatBehavior = RepeatBehavior.Forever;
+            rotatetransform.BeginAnimation(RotateTransform.AngleProperty, doubleanimation);
         }
 
         //In bottom left corner Update commands for date and time
@@ -1238,6 +1247,8 @@ namespace testroom
             BackgroundBottomLight.Background = MyBrushLight;
             BackgroundTopDark.Background = MyBrushDark;
             BackgroundTopLight.Background = MyBrushLight;
+
+            LoadingSpinnerGrid.Visibility = Visibility.Visible;
         }
         public void LoadedAnimation()
         {
@@ -1280,6 +1291,8 @@ namespace testroom
             BackgroundBottomLight.Background = MyBrushLight;
             BackgroundTopDark.Background = MyBrushDark;
             BackgroundTopLight.Background = MyBrushLight;
+
+            LoadingSpinnerGrid.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -2176,7 +2189,7 @@ namespace testroom
         private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             CreateReservationGridToDateCalendar.BlackoutDates.Clear();
-            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate));
+            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate.Value));
         }
         #endregion
 
