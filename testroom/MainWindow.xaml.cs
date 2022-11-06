@@ -238,6 +238,10 @@ namespace testroom
                     CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
                     CreateReservationGridFromDateCalendar.SelectedDates.Clear();
                     CreateReservationGridFromDateCalendar.DisplayDate = DateTime.Today;
+                }
+                catch { }
+                try
+                {
                     CreateReservationGridToDateCalendar.BlackoutDates.Clear();
                     CreateReservationGridToDateCalendar.SelectedDates.Clear();
                     CreateReservationGridToDateCalendar.DisplayDate = DateTime.Today;
@@ -1797,22 +1801,23 @@ namespace testroom
                     //Generate pdf
                     PDF pdf = new PDF(1, CalculateReceipt());
 
-                    var isGetAllReservations = await GetAllReservations();
-
                     
 
-                    MessageBox.Show(CreateReservationGridClassifficationCombobox.SelectedItem.ToString());
+                    ComboBoxItem classiffication = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
-                    //if (ReservationCommands.PostReservationInformation(CreateReservationGridClassifficationCombobox.Text.ToString(), CreateReservationGridFromDateCalendar.SelectedDate.ToString(), CreateReservationGridToDateCalendar.SelectedDate.ToString(), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
-                    //{
-                    //    //Return back to the reservations screen
-                    //    CreateReservationScreen.Visibility = Visibility.Hidden;
-                    //    ReservationsScreen.Visibility = Visibility.Visible;
-                    //}
-                    //else
-                    //{
-                    //    PublicCommands.ShowError("Something went wrong. Please contact system support.");
-                    //}
+                    if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace(" 00:00:00", "").Replace("/", "-"), CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace(" 00:00:00", "").Replace("/", "-"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                    {
+                        //Return back to the reservations screen
+                        CreateReservationScreen.Visibility = Visibility.Hidden;
+                        ReservationsScreen.Visibility = Visibility.Visible;
+
+                        var isGetAllReservations = await GetAllReservations();
+
+                    }
+                    else
+                    {
+                        PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    }
 
                     LoadedAnimation();
                 }

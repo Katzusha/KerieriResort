@@ -147,8 +147,6 @@ namespace testroom
             using (StreamReader sr = new StreamReader(data))
             {
                 html = sr.ReadToEnd();
-
-                //MainWindow.ShowError(html);
             }
             dynamic AvailableEssentials = JsonConvert.DeserializeObject(html);
 
