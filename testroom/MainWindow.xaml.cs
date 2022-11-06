@@ -1797,11 +1797,22 @@ namespace testroom
                     //Generate pdf
                     PDF pdf = new PDF(1, CalculateReceipt());
 
-                    //Return back to the reservations screen
-                    CreateReservationScreen.Visibility = Visibility.Hidden;
-                    ReservationsScreen.Visibility = Visibility.Visible;
-
                     var isGetAllReservations = await GetAllReservations();
+
+                    
+
+                    MessageBox.Show(CreateReservationGridClassifficationCombobox.SelectedItem.ToString());
+
+                    //if (ReservationCommands.PostReservationInformation(CreateReservationGridClassifficationCombobox.Text.ToString(), CreateReservationGridFromDateCalendar.SelectedDate.ToString(), CreateReservationGridToDateCalendar.SelectedDate.ToString(), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                    //{
+                    //    //Return back to the reservations screen
+                    //    CreateReservationScreen.Visibility = Visibility.Hidden;
+                    //    ReservationsScreen.Visibility = Visibility.Visible;
+                    //}
+                    //else
+                    //{
+                    //    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    //}
 
                     LoadedAnimation();
                 }
