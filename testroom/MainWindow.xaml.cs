@@ -5,6 +5,7 @@ using System;
 using System.Configuration;
 using System.Dynamic;
 using System.IO;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1798,25 +1799,75 @@ namespace testroom
                 {
                     LoadingAnimation();
 
-                    //Generate pdf
-                    PDF pdf = new PDF(1, CalculateReceipt());
-
-                    
-
-                    ComboBoxItem classiffication = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
-
-                    if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace(" 00:00:00", "").Replace("/", "-"), CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace(" 00:00:00", "").Replace("/", "-"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                    try
                     {
-                        //Return back to the reservations screen
-                        CreateReservationScreen.Visibility = Visibility.Hidden;
-                        ReservationsScreen.Visibility = Visibility.Visible;
+                        //Generate pdf
+                        PDF pdf = new PDF(1, CalculateReceipt());
 
-                        var isGetAllReservations = await GetAllReservations();
+                        ComboBoxItem classiffication = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
+                        if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                        {
+                            if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
+                            {
+                                bool sidereservants = false;
+                                foreach(var button in CreateReservationGridSideGuestAddedGrid.Children)
+                                {
+                                    string Firstname, Surname, Birth = string.Empty;
+
+                                    Button btn = (Button)button;
+
+                                    if (btn.Content.ToString().Contains("⨉") == false)
+                                    {
+                                        Grid parent = (Grid)btn.Parent;
+                                        int index = parent.Children.IndexOf(btn);
+                                        int rowindex = Grid.GetRow(btn);
+                                        RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+                                        string[] buttoninfo = btn.Content.ToString().Split('\n');
+
+                                        //Fill all the inuts from children info
+                                        Firstname = btn.Name.Replace('_', ' ');
+                                        Surname = buttoninfo[0].ToString().Substring(3);
+                                        Birth = buttoninfo[1];
+
+                                        if (ReservationCommands.PostSideReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), Firstname, Surname, Birth))
+                                        {
+                                            sidereservants = true;
+                                        }
+                                        else
+                                        {
+                                            sidereservants = false;
+                                        }
+                                        if (sidereservants)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
+                                        }
+                                    }
+                                }
+                                //Return back to the reservations screen
+                                CreateReservationScreen.Visibility = Visibility.Hidden;
+                                ReservationsScreen.Visibility = Visibility.Visible;
+
+                                var isGetAllReservations = await GetAllReservations();
+                            }
+                            else
+                            {
+                                PublicCommands.ShowError("Writing in the server is currupted. Please contact system support!");
+                            }
+                        }
+                        else
+                        {
+                            PublicCommands.ShowError("Reservation culdn't be created. Please check your internet connection and try again.");
+                        }
                     }
-                    else
+                    catch (Exception ex) 
                     {
-                        PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                        PublicCommands.ShowError(ex.Message);
+                        //PublicCommands.ShowError("Something is wrong with the server. Please check your internet connection and try again.");
                     }
 
                     LoadedAnimation();
@@ -1958,7 +2009,7 @@ namespace testroom
                     //Declare children speciffications
                     Button buttonAddedSideGuest = new Button();
                     buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
-                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("dd/MM/yyyy");
+                        "\n" + CreateReservationGridSideGuestBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd");
                     buttonAddedSideGuest.Name = CreateReservationGridSideGuestFirstnameInput.Text.Replace(' ', '_');
                     buttonAddedSideGuest.Style = (Style)this.Resources["GeneratedAddedSideGuestButton"];
                     buttonAddedSideGuest.Click += new RoutedEventHandler(EditAddedSideGuestBtn_Click);
