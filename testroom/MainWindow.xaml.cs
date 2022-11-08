@@ -286,6 +286,7 @@ namespace testroom
                 CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.White;
                 CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.White;
                 CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestCitylabel.Foreground = Brushes.White;
                 CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.White;
                 CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
                 CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;

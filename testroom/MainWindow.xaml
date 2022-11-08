@@ -1416,7 +1416,7 @@
                     </Border>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
                     <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,-535,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
 
@@ -1502,7 +1502,7 @@
                     </Button>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridPaymentInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
                     <Label Width="100" Height="100" Foreground="{x:Null}" Margin="-1100,-250,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label.Background>
                             <ImageBrush ImageSource="/Images/creditcardicon.png"/>
@@ -1527,7 +1527,7 @@
                     <Wpf:PdfViewer x:Name="CreateReservationGridPaymentInformationPdfPreview" HorizontalAlignment="Center" Background="#BF3E3E3E" Foreground="Black" VerticalAlignment="Center" Width="400" Height="500" Margin="-100,-70,0,0"/>
 
                     <Label Grid.Column="1" Content="Price :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-436,-550,0"/>
-                    <TextBox x:Name="CreateReservationGridPaymentInformationPriceInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-350,-775,0" Width="400"/>
+                    <TextBox x:Name="CreateReservationGridPaymentInformationPriceInput" Style="{DynamicResource TextBoxInput}" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-350,-775,0" Width="400"/>
 
                     <Label Grid.Column="1" Content="Comment :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-240,-550,0"/>
                     <TextBox x:Name="CreateReservationGridPaymentInformationCommentInput" Style="{DynamicResource CommentTextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-775,-150" Width="400" Height="350" TextWrapping="Wrap"/>
