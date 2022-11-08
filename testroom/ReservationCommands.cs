@@ -118,5 +118,130 @@ namespace testroom
 
             return AvailableEssentials;
         }
+
+        public static bool PostReservationInformation (string ClassifficationId, string FromDate, string ToDate, string Price, string Comment)
+        {
+            // Create a request using a URL that can receive a post. 
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/PostReservations.php");
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            string postData = "ClassifficationId=" + ClassifficationId.ToString() + "&FromDate=" + FromDate + "&ToDate=" + ToDate + "&Price=" + Price + "&Comment=" + Comment + "&DatabaseName=" + MainWindow.DatabaseName;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            Stream data = response.GetResponseStream();
+
+            string html = string.Empty;
+
+            using (StreamReader sr = new StreamReader(data))
+            {
+                html = sr.ReadToEnd();
+            }
+            dynamic AvailableEssentials = JsonConvert.DeserializeObject(html);
+
+            if (AvailableEssentials.response.success == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool PostMainReservantInformation(string ClassifficationId, string FromDate, string ToDate, string Firstname, string Surname, string Birth, string Email, string PhoneNumber, string Country, string PostNumber, string City, string Address, string Gender, string CertifiedNumber)
+        {
+            // Create a request using a URL that can receive a post. 
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/PostMainReservant.php");
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            string postData = "ClassifficationId=" + ClassifficationId.ToString() + "&FromDate=" + FromDate + "&ToDate=" + ToDate + "&Firstname=" + Firstname + "&Surname=" + Surname + "&Birth=" + Birth + "&Email=" + Email + "&PhoneNumber=" + PhoneNumber + "&Country=" + Country + "&PostNumber=" + PostNumber + "&City=" + City + "&Address=" + Address + "&Gender=" + Gender + "&CertifiedNumber=" + CertifiedNumber + "&DatabaseName=" + MainWindow.DatabaseName;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            { }
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            Stream data = response.GetResponseStream();
+
+            string html = string.Empty;
+
+            using (StreamReader sr = new StreamReader(data))
+            {
+                html = sr.ReadToEnd();
+            }
+            dynamic AvailableEssentials = JsonConvert.DeserializeObject(html);
+
+            if (AvailableEssentials.response.success == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool PostSideReservantInformation(string ClassifficationId, string FromDate, string ToDate, string Firstname, string Surname, string Birth)
+        {
+            // Create a request using a URL that can receive a post. 
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/PostSideReservant.php");
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            string postData = "ClassifficationId=" + ClassifficationId.ToString() + "&FromDate=" + FromDate + "&ToDate=" + ToDate + "&Firstname=" + Firstname + "&Surname=" + Surname + "&Birth=" + Birth + "&DatabaseName=" + MainWindow.DatabaseName;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            { }
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            Stream data = response.GetResponseStream();
+
+            string html = string.Empty;
+
+            using (StreamReader sr = new StreamReader(data))
+            {
+                html = sr.ReadToEnd();
+            }
+            dynamic AvailableEssentials = JsonConvert.DeserializeObject(html);
+
+            if (AvailableEssentials.response.success == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
