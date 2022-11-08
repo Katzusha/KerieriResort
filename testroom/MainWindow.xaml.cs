@@ -271,7 +271,7 @@ namespace testroom
                 CreateReservationGridSideGuestBirthCalendar.DisplayDate = DateTime.Today;
                 CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
                 CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
-                CreateReservationGridPaymentInfoDdvInput.Text = "22";
+                CreateReservationGridPaymentinfoTaxinput.Clear();
                 CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
                 CreateReservationGridPaymentInformationPriceInput.Clear();
                 CreateReservationGridPaymentInformationCommentInput.Clear();
@@ -1633,6 +1633,7 @@ namespace testroom
             CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
             CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
             AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
+            TaxInput.Text = configuration.AppSettings.Settings["Tax"].Value;
 
             //Check what needs to be disabled
             if (bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value))
@@ -2006,6 +2007,10 @@ namespace testroom
                     SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
 
                     CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+
+                    Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                    CreateReservationGridPaymentinfoTaxinput.Text = configuration.AppSettings.Settings["Tax"].Value;
 
                     CreateReservationProgress++;
                 }
@@ -2625,12 +2630,16 @@ namespace testroom
 
             configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
 
+            configuration.AppSettings.Settings["Tax"].Value = TaxInput.Text;
+
             //Save app.config chages
             configuration.Save();
             ConfigurationManager.RefreshSection("appSettings");
 
             SettingsScreen.Visibility = Visibility.Hidden;
             ReservationsScreen.Visibility = Visibility.Visible;
+
+            MenuReservationsBtn_Click(sender, e);
         }
 
         //Preview for numbers only input

@@ -1375,6 +1375,8 @@
                 <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Button x:Name="SettingsSaveBtn" Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="SettingsSaveBtn_Click"/>
                 </Grid>
+                <Label x:Name="TaxLabel" Content="Tax percantage" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-210"/>
+                <TextBox x:Name="TaxInput" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewTextInput="PreviewTextInput" Margin="0,0,-246,-220"/>
             </Grid>
             <!--#endregion-->
 
@@ -1517,8 +1519,8 @@
                     </Label>
                     <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,0,0,-50" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
 
-                    <Label Grid.Column="1" Content="Tax in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-1045,0,0,-250"/>
-                    <TextBox x:Name="CreateReservationGridPaymentInfoDdvInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Label Grid.Column="1" x:Name="CreateReservationGridPaymentinfoTaxLabel" Content="Tax in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-1045,0,0,-250"/>
+                    <TextBox x:Name="CreateReservationGridPaymentinfoTaxinput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
                              PreviewTextInput="PreviewCreateReservationGridPaymentInfoDdvInput" Margin="-950,0,0,-335" Width="200"/>
 
                     <Button Style="{DynamicResource GrayButton}" Content="SAVE" MouseEnter="SaveBtn_Enter" MouseLeave="SaveBtn_Leave" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-180,-500"/>
