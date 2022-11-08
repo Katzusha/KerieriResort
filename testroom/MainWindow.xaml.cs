@@ -260,6 +260,7 @@ namespace testroom
                 CreateReservationGridMainGuestPhoneNumberInput.Clear();
                 CreateReservationGridMainGuestCountryInput.Clear();
                 CreateReservationGridMainGuestPostNumberInput.Clear();
+                CreateReservationGridMainGuestCityInput.Clear();
                 CreateReservationGridMainGuestAddressInput.Clear();
                 CreateReservationGridMainGuestCertifiedNumberInput.Clear();
                 CreateReservationGridSideGuestAddedGrid.Children.Clear();
@@ -2005,6 +2006,8 @@ namespace testroom
                     SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
 
                     CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+
+                    CreateReservationProgress++;
                 }
                 else if (CreateReservationProgress == 4)
                 {
@@ -2098,6 +2101,8 @@ namespace testroom
             {
                 PublicCommands.ShowError(ex.Message);
             }
+
+            MessageBox.Show(CreateReservationProgress.ToString());
         }
 
         private async void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
