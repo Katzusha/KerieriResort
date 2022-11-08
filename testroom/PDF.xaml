@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
                 <Border BorderThickness="0" BorderBrush="Black" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150">
                     <Border.Background>
-                        <ImageBrush ImageSource="/Images/kerierilogo.png"/>
+                        <ImageBrush ImageSource="/Images/kerierilogopdf.png"/>
                     </Border.Background>
                 </Border>
                 <Label Content="Document n.:" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Height="34" Grid.Column="1" Width="136"/>
