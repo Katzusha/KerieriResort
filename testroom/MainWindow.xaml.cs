@@ -1766,14 +1766,53 @@ namespace testroom
             {
                 if (CreateReservationProgress == 1)
                 {
-                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+                    bool classifficaiton = false;
+                    if (CreateReservationGridClassifficationCombobox.SelectedIndex <= 0)
+                    {
+                        CreateReservationGridClassifficationLabel.Foreground = Brushes.Red;
+                        classifficaiton = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridClassifficationLabel.Foreground = Brushes.White;
+                        classifficaiton = true;
+                    }
+                    bool fromdate = false;
+                    if (CreateReservationGridFromDateCalendar.SelectedDate == null)
+                    {
+                        CreateReservationGridFromDateLabel.Foreground = Brushes.Red;
+                        fromdate = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridFromDateLabel.Foreground = Brushes.White;
+                        fromdate = true;
+                    }
+                    bool todate = false;
+                    if (CreateReservationGridToDateCalendar.SelectedDate == null)
+                    {
+                        CreateReservationGridToDateLabel.Foreground = Brushes.Red;
+                        todate = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridToDateLabel.Foreground = Brushes.White;
+                        todate = true;
+                    }
+                    
+                    if (classifficaiton && fromdate && todate)
+                    {
+                        //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                        CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
 
-                    SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
+                        SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
 
-                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
+                        CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
 
-                    CreateReservationGridBackBtn.Content = "Back";
+                        CreateReservationGridBackBtn.Content = "Back";
+
+                        CreateReservationProgress += 1;
+                    }
                 }
                 else if (CreateReservationProgress == 2)
                 {
@@ -1783,6 +1822,8 @@ namespace testroom
                     SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
 
                     CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+
+                    CreateReservationProgress += 1;
                 }
                 else if (CreateReservationProgress == 3)
                 {
@@ -1794,6 +1835,8 @@ namespace testroom
                     SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
 
                     CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+
+                    CreateReservationProgress += 1;
                 }
                 else if (CreateReservationProgress == 4)
                 {
@@ -1810,12 +1853,12 @@ namespace testroom
                         {
                             if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
                             {
-                                bool sidereservants = false;
-                                foreach(var button in CreateReservationGridSideGuestAddedGrid.Children)
+                                bool sidereservants = true;
+                                foreach(var child in CreateReservationGridSideGuestAddedGrid.Children)
                                 {
                                     string Firstname, Surname, Birth = string.Empty;
 
-                                    Button btn = (Button)button;
+                                    Button btn = (Button)child;
 
                                     if (btn.Content.ToString().Contains("⨉") == false)
                                     {
@@ -1838,21 +1881,23 @@ namespace testroom
                                         {
                                             sidereservants = false;
                                         }
-                                        if (sidereservants)
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
-                                        }
                                     }
                                 }
-                                //Return back to the reservations screen
-                                CreateReservationScreen.Visibility = Visibility.Hidden;
-                                ReservationsScreen.Visibility = Visibility.Visible;
 
-                                var isGetAllReservations = await GetAllReservations();
+                                if (sidereservants)
+                                {
+                                    //Return back to the reservations screen
+                                    CreateReservationScreen.Visibility = Visibility.Hidden;
+                                    ReservationsScreen.Visibility = Visibility.Visible;
+
+                                    var isGetAllReservations = await GetAllReservations();
+
+                                    CreateReservationProgress += 1;
+                                }
+                                else
+                                {
+                                    PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
+                                }   
                             }
                             else
                             {
@@ -1876,8 +1921,6 @@ namespace testroom
                 {
                     PublicCommands.ShowError("Something went wrong. Please contact system support.");
                 }
-
-                CreateReservationProgress += 1;
             }
             catch (Exception ex)
             {
@@ -2256,7 +2299,10 @@ namespace testroom
         private void CreateReservationGridFromDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+            CreateReservationGridToDateCalendar.SelectedDates.Clear();
             CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate.Value));
+
+            Mouse.Capture(null);
         }
         #endregion
 
@@ -2433,9 +2479,9 @@ namespace testroom
 
         #endregion
 
-        private void CreateReservationGridToDateCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void CalendarLoseFocus(object sender, SelectionChangedEventArgs e)
         {
-
+            Mouse.Capture(null);
         }
 
         private void Calendar_GotFocus(object sender, RoutedEventArgs e)
