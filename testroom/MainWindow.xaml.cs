@@ -1816,6 +1816,127 @@ namespace testroom
                 }
                 else if (CreateReservationProgress == 2)
                 {
+                    bool firstname = false;
+                    if (CreateReservationGridMainGuestFirstnameInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.Red;
+                        firstname = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.White;
+                        firstname = true;
+                    }
+
+                    bool surname = false;
+                    if (CreateReservationGridMainGuestSurnameInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.Red;
+                        surname = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.White;
+                        surname = true;
+                    }
+
+                    bool birth = false;
+                    if (CreateReservationGridMainReservantBirthCalendar.SelectedDate == null)
+                    {
+                        CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.Red;
+                        birth = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.White;
+                        birth = true;
+                    }
+
+                    bool email = false;
+                    Regex emailregex = new Regex(@".*@\w*\.\w*");
+                    if (emailregex.IsMatch(CreateReservationGridMainGuestEmailInput.Text))
+                    {
+                        CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.Red;
+                        email = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.White;
+                        email = true;
+                    }
+
+                    bool phonenumber = false;
+                    if (CreateReservationGridMainGuestPhoneNumberInput.Text.Length <= 7)
+                    {
+                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.Red;
+                        phonenumber = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.White;
+                        phonenumber = true;
+                    }
+
+                    bool country = false;
+                    if (CreateReservationGridMainGuestCountryInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.Red;
+                        country = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.White;
+                        country = true;
+                    }
+
+                    bool Address = false;
+                    if (CreateReservationGridMainGuestAddressInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.Red;
+                        Address = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.White;
+                        Address = true;
+                    }
+
+                    bool postnumber = false;
+                    if (CreateReservationGridMainGuestPostNumberInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.Red;
+                        postnumber = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.White;
+                        postnumber = true;
+                    }
+
+                    bool city = false;
+                    if (CreateReservationGridMainGuestCityInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestCitylabel.Foreground = Brushes.Red;
+                        city = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestCitylabel.Foreground = Brushes.White;
+                        city = true;
+                    }
+
+                    bool certifiednumber = false;
+                    if (CreateReservationGridMainGuestCertifiedNumberInput.Text.Length <= 3)
+                    {
+                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.Red;
+                        certifiednumber = false;
+                    }
+                    else
+                    {
+                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.White;
+                        certifiednumber = true;
+                    }
+
                     //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
                     CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
 
@@ -1849,65 +1970,69 @@ namespace testroom
 
                         ComboBoxItem classiffication = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
-                        if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                        if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true || CreateReservationGridPaymentInformationCashCheckBox.IsChecked == false)
                         {
-                            if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
+                            if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
                             {
-                                bool sidereservants = true;
-                                foreach(var child in CreateReservationGridSideGuestAddedGrid.Children)
+                                if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
                                 {
-                                    string Firstname, Surname, Birth = string.Empty;
-
-                                    Button btn = (Button)child;
-
-                                    if (btn.Content.ToString().Contains("⨉") == false)
+                                    bool sidereservants = true;
+                                    foreach (var child in CreateReservationGridSideGuestAddedGrid.Children)
                                     {
-                                        Grid parent = (Grid)btn.Parent;
-                                        int index = parent.Children.IndexOf(btn);
-                                        int rowindex = Grid.GetRow(btn);
-                                        RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
-                                        string[] buttoninfo = btn.Content.ToString().Split('\n');
+                                        string Firstname, Surname, Birth = string.Empty;
 
-                                        //Fill all the inuts from children info
-                                        Firstname = btn.Name.Replace('_', ' ');
-                                        Surname = buttoninfo[0].ToString().Substring(3);
-                                        Birth = buttoninfo[1];
+                                        Button btn = (Button)child;
 
-                                        if (ReservationCommands.PostSideReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), Firstname, Surname, Birth))
+                                        if (btn.Content.ToString().Contains("⨉") == false)
                                         {
-                                            sidereservants = true;
-                                        }
-                                        else
-                                        {
-                                            sidereservants = false;
+                                            Grid parent = (Grid)btn.Parent;
+                                            int index = parent.Children.IndexOf(btn);
+                                            int rowindex = Grid.GetRow(btn);
+                                            RowDefinition row = (RowDefinition)parent.RowDefinitions[rowindex];
+                                            string[] buttoninfo = btn.Content.ToString().Split('\n');
+
+                                            //Fill all the inuts from children info
+                                            Firstname = btn.Name.Replace('_', ' ');
+                                            Surname = buttoninfo[0].ToString().Substring(3);
+                                            Birth = buttoninfo[1];
+
+                                            if (ReservationCommands.PostSideReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), Firstname, Surname, Birth))
+                                            {
+                                                sidereservants = true;
+                                            }
+                                            else
+                                            {
+                                                sidereservants = false;
+                                            }
                                         }
                                     }
-                                }
 
-                                if (sidereservants)
-                                {
-                                    //Return back to the reservations screen
-                                    CreateReservationScreen.Visibility = Visibility.Hidden;
-                                    ReservationsScreen.Visibility = Visibility.Visible;
+                                    if (sidereservants)
+                                    {
+                                        //Return back to the reservations screen
+                                        CreateReservationScreen.Visibility = Visibility.Hidden;
+                                        ReservationsScreen.Visibility = Visibility.Visible;
 
-                                    var isGetAllReservations = await GetAllReservations();
+                                        var isGetAllReservations = await GetAllReservations();
 
-                                    CreateReservationProgress += 1;
+                                        CreateReservationProgress += 1;
+                                    }
+                                    else
+                                    {
+                                        PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
+                                    }
                                 }
                                 else
                                 {
-                                    PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
-                                }   
+                                    PublicCommands.ShowError("Writing in the server is currupted. Please contact system support!");
+                                }
                             }
                             else
                             {
-                                PublicCommands.ShowError("Writing in the server is currupted. Please contact system support!");
+                                PublicCommands.ShowError("Reservation culdn't be created. Please check your internet connection and try again.");
                             }
                         }
-                        else
-                        {
-                            PublicCommands.ShowError("Reservation culdn't be created. Please check your internet connection and try again.");
-                        }
+                        
                     }
                     catch (Exception ex) 
                     {
