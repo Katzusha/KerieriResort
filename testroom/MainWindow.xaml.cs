@@ -274,6 +274,22 @@ namespace testroom
                 CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
                 CreateReservationGridPaymentInformationPriceInput.Clear();
                 CreateReservationGridPaymentInformationCommentInput.Clear();
+
+                CreateReservationGridClassifficationLabel.Foreground = Brushes.White;
+                CreateReservationGridFromDateLabel.Foreground = Brushes.White;
+                CreateReservationGridToDateLabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.White;
+                CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.White;
+                CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
+                CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
+                CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
             }
             catch
             {
@@ -1953,14 +1969,41 @@ namespace testroom
                 {
                     CreateReservationGridNextBtn.Content = "Done";
 
+                    bool ischeckedchek = false;
+                    double price = 0;
+                    //Generate all the items that are being payed (property, breakfast...)
+                    foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
+                    {
+                        if (child.GetType().ToString() == "System.Windows.Controls.CheckBox")
+                        {
+                            CheckBox checkbox = (CheckBox)child;
+
+                            ischeckedchek = false;
+
+                            if (checkbox.IsChecked == true)
+                            {
+                                ischeckedchek = true;
+                            }
+                        }
+                        else if (child.GetType().ToString() == "System.Windows.Controls.TextBox")
+                        {
+                            TextBox textbox = (TextBox)child;
+
+                            if (ischeckedchek == true)
+                            {
+                                price = price + Convert.ToDouble(textbox.Text.Replace("€", ""));
+                            }
+                        }
+                    }
+
+                    CreateReservationGridPaymentInformationPriceInput.Text = (price + 200).ToString();
+
                     //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
                     CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
 
                     SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
 
                     CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
-
-                    CreateReservationProgress += 1;
                 }
                 else if (CreateReservationProgress == 4)
                 {
@@ -2114,7 +2157,7 @@ namespace testroom
         {
             try
             {
-                if (CreateReservationGridClassifficationCombobox.SelectedIndex == 1)
+                if (CreateReservationGridClassifficationCombobox.SelectedIndex != 0)
                 {
                     LoadingAnimation();
 
@@ -2174,9 +2217,48 @@ namespace testroom
         {
             try
             {
-                if (CreateReservationGridSideGuestFirstnameInput.Text != "" && CreateReservationGridSideGuestSurnameInput.Text != ""
-                    && CreateReservationGridSideGuestBirthCalendar.SelectedDate != null)
+                bool firstname = false;
+                if (CreateReservationGridSideGuestFirstnameInput.Text.Length <= 1)
                 {
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.Red;
+                    firstname = false;
+                }
+                else
+                {
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
+                    firstname = true;
+                }
+
+                bool surname = false;
+                if (CreateReservationGridSideGuestSurnameInput.Text.Length <= 1)
+                {
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.Red;
+                    surname = false;
+                }
+                else
+                {
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
+                    surname = true;
+                }
+
+                bool birth = false;
+                if (CreateReservationGridSideGuestBirthCalendar.SelectedDate == null)
+                {
+                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.Red;
+                    birth = false;
+                }
+                else
+                {
+                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+                    birth = true;
+                }
+
+                if (firstname && surname && birth)
+                {
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+
                     //Declare children speciffications
                     Button buttonAddedSideGuest = new Button();
                     buttonAddedSideGuest.Content = CreateReservationGridSideGuestFirstnameInput.Text.Substring(0, 1) + ". " + CreateReservationGridSideGuestSurnameInput.Text +
@@ -2211,11 +2293,6 @@ namespace testroom
                     CreateReservationGridSideGuestFirstnameInput.Clear();
                     CreateReservationGridSideGuestSurnameInput.Clear();
                     CreateReservationGridSideGuestBirthCalendar.SelectedDate = null;
-                }
-
-                else
-                {
-                    PublicCommands.ShowError("Please fill every information box before saving!");
                 }
             }
             catch (Exception ex)
