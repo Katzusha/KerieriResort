@@ -1817,7 +1817,7 @@ namespace testroom
                 else if (CreateReservationProgress == 2)
                 {
                     bool firstname = false;
-                    if (CreateReservationGridMainGuestFirstnameInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestFirstnameInput.Text.Length <= 1)
                     {
                         CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.Red;
                         firstname = false;
@@ -1829,7 +1829,7 @@ namespace testroom
                     }
 
                     bool surname = false;
-                    if (CreateReservationGridMainGuestSurnameInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestSurnameInput.Text.Length <= 2)
                     {
                         CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.Red;
                         surname = false;
@@ -1854,7 +1854,7 @@ namespace testroom
 
                     bool email = false;
                     Regex emailregex = new Regex(@".*@\w*\.\w*");
-                    if (emailregex.IsMatch(CreateReservationGridMainGuestEmailInput.Text))
+                    if (emailregex.IsMatch(CreateReservationGridMainGuestEmailInput.Text) == false)
                     {
                         CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.Red;
                         email = false;
@@ -1878,7 +1878,7 @@ namespace testroom
                     }
 
                     bool country = false;
-                    if (CreateReservationGridMainGuestCountryInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestCountryInput.Text.Length <= 2)
                     {
                         CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.Red;
                         country = false;
@@ -1890,7 +1890,7 @@ namespace testroom
                     }
 
                     bool Address = false;
-                    if (CreateReservationGridMainGuestAddressInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestAddressInput.Text.Length <= 2)
                     {
                         CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.Red;
                         Address = false;
@@ -1902,7 +1902,7 @@ namespace testroom
                     }
 
                     bool postnumber = false;
-                    if (CreateReservationGridMainGuestPostNumberInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestPostNumberInput.Text.Length <= 1)
                     {
                         CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.Red;
                         postnumber = false;
@@ -1914,7 +1914,7 @@ namespace testroom
                     }
 
                     bool city = false;
-                    if (CreateReservationGridMainGuestCityInput.Text.Length <= 3)
+                    if (CreateReservationGridMainGuestCityInput.Text.Length < 1)
                     {
                         CreateReservationGridMainGuestCitylabel.Foreground = Brushes.Red;
                         city = false;
@@ -1937,14 +1937,17 @@ namespace testroom
                         certifiednumber = true;
                     }
 
-                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+                    if (firstname && surname && birth && email && phonenumber && country && Address && postnumber && city && certifiednumber)
+                    {
+                        //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                        CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
 
-                    SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
+                        SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
 
-                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+                        CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
 
-                    CreateReservationProgress += 1;
+                        CreateReservationProgress += 1;
+                    }
                 }
                 else if (CreateReservationProgress == 3)
                 {
@@ -2326,10 +2329,10 @@ namespace testroom
         {
             //Generate information about bill and customer
             string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
-                "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "_" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("/", "-").Replace("00:00:00", "") + "\", " +
+                "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "_" + CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "\", " +
                 "\"CreatedDate\": \"" + DateTime.Now.ToString("dd-MM-yyyy") + "\", " +
-                "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
-                "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.ToString().Replace("-", "").Replace("00:00:00", "") + "\", " +
+                "\"FromDate\": \"" + CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "\", " +
+                "\"ToDate\": \"" + CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "\", " +
                 "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
                 "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
                 "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
