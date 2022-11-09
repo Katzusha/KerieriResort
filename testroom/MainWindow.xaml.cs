@@ -1699,17 +1699,18 @@ namespace testroom
         //Add reservation button on reservations grid
         private async void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Begin loading animation
-            LoadingAnimation();
-
-            //Fill the Combobox with all the classifficaitons
-            await Task.Delay(500);
-
             try
             {
+                //Begin loading animation
+                LoadingAnimation();
+
+                //Fill the Combobox with all the classifficaitons
+                await Task.Delay(500);
+
                 ClearAll();
 
                 CreateReservationGridClassifficationCombobox.Items.Add("None");
+                CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
 
                 dynamic GetClassiffications = ClassifficationCommands.GetAll();
 
@@ -1721,60 +1722,70 @@ namespace testroom
 
                     CreateReservationGridClassifficationCombobox.Items.Add(item);
                 }
+
+                //Switch displayed grids
+                CreateReservationScreen.Visibility = Visibility.Visible;
+                ReservationsScreen.Visibility = Visibility.Hidden;
+
+                //Animation to show main reservant information screen
+                ThicknessAnimation LogInAnimation = new ThicknessAnimation();
+                LogInAnimation.To = new Thickness(0, 0, 0, 0);
+                LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
+                LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
+                CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
+
+                //Make sure that every grid will be displayed in the right order
+                CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+                //Resert progression bar
+                CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+                //Start the progress bar
+                CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
+
+                //Reset all the values needed for the Creation
+                CreateReservationProgress = 1;
+                CreateReservationGridNextBtn.Content = "Next";
+                CreateReservationGridBackBtn.Content = "Cancel";
+
+                BlackOutPastDates();
+
+                //RowDefinition newrow = new RowDefinition();
+                //newrow.Height = new GridLength(150);
+                //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
+
+                //End the loading animation
+                LoadedAnimation();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+
+                LoadedAnimation();
+            }
+        }
+
+        public void BlackOutPastDates()
+        {
+            try
+            {
+                CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+
+                CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
+                CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
+
             }
             catch (Exception ex)
             {
                 PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
-
-            //Switch displayed grids
-            CreateReservationScreen.Visibility = Visibility.Visible;
-            ReservationsScreen.Visibility = Visibility.Hidden;
-
-            //Animation to show main reservant information screen
-            ThicknessAnimation LogInAnimation = new ThicknessAnimation();
-            LogInAnimation.To = new Thickness(0, 0, 0, 0);
-            LogInAnimation.From = new Thickness(System.Windows.SystemParameters.PrimaryScreenWidth + 1000, 0, -(System.Windows.SystemParameters.PrimaryScreenWidth + 1000), 0);
-            LogInAnimation.Duration = new Duration(TimeSpan.FromSeconds(.5));
-            CreateReservationGridReservationInformationGrid.BeginAnimation(MarginProperty, LogInAnimation);
-
-            //Make sure that every grid will be displayed in the right order
-            CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
-            CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
-            CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
-
-            //Resert progression bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-
-            //Start the progress bar
-            CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
-
-            //Reset all the values needed for the Creation
-            CreateReservationProgress = 1;
-            CreateReservationGridNextBtn.Content = "Next";
-            CreateReservationGridBackBtn.Content = "Cancel";
-
-            BlackOutPastDates();
-
-            //RowDefinition newrow = new RowDefinition();
-            //newrow.Height = new GridLength(150);
-            //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
-
-            //End the loading animation
-            LoadedAnimation();
-        }
-
-        public void BlackOutPastDates()
-        {
-            CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
-            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
-
-            CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
-            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), DateTime.Today.AddDays(-1)));
         }
 
         public int CreateReservationProgress = 1;
@@ -2106,76 +2117,90 @@ namespace testroom
             {
                 PublicCommands.ShowError(ex.Message);
             }
-
-            MessageBox.Show(CreateReservationProgress.ToString());
         }
 
         private async void CreateReservationGridBackBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CreateReservationProgress == 1)
+            try
             {
-                //Begin loading animation
-                LoadingAnimation();
+                if (CreateReservationProgress == 1)
+                {
+                    try
+                    {
+                        //Begin loading animation
+                        LoadingAnimation();
 
-                CreateReservationScreen.Visibility = Visibility.Hidden;
-                ReservationsScreen.Visibility = Visibility.Visible;
+                        await Task.Delay(500);
 
-                var isGetAllReservations = await GetAllReservations();
+                        CreateReservationScreen.Visibility = Visibility.Hidden;
+                        ReservationsScreen.Visibility = Visibility.Visible;
 
-                //End loading animation
-                LoadedAnimation();
+                        var isGetAllReservations = await GetAllReservations();
+
+                        //End loading animation
+                        LoadedAnimation();
+                    }
+                    catch
+                    {
+                        LoadedAnimation();
+                    }
+                }
+                else if (CreateReservationProgress == 2)
+                {
+                    CreateReservationGridBackBtn.Content = "Cancel";
+
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridRight(CreateReservationGridMainReservantInformationGrid, CreateReservationGridReservationInformationGrid);
+
+                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+                }
+                else if (CreateReservationProgress == 3)
+                {
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridRight(CreateReservationGridSideReservantInformationGrid, CreateReservationGridMainReservantInformationGrid);
+
+                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+                }
+                else if (CreateReservationProgress == 4)
+                {
+                    CreateReservationGridNextBtn.Content = "Next";
+
+                    //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
+
+                    SwipeGridRight(CreateReservationGridPaymentInformationGrid, CreateReservationGridSideReservantInformationGrid);
+
+                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+                }
+                else
+                {
+                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                }
+
+                CreateReservationProgress -= 1;
             }
-            else if (CreateReservationProgress == 2)
-            {
-                CreateReservationGridBackBtn.Content = "Cancel";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridMainReservantInformationGrid, CreateReservationGridReservationInformationGrid);
-
-                CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 3)
-            {
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridSideReservantInformationGrid, CreateReservationGridMainReservantInformationGrid);
-
-                CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-            }
-            else if (CreateReservationProgress == 4)
-            {
-                CreateReservationGridNextBtn.Content = "Next";
-
-                //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
-                CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
-
-                SwipeGridRight(CreateReservationGridPaymentInformationGrid, CreateReservationGridSideReservantInformationGrid);
-
-                CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-            }
-            else
+            catch (Exception ex)
             {
                 PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
-
-            CreateReservationProgress -= 1;
         }
 
         private async void CreateReservationGridClassifficationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (CreateReservationGridClassifficationCombobox.SelectedIndex != 0)
-                {
-                    LoadingAnimation();
+                LoadingAnimation();
 
+                await Task.Delay(500);
+
+                if (CreateReservationGridClassifficationCombobox.SelectedIndex <= 0 || CreateReservationGridClassifficationCombobox.Items.Count != 0)
+                {
                     CreateReservationGridAvailableEssentialsGrid.Children.Clear();
                     CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
-
-                    await Task.Delay(500);
 
                     ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
@@ -2214,13 +2239,13 @@ namespace testroom
 
                         row++;
                     }
-
-                    LoadedAnimation();
                 }
+
+                LoadedAnimation();
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                LoadedAnimation();
             }
         }
 
@@ -2403,14 +2428,25 @@ namespace testroom
 
         private void CreateReservationGridPaymentInformationPreviewBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Make sure that the document isn't open at the time
-            CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
+            try
+            {
+                LoadingAnimation();
 
-            //Generate pdf
-            PDF pdf = new PDF(3, CalculateReceipt());
+                //Make sure that the document isn't open at the time
+                CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
 
-            //Show the pdf preview
-            CreateReservationGridPaymentInformationPdfPreview.LoadDocument("D:\\preview.pdf");
+                //Generate pdf
+                PDF pdf = new PDF(3, CalculateReceipt());
+
+                //Show the pdf preview
+                CreateReservationGridPaymentInformationPdfPreview.LoadDocument("D:\\preview.pdf");
+
+                LoadedAnimation();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+            }
         }
 
         public dynamic CalculateReceipt()

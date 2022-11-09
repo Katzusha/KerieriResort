@@ -1274,17 +1274,18 @@
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="75"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
+                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
                         <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1297,7 +1298,7 @@
                     <TextBox x:Name="HomeGridSearch" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" 
                      Height="50" Width="100" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
                      VerticalContentAlignment="Center" Cursor="IBeam" GotFocus="SearchInput_GotFocus" LostFocus="SearchInput_LostFocus" FontWeight="Bold" 
-                     Text="🔍" MouseEnter="HomeGridSearch_MouseEnter" MouseLeave="HomeGridSearch_MouseLeave" Margin="0,0,20,0" KeyUp="HomeGridSearch_KeyUp">
+                     Text="🔍" MouseEnter="HomeGridSearch_MouseEnter" MouseLeave="HomeGridSearch_MouseLeave" KeyUp="HomeGridSearch_KeyUp" Grid.Column="1" RenderTransformOrigin="0.314,0.499" Margin="0,0,5,0">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="SnapsToDevicePixels"
@@ -1329,9 +1330,18 @@
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
-                    <Button x:Name="AddReservationsBtn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Height="50" 
+
+                    <ComboBox Grid.Column="1" Width="250" Cursor="Hand" Height="50" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SelectedIndex="0">
+                        <ComboBoxItem Content="All"/>
+                        <ComboBoxItem Content="Current" Foreground="#FF6565FF"/>
+                        <ComboBoxItem Content="Past" Foreground="#FFF2B33B"/>
+                        <ComboBoxItem Content="Incoming" Foreground="#FF4EB54E"/>
+                        <ComboBoxItem Content="Dismissed" Foreground="#FFFF4F4F"/>
+                    </ComboBox>
+                    
+                    <Button x:Name="AddReservationsBtn" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" 
                     Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="10,0,0,0" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddReservationsBtn_Click">
+                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddReservationsBtn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="25"></Setter>
@@ -1381,7 +1391,7 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="857*"/>
@@ -1403,7 +1413,9 @@
                    FontSize="20" Margin="-450,-156,0,0"/>
                     <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
                    FontSize="20" Margin="-950,-390,0,0"/>
-                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectedIndex="0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged"/>
+                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectedIndex="0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged">
+                        <ComboBoxItem Content="None"/>
+                    </ComboBox>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridFromDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-925,0,0,-145" SelectedDatesChanged="CreateReservationGridFromDateCalendar_SelectedDatesChanged" GotFocus="Calendar_GotFocus"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridToDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-316,0,0,-145" SelectedDatesChanged="CalendarLoseFocus" GotFocus="Calendar_GotFocus"/>
                     <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
@@ -1730,7 +1742,7 @@
             </Button>
 
             <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="00:00" FontWeight="Bold" Padding="-10"/>
-            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1999" VerticalAlignment="Bottom"/>
+            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1900" VerticalAlignment="Bottom"/>
             <!--<Image Source="/Images/kerierilogo.png" Grid.Column="0" Height="150" VerticalAlignment="Top"/>-->
 
             <Button x:Name="LogoBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150"  
@@ -1763,7 +1775,7 @@
             </Button>
             <!--#endregion-->
         </Grid>
-        <Grid x:Name="LoadingSpinnerGrid" Background="#3F3E3E3E" Visibility="Hidden">
+        <Grid x:Name="LoadingSpinnerGrid" Background="#3F3E3E3E" Visibility="Visible">
             <Ellipse x:Name="LoadingSpinner" Height="200" Width="200" Stroke="#5656FF" StrokeThickness="15" StrokeDashArray="29" StrokeDashCap="Round"/>
         </Grid>
     </Grid>
