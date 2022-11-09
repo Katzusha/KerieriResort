@@ -322,7 +322,7 @@ namespace testroom
                             Button button = new Button();
                             button.Name = "ClassifficationId" + information.Id;
                             //string name = information.Name.ToString();
-                            button.Content = information.Name + ". " + information.Price + "\nCl.: " + information.Size;
+                            button.Content = information.Name + "\n" + information.SerialNumber + "\n" + information.Price + "\n" + information.Size;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
