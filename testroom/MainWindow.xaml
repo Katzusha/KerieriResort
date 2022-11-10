@@ -1413,7 +1413,7 @@
                    FontSize="20" Margin="-450,-156,0,0"/>
                     <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" 
                    FontSize="20" Margin="-950,-390,0,0"/>
-                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectedIndex="0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged">
+                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged">
                         <ComboBoxItem Content="None"/>
                     </ComboBox>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridFromDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-925,0,0,-145" SelectedDatesChanged="CreateReservationGridFromDateCalendar_SelectedDatesChanged" GotFocus="Calendar_GotFocus"/>
@@ -1775,7 +1775,7 @@
             </Button>
             <!--#endregion-->
         </Grid>
-        <Grid x:Name="LoadingSpinnerGrid" Background="#3F3E3E3E" Visibility="Visible">
+        <Grid x:Name="LoadingAnimationGrid" Background="#3F3E3E3E" Visibility="Hidden">
             <Ellipse x:Name="LoadingSpinner" Height="200" Width="200" Stroke="#5656FF" StrokeThickness="15" StrokeDashArray="29" StrokeDashCap="Round"/>
         </Grid>
     </Grid>

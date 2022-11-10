@@ -184,11 +184,9 @@ namespace testroom
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
 
-            InitializeComponent();
-
             StartClock();
 
-            LoadingSpinnerGrid.Visibility = Visibility.Hidden;
+            LoadingAnimationGrid.Visibility = Visibility.Hidden;
 
             var doubleanimation = new DoubleAnimation(360, 0, new Duration(TimeSpan.FromSeconds(2)));
             var rotatetransform = new RotateTransform();
@@ -1271,7 +1269,7 @@ namespace testroom
             BackgroundTopDark.Background = MyBrushDark;
             BackgroundTopLight.Background = MyBrushLight;
 
-            LoadingSpinnerGrid.Visibility = Visibility.Visible;
+            LoadingAnimationGrid.Visibility = Visibility.Visible;
         }
         public void LoadedAnimation()
         {
@@ -1315,7 +1313,7 @@ namespace testroom
             BackgroundTopDark.Background = MyBrushDark;
             BackgroundTopLight.Background = MyBrushLight;
 
-            LoadingSpinnerGrid.Visibility = Visibility.Hidden;
+            LoadingAnimationGrid.Visibility = Visibility.Hidden;
         }
         #endregion
 
@@ -2732,7 +2730,6 @@ namespace testroom
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
         #endregion
-
         #endregion
 
         private void CalendarLoseFocus(object sender, SelectionChangedEventArgs e)
