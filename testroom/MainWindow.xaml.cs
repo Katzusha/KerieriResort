@@ -302,7 +302,7 @@ namespace testroom
 
         #region Reservations
         //Generate buttons for all the Reservations in json file
-        public async Task<bool> GetAllReservations()
+        public async Task<bool> GetAllReservations(string span)
         {
             await Task.Delay(500);
 
@@ -311,7 +311,7 @@ namespace testroom
                 ClearAll();
 
                 //Get json file for all the reservations
-                dynamic getall = ReservationCommands.GetAll();
+                dynamic getall = ReservationCommands.GetAll(span);
 
 
                 if (getall != null)
@@ -345,6 +345,46 @@ namespace testroom
                             button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
                                 "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
+                            //Current
+                            if (information.FromDate <= DateTime.Today && DateTime.Today < information.ToDate)
+                            {
+                                SolidColorBrush myBrush = new SolidColorBrush();
+                                ColorAnimation myColorAnimation = new ColorAnimation();
+                                myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
+                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                button.BorderBrush = myBrush;
+                            }
+                            //Past
+                            else if (information.ToDate < DateTime.Today)
+                            {
+                                SolidColorBrush myBrush = new SolidColorBrush();
+                                ColorAnimation myColorAnimation = new ColorAnimation();
+                                myColorAnimation.To = Color.FromArgb(255, 242, 179, 59);
+                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                button.BorderBrush = myBrush;
+                            }
+                            //Incoming
+                            else if (information.FromDate > DateTime.Today) 
+                            {
+                                SolidColorBrush myBrush = new SolidColorBrush();
+                                ColorAnimation myColorAnimation = new ColorAnimation();
+                                myColorAnimation.To = Color.FromArgb(255, 74, 148, 74);
+                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                button.BorderBrush = myBrush;
+                            }
+                            ////Dismissed
+                            //else if (information.isDeleted = 1)
+                            //{
+                            //    SolidColorBrush myBrush = new SolidColorBrush();
+                            //    ColorAnimation myColorAnimation = new ColorAnimation();
+                            //    myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
+                            //    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                            //    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                            //    button.BorderBrush = myBrush;
+                            //}
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
                             //Add generated children to the grid
@@ -1386,7 +1426,7 @@ namespace testroom
                 if (LogInCommands.UserLogIn(username, password))
                 {
                     //Generate all reservations from users database
-                    var isGetAllSearched = await GetAllReservations();
+                    var isGetAllSearched = await GetAllReservations("");
 
                     ControlGrid.Visibility = Visibility.Visible;
 
@@ -1445,7 +1485,7 @@ namespace testroom
                     if (LogInCommands.UserLogIn(username, password))
                     {
                         //Generate all reservations from users database
-                        var isGetAllSearched = await GetAllReservations();
+                        var isGetAllSearched = await GetAllReservations("");
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1505,7 +1545,7 @@ namespace testroom
                     if (LogInCommands.UserLogIn(username, password))
                     {
                         //Generate all reservations from users database
-                        var isGetAllSearched = await GetAllReservations();
+                        var isGetAllSearched = await GetAllReservations("");
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1569,7 +1609,7 @@ namespace testroom
                 ClearAll();
 
                 //Generate all reservations
-                var isGetAllReservations = await GetAllReservations();
+                var isGetAllReservations = await GetAllReservations("");
 
                 //End the loading animation
                 LoadedAnimation();
@@ -2077,7 +2117,7 @@ namespace testroom
                                         CreateReservationScreen.Visibility = Visibility.Hidden;
                                         ReservationsScreen.Visibility = Visibility.Visible;
 
-                                        var isGetAllReservations = await GetAllReservations();
+                                        var isGetAllReservations = await GetAllReservations("");
 
                                         CreateReservationProgress += 1;
                                     }
@@ -2133,7 +2173,7 @@ namespace testroom
                         CreateReservationScreen.Visibility = Visibility.Hidden;
                         ReservationsScreen.Visibility = Visibility.Visible;
 
-                        var isGetAllReservations = await GetAllReservations();
+                        var isGetAllReservations = await GetAllReservations("");
 
                         //End loading animation
                         LoadedAnimation();
@@ -2742,6 +2782,30 @@ namespace testroom
             Calendar calendar = (Calendar)sender;
 
             FocusManager.SetFocusedElement(calendar, null);
+        }
+
+        private void ReservationGridSpanSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ReservationGridSpanSelection.Text == "All")
+            {
+                var isGetAll = GetAllReservations("");
+            }
+            else if (ReservationGridSpanSelection.Text == "Current")
+            {
+                var isGetCurrent = GetAllReservations("WHERE FromDate <= CURDATE() AND ToDate >= CURDATE()");
+            }
+            else if (ReservationGridSpanSelection.Text == "Past")
+            {
+                var isGetPast = GetAllReservations("WHERE ToDate < CURDATE()");
+            }
+            else if (ReservationGridSpanSelection.Text == "Incoming")
+            {
+                var isGetIncoming = GetAllReservations("WHERE FromDate < CURDATE()");
+            }
+            else if (ReservationGridSpanSelection.Text == "Dismissed")
+            {
+                var isGetDismissed = GetAllReservations("WHERE isDeleted = 0");
+            }
         }
     }
 }

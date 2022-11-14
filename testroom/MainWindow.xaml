@@ -16,6 +16,7 @@
             <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Background" Value="#7F6565ff"/>
+            <Setter Property="BorderBrush" Value="#FFFFFF00"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -25,7 +26,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 0, 0" BorderBrush="#FF0074FF">
+                        <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="2, 2, 0, 0" BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -1331,7 +1332,7 @@
                         </TextBox.Resources>
                     </TextBox>
 
-                    <ComboBox Grid.Column="1" Width="250" Cursor="Hand" Height="50" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SelectedIndex="0">
+                    <ComboBox x:Name="ReservationGridSpanSelection" Grid.Column="1" Width="250" Cursor="Hand" Height="50" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SelectedIndex="0" SelectionChanged="ReservationGridSpanSelection_SelectionChanged">
                         <ComboBoxItem Content="All"/>
                         <ComboBoxItem Content="Current" Foreground="#FF6565FF"/>
                         <ComboBoxItem Content="Past" Foreground="#FFF2B33B"/>
