@@ -181,6 +181,7 @@ namespace testroom
 
             ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+            ClassifficationScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
 
@@ -2006,6 +2007,7 @@ namespace testroom
                 ReservationsScreen.Visibility = Visibility.Visible;
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                ClassifficationScreen.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
 
@@ -2713,6 +2715,18 @@ namespace testroom
                         CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
 
                         row++;
+                    }
+
+                    BlackOutPastDates();
+
+                    dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
+
+                    foreach (var information in BlackOutDates)
+                    {
+                        CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
+                        CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                        CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
                     }
                 }
 
