@@ -2362,6 +2362,10 @@ namespace testroom
 
                     ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
+                    if (item == null)
+                    {
+                        return;
+                    }
                     dynamic AvailableEssentials = ReservationCommands.GetAvailableEssentials(item.Name.Replace("ClassifficationId", ""));
 
                     int row = 0;
