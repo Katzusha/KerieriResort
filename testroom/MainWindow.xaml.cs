@@ -299,6 +299,82 @@ namespace testroom
             }
         }
 
+        public async Task<bool> GetAllClassiffications()
+        {
+            await Task.Delay(500);
+
+            try
+            {
+                ClearAll();
+
+                //Get json file for all the reservations
+                dynamic getall = ClassifficationCommands.GetAll();
+
+
+                if (getall != null)
+                {
+                    try
+                    {
+                        //Declare row definition for the generated children
+                        int col = 0;
+                        int row = 0;
+                        RowDefinition newrow = new RowDefinition();
+                        newrow.Height = new GridLength(250);
+                        HomeGridScrollViewer.RowDefinitions.Add(newrow);
+
+                        foreach (var information in getall)
+                        {
+                            Console.WriteLine(getall + " : " + information);
+                            //If there are four children in previus row generate new row same as privius
+                            if (col == 4)
+                            {
+                                newrow = new RowDefinition();
+                                newrow.Height = new GridLength(250);
+                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
+
+                                col = 0;
+                                row++;
+                            }
+
+                            //Declare children speciffications
+                            Button button = new Button();
+                            button.Name = "ClassifficationId" + information.Id;
+                            //string name = information.Name.ToString();
+                            button.Content = information.Name + "\n" + information.SerialNumber + "\n" + information.Price + "\n" + information.Size;
+                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
+                            //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+
+                            //Add generated children to the grid
+                            Grid.SetColumn(button, col);
+                            Grid.SetRow(button, row);
+                            HomeGridScrollViewer.Children.Add(button);
+
+                            col++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        PublicCommands.ShowError(ex.Message);
+                    }
+                }
+                else
+                {
+                    //If there is no children inserted in grid, show No Results
+                    HomeGridNoResultsLabel.Visibility = Visibility.Visible;
+                }
+
+                HomeGridScrollViewerSetter.ScrollToVerticalOffset(0);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+
+                return false;
+            }
+        }
+
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
         #region PUBLIC TASKS
 
@@ -1949,9 +2025,37 @@ namespace testroom
         }
 
         //Classiffications button on control screen
-        private void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
+        private async void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                //Start the loading animation
+                LoadingAnimation();
 
+                //Show the reservatons grid and hide no results label
+                ControlGrid.Visibility = Visibility.Visible;
+                ReservationsScreen.Visibility = Visibility.Visible;
+                ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
+                HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                CreateReservationScreen.Visibility = Visibility.Hidden;
+                SettingsScreen.Visibility = Visibility.Hidden;
+
+                //Clear all elements
+                ClearAll();
+
+                //Generate all reservations
+                var isGetAllClassiffications = await GetAllClassiffications();
+
+                //End the loading animation
+                LoadedAnimation();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(ex.Message);
+
+                //End the loading animation
+                LoadedAnimation();
+            }
         }
 
         //LogOut button on control screen
