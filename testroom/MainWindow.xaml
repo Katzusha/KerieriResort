@@ -16,7 +16,7 @@
             <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Background" Value="#7F6565ff"/>
-            <Setter Property="BorderBrush" Value="#FFFFFF00"/>
+            <Setter Property="BorderBrush" Value="#FF6565FF"/>
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -1371,6 +1371,94 @@
                 </Grid>
             </Grid>
 
+
+            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Visible">
+                <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
+                        <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 0, 5, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ScrollViewer>
+                    <TextBox x:Name="ClassifficaitonsGridSearch" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" 
+                     Height="50" Width="100" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Cursor="IBeam" GotFocus="SearchInput_GotFocus" LostFocus="SearchInput_LostFocus" FontWeight="Bold" 
+                     Text="🔍" MouseEnter="HomeGridSearch_MouseEnter" MouseLeave="HomeGridSearch_MouseLeave" KeyUp="HomeGridSearch_KeyUp" Grid.Column="1" RenderTransformOrigin="0.314,0.499" Margin="0,0,5,0">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="SnapsToDevicePixels"
+                            Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                            Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                            Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                            Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                            Value="0" />
+                                <Setter Property="MinHeight"
+                            Value="0" />
+                                <Setter Property="AllowDrop"
+                            Value="False" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                            <Border x:Name="Border"
+                                        CornerRadius="25"
+                                        Padding="2" Background="#3e3e3e" BorderBrush="Transparent">
+                                                <ScrollViewer Margin="0"
+                                            x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <Button x:Name="AddClassifficaionsBtn" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" 
+                    Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddReservationsBtn_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"></Setter>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#3e3e3e"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Grid>
 
             <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Hidden">
                 <Grid.ColumnDefinitions>

@@ -232,6 +232,9 @@ namespace testroom
                 HomeGridScrollViewer.Children.Clear();
                 HomeGridScrollViewer.RowDefinitions.Clear();
 
+                ClassifficaitonsGridScrollViewer.Children.Clear();
+                ClassifficaitonsGridScrollViewer.RowDefinitions.Clear();
+
                 CreateReservationGridClassifficationCombobox.Items.Clear();
 
                 try
@@ -320,7 +323,7 @@ namespace testroom
                         int row = 0;
                         RowDefinition newrow = new RowDefinition();
                         newrow.Height = new GridLength(250);
-                        HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                        ClassifficaitonsGridScrollViewer.RowDefinitions.Add(newrow);
 
                         foreach (var information in getall)
                         {
@@ -330,7 +333,7 @@ namespace testroom
                             {
                                 newrow = new RowDefinition();
                                 newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                                ClassifficaitonsGridScrollViewer.RowDefinitions.Add(newrow);
 
                                 col = 0;
                                 row++;
@@ -340,14 +343,14 @@ namespace testroom
                             Button button = new Button();
                             button.Name = "ClassifficationId" + information.Id;
                             //string name = information.Name.ToString();
-                            button.Content = information.Name + "\n" + information.SerialNumber + "\n" + information.Price + "\n" + information.Size;
+                            button.Content = "Room: " + information.Name + "\n" + "SN: " + information.SerialNumber + "\n" + "Price: " + information.Price + "\n" + information.Size;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
                             //Add generated children to the grid
                             Grid.SetColumn(button, col);
                             Grid.SetRow(button, row);
-                            HomeGridScrollViewer.Children.Add(button);
+                            ClassifficaitonsGridScrollViewer.Children.Add(button);
 
                             col++;
                         }
@@ -360,7 +363,7 @@ namespace testroom
                 else
                 {
                     //If there is no children inserted in grid, show No Results
-                    HomeGridNoResultsLabel.Visibility = Visibility.Visible;
+                    ClassifficaitonsGridScrollViewer.Visibility = Visibility.Visible;
                 }
 
                 HomeGridScrollViewerSetter.ScrollToVerticalOffset(0);
@@ -2034,7 +2037,8 @@ namespace testroom
 
                 //Show the reservatons grid and hide no results label
                 ControlGrid.Visibility = Visibility.Visible;
-                ReservationsScreen.Visibility = Visibility.Visible;
+                ReservationsScreen.Visibility = Visibility.Hidden;
+                ClassifficationScreen.Visibility = Visibility.Visible;
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
