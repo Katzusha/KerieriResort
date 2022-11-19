@@ -197,6 +197,9 @@ namespace testroom
             LoadingSpinner.RenderTransformOrigin = new Point(0.5, 0.5);
             doubleanimation.RepeatBehavior = RepeatBehavior.Forever;
             rotatetransform.BeginAnimation(RotateTransform.AngleProperty, doubleanimation);
+
+            CreateReservationGridMainReservantBirthCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime)DateTime.Now.AddYears(-18), new DateTime(2100, 12, 31)));
+            CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
         }
 
         //In bottom left corner Update commands for date and time
@@ -273,6 +276,7 @@ namespace testroom
                 CreateReservationGridSideGuestSurnameInput.Clear();
                 CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
                 CreateReservationGridSideGuestBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
                 CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
                 CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
                 CreateReservationGridPaymentinfoTaxinput.Clear();
@@ -3041,6 +3045,7 @@ namespace testroom
         {
             CreateReservationGridToDateCalendar.BlackoutDates.Clear();
             CreateReservationGridToDateCalendar.SelectedDates.Clear();
+            CreateReservationGridToDateCalendar.DisplayDate = (DateTime)CreateReservationGridFromDateCalendar.SelectedDate;
             CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate.Value));
 
             Mouse.Capture(null);

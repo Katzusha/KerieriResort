@@ -1275,7 +1275,7 @@
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Visible">
+            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1372,7 +1372,7 @@
             </Grid>
 
 
-            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Visible">
+            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1480,7 +1480,7 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="857*"/>
