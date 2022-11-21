@@ -2555,6 +2555,7 @@ namespace testroom
                                         //Return back to the reservations screen
                                         CreateReservationScreen.Visibility = Visibility.Hidden;
                                         ReservationsScreen.Visibility = Visibility.Visible;
+                                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                                         var isGetAllReservations = await GetAllReservations(null);
 
@@ -2611,6 +2612,7 @@ namespace testroom
 
                         CreateReservationScreen.Visibility = Visibility.Hidden;
                         ReservationsScreen.Visibility = Visibility.Visible;
+                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                         var isGetAllReservations = await GetAllReservations(null);
 
