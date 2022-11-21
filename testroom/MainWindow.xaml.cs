@@ -181,6 +181,7 @@ namespace testroom
 
             ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+            ClassifficationScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
 
@@ -196,6 +197,9 @@ namespace testroom
             LoadingSpinner.RenderTransformOrigin = new Point(0.5, 0.5);
             doubleanimation.RepeatBehavior = RepeatBehavior.Forever;
             rotatetransform.BeginAnimation(RotateTransform.AngleProperty, doubleanimation);
+
+            CreateReservationGridMainReservantBirthCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime)DateTime.Now.AddYears(-18), new DateTime(2100, 12, 31)));
+            CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
         }
 
         //In bottom left corner Update commands for date and time
@@ -272,6 +276,7 @@ namespace testroom
                 CreateReservationGridSideGuestSurnameInput.Clear();
                 CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
                 CreateReservationGridSideGuestBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
                 CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
                 CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
                 CreateReservationGridPaymentinfoTaxinput.Clear();
@@ -2006,6 +2011,7 @@ namespace testroom
                 ReservationsScreen.Visibility = Visibility.Visible;
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                ClassifficationScreen.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
 
@@ -2549,6 +2555,7 @@ namespace testroom
                                         //Return back to the reservations screen
                                         CreateReservationScreen.Visibility = Visibility.Hidden;
                                         ReservationsScreen.Visibility = Visibility.Visible;
+                                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                                         var isGetAllReservations = await GetAllReservations(null);
 
@@ -2605,6 +2612,7 @@ namespace testroom
 
                         CreateReservationScreen.Visibility = Visibility.Hidden;
                         ReservationsScreen.Visibility = Visibility.Visible;
+                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                         var isGetAllReservations = await GetAllReservations(null);
 
@@ -2713,6 +2721,18 @@ namespace testroom
                         CreateReservationGridAvailableEssentialsGrid.Children.Add(textbox);
 
                         row++;
+                    }
+
+                    BlackOutPastDates();
+
+                    dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
+
+                    foreach (var information in BlackOutDates)
+                    {
+                        CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
+                        CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                        CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
                     }
                 }
 
@@ -3027,6 +3047,7 @@ namespace testroom
         {
             CreateReservationGridToDateCalendar.BlackoutDates.Clear();
             CreateReservationGridToDateCalendar.SelectedDates.Clear();
+            CreateReservationGridToDateCalendar.DisplayDate = (DateTime)CreateReservationGridFromDateCalendar.SelectedDate;
             CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(1900, 1, 1), (DateTime)CreateReservationGridFromDateCalendar.SelectedDate.Value));
 
             Mouse.Capture(null);
