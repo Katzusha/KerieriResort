@@ -189,8 +189,6 @@ namespace testroom
 
             LoadingAnimationGrid.Visibility = Visibility.Hidden;
 
-            ReservationGridSpanSelection.SelectedIndex = 0;
-
             var doubleanimation = new DoubleAnimation(360, 0, new Duration(TimeSpan.FromSeconds(2)));
             var rotatetransform = new RotateTransform();
             LoadingSpinner.RenderTransform = rotatetransform;
