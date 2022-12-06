@@ -189,8 +189,6 @@ namespace testroom
 
             LoadingAnimationGrid.Visibility = Visibility.Hidden;
 
-            ReservationGridSpanSelection.SelectedIndex = 0;
-
             var doubleanimation = new DoubleAnimation(360, 0, new Duration(TimeSpan.FromSeconds(2)));
             var rotatetransform = new RotateTransform();
             LoadingSpinner.RenderTransform = rotatetransform;
@@ -2555,6 +2553,7 @@ namespace testroom
                                         //Return back to the reservations screen
                                         CreateReservationScreen.Visibility = Visibility.Hidden;
                                         ReservationsScreen.Visibility = Visibility.Visible;
+                                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                                         var isGetAllReservations = await GetAllReservations(null);
 
@@ -2611,6 +2610,7 @@ namespace testroom
 
                         CreateReservationScreen.Visibility = Visibility.Hidden;
                         ReservationsScreen.Visibility = Visibility.Visible;
+                        HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
                         var isGetAllReservations = await GetAllReservations(null);
 
