@@ -30,7 +30,7 @@ namespace testroom
 
         public static string DatabaseName = "";
 
-        public static string APIconnection = "https://kosakandraz.com/API";
+        public static string APIconnection = "https://api.kerieri.eu";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
