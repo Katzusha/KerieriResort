@@ -20,7 +20,7 @@
             <Setter Property="Margin" Value="10, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontSize" Value="26px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -1802,7 +1802,7 @@
             </Button>
 
             <Button x:Name="MenuSettingsBtn" Content="⚙" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50" 
-                    Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    Background="#565676" BorderBrush="#565676" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="SettingsBtn_Enter" MouseLeave="SettingsBtn_Leave" Click="SettingsBtn_Click" Margin="0,0,0,90">
                 <Button.Resources>
                     <Style TargetType="Border">
