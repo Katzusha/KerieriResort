@@ -1275,7 +1275,7 @@
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Visible">
+            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1372,7 +1372,7 @@
             </Grid>
 
 
-            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1431,7 +1431,7 @@
 
                     <Button x:Name="AddClassifficaionsBtn" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" 
                     Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddReservationsBtn_Click">
+                    VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddClassifficaionsBtn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="25"></Setter>
@@ -1480,7 +1480,7 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="857*"/>

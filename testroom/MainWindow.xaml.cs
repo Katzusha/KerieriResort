@@ -919,8 +919,8 @@ namespace testroom
             //Animations for buttons background color to transforme it from transparrent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 255, 0, 0);
-            myColorAnimation.To = Color.FromArgb(255, 255, 0, 0);
+            myColorAnimation.From = Color.FromArgb(0, 255, 86, 86);
+            myColorAnimation.To = Color.FromArgb(255, 255, 86, 86);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -943,8 +943,8 @@ namespace testroom
             //Animations for buttons background color to transforme it from red back to transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 255, 0, 0);
-            myColorAnimation.To = Color.FromArgb(0, 255, 0, 0);
+            myColorAnimation.From = Color.FromArgb(255, 255, 86, 86);
+            myColorAnimation.To = Color.FromArgb(0, 255, 86, 86);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -3125,6 +3125,11 @@ namespace testroom
         //    }
         //}
         #endregion
+
+        private void AddClassifficaionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         #endregion
 
