@@ -1183,8 +1183,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(50, 50, 100);
+            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1207,8 +1207,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(50, 50, 100);
-            myColorAnimation.To = Color.FromRgb(23, 23, 23);
+            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1231,8 +1231,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(50, 50, 100);
+            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1255,8 +1255,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(50, 50, 100);
-            myColorAnimation.To = Color.FromRgb(23, 23, 23);
+            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1280,8 +1280,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(50, 50, 100);
+            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1303,8 +1303,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(50, 50, 100);
-            myColorAnimation.To = Color.FromRgb(23, 23, 23);
+            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1328,8 +1328,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(23, 23, 23);
-            myColorAnimation.To = Color.FromRgb(255, 79, 79);
+            myColorAnimation.From = Color.FromArgb(0, 255, 79, 79);
+            myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -1351,8 +1351,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromRgb(255, 79, 79);
-            myColorAnimation.To = Color.FromRgb(23, 23, 23);
+            myColorAnimation.From = Color.FromArgb(255, 255, 79, 79);
+            myColorAnimation.To = Color.FromArgb(0, 255, 79, 79);
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
