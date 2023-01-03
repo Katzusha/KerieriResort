@@ -1275,7 +1275,7 @@
 
 
             <!--#region MENU GRIDS-->
-            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1332,7 +1332,7 @@
                         </TextBox.Resources>
                     </TextBox>
 
-                    <ComboBox x:Name="ReservationGridSpanSelection" Grid.Column="1" Width="250" Cursor="Hand" Height="50" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SelectionChanged="ReservationGridSpanSelection_SelectionChanged" SelectedIndex="-1">
+                    <ComboBox x:Name="ReservationGridSpanSelection" Grid.Column="1" Width="250" Cursor="Hand" Height="50" FontWeight="Bold" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" SelectionChanged="ReservationGridSpanSelection_SelectionChanged">
                         <ComboBoxItem Content="All"/>
                         <ComboBoxItem Content="Current" Foreground="#FF6565FF"/>
                         <ComboBoxItem Content="Past" Foreground="#FFF2B33B"/>

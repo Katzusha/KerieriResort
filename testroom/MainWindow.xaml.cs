@@ -22,15 +22,15 @@ namespace testroom
     public partial class MainWindow : Window
     {
         #region PUBLIC VALUES AND COMMANDS
-        public static MySqlConnection conn = new MySqlConnection("server=152.89.234.155;user=kosakand_admin;database=kosakand_iAsistent;port=3306;" +
-                    "password=uclWRX~uV2jq");
+        public static MySqlConnection conn = new MySqlConnection("server=152.89.234.190;user=kerieri_Client;database=kerieri_Clients;port=3306;" +
+                    "password=keriericlient123");
         public static MySqlCommand cmd;
 
         public static string ClassifficationType = string.Empty;
 
         public static string DatabaseName = "";
 
-        public static string APIconnection = "https://kosakandraz.com/API";
+        public static string APIconnection = "https://kerieri.eu/API";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
@@ -184,6 +184,7 @@ namespace testroom
             ClassifficationScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
+            ReservationGridSpanSelection.SelectedIndex = 0;
 
             StartClock();
 
@@ -238,6 +239,8 @@ namespace testroom
                 ClassifficaitonsGridScrollViewer.RowDefinitions.Clear();
 
                 CreateReservationGridClassifficationCombobox.Items.Clear();
+
+                ReservationGridSpanSelection.SelectedIndex = 0;
 
                 try
                 {
