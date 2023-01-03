@@ -1136,6 +1136,19 @@
             </Border>
         </Grid>
 
+        <Grid x:Name="LeafBackground">
+            <Border Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="250,0,0,-5">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/leafpicture1.png"/>
+                </Border.Background>
+            </Border>
+            <Border VerticalAlignment="Top" Width="400" Height="400" HorizontalAlignment="Right">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/leafpicture2.png"/>
+                </Border.Background>
+            </Border>
+        </Grid>
+
 
 
 
