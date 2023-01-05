@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace testroom
 {
@@ -182,6 +183,7 @@ namespace testroom
             ReservationsScreen.Visibility = Visibility.Visible;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
             ClassifficationScreen.Visibility = Visibility.Hidden;
+            CreateClassifficationScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
             ReservationGridSpanSelection.SelectedIndex = 0;
@@ -242,6 +244,8 @@ namespace testroom
 
                 ReservationGridSpanSelection.SelectedIndex = 0;
 
+
+
                 try
                 {
                     CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
@@ -301,6 +305,14 @@ namespace testroom
                 CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
                 CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
                 CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+
+
+                CreateClassifficationGridMaxReservantsInput.Clear();
+                CreateClassifficationGridNameInput.Clear();
+                CreateClassifficationGridPriceInput.Clear();
+                CreateClassifficationGridSerialNumberInput.Clear();
+                CreateClassifficationGridSizeInput.Clear();
+                CreateClassifficationGridIncludedEssentials.Children.Clear();
             }
             catch
             {
@@ -382,6 +394,17 @@ namespace testroom
 
                 return false;
             }
+        }
+
+        private void PreviewNumber(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void PreviewDecimal(object sender, TextCompositionEventArgs e)
+        {
+            
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
@@ -2013,6 +2036,7 @@ namespace testroom
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
                 ClassifficationScreen.Visibility = Visibility.Hidden;
+                CreateClassifficationScreen.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
 
@@ -2049,6 +2073,7 @@ namespace testroom
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
                 HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
+                CreateClassifficationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
 
                 //Clear all elements
@@ -2075,6 +2100,8 @@ namespace testroom
             //Reset the grid view
             ReservationsScreen.Visibility = Visibility.Visible;
             CreateReservationScreen.Visibility = Visibility.Hidden;
+            CreateClassifficationScreen.Visibility = Visibility.Hidden;
+            ClassifficationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
 
             //Animation to show login screen
@@ -2102,6 +2129,8 @@ namespace testroom
             ReservationsScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Visible;
+            CreateClassifficationScreen.Visibility = Visibility.Hidden;
+            ClassifficationScreen.Visibility = Visibility.Hidden;
 
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -3128,7 +3157,8 @@ namespace testroom
 
         private void AddClassifficaionsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ClassifficationScreen.Visibility = Visibility.Hidden;
+            CreateClassifficationScreen.Visibility = Visibility.Visible;
         }
 
         #endregion
