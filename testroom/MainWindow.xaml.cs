@@ -339,38 +339,52 @@ namespace testroom
                         //Declare row definition for the generated children
                         int col = 0;
                         int row = 0;
-                        RowDefinition newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
-                        ClassifficaitonsGridScrollViewer.RowDefinitions.Add(newrow);
+                        
 
                         foreach (var information in getall)
                         {
-                            Console.WriteLine(getall + " : " + information);
-                            //If there are four children in previus row generate new row same as privius
-                            if (col == 4)
-                            {
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                ClassifficaitonsGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
+                            RowDefinition newrow = new RowDefinition();
+                            newrow.Height = new GridLength(50);
+                            ClassifficaitonsGridScrollViewer.RowDefinitions.Add(newrow);
 
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ClassifficationId" + information.Id;
                             //string name = information.Name.ToString();
-                            button.Content = "Room: " + information.Name + "\n" + "SN: " + information.SerialNumber + "\n" + "Price: " + information.Price + "\n" + information.Size;
+                            //button.Content = "Room: " + information.Name + "\n" + "SN: " + information.SerialNumber + "\n" + "Price: " + information.Price + "\n" + information.Size;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
                             //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-
                             //Add generated children to the grid
                             Grid.SetColumn(button, col);
                             Grid.SetRow(button, row);
                             ClassifficaitonsGridScrollViewer.Children.Add(button);
 
-                            col++;
+                            Label label = new Label();
+                            label.Content = information.Name;
+                            Grid.SetColumn(label, 0);
+                            Grid.SetRow(label, row);
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            ClassifficaitonsGridScrollViewer.Children.Add(label);
+                            label = new Label();
+                            label.Content = information.SerialNumber;
+                            Grid.SetColumn(label, 1);
+                            Grid.SetRow(label, row);
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            ClassifficaitonsGridScrollViewer.Children.Add(label);
+                            label = new Label();
+                            label.Content = information.Price + "€";
+                            Grid.SetColumn(label, 2);
+                            Grid.SetRow(label, row);
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            ClassifficaitonsGridScrollViewer.Children.Add(label);
+                            label = new Label();
+                            label.Content = information.Size + "m square";
+                            Grid.SetColumn(label, 3);
+                            Grid.SetRow(label, row);
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            ClassifficaitonsGridScrollViewer.Children.Add(label);
+
+                            row++;
                         }
                     }
                     catch (Exception ex)
@@ -432,30 +446,23 @@ namespace testroom
                         int col = 0;
                         int row = 0;
                         RowDefinition newrow = new RowDefinition();
-                        newrow.Height = new GridLength(250);
+                        newrow.Height = new GridLength(50);
                         HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                         foreach (var information in getall)
                         {
                             if (status == null)
                             {
-                                //If there are four children in previus row generate new row same as privius
-                                if (col == 4)
-                                {
-                                    newrow = new RowDefinition();
-                                    newrow.Height = new GridLength(250);
-                                    HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                    col = 0;
-                                    row++;
-                                }
+                                newrow = new RowDefinition();
+                                newrow.Height = new GridLength(50);
+                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                                 //Declare children speciffications
                                 Button button = new Button();
                                 button.Name = "ReservationId" + information.Id;
                                 string firstname = information.Firstname.ToString();
-                                button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                                 button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                                 //Current
@@ -474,8 +481,6 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    col++;
                                 }
                                 //Past
                                 else if (information.Status == -1)
@@ -493,8 +498,6 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    col++;
                                 }
                                 //Incoming
                                 else if (information.Status == 1)
@@ -512,30 +515,47 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    col++;
                                 }
+
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                row++;
                             }
 
                             if (information.Status == status)
                             {
-                                //If there are four children in previus row generate new row same as privius
-                                if (col == 4)
-                                {
-                                    newrow = new RowDefinition();
-                                    newrow.Height = new GridLength(250);
-                                    HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                    col = 0;
-                                    row++;
-                                }
-
                                 //Declare children speciffications
                                 Button button = new Button();
                                 button.Name = "ReservationId" + information.Id;
                                 string firstname = information.Firstname.ToString();
-                                button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                                 button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                                 //Current
@@ -586,7 +606,35 @@ namespace testroom
                                 Grid.SetRow(button, row);
                                 HomeGridScrollViewer.Children.Add(button);
 
-                                col++;
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                row++;
                             }
                         }
                     }
@@ -643,23 +691,16 @@ namespace testroom
                     {
                         if (information.Success == 1)
                         {
-                            if (col == 4)
-                            {
-                                //If there are four children in previus row generate new row same as privius
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
+                            newrow = new RowDefinition();
+                            newrow.Height = new GridLength(50);
+                            HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                        "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                            //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                             //Current
@@ -671,6 +712,13 @@ namespace testroom
                                 myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
                                 myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
                                 button.BorderBrush = myBrush;
+
+                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+
+                                //Add generated children to the grid
+                                Grid.SetColumn(button, col);
+                                Grid.SetRow(button, row);
+                                HomeGridScrollViewer.Children.Add(button);
                             }
                             //Past
                             else if (information.Status == -1)
@@ -681,6 +729,13 @@ namespace testroom
                                 myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
                                 myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
                                 button.BorderBrush = myBrush;
+
+                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+
+                                //Add generated children to the grid
+                                Grid.SetColumn(button, col);
+                                Grid.SetRow(button, row);
+                                HomeGridScrollViewer.Children.Add(button);
                             }
                             //Incoming
                             else if (information.Status == 1)
@@ -691,25 +746,44 @@ namespace testroom
                                 myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
                                 myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
                                 button.BorderBrush = myBrush;
-                            }
-                            //Dismissed
-                            else if (information.Status == -2)
-                            {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
-                            }
-                            //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                            //Add generated children to the grid
-                            Grid.SetColumn(button, col);
-                            Grid.SetRow(button, row);
-                            HomeGridScrollViewer.Children.Add(button);
+                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                            col++;
+                                //Add generated children to the grid
+                                Grid.SetColumn(button, col);
+                                Grid.SetRow(button, row);
+                                HomeGridScrollViewer.Children.Add(button);
+                            }
+
+                            Label label = new Label();
+                            label.Content = firstname + " " + information.Surname;
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            Grid.SetColumn(label, 0);
+                            Grid.SetRow(label, row);
+                            HomeGridScrollViewer.Children.Add(label);
+
+                            label = new Label();
+                            label.Content = information.Name;
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            Grid.SetColumn(label, 1);
+                            Grid.SetRow(label, row);
+                            HomeGridScrollViewer.Children.Add(label);
+
+                            label = new Label();
+                            label.Content = information.FromDate;
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            Grid.SetColumn(label, 2);
+                            Grid.SetRow(label, row);
+                            HomeGridScrollViewer.Children.Add(label);
+
+                            label = new Label();
+                            label.Content = information.ToDate;
+                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                            Grid.SetColumn(label, 3);
+                            Grid.SetRow(label, row);
+                            HomeGridScrollViewer.Children.Add(label);
+
+                            row++;
                         }
                     }
                 }
@@ -720,23 +794,12 @@ namespace testroom
                     {
                         if (information.Success == 1)
                         {
-                            if (col == 4)
-                            {
-                                //If there are four children in previus row generate new row same as privius
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
-
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                        "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                             //Incoming
@@ -756,7 +819,35 @@ namespace testroom
                                 Grid.SetRow(button, row);
                                 HomeGridScrollViewer.Children.Add(button);
 
-                                col++;
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                row++;
                             }                           
                         }
                     }
@@ -768,23 +859,12 @@ namespace testroom
                     {
                         if (information.Success == 1)
                         {
-                            if (col == 4)
-                            {
-                                //If there are four children in previus row generate new row same as privius
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
-
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                        "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                             //Incoming
@@ -804,7 +884,35 @@ namespace testroom
                                 Grid.SetRow(button, row);
                                 HomeGridScrollViewer.Children.Add(button);
 
-                                col++;
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                row++;
                             }
                         }
                     }
@@ -816,23 +924,12 @@ namespace testroom
                     {
                         if (information.Success == 1)
                         {
-                            if (col == 4)
-                            {
-                                //If there are four children in previus row generate new row same as privius
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
-
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                        "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                            //"\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                             //Incoming
@@ -852,7 +949,35 @@ namespace testroom
                                 Grid.SetRow(button, row);
                                 HomeGridScrollViewer.Children.Add(button);
 
-                                col++;
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                row++;
                             }
                         }
                     }
@@ -864,23 +989,12 @@ namespace testroom
                     {
                         if (information.Success == 1)
                         {
-                            if (col == 4)
-                            {
-                                //If there are four children in previus row generate new row same as privius
-                                newrow = new RowDefinition();
-                                newrow.Height = new GridLength(250);
-                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                                col = 0;
-                                row++;
-                            }
-
                             //Declare children speciffications
                             Button button = new Button();
                             button.Name = "ReservationId" + information.Id;
                             string firstname = information.Firstname.ToString();
-                            button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                                        "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                             button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
                             //Incoming
@@ -899,6 +1013,34 @@ namespace testroom
                                 Grid.SetColumn(button, col);
                                 Grid.SetRow(button, row);
                                 HomeGridScrollViewer.Children.Add(button);
+
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
 
                                 col++;
                             }
@@ -1494,7 +1636,7 @@ namespace testroom
 
             //Animation for buttons size to transforme it for 5px smaller
             ThicknessAnimation thicknessAnimation = new ThicknessAnimation();
-            thicknessAnimation.To = new Thickness(10, 10, 10, 10);
+            thicknessAnimation.To = new Thickness(10, 2, 10, 2);
             thicknessAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(MarginProperty, thicknessAnimation);
 

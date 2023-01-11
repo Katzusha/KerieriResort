@@ -10,25 +10,24 @@
         WindowStyle="None"
         Title="Kerieri Resort" Height="237" Width="1101" Background="#1f1f27" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
     <Window.Resources>
-        <SolidColorBrush x:Key="BrushPrimary" Color="#5656FF"/>
-        <Color x:Key="ColorPrimary">#5656FF</Color>
-        <SolidColorBrush x:Key="BrushTextBox" Color="#5656FF"/>
-        <Color x:Key="ColorTextBox">#5656FF</Color>
-        <SolidColorBrush x:Key="BrushBackgroundColor" Color="#5656FF"/>
-        <Color x:Key="ColorBackgroundColor">#5656FF</Color>
-        <SolidColorBrush x:Key="BrushTextBoxColor" Color="#5656FF"/>
-        <Color x:Key="ColorTextBoxColor">#5656FF</Color>
-        <SolidColorBrush x:Key="BrushNegativeColor" Color="#5656FF"/>
-        <Color x:Key="ColorNegativeColor">#5656FF</Color>
+
+        <Style x:Key="GeneratedReservationAndClassifficationLabel" TargetType="Label">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="FontSize" Value="26px"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
 
         <Style x:Key="GeneratedReservationAndClassifficationButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
             <EventSetter Event="MouseEnter" Handler="GeneratedCassifficationAndReservationBtn_Enter"/>
             <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
+            <Setter Property="Grid.ColumnSpan" Value="10"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Background" Value="#7F6565ff"/>
             <Setter Property="BorderBrush" Value="#FF6565FF"/>
-            <Setter Property="Margin" Value="10, 10, 10, 10"/>
+            <Setter Property="Margin" Value="10, 2, 10, 2"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="26px"/>
@@ -37,7 +36,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25" Background="{TemplateBinding Background}" BorderThickness="5, 5, 0, 0" BorderBrush="{TemplateBinding BorderBrush}">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="15, 0, 0, 0" BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -1310,8 +1309,25 @@
                         <RowDefinition Height="75"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+
+                    <Border Background="#7e5656FF" Grid.Row="1" Grid.ColumnSpan="3" Height="50" VerticalAlignment="Top" CornerRadius="5, 5, 0, 0" Margin="10, 0, 10, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Customer" Grid.Column="0" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Classiffication" Grid.Column="1" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="From date" Grid.Column="2" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="To date" Grid.Column="3" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                        </Grid>
+                    </Border>
+                    
                     <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
-                        <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
+                        <Grid x:Name="HomeGridScrollViewer" Margin="5, 50, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -1396,7 +1412,7 @@
             </Grid>
 
 
-            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Visible">
                 <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1407,8 +1423,25 @@
                         <RowDefinition Height="75"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+
+                    <Border Background="#7e5656FF" Grid.Row="1" Grid.ColumnSpan="3" Height="50" VerticalAlignment="Top" CornerRadius="5, 5, 0, 0" Margin="10, 0, 10, 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Classiffication" Grid.Column="0" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Serial number" Grid.Column="1" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Price per night" Grid.Column="2" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Size" Grid.Column="3" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                        </Grid>
+                    </Border>
+
                     <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
-                        <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 0, 5, 0">
+                        <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 50, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -1484,21 +1517,24 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Visible">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
-                <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked" Unchecked="CalculatePricePerPearson_Unchecked"/>
-                <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" IsEnabled="False" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
-                <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
-                <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
-                <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <Button x:Name="SettingsSaveBtn" Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="SettingsSaveBtn_Click"/>
+            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Hidden">
+                <Grid Margin="0, 0, -500, 0">
+                    <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
+                    <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked" Unchecked="CalculatePricePerPearson_Unchecked"/>
+                    <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" IsEnabled="False" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
+                    <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
+                    <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
+                    <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button x:Name="SettingsSaveBtn" Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="SettingsSaveBtn_Click"/>
+                    </Grid>
+                    <Label x:Name="TaxLabel" Content="Tax percantage" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-210"/>
+                    <TextBox x:Name="TaxInput" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewTextInput="PreviewTextInput" Margin="0,0,-246,-220"/>
                 </Grid>
-                <Label x:Name="TaxLabel" Content="Tax percantage" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-210"/>
-                <TextBox x:Name="TaxInput" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewTextInput="PreviewTextInput" Margin="0,0,-246,-220"/>
+                <Grid Margin="-500, 0, 0, 0">
+                    <Label Content="Personalization" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}" Grid.Column="1"/>
+
+                </Grid>
+                
             </Grid>
             <!--#endregion-->
 
