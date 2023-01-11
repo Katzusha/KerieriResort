@@ -2136,7 +2136,6 @@ namespace testroom
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             //Set all the variables from app.config file
-            CalculatePricePerNight.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerNight"].Value);
             CalculatePricePerPearson.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculatePerPearson"].Value);
             CalculateUnderaged.IsChecked = bool.Parse(configuration.AppSettings.Settings["CalculateUnderaged"].Value);
             AgeLimit.Text = configuration.AppSettings.Settings["CalculateUnderagedAge"].Value;
@@ -2491,7 +2490,10 @@ namespace testroom
                     CreateReservationGridNextBtn.Content = "Done";
 
                     bool ischeckedchek = false;
-                    double price = 0;
+                    ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
+                    int id = Int32.Parse(item.Name.ToString().Replace("ClassifficationId", ""));
+
+                    double price = (((CreateReservationGridToDateCalendar.SelectedDate.Value.Date - CreateReservationGridFromDateCalendar.SelectedDate.Value.Date).TotalDays + 1) * ClassifficationCommands.GetClassifficationPrice(id));
                     //Generate all the items that are being payed (property, breakfast...)
                     foreach (object child in CreateReservationGridAvailableEssentialsGrid.Children)
                     {
@@ -2517,7 +2519,7 @@ namespace testroom
                         }
                     }
 
-                    CreateReservationGridPaymentInformationPriceInput.Text = (price + 200).ToString();
+                    CreateReservationGridPaymentInformationPriceInput.Text = (price).ToString();
 
                     //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
                     CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Visible;
@@ -2543,7 +2545,7 @@ namespace testroom
 
                         ComboBoxItem classiffication = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
 
-                        if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true || CreateReservationGridPaymentInformationCashCheckBox.IsChecked == false)
+                        if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true || CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
                         {
                             if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
                             {
@@ -2974,8 +2976,14 @@ namespace testroom
             }
         }
 
+
         public dynamic CalculateReceipt()
         {
+            ComboBoxItem item = (ComboBoxItem)CreateReservationGridClassifficationCombobox.SelectedItem;
+            int id = Int32.Parse(item.Name.ToString().Replace("ClassifficationId", ""));
+
+            double price = ((CreateReservationGridToDateCalendar.SelectedDate.Value.Date - CreateReservationGridFromDateCalendar.SelectedDate.Value.Date).TotalDays * ClassifficationCommands.GetClassifficationPrice(id));
+
             //Generate information about bill and customer
             string json = "{\"DocumentName\": \"0001_" + CreateReservationGridClassifficationCombobox.Text + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
                 "\"DocumentNumber\": \"" + CreateReservationGridClassifficationCombobox.Text + "_" + CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "_" + CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("dd-MM-yyyy") + "\", " +
@@ -2985,7 +2993,7 @@ namespace testroom
                 "\"CustomerName\": \"" + CreateReservationGridMainGuestFirstnameInput.Text + " " + CreateReservationGridMainGuestSurnameInput.Text + "\", " +
                 "\"CustomerAddress\": \"" + CreateReservationGridMainGuestAddressInput.Text + "\", \"" + CreateReservationGridMainGuestPostNumberInput.Text + "\" : \"" + CreateReservationGridMainGuestCityInput.Text + "\", " +
                 "\"CustomerContact\": \"" + CreateReservationGridMainGuestEmailInput.Text + "\", " +
-                "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"200.00\"}";
+                "\"Items\":[{\"Quantity\": 1, \"Item\": \"Classiffication " + CreateReservationGridClassifficationCombobox.Text + "\", \"Price\": \"" + price.ToString() + "\"}";
 
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -3171,14 +3179,6 @@ namespace testroom
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             //Set every object to the right state (enabled, disabled) and right value (checked, unchecked)
-            if (CalculatePricePerNight.IsChecked == true)
-            {
-                configuration.AppSettings.Settings["CalculatePerNight"].Value = "true";
-            }
-            else
-            {
-                configuration.AppSettings.Settings["CalculatePerNight"].Value = "false";
-            }
             if (CalculatePricePerPearson.IsChecked == true)
             {
                 configuration.AppSettings.Settings["CalculatePerPearson"].Value = "true";

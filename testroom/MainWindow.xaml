@@ -10,6 +10,17 @@
         WindowStyle="None"
         Title="Kerieri Resort" Height="237" Width="1101" Background="#1f1f27" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
     <Window.Resources>
+        <SolidColorBrush x:Key="BrushPrimary" Color="#5656FF"/>
+        <Color x:Key="ColorPrimary">#5656FF</Color>
+        <SolidColorBrush x:Key="BrushTextBox" Color="#5656FF"/>
+        <Color x:Key="ColorTextBox">#5656FF</Color>
+        <SolidColorBrush x:Key="BrushBackgroundColor" Color="#5656FF"/>
+        <Color x:Key="ColorBackgroundColor">#5656FF</Color>
+        <SolidColorBrush x:Key="BrushTextBoxColor" Color="#5656FF"/>
+        <Color x:Key="ColorTextBoxColor">#5656FF</Color>
+        <SolidColorBrush x:Key="BrushNegativeColor" Color="#5656FF"/>
+        <Color x:Key="ColorNegativeColor">#5656FF</Color>
+
         <Style x:Key="GeneratedReservationAndClassifficationButton" TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
             <EventSetter Event="MouseEnter" Handler="GeneratedCassifficationAndReservationBtn_Enter"/>
@@ -1014,13 +1025,13 @@
         </Style>
         <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#5656FF"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#5656FF"/>
         <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
-        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="Blue"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#5656FF"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
         <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
@@ -1065,7 +1076,7 @@
                                 <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.MouseOver.Glyph}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Background}"/>
+                                <Setter Property="Background" TargetName="checkBoxBorder" Value="transparent"/>
                                 <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource OptionMark.Disabled.Border}"/>
                                 <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
                                 <Setter Property="Fill" TargetName="indeterminateMark" Value="{StaticResource OptionMark.Disabled.Glyph}"/>
@@ -1473,15 +1484,14 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Hidden">
+            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
-                <CheckBox x:Name="CalculatePricePerNight" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per night" HorizontalAlignment="Center" Margin="0,-200,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}"/>
                 <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked" Unchecked="CalculatePricePerPearson_Unchecked"/>
-                <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
+                <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" IsEnabled="False" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
                 <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
                 <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
                 <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
@@ -1657,7 +1667,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <Label x:Name="CreateClassifficationGridNamelabel" Content="Name :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-480,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridNameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-400,0,0"/>

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -127,6 +128,48 @@ namespace testroom
             {
                 return false;
             }
+        }
+
+        public static double GetClassifficationPrice(int ID)
+        {
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/GetClassifficationPrice.php");
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            string postData = "DatabaseName=" + MainWindow.DatabaseName + "&ClassifficationId=" + ID.ToString();
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.
+            //request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            Stream data = response.GetResponseStream();
+
+            string html = string.Empty;
+
+            using (StreamReader sr = new StreamReader(data))
+            {
+                html = sr.ReadToEnd();
+
+                //MainWindow.ShowError(html);
+            }
+            dynamic PostResponse = JsonConvert.DeserializeObject(html);
+            double price = 0;
+
+            foreach (var information in PostResponse)
+            {
+                price = double.Parse(information.Price.ToString());
+            }
+
+
+            return price;
         }
     }
 }
