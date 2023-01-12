@@ -2689,6 +2689,9 @@ namespace testroom
 
                         if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true || CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
                         {
+                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = Brushes.White;
+                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = Brushes.White;
+
                             if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
                             {
                                 if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
@@ -2750,7 +2753,11 @@ namespace testroom
                                 PublicCommands.ShowError("Reservation culdn't be created. Please check your internet connection and try again.");
                             }
                         }
-                        
+                        else
+                        {
+                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = Brushes.Red;
+                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = Brushes.Red;
+                        }
                     }
                     catch (Exception ex) 
                     {

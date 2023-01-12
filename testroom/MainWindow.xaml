@@ -1326,8 +1326,8 @@
                         </Grid>
                     </Border>
                     
-                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
-                        <Grid x:Name="HomeGridScrollViewer" Margin="5, 50, 5, 0">
+                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 50, 0, 0">
+                        <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -1440,8 +1440,8 @@
                         </Grid>
                     </Border>
 
-                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
-                        <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 50, 5, 0">
+                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 50, 0, 0">
+                        <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
