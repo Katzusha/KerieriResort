@@ -3154,6 +3154,45 @@ namespace testroom
 
             Mouse.Capture(null);
         }
+
+        private async void ReservationGridSpanSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadingAnimation();
+
+            HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+
+            await Task.Delay(500);
+
+            ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
+
+            if (item.Content.ToString() == "All")
+            {
+                var isGetAll = await GetAllReservations(null);
+            }
+            else if (item.Content.ToString() == "Current")
+            {
+                var isGetCurrent = await GetAllReservations(0);
+            }
+            else if (item.Content.ToString() == "Past")
+            {
+                var isGetPast = await GetAllReservations(-1);
+            }
+            else if (item.Content.ToString() == "Incoming")
+            {
+                var isGetIncoming = await GetAllReservations(1);
+            }
+            else if (item.Content.ToString() == "Dismissed")
+            {
+                var isGetDismissed = await GetAllReservations(-2);
+            }
+
+            if (HomeGridScrollViewer.Children.Count == 0)
+            {
+                HomeGridNoResultsLabel.Visibility = Visibility.Visible;
+            }
+
+            LoadedAnimation();
+        }
         #endregion
 
 
@@ -3350,6 +3389,12 @@ namespace testroom
             }
         }
 
+        private void CreateClassifficationGridBackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClearAll();
+            ClassifficationScreen.Visibility = Visibility.Visible;
+            CreateClassifficationScreen.Visibility = Visibility.Hidden;
+        }
         #endregion
 
 
@@ -3459,43 +3504,9 @@ namespace testroom
             FocusManager.SetFocusedElement(calendar, null);
         }
 
-        private async void ReservationGridSpanSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CreateClassifficationGridNextBtn_Click(object sender, RoutedEventArgs e)
         {
-            LoadingAnimation();
 
-            HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-
-            await Task.Delay(500);
-
-            ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
-
-            if (item.Content.ToString() == "All")
-            {
-                var isGetAll = await GetAllReservations(null);
-            }
-            else if (item.Content.ToString() == "Current")
-            {
-                var isGetCurrent = await GetAllReservations(0);
-            }
-            else if (item.Content.ToString() == "Past")
-            {
-                var isGetPast = await GetAllReservations(-1);
-            }
-            else if (item.Content.ToString() == "Incoming")
-            {
-                var isGetIncoming = await GetAllReservations(1);
-            }
-            else if (item.Content.ToString() == "Dismissed")
-            {
-                var isGetDismissed = await GetAllReservations(-2);
-            }
-
-            if (HomeGridScrollViewer.Children.Count == 0)
-            {
-                HomeGridNoResultsLabel.Visibility = Visibility.Visible;
-            }
-
-            LoadedAnimation();
         }
     }
 }
