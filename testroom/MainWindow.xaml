@@ -1326,7 +1326,7 @@
                         </Grid>
                     </Border>
                     
-                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 50, 0, 0">
+                    <ScrollViewer x:Name="HomeGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 52, 0, 0">
                         <Grid x:Name="HomeGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1412,7 +1412,7 @@
             </Grid>
 
 
-            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Visible">
+            <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Hidden">
                 <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -1440,7 +1440,7 @@
                         </Grid>
                     </Border>
 
-                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 50, 0, 0">
+                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0, 52, 0, 0">
                         <Grid x:Name="ClassifficaitonsGridScrollViewer" Margin="5, 0, 5, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1696,14 +1696,14 @@
                     <TextBox x:Name="CreateReservationGridPaymentInformationCommentInput" Style="{DynamicResource CommentTextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-775,-150" Width="400" Height="350" TextWrapping="Wrap"/>
                 </Grid>
 
-                <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350">
+                <Grid Grid.Row="3" HorizontalAlignment="Right" Width="350" Height="100" VerticalAlignment="Bottom">
                     <Button Style="{DynamicResource BlueButton}" x:Name="CreateReservationGridNextBtn" Grid.Row="3" Content="Next" Width="150" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateReservationGridNextBtn_Click" Margin="0,0,-170,0"/>
 
                     <Button Style="{DynamicResource RedButton}" x:Name="CreateReservationGridBackBtn" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateReservationGridBackBtn_Click"/>
                 </Grid>
             </Grid>
 
-            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <Label x:Name="CreateClassifficationGridNamelabel" Content="Name :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-480,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridNameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-400,0,0"/>
@@ -1731,7 +1731,12 @@
                         </Grid>
                     </ScrollViewer>
                 </Border>
-                
+
+                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="350" Height="100">
+                    <Button Style="{DynamicResource BlueButton}" x:Name="CreateClassifficationGridNextBtn" Grid.Row="3" Content="Done" Width="150" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave" Click="CreateClassifficationGridNextBtn_Click" Margin="0,0,-170,0"/>
+
+                    <Button Style="{DynamicResource RedButton}" x:Name="CreateClassifficationGridBackBtn" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="-170,0,0,0" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave" Click="CreateClassifficationGridBackBtn_Click"/>
+                </Grid>
             </Grid>
             <!--#endregion-->
 
