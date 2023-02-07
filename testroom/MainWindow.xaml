@@ -11,10 +11,40 @@
         Title="Kerieri Resort" Height="237" Width="1101" Background="#1f1f27" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
     <Window.Resources>
 
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#5656FF"/>
+        <Color x:Key="PrimaryColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="SecondaryBrush" Color="#3e3e3e"/>
+        <Color x:Key="SecondaryColor">#3e3e3e</Color>
+
+        <SolidColorBrush x:Key="FalseBrush" Color="#FF5656"/>
+        <Color x:Key="FalseColor">#FF5656</Color>
+
+        <SolidColorBrush x:Key="TrueBrush" Color="#5656FF"/>
+        <Color x:Key="TrueColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="FontBrush" Color="#FFFFFF"/>
+        <Color x:Key="FontColor">#FFFFFF</Color>
+
+        <SolidColorBrush x:Key="DefaultBorderBrush" Color="#5656FF"/>
+        <Color x:Key="DefaultBorderColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="PastMarkBrush" Color="#f2b33b"/>
+        <Color x:Key="PastMarkColor">#f2b33b</Color>
+
+        <SolidColorBrush x:Key="CurrentMarkBrush" Color="#5656FF"/>
+        <Color x:Key="CurrentMarkColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="IncomingMarkBrush" Color="#56FF56"/>
+        <Color x:Key="IncomingMarkColor">#56FF56</Color>
+
+        <SolidColorBrush x:Key="DismissedMarkBrush" Color="#FF5656"/>
+        <Color x:Key="DismissedMarkColor">#FF5656</Color>
+
         <Style x:Key="GeneratedReservationAndClassifficationLabel" TargetType="Label">
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="FontSize" Value="26px"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -25,11 +55,11 @@
             <EventSetter Event="MouseLeave" Handler="GeneratedCassifficationAndReservationBtn_Leave"/>
             <Setter Property="Grid.ColumnSpan" Value="10"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Background" Value="#7F6565ff"/>
-            <Setter Property="BorderBrush" Value="#FF6565FF"/>
+            <Setter Property="Background" Value="#7F6565ff"/> <!-- POTREBNO DODAT VALUE-->
+            <Setter Property="BorderBrush" Value="{DynamicResource PrimaryBrush}"/>
             <Setter Property="Margin" Value="10, 2, 10, 2"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="FontSize" Value="26px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -49,17 +79,17 @@
             <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestBtn_Enter"/>
             <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#3f3f3f"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Margin" Value="10, 10, 0, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="FontSize" Value="32px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25, 0, 0, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 0, 0" BorderBrush="#6e6e6e">
+                        <Border CornerRadius="25, 0, 0, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 0, 0" BorderBrush="{DynamicResource SecondaryBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -72,11 +102,11 @@
             <EventSetter Event="MouseEnter" Handler="GeneratedAddedSideGuestDeleteBtn_Enter"/>
             <EventSetter Event="MouseLeave" Handler="GeneratedAddedSideGuestDeleteBtn_Leave"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#3e3e3e"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Content" Value="⨉"/>
             <Setter Property="Margin" Value="0, 10, 10, 10"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="FontSize" Value="32px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -96,10 +126,10 @@
             <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
             <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#5656FF"/>
+            <Setter Property="Background" Value="{DynamicResource TrueBrush}"/>
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="FontSize" Value="24px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -123,7 +153,7 @@
             <Setter Property="Background" Value="#00000000"/>
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="FontSize" Value="24px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -131,7 +161,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 3, 3" BorderBrush="#FF5656">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="3, 3, 3, 3" BorderBrush="{DynamicResource FalseBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -144,10 +174,10 @@
             <!--<EventSetter Event="MouseEnter" Handler="GeneratedBtn_Enter"/>-->
             <!--<EventSetter Event="MouseLeave" Handler="GeneratedBtn_Leave"/>-->
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#3e3e3e"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Margin" Value="0, 0, 0, 0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="FontSize" Value="24px"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -155,7 +185,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}" BorderThickness="0, 0, 0, 0" BorderBrush="#0000FF">
+                        <Border CornerRadius="25, 25, 25, 25" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -174,7 +204,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="Margin" Value="5, 5, 5, 5"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Template">
@@ -192,9 +222,9 @@
                                      EndPoint="0,1">
                                             <LinearGradientBrush.GradientStops>
                                                 <GradientStopCollection>
-                                                    <GradientStop Color="#3e3e3e"
+                                                    <GradientStop Color="{DynamicResource SecondaryColor}"
                                     Offset="0.0" />
-                                                    <GradientStop Color="#3e3e3e"
+                                                    <GradientStop Color="{DynamicResource SecondaryColor}"
                                     Offset="1.0" />
                                                 </GradientStopCollection>
                                             </LinearGradientBrush.GradientStops>
@@ -205,8 +235,8 @@
                                      EndPoint="0,1">
                                             <LinearGradientBrush.GradientStops>
                                                 <GradientStopCollection>
-                                                    <GradientStop Color="Gray" />
-                                                    <GradientStop Color="Gray"
+                                                    <GradientStop Color="{DynamicResource SecondaryColor}" />
+                                                    <GradientStop Color="{DynamicResource SecondaryColor}"
                                     Offset="1.0" />
                                                 </GradientStopCollection>
                                             </LinearGradientBrush.GradientStops>
@@ -220,7 +250,7 @@
                                             x:Name="CheckMark"
                                             Data="M 0 7 L 7 0">
                                             <Path.Stroke>
-                                                <SolidColorBrush Color="Blue" />
+                                                <SolidColorBrush Color="{DynamicResource PrimaryColor}" />
                                             </Path.Stroke>
                                         </Path>
                                         <Path Visibility="Collapsed"
@@ -231,7 +261,7 @@
                                             StrokeThickness="2"
                                             Data="M 0 7 L 7 0">
                                             <Path.Stroke>
-                                                <SolidColorBrush Color="Purple" />
+                                                <SolidColorBrush Color="{DynamicResource PrimaryColor}" />
                                             </Path.Stroke>
                                         </Path>
                                     </Grid>
@@ -246,7 +276,7 @@
                                                 Storyboard.TargetProperty="(Panel.Background).
                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                         Value="Blue" />
+                                         Value="{DynamicResource PrimaryColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -256,19 +286,19 @@
                                                 Storyboard.TargetProperty="(Panel.Background).
                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                         Value="Blue" />
+                                         Value="{DynamicResource PrimaryColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
                                                 Storyboard.TargetProperty="(Border.BorderBrush).
                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                         Value="Blue" />
+                                         Value="{DynamicResource PrimaryColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
                                                 Storyboard.TargetProperty="(Border.BorderBrush).
                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                         Value="Blue" />
+                                         Value="{DynamicResource PrimaryColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -308,7 +338,7 @@
 
         <Style x:Key="CheckBogGeneratedButtonPrice" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="24"/>
@@ -328,20 +358,20 @@
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
                   CornerRadius="25"
-                  Background="#FF3F3F3F"
-                  BorderBrush="#FF97A0A5"
+                  Background="{DynamicResource SecondaryBrush}"
+                  BorderBrush="{DynamicResource SecondaryBrush}"
                   BorderThickness="0" />
                 <Border 
                   Grid.Column="0"
                   CornerRadius="25, 0, 0, 25" 
                   Margin="1" 
-                  Background="#FF3F3F3F" 
-                  BorderBrush="#FF97A0A5"
+                  Background="{DynamicResource SecondaryBrush}" 
+                  BorderBrush="{DynamicResource SecondaryBrush}"
                   BorderThickness="0,0,0,0" />
                 <Path 
                   x:Name="Arrow"
                   Grid.Column="1"     
-                  Fill="White"
+                  Fill="{DynamicResource FontBrush}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
                   Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
@@ -375,7 +405,7 @@
             <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
             <Setter Property="MinWidth" Value="120"/>
             <Setter Property="MinHeight" Value="20"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -401,8 +431,8 @@
                             VerticalAlignment="Center" 
                             Margin="25,3,23,3"
                             Focusable="True" 
-                            Background="#3e3e3e"
-                            Foreground="White"
+                            Background="{DynamicResource SecondaryBrush}"
+                            Foreground="{DynamicResource FontBrush}"
                             Visibility="Hidden"/>
                             <Popup 
                             Name="Popup"
@@ -418,10 +448,10 @@
                               MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <Border 
                                 x:Name="DropDownBorder"
-                                Background="#3e3e3e"
+                                Background="{DynamicResource SecondaryBrush}"
                                 CornerRadius="25"
                                 BorderThickness="0"
-                                BorderBrush="#888888"/>
+                                BorderBrush="{DynamicResource SecondaryBrush}"/>
                                     <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                     </ScrollViewer>
@@ -430,10 +460,10 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="HasItems" Value="false">
-                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="50"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#888888"/>
+                                <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"/>
                             </Trigger>
                             <Trigger Property="IsGrouping" Value="true">
                                 <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
@@ -458,7 +488,7 @@
         <!-- SimpleStyles: ComboBoxItem -->
         <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -473,7 +503,7 @@
                                 <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#888888"/>
+                                <Setter Property="Foreground" Value="{DynamicResource SecondaryBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -482,32 +512,25 @@
         </Style>
 
         <Style x:Key="TextBoxInput" TargetType="{x:Type TextBox}">
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="MinWidth" Value="0" />
-            <Setter Property="Cursor" Value="IBeam"/>
-            <Setter Property="MinHeight" Value="0" />
-            <Setter Property="AllowDrop" Value="False" />
-            <Setter Property="FontSize" Value="24px"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Width" Value="450"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="IBeam"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
                         <Border Name="Border" CornerRadius="25" Padding="0">
                             <Border.Background>
-                                <SolidColorBrush Color="#3e3e3e" />
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}"/>
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Transparent" />
                             </Border.BorderBrush>
-                            <ScrollViewer Margin="20, 0, 20, 0" x:Name="PART_ContentHost" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <ScrollViewer Margin="0, 0, 0, 0" x:Name="PART_ContentHost" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="450"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -515,27 +538,20 @@
         </Style>
 
         <Style x:Key="CommentTextBoxInput" TargetType="{x:Type TextBox}">
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="MinWidth" Value="0" />
-            <Setter Property="Cursor" Value="IBeam"/>
-            <Setter Property="MinHeight" Value="0" />
-            <Setter Property="AllowDrop" Value="False" />
-            <Setter Property="FontSize" Value="24px"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Width" Value="450"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="IBeam"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
                         <Border Name="Border" CornerRadius="25" Padding="0">
                             <Border.Background>
-                                <SolidColorBrush Color="#3e3e3e" />
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}" />
                             </Border.Background>
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="Transparent" />
@@ -550,12 +566,12 @@
         <ControlTemplate x:Key="CalendarItemTemplate1" TargetType="{x:Type CalendarItem}">
             <ControlTemplate.Resources>
                 <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                    <TextBlock FontWeight="Bold" FontFamily="Verdana" Foreground="White" FontSize="12" HorizontalAlignment="Center" Margin="0, 0, 0, 0" Text="{Binding}" VerticalAlignment="Center"/>
+                    <TextBlock FontWeight="Bold" FontFamily="Verdana" Foreground="{DynamicResource FontBrush}" FontSize="12" HorizontalAlignment="Center" Margin="0, 0, 0, 0" Text="{Binding}" VerticalAlignment="Center"/>
                 </DataTemplate>
             </ControlTemplate.Resources>
             <Grid x:Name="PART_Root" Width="275" Height="275" Focusable="False">
                 <Grid.Resources>
-                    <SolidColorBrush x:Key="DisabledColor" Color="#A5FFFFFF"/>
+                    <SolidColorBrush x:Key="DisabledColor" Color="Transparent"/>
                 </Grid.Resources>
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
@@ -567,8 +583,8 @@
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
-                <Border Background="#3e3e3e"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="25">
-                    <Border BorderThickness="0" BorderBrush="#FFFFFFFF" CornerRadius="25">
+                <Border Background="{DynamicResource SecondaryBrush}"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="25">
+                    <Border BorderThickness="0" BorderBrush="{DynamicResource SecondaryBrush}" CornerRadius="25">
                         <Grid>
                             <Grid.Resources>
                                 <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
@@ -588,9 +604,9 @@
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-                                        <Rectangle Fill="Blue" Opacity="1" Stretch="Fill"/>
+                                        <Rectangle Fill="{DynamicResource PrimaryBrush}" Opacity="1" Stretch="Fill"/>
                                         <Grid>
-                                            <Path x:Name="path" Fill="white" HorizontalAlignment="center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                            <Path x:Name="path" Fill="{DynamicResource FontBrush}" HorizontalAlignment="center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                         </Grid>
                                     </Grid>
                                 </ControlTemplate>
@@ -613,7 +629,7 @@
                                         </VisualStateManager.VisualStateGroups>
                                         <Rectangle Fill="Transparent" Opacity="1" Stretch="Fill"/>
                                         <Grid>
-                                            <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="White" HorizontalAlignment="Center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                            <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="{DynamicResource FontBrush}" HorizontalAlignment="Center" Height="10" Margin="0, 0, 0, 0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                         </Grid>
                                     </Grid>
                                 </ControlTemplate>
@@ -634,7 +650,7 @@
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-                                        <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="{DynamicResource FontBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     </Grid>
                                 </ControlTemplate>
                             </Grid.Resources>
@@ -647,7 +663,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Button x:Name="PART_PreviousButton" Grid.Column="0" Focusable="False" HorizontalContentAlignment="Center" Padding="0, 0, 3, 2" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="25" Grid.Row="0" Content="◀" Foreground="White" BorderThickness="0" Background="Blue" Width="40">
+                            <Button x:Name="PART_PreviousButton" Grid.Column="0" Focusable="False" HorizontalContentAlignment="Center" Padding="0, 0, 3, 2" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="25" Grid.Row="0" Content="◀" Foreground="{DynamicResource FontBrush}" BorderThickness="0" Background="{DynamicResource PrimaryBrush}" Width="40">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="15"></Setter>
@@ -655,7 +671,7 @@
                                 </Button.Resources>
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Button}">
@@ -674,15 +690,15 @@
                                 </Button.Style>
                             </Button>
                             <Button x:Name="PART_HeaderButton" Grid.Column="1" Focusable="False" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Grid.Row="0" Template="{StaticResource HeaderButtonTemplate}" VerticalAlignment="Center"/>
-                            <Button x:Name="PART_NextButton" Grid.Column="2" Focusable="False" HorizontalContentAlignment="Center" Padding="3, 0, 0, 2" HorizontalAlignment="Center" Height="25" Grid.Row="0" Background="Blue" Foreground="White" BorderThickness="0" Content="▶" Width="40">
+                            <Button x:Name="PART_NextButton" Grid.Column="2" Focusable="False" HorizontalContentAlignment="Center" Padding="3, 0, 0, 2" HorizontalAlignment="Center" Height="25" Grid.Row="0" Background="{DynamicResource PrimaryBrush}" Foreground="{DynamicResource FontBrush}" BorderThickness="0" Content="▶" Width="40">
                                 <Button.Resources>
                                     <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="15"></Setter>
+                                        <Setter Property="CornerRadius" Value="25"></Setter>
                                     </Style>
                                 </Button.Resources>
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Background" Value="Blue"/>
+                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Button}">
@@ -872,20 +888,20 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="TodayBackground" Fill="#323264" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
-                            <Rectangle x:Name="SelectedBackground" Fill="#6565FF" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="TodayBackground" Fill="{DynamicResource PrimaryBrush}" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
+                            <Rectangle x:Name="SelectedBackground" Fill="{DynamicResource PrimaryBrush}" Opacity="0" Focusable="False" RadiusX="25" RadiusY="25"/>
                             <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Focusable="False"/>
                             <Rectangle x:Name="HighlightBackground" Fill="#3333ff" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Focusable="False" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="{DynamicResource FontBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Focusable="False" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <Path x:Name="Blackout" Data="M 0 0 L 10 0 L 10 10 L 0 10" Focusable="False" Fill="#000000" HorizontalAlignment="Stretch" Margin="0, 1, 0, 1" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
-                            <Rectangle x:Name="DayButtonFocusVisual" Focusable="False" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                            <Rectangle x:Name="DayButtonFocusVisual" Focusable="False" IsHitTestVisible="false" RadiusX="25" RadiusY="25" Stroke="{DynamicResource PrimaryBrush}" Visibility="Collapsed"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="CalendarCalendarButtonStyle1" TargetType="{x:Type CalendarButton}">
-            <Setter Property="Background" Value="#3333ff"/>
+            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
             <Setter Property="Focusable" Value="False"/>
             <Setter Property="MinWidth" Value="40"/>
             <Setter Property="MinHeight" Value="42"/>
@@ -965,8 +981,8 @@
                             </VisualStateManager.VisualStateGroups>
                             <Rectangle x:Name="SelectedBackground" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
                             <Rectangle x:Name="Background" Fill="{TemplateBinding Background}" Focusable="False" Opacity="0" RadiusX="25" RadiusY="25"/>
-                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="White" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,0,1,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <Rectangle x:Name="CalendarButtonFocusVisual" IsHitTestVisible="false" Focusable="False" RadiusX="25" RadiusY="25" Stroke="#FF45D6FA" Visibility="Collapsed"/>
+                            <ContentPresenter x:Name="NormalText" TextElement.Foreground="{DynamicResource FontBrush}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,0,1,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="CalendarButtonFocusVisual" IsHitTestVisible="false" Focusable="False" RadiusX="25" RadiusY="25" Stroke="{DynamicResource PrimaryBrush}" Visibility="Collapsed"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
@@ -984,7 +1000,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -994,10 +1010,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
-                                <Setter Property="Background" TargetName="Border" Value="#FF4F4F4F"/>
+                                <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="#888888"/>
+                                <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -1022,25 +1038,25 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="#5656FF"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="{DynamicResource FontColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Border" Color="{DynamicResource SecondaryColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Static.Glyph" Color="{DynamicResource PrimaryColor}"/>
         <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FF5593FF"/>
-        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#5656FF"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="{DynamicResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="{DynamicResource PrimaryColor}"/>
         <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF3C77DD"/>
-        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="#5656FF"/>
-        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FFE6E6E6"/>
-        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FFBCBCBC"/>
-        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="{DynamicResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Pressed.Glyph" Color="{DynamicResource PrimaryColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="{DynamicResource FontColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="{DynamicResource FontColor}"/>
+        <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="{DynamicResource FontColor}"/>
 
 
         <Style x:Key="GeneratedCheckBox" TargetType="{x:Type CheckBox}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -1173,52 +1189,25 @@
                 <PasswordBox.Resources>
                     <Style x:Key="{x:Type PasswordBox}"
                         TargetType="{x:Type PasswordBox}">
-                        <Setter Property="SnapsToDevicePixels"
-                            Value="true" />
-                        <Setter Property="OverridesDefaultStyle"
-                            Value="true" />
-                        <Setter Property="KeyboardNavigation.TabNavigation"
-                            Value="None" />
-                        <Setter Property="FocusVisualStyle"
-                            Value="{x:Null}" />
-                        <Setter Property="FontFamily"
-                            Value="Verdana" />
-                        <Setter Property="PasswordChar"
-                            Value="●" />
-                        <Setter Property="MinWidth"
-                            Value="120" />
-                        <Setter Property="MinHeight"
-                            Value="20" />
-                        <Setter Property="AllowDrop"
-                            Value="true" />
+                        <Setter Property="Foreground" Value="{DynamicResource FontColor}"/>
+                        <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Width" Value="450"/>
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Cursor" Value="IBeam"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type PasswordBox}">
-                                    <Border x:Name="Border"
-                                        CornerRadius="25"
-                                        Padding="2"
-                                        BorderThickness="0">
+                                    <Border Name="Border" CornerRadius="25" Padding="0">
                                         <Border.Background>
-                                            <SolidColorBrush Color="#3e3e3e" />
+                                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"/>
                                         </Border.Background>
                                         <Border.BorderBrush>
                                             <SolidColorBrush Color="Transparent" />
                                         </Border.BorderBrush>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal" />
-                                                <VisualState x:Name="Disabled" />
-                                                <VisualState x:Name="MouseOver">
-                                                    <Storyboard.Target>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Cursor" Value="IBeam"/>
-                                                            <Setter Property="BorderBrush" Value="Transparent"/>
-                                                        </Trigger>
-                                                    </Storyboard.Target>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                        <ScrollViewer x:Name="PART_ContentHost" />
+                                        <ScrollViewer Margin="0, 0, 0, 0" x:Name="PART_ContentHost" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="450"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
