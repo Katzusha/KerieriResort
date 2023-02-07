@@ -11,6 +11,12 @@
         Title="Kerieri Resort" Height="237" Width="1101" Background="#1f1f27" FontSize="16" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="768" WindowState="Maximized" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
     <Window.Resources>
 
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#1f1f27"/>
+        <Color x:Key="BackgroundColor">#1f1f27</Color>
+
+        <SolidColorBrush x:Key="MenuBrush" Color="#565676"/>
+        <Color x:Key="MenuColor">#565676</Color>
+
         <SolidColorBrush x:Key="PrimaryBrush" Color="#5656FF"/>
         <Color x:Key="PrimaryColor">#5656FF</Color>
 
@@ -40,6 +46,11 @@
 
         <SolidColorBrush x:Key="DismissedMarkBrush" Color="#FF5656"/>
         <Color x:Key="DismissedMarkColor">#FF5656</Color>
+
+        <Style x:Key="Label" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
+        </Style>
 
         <Style x:Key="GeneratedReservationAndClassifficationLabel" TargetType="Label">
             <Setter Property="IsHitTestVisible" Value="False"/>
@@ -1120,7 +1131,13 @@
     <!--BACKGROUND GRID-->
     <Grid>
         <Grid  x:Name="BackGroundGrid" Visibility="Hidden">
-            <Border x:Name="BackgroundBottomLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,482,-1267,-100">
+            <Border x:Name="BackgroundBottomLight" 
+                    BorderThickness="1" 
+                    Background="Blue" 
+                    Width="30" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    CornerRadius="15" 
+                    Margin="-1000,482,-1267,-100">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -1130,7 +1147,13 @@
                     </TransformGroup>
                 </Border.RenderTransform>
             </Border>
-            <Border x:Name="BackgroundTopDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1321,-100,-1000,336">
+            <Border x:Name="BackgroundTopDark" 
+                    BorderThickness="1" 
+                    Background="#FF0000B4" 
+                    Width="32" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    CornerRadius="15" 
+                    Margin="-1321,-100,-1000,336">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -1140,7 +1163,13 @@
                     </TransformGroup>
                 </Border.RenderTransform>
             </Border>
-            <Border x:Name="BackgroundTopLight" BorderThickness="1" Background="Blue" Width="30" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1144,-100,-1000,282">
+            <Border x:Name="BackgroundTopLight" 
+                    BorderThickness="1" 
+                    Background="Blue" 
+                    Width="30" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    CornerRadius="15" 
+                    Margin="-1144,-100,-1000,282">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -1150,7 +1179,13 @@
                     </TransformGroup>
                 </Border.RenderTransform>
             </Border>
-            <Border x:Name="BackgroundBottomDark" BorderThickness="1" Background="#FF0000B4" Width="32" RenderTransformOrigin="0.5,0.5" CornerRadius="15" Margin="-1000,413,-1373,-100">
+            <Border x:Name="BackgroundBottomDark" 
+                    BorderThickness="1" 
+                    Background="#FF0000B4" 
+                    Width="32" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    CornerRadius="15" 
+                    Margin="-1000,413,-1373,-100">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -1163,12 +1198,19 @@
         </Grid>
 
         <Grid x:Name="LeafBackground">
-            <Border Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="250,0,0,-5">
+            <Border Width="400" 
+                    Height="400" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom" 
+                    Margin="250,0,0,-5">
                 <Border.Background>
                     <ImageBrush ImageSource="/Images/leafpicture1.png"/>
                 </Border.Background>
             </Border>
-            <Border VerticalAlignment="Top" Width="400" Height="400" HorizontalAlignment="Right">
+            <Border VerticalAlignment="Top" 
+                    Width="400" 
+                    Height="400" 
+                    HorizontalAlignment="Right">
                 <Border.Background>
                     <ImageBrush ImageSource="/Images/leafpicture2.png"/>
                 </Border.Background>
@@ -1179,17 +1221,42 @@
 
 
         <!-- LOGIN GRID -->
-        <Grid x:Name="LogInScreen" Visibility="Hidden">
-            <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
-                     Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
-            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
-                         Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
+        <Grid x:Name="LogInScreen" 
+              Visibility="Hidden">
+            <Image Source="Images/kerierilogo.png" 
+                   Width="150" Height="150" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Top"/>
+            <TextBox x:Name="loginusernameinput" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Height="50" 
+                     Width="500" 
+                     HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" 
+                     Margin="0,-75,0,0" 
+                     GotFocus="LogInUsernameTextBox_GotFocus" 
+                     LostFocus="LogInUsernameTextBox_LostFocus" 
+                     FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" 
+                     Style="{StaticResource TextBoxInput}"/>
+            <PasswordBox x:Name="loginpasswordinput" 
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" 
+                         Width="500" 
+                         Margin="0,0,0,-100" 
+                         Height="50" 
+                         Foreground="White" 
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         FontSize="24" Cursor="IBeam" 
+                         GotFocus="PasswordBoxInput_GotFocus" 
+                         LostFocus="PasswordBoxInput_LostFocus"
+                         FontWeight="Bold"
+                         KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
                     <Style x:Key="{x:Type PasswordBox}"
                         TargetType="{x:Type PasswordBox}">
-                        <Setter Property="Foreground" Value="{DynamicResource FontColor}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
                         <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
                         <Setter Property="Height" Value="50"/>
                         <Setter Property="Width" Value="450"/>
@@ -1215,16 +1282,50 @@
                     </Style>
                 </PasswordBox.Resources>
             </PasswordBox>
-            <Label x:Name="loginusernamelabel" Content="Username :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,-155,0,0" Foreground="White" 
-                   FontSize="20"/>
-            <Label x:Name="loginpasswordlabel" Content="Password :" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-300,20,0,0" Foreground="White" 
-                   FontSize="20"/>
-            <Button Style="{DynamicResource BlueButton}" x:Name="loginloginbutton" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50" 
-                     Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
-                    VerticalContentAlignment="Center" FontFamily="Arial" Margin="0,0,-450,-240" Click="loginloginbutton_Click" MouseEnter="BlueBtn_Enter" MouseLeave="BlueBtn_Leave"/>
-            <Button Style="{DynamicResource RedButton}" x:Name="loginexitbutton" Content="Exit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="50"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-                    FontFamily="Arial" Margin="0,0,-100,-240" Click="loginexitbutton_Click" MouseEnter="RedBtn_Enter" MouseLeave="RedBtn_Leave"/>
+            <Label x:Name="loginusernamelabel"
+                   Content="Username :"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Margin="-300,-155,0,0" 
+                   Style="{DynamicResource Label}"/>
+            <Label x:Name="loginpasswordlabel"
+                   Content="Password :"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Margin="-300,20,0,0"
+                   Style="{DynamicResource Label}"/>
+            <Button Style="{DynamicResource BlueButton}"
+                    x:Name="loginloginbutton"
+                    Content="Log in" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="150" Height="50" 
+                     Foreground="White"
+                    FontSize="24"
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center"
+                    FontFamily="Arial"
+                    Margin="0,0,-450,-240"
+                    Click="loginloginbutton_Click"
+                    MouseEnter="BlueBtn_Enter"
+                    MouseLeave="BlueBtn_Leave"/>
+            <Button Style="{DynamicResource RedButton}"
+                    x:Name="loginexitbutton"
+                    Content="Exit"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="150"
+                    Height="50"  
+                BorderBrush="{x:Null}" 
+                    Foreground="White" 
+                    FontSize="24"
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center" 
+                    FontFamily="Arial" 
+                    Margin="0,0,-100,-240"
+                    Click="loginexitbutton_Click"
+                    MouseEnter="RedBtn_Enter" 
+                    MouseLeave="RedBtn_Leave"/>
             <TextBox x:Name="loginfaillabel" Visibility="Hidden" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Unvalid username or password!" 
                      VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red" SelectionBrush="{x:Null}" 
                      SelectionTextBrush="{x:Null}" FontSize="24" FontFamily="Arial" TextAlignment="Center" VerticalContentAlignment="Center" 
@@ -1288,7 +1389,7 @@
 
             <!--#region MENU GRIDS-->
             <Grid x:Name="ReservationsScreen" Grid.Column="1" Visibility="Hidden">
-                <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
+                <Label x:Name="HomeGridNoResultsLabel" Content="No Reservations" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource FontBrush}" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
@@ -1308,10 +1409,10 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="Customer" Grid.Column="0" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
-                            <Label Content="Classiffication" Grid.Column="1" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
-                            <Label Content="From date" Grid.Column="2" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
-                            <Label Content="To date" Grid.Column="3" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Customer" Grid.Column="0" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Classiffication" Grid.Column="1" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="From date" Grid.Column="2" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="To date" Grid.Column="3" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
                         </Grid>
                     </Border>
                     
@@ -1402,7 +1503,7 @@
 
 
             <Grid x:Name="ClassifficationScreen" Grid.Column="1" Visibility="Hidden">
-                <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="White" FontSize="36"/>
+                <Label x:Name="ClassifficationsGridNoResultsLabel" Visibility="Hidden" Content="No Classiffications" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Foreground="{DynamicResource FontBrush}" FontSize="36"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
@@ -1422,9 +1523,9 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="Classiffication" Grid.Column="0" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
-                            <Label Content="Serial number" Grid.Column="1" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
-                            <Label Content="Price per night" Grid.Column="2" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Classiffication" Grid.Column="0" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Serial number" Grid.Column="1" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
+                            <Label Content="Price per night" Grid.Column="2" FontSize="24" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
                             <Label Content="Size" Grid.Column="3" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" IsHitTestVisible="False"/>
                         </Grid>
                     </Border>
@@ -1440,7 +1541,7 @@
                         </Grid>
                     </ScrollViewer>
                     <TextBox x:Name="ClassifficaitonsGridSearch" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" 
-                     Height="50" Width="100" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
+                     Height="50" Width="100" Foreground="{DynamicResource FontBrush}" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
                      VerticalContentAlignment="Center" Cursor="IBeam" GotFocus="SearchInput_GotFocus" LostFocus="SearchInput_LostFocus" FontWeight="Bold" 
                      Text="🔍" MouseEnter="HomeGridSearch_MouseEnter" MouseLeave="HomeGridSearch_MouseLeave" KeyUp="HomeGridSearch_KeyUp" Grid.Column="1" RenderTransformOrigin="0.314,0.499" Margin="0,0,5,0">
                         <TextBox.Resources>
@@ -1464,7 +1565,7 @@
                                         <ControlTemplate TargetType="{x:Type TextBoxBase}">
                                             <Border x:Name="Border"
                                         CornerRadius="25"
-                                        Padding="2" Background="#3e3e3e" BorderBrush="Transparent">
+                                        Padding="2" Background="{DynamicResource SecondaryBrush}" BorderBrush="Transparent">
                                                 <ScrollViewer Margin="0"
                                             x:Name="PART_ContentHost" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                             </Border>
@@ -1476,7 +1577,7 @@
                     </TextBox>
 
                     <Button x:Name="AddClassifficaionsBtn" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" 
-                    Background="#FF3E3E3E" BorderBrush="#3e3e3e" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" 
+                    Background="#FF3E3E3E" BorderBrush="{DynamicResource SecondaryBrush}" Foreground="{DynamicResource FontBrush}" FontSize="24" HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center" FontFamily="Arial" MouseEnter="AddBtn_Enter" MouseLeave="AddBtn_Leave" Click="AddClassifficaionsBtn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -1506,17 +1607,17 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Hidden">
+            <Grid Grid.Column="1" x:Name="SettingsScreen" Visibility="Visible">
                 <Grid Margin="0, 0, -500, 0">
                     <Label Content="Price calculation!" FontSize="32" Foreground="#FF6565FF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-350,0,0" Background="{x:Null}"/>
                     <CheckBox x:Name="CalculatePricePerPearson" Grid.Column="0" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate price per people" HorizontalAlignment="Center" Margin="0,-100,0,0" VerticalAlignment="Center" Checked="CalculatePricePerPearson_Checked" Unchecked="CalculatePricePerPearson_Unchecked"/>
                     <CheckBox x:Name="CalculateUnderaged" Grid.Column="0" IsEnabled="False" Style="{DynamicResource GeneratedCheckBox}" Content="Calculate underaged" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Checked="CalculateUnderaged_Checked" Unchecked="CalculateUnderaged_Unchecked"/>
-                    <Label x:Name="AgeLimitLabel" Content="Age limit" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
+                    <Label x:Name="AgeLimitLabel" Content="Age limit" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-100"/>
                     <TextBox x:Name="AgeLimit" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-175,-100" PreviewTextInput="PreviewTextInput"/>
                     <Grid Grid.Column="1" Width="170" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                         <Button x:Name="SettingsSaveBtn" Style="{DynamicResource BlueButton}" Content="Save" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Column="1" Click="SettingsSaveBtn_Click"/>
                     </Grid>
-                    <Label x:Name="TaxLabel" Content="Tax percantage" FontSize="24" Foreground="#FFFFFF" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-210"/>
+                    <Label x:Name="TaxLabel" Content="Tax percantage" Style="{DynamicResource Label}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Margin="-100,0,0,-210"/>
                     <TextBox x:Name="TaxInput" Style="{DynamicResource TextBoxInput}" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewTextInput="PreviewTextInput" Margin="0,0,-246,-220"/>
                 </Grid>
                 <Grid Margin="-500, 0, 0, 0">
@@ -1543,20 +1644,20 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Label x:Name="CreateReservationGridFromDateLabel" Grid.Column="0" Content="From date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="-925,-165,0,0"/>
+
+                    <Label x:Name="CreateReservationGridFromDateLabel" Grid.Column="0" Content="From date :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-925,-165,0,0"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridFromDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-925,0,0,-145" SelectedDatesChanged="CreateReservationGridFromDateCalendar_SelectedDatesChanged" GotFocus="Calendar_GotFocus"/>
 
-                    <Label x:Name="CreateReservationGridToDateLabel" Grid.Column="0" Content="To date :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="-316,-156,0,0"/>
+                    <Label x:Name="CreateReservationGridToDateLabel" Grid.Column="0" Content="To date :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-316,-156,0,0"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridToDateCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" Margin="-316,0,0,-145" SelectedDatesChanged="CalendarLoseFocus" GotFocus="Calendar_GotFocus"/>
 
-                    <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="-650,-390,0,0"/>
+                    <Label x:Name="CreateReservationGridClassifficationLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-390,0,0"/>
                     <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" x:Name="CreateReservationGridClassifficationCombobox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Height="50" FontSize="24" Margin="-650,-300,0,0" SelectionChanged="CreateReservationGridClassifficationCombobox_SelectionChanged">
                         <ComboBoxItem Content="None"/>
                     </ComboBox>
 
-                    <Label x:Name="CreateReservationGridEssentialsLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="0,-530,-650,0"/>
-                    <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
+                    <Label x:Name="CreateReservationGridEssentialsLabel" Grid.Column="0" Content="Classiffication :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-530,-650,0"/>
+                    <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="{DynamicResource SecondaryBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
                         <ScrollViewer Margin="0,25,0,25" VerticalScrollBarVisibility="Auto">
                             <Grid x:Name="CreateReservationGridAvailableEssentialsGrid">
                                 <Grid.ColumnDefinitions>
@@ -1569,34 +1670,34 @@
                 </Grid>
 
                 <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
-                    <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-535,0,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-535,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestSurnamelabel" Content="Surname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-345,0,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestSurnamelabel" Content="Surname :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-345,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestSurnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-252,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestBirthlabel" Content="Date of birth :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-140,0,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestBirthlabel" Content="Date of birth :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-140,0,0"/>
                     <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" x:Name="CreateReservationGridMainReservantBirthCalendar" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Height="275" Width="275" BorderBrush="{x:Null}" SelectedDatesChanged="CalendarLoseFocus" Margin="-650,0,0,-179"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestEmaillabel" Content="eMail :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-535,-650,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestEmaillabel" Content="eMail :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-535,-650,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestEmailInput" Style="{DynamicResource TextBoxInput}" Margin="0,-448,-650,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestPhoneNumberlabel" Content="Phone n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-345,-650,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestPhoneNumberlabel" Content="Phone n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-345,-650,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestPhoneNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,-252,-650,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestCountrylabel" Content="Country :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-140,-650,0"/>
+                    <Label x:Name="CreateReservationGridMainGuestCountrylabel" Content="Country :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-140,-650,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestCountryInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-50,-650,0"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-650,-45"/>
+                    <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,0,-650,-45"/>
                     <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,-135"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-345,-235"/>
+                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,0,-345,-235"/>
                     <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-320" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestCitylabel" Content="City :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-795,-235"/>
+                    <Label x:Name="CreateReservationGridMainGuestCitylabel" Content="City :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,0,-795,-235"/>
                     <TextBox x:Name="CreateReservationGridMainGuestCityInput" Style="{DynamicResource TextBoxInput}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-320"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-650,-425"/>
+                    <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,0,-650,-425"/>
                     <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
 
@@ -1669,7 +1770,7 @@
                     </Label>
                     <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,0,0,-50" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
 
-                    <Label Grid.Column="1" x:Name="CreateReservationGridPaymentinfoTaxLabel" Content="Tax in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,0,0,-250"/>
+                    <Label Grid.Column="1" x:Name="CreateReservationGridPaymentinfoTaxLabel" Content="Tax in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-950,0,0,-250"/>
                     <TextBox x:Name="CreateReservationGridPaymentinfoTaxinput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
                              PreviewTextInput="PreviewCreateReservationGridPaymentInfoDdvInput" Margin="-950,0,0,-335" Width="200"/>
 
@@ -1678,10 +1779,10 @@
                     <Button x:Name="CreateReservationGridPaymentInformationPreviewBtn" Style="{DynamicResource GrayButton}" MouseEnter="PreviewBtn_Enter" MouseLeave="PreviewBtn_Leave" Content="👁" Width="50" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CreateReservationGridPaymentInformationPreviewBtn_Click" Margin="-450,0,0,-500"/>
                     <Wpf:PdfViewer x:Name="CreateReservationGridPaymentInformationPdfPreview" HorizontalAlignment="Center" Background="#BF3E3E3E" Foreground="Black" VerticalAlignment="Center" Width="400" Height="500" Margin="-100,-70,0,0"/>
 
-                    <Label Grid.Column="1" Content="Price :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-436,-775,0"/>
+                    <Label Grid.Column="1" Content="Price :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-436,-775,0"/>
                     <TextBox x:Name="CreateReservationGridPaymentInformationPriceInput" Style="{DynamicResource TextBoxInput}" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-350,-775,0" Width="400"/>
 
-                    <Label Grid.Column="1" Content="Comment :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,-240,-775,0"/>
+                    <Label Grid.Column="1" Content="Comment :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-240,-775,0"/>
                     <TextBox x:Name="CreateReservationGridPaymentInformationCommentInput" Style="{DynamicResource CommentTextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-775,-150" Width="400" Height="350" TextWrapping="Wrap"/>
                 </Grid>
 
@@ -1692,25 +1793,25 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                <Label x:Name="CreateClassifficationGridNamelabel" Content="Name :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-480,0,0"/>
+                <Label x:Name="CreateClassifficationGridNamelabel" Content="Name :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-480,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridNameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-400,0,0"/>
 
-                <Label x:Name="CreateClassifficationGridSerialNumberlabel" Content="Serial number :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-280,0,0"/>
+                <Label x:Name="CreateClassifficationGridSerialNumberlabel" Content="Serial number :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-280,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridSerialNumberInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-200,0,0"/>
 
-                <Label x:Name="CreateClassifficationGridPricelabel" Content="Price per night :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-80,0,0"/>
+                <Label x:Name="CreateClassifficationGridPricelabel" Content="Price per night :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,-80,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridPriceInput" Style="{DynamicResource TextBoxInput}" Margin="-650,0,0,0" PreviewTextInput="PreviewDecimal"/>
 
-                <Label x:Name="CreateClassifficationGridSizelabel" Content="Size :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,0,0,-120"/>
+                <Label x:Name="CreateClassifficationGridSizelabel" Content="Size :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,0,0,-120"/>
                 <TextBox x:Name="CreateClassifficationGridSizeInput" Style="{DynamicResource TextBoxInput}" Margin="-650,0,0,-200" PreviewTextInput="PreviewNumber"/>
 
-                <Label x:Name="CreateClassifficationGridMaxReservantslabel" Content="Max reservants :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,0,0,-320"/>
+                <Label x:Name="CreateClassifficationGridMaxReservantslabel" Content="Max reservants :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="-650,0,0,-320"/>
                 <TextBox x:Name="CreateClassifficationGridMaxReservantsInput" Style="{DynamicResource TextBoxInput}" Margin="-650,0,0,-400" PreviewTextInput="PreviewNumber"/>
 
-                <Label x:Name="CreateClassifficationGridIncludedEssentialslabel" Grid.Column="0" Content="Included essentials :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="0,-530,-650,0"/>
-                <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="#FF3E3E3E" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
+                <Label x:Name="CreateClassifficationGridIncludedEssentialslabel" Grid.Column="0" Content="Included essentials :" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Label}" Margin="0,-530,-650,0"/>
+                <Border BorderThickness="1" Width="450" Height="500" CornerRadius="25,25,25,25" Background="{DynamicResource SecondaryBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,0">
                     <ScrollViewer Margin="0,25,0,25" VerticalScrollBarVisibility="Auto">
                         <Grid x:Name="CreateClassifficationGridIncludedEssentials">
                             <Grid.ColumnDefinitions>
@@ -1733,12 +1834,12 @@
             <!--#region MENU BUTTONS-->
             <Border Background="#3e3e4e"/>
             <Button x:Name="MenuDashboardBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                BorderBrush="{x:Null}" Foreground="{DynamicResource FontBrush}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                     FontFamily="Arial" MouseEnter="MenuDashboardButton_Enter" MouseLeave="MenuDashboardButton_Leave" Margin="0,200,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="#565676"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource MenuBrush}"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1767,16 +1868,16 @@
                             UriSource="Images/dashboardicon.png" />
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="DASHBOARD" FontWeight="Bold" Background="Transparent" Foreground="{DynamicResource FontBrush}" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuReservationsBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                BorderBrush="{x:Null}" Foreground="{DynamicResource FontBrush}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                     FontFamily="Arial" MouseEnter="MenuHomeButton_Enter" MouseLeave="MenuHomeButton_Leave" Margin="0,280,-1000,0" FontWeight="Bold" Click="MenuReservationsBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="#565676"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource MenuBrush}"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1805,17 +1906,17 @@
                             UriSource="Images/reservations.png" />
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="BOOKINGS" FontWeight="Bold" Background="Transparent" Foreground="{DynamicResource FontBrush}" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuClassifficationBtn" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                BorderBrush="{x:Null}" Foreground="{DynamicResource FontBrush}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                     FontFamily="Arial" MouseEnter="MenuClassifficationsBtn_Enter" MouseLeave="MenuClassifficationsBtn_Leave" Margin="0,360,-1000,0" 
                     Background="#000000FF" FontWeight="Bold" Click="MenuClassifficationBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="#565676"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource MenuBrush}"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1844,16 +1945,16 @@
                             UriSource="Images/classifficationsicon.png"/>
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="CLASSIFFICAITONS" FontWeight="Bold" Background="Transparent" Foreground="{DynamicResource FontBrush}" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
             <Button x:Name="MenuLogOutBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="70"  
-                BorderBrush="{x:Null}" Foreground="White" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                BorderBrush="{x:Null}" Foreground="{DynamicResource FontBrush}" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                 FontFamily="Arial" MouseEnter="MenuLogOutButton_Enter" MouseLeave="MenuLogOutButton_Leave" Background="#000000FF" FontWeight="Bold" Margin="0,0,-1000,150" Click="MenuLogOutBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0, 25, 25, 0"/>
-                        <Setter Property="BorderBrush" Value="#FFFF4F4F"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource FalseBrush}"/>
                         <Setter Property="BorderThickness" Value="4"/>
                     </Style>
                 </Button.Resources>
@@ -1882,7 +1983,7 @@
                             UriSource="Images/logouticon.png"/>
                         </Image.Source>
                     </Image>
-                    <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="White" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
+                    <Label Grid.Column="2" Content="LOGOUT" FontWeight="Bold" Background="Transparent" Foreground="{DynamicResource FontBrush}" BorderBrush="Transparent" BorderThickness="0px" Margin="0, 0, 0, 5"/>
                 </Grid>
             </Button>
 
@@ -1915,8 +2016,8 @@
                 </Button.Style>
             </Button>
 
-            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Foreground="White" Content="00:00" FontWeight="Bold" Padding="-10"/>
-            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Foreground="White" Content="01/01/1900" VerticalAlignment="Bottom"/>
+            <Label x:Name="MenuClock" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  VerticalAlignment="Bottom" Height="55" Margin="0,0,0,40" FontSize="48" Style="{DynamicResource Label}" Content="00:00" FontWeight="Bold" Padding="-10"/>
+            <Label x:Name="MenuDate" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="51" FontSize="24" Style="{DynamicResource Label}" Content="01/01/1900" VerticalAlignment="Bottom"/>
             <!--<Image Source="/Images/kerierilogo.png" Grid.Column="0" Height="150" VerticalAlignment="Top"/>-->
 
             <Button x:Name="LogoBtn" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="150"  
