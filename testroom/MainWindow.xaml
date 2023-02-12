@@ -2458,10 +2458,14 @@
             <Grid Grid.Column="1"
                   x:Name="SettingsScreen"
                   Visibility="Visible">
-                <Grid Margin="0, 0, -500, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
                     <Label Content="Price calculation!"
                            FontSize="32"
-                           Foreground="#FF6565FF"
+                           Foreground="{DynamicResource PrimaryBrush}"
                            FontWeight="Bold"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -2484,7 +2488,7 @@
                               HorizontalAlignment="Center"
                               Margin="0,0,0,0"
                               VerticalAlignment="Center"
-                              Foreground="White"
+                              Foreground="{DynamicResource FontBrush}"
                               BorderBrush="{x:Null}"
                               Background="{x:Null}"
                               Checked="CalculateUnderaged_Checked"
@@ -2535,10 +2539,10 @@
                              PreviewTextInput="PreviewTextInput"
                              Margin="0,0,-246,-220" />
                 </Grid>
-                <Grid Margin="-500, 0, 0, 0">
+                <Grid Grid.Column="1">
                     <Label Content="Personalization"
                            FontSize="32"
-                           Foreground="#FF6565FF"
+                           Foreground="{DynamicResource PrimaryBrush}"
                            FontWeight="Bold"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -2546,6 +2550,16 @@
                            Background="{x:Null}"
                            Grid.Column="1" />
 
+                    <CheckBox x:Name="AnimationsCheckbox"
+                              IsEnabled="True"
+                              Style="{DynamicResource GeneratedCheckBox}"
+                              Content="Animations"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,0"
+                              VerticalAlignment="Center"
+                              Foreground="{DynamicResource FontBrush}"
+                              BorderBrush="{x:Null}"
+                              Background="{x:Null}"/>
                 </Grid>
 
             </Grid>

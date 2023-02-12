@@ -354,6 +354,14 @@ namespace testroom
         #region RED BUTTON animations
         private void RedBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -379,6 +387,14 @@ namespace testroom
         }
         private void RedBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -407,6 +423,14 @@ namespace testroom
         #region BLUE BUTTON animations
         private void BlueBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -422,6 +446,14 @@ namespace testroom
         }
         private void BlueBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -441,6 +473,14 @@ namespace testroom
         #region GREEN BUTTON animations
         private void GreenBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -465,6 +505,14 @@ namespace testroom
         }
         private void GreenBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -561,6 +609,14 @@ namespace testroom
         #region TEXTBOX INPUT animation
         private void LogInUsernameTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it to 110% it's size
@@ -574,6 +630,14 @@ namespace testroom
         }
         private void LogInUsernameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it back to 100% it's size
@@ -591,6 +655,14 @@ namespace testroom
         #region PASWORDBOX INPUT animation
         private void PasswordBoxInput_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             PasswordBox text = (PasswordBox)sender;
 
             //Animation for textboxes size to transforme it to 110% it's size
@@ -604,6 +676,14 @@ namespace testroom
         }
         private void PasswordBoxInput_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             PasswordBox text = (PasswordBox)sender;
 
             //Animation for passwordboxes size to transforme it back to 100% it's size
@@ -842,6 +922,14 @@ namespace testroom
         }
         private void HomeGridSearch_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for searchboxes size to transforme it to 110% it's size
@@ -852,6 +940,14 @@ namespace testroom
         }
         private void HomeGridSearch_MouseLeave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for searchboxes size to transforme it back to 100% it's size
@@ -866,6 +962,14 @@ namespace testroom
         #region SETTINGS BUTTON animations
         private void HomeSettingsBtn_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Hand;
@@ -878,6 +982,14 @@ namespace testroom
         }
         private void HomeSettingsBtn_MouseLeave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to transforme button back to 100% it's size
@@ -894,6 +1006,14 @@ namespace testroom
         #region GENERATED BUTTON animations
         private void GeneratedCassifficationAndReservationBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Hand;
@@ -915,6 +1035,14 @@ namespace testroom
         }
         private void GeneratedCassifficationAndReservationBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -936,6 +1064,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -957,6 +1093,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -978,6 +1122,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestDeleteBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -999,6 +1151,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestDeleteBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -1026,6 +1186,14 @@ namespace testroom
         #region PREVIEW BUTTON animations
         private void PreviewBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1041,6 +1209,14 @@ namespace testroom
         }
         private void PreviewBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -1060,6 +1236,14 @@ namespace testroom
         #region PRINT AND SAVE BUTTON animations
         private void SaveAndPrintBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1075,6 +1259,14 @@ namespace testroom
         }
         private void SaveAndPrintBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -1094,6 +1286,14 @@ namespace testroom
         #region SAVE BUTTON animations
         private void SaveBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1109,6 +1309,14 @@ namespace testroom
         }
         private void SaveBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -3426,6 +3634,8 @@ namespace testroom
             configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
 
             configuration.AppSettings.Settings["Tax"].Value = TaxInput.Text;
+
+            configuration.AppSettings.Settings["Animations"].Value = AnimationsCheckbox.IsChecked.ToString();
 
             //Save app.config chages
             configuration.Save();
