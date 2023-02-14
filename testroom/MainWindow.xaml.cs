@@ -294,22 +294,22 @@ namespace testroom
                 CreateReservationGridPaymentInformationPriceInput.Clear();
                 CreateReservationGridPaymentInformationCommentInput.Clear();
 
-                CreateReservationGridClassifficationLabel.Foreground = Brushes.White;
-                CreateReservationGridFromDateLabel.Foreground = Brushes.White;
-                CreateReservationGridToDateLabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestCitylabel.Foreground = Brushes.White;
-                CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.White;
-                CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
-                CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
-                CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+                CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridFromDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridToDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestEmaillabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestPhoneNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCountrylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestAddresslabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestPostNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCitylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
 
                 CreateClassifficationGridMaxReservantsInput.Clear();
@@ -2578,7 +2578,7 @@ namespace testroom
                 CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
 
                 //Start the progress bar
-                CreateReservationGridReservationInformationProgress.Foreground = Brushes.White;
+                CreateReservationGridReservationInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                 //Reset all the values needed for the Creation
                 CreateReservationProgress = 1;
@@ -2646,7 +2646,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridFromDateLabel.Foreground = Brushes.White;
+                        CreateReservationGridFromDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         fromdate = true;
                     }
                     bool todate = false;
@@ -2657,7 +2657,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridToDateLabel.Foreground = Brushes.White;
+                        CreateReservationGridToDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         todate = true;
                     }
                     
@@ -2668,7 +2668,7 @@ namespace testroom
 
                         SwipeGridLeft(CreateReservationGridReservationInformationGrid, CreateReservationGridMainReservantInformationGrid);
 
-                        CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.White;
+                        CreateReservationGridMainReservantInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                         CreateReservationGridBackBtn.Content = "Back";
 
@@ -2685,7 +2685,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         firstname = true;
                     }
 
@@ -2697,7 +2697,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         surname = true;
                     }
 
@@ -2709,7 +2709,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         birth = true;
                     }
 
@@ -2722,7 +2722,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestEmaillabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         email = true;
                     }
 
@@ -2734,7 +2734,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         phonenumber = true;
                     }
 
@@ -2746,7 +2746,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestCountrylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         country = true;
                     }
 
@@ -2758,7 +2758,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestAddresslabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         Address = true;
                     }
 
@@ -2770,7 +2770,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestPostNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         postnumber = true;
                     }
 
@@ -2782,7 +2782,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestCitylabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestCitylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         city = true;
                     }
 
@@ -2794,7 +2794,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.White;
+                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         certifiednumber = true;
                     }
 
@@ -2805,7 +2805,7 @@ namespace testroom
 
                         SwipeGridLeft(CreateReservationGridMainReservantInformationGrid, CreateReservationGridSideReservantInformationGrid);
 
-                        CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.White;
+                        CreateReservationGridSideGuestsInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                         CreateReservationProgress += 1;
                     }
@@ -2851,7 +2851,7 @@ namespace testroom
 
                     SwipeGridLeft(CreateReservationGridSideReservantInformationGrid, CreateReservationGridPaymentInformationGrid);
 
-                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.White;
+                    CreateReservationGridPaymentInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                     Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
@@ -2872,8 +2872,8 @@ namespace testroom
 
                         if (CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked == true || CreateReservationGridPaymentInformationCashCheckBox.IsChecked == true)
                         {
-                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = Brushes.White;
-                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = Brushes.White;
+                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                             if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
                             {
@@ -3120,7 +3120,7 @@ namespace testroom
                 }
                 else
                 {
-                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                     firstname = true;
                 }
 
@@ -3132,7 +3132,7 @@ namespace testroom
                 }
                 else
                 {
-                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                     surname = true;
                 }
 
@@ -3144,15 +3144,15 @@ namespace testroom
                 }
                 else
                 {
-                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                     birth = true;
                 }
 
                 if (firstname && surname && birth)
                 {
-                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.White;
-                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.White;
-                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.White;
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                    CreateReservationGridSideGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
                     //Declare children speciffications
                     Button buttonAddedSideGuest = new Button();
@@ -3722,7 +3722,7 @@ namespace testroom
 
             //Enable checkbox
             CalculateUnderaged.IsEnabled = true;
-            CalculateUnderaged.Foreground = Brushes.White;
+            CalculateUnderaged.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
             //If underaged isn't checked
             if (CalculateUnderaged.IsChecked == false)
@@ -3735,7 +3735,7 @@ namespace testroom
             {
                 //Enable age limit
                 AgeLimit.IsEnabled = true;
-                AgeLimitLabel.Foreground = Brushes.White;
+                AgeLimitLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
             }
         }
 
@@ -3743,7 +3743,7 @@ namespace testroom
         {
             //Enable age limit input
             AgeLimit.IsEnabled = true;
-            AgeLimitLabel.Foreground = Brushes.White;
+            AgeLimitLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
         }
 
         private void CalculatePricePerPearson_Unchecked(object sender, RoutedEventArgs e)

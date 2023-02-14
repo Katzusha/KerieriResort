@@ -1910,9 +1910,9 @@
         <Grid x:Name="LogInScreen" Visibility="Hidden">
             <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
-                     Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
-            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
+                     HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
+            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Margin="0,0,0,-100" Height="50" 
                          Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
                     <Style x:Key="{x:Type PasswordBox}"
