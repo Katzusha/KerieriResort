@@ -179,6 +179,9 @@ namespace testroom
             //When application start we need to make sure that the login window is the first window that we show regardles of programming activity
             InitializeComponent();
 
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("en-US");
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
             ControlGrid.Visibility = Visibility.Hidden;
             LogInScreen.Visibility = Visibility.Visible;
 
@@ -558,26 +561,80 @@ namespace testroom
 
         //Gotfocus and lostfocus animations for textboxes
         #region TEXTBOX INPUT animation
-        private void LogInUsernameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void NormalTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500 * 1.1;
+            myDoubleAnimation.To = 450 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
             myDoubleAnimation.To = 50 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
         }
-        private void LogInUsernameTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void NormalTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 450;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+        }
+
+        private void MiniTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+
+            //Animation for textboxes size to transforme it to 110% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 120 * 1.1;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50 * 1.1;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+        }
+        private void MiniTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+
+            //Animation for textboxes size to transforme it back to 100% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 120;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+        }
+
+        private void MediumTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+
+            //Animation for textboxes size to transforme it to 110% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 300 * 1.1;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
+            myDoubleAnimation.To = 50 * 1.1;
+            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
+        }
+        private void MediumTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox text = (TextBox)sender;
+
+            //Animation for textboxes size to transforme it back to 100% it's size
+            DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+            myDoubleAnimation.To = 300;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
             myDoubleAnimation.To = 50;
@@ -594,7 +651,7 @@ namespace testroom
 
             //Animation for textboxes size to transforme it to 110% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500 * 1.1;
+            myDoubleAnimation.To = 450 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
             myDoubleAnimation.To = 50 * 1.1;
@@ -607,13 +664,15 @@ namespace testroom
 
             //Animation for passwordboxes size to transforme it back to 100% it's size
             DoubleAnimation myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.To = 500;
+            myDoubleAnimation.To = 450;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
         }
+
+
         #endregion
 
         //Enter and leave animations for menu buttons
@@ -2362,18 +2421,18 @@ namespace testroom
                     bool classifficaiton = false;
                     if (CreateReservationGridClassifficationCombobox.SelectedIndex <= 0)
                     {
-                        CreateReservationGridClassifficationLabel.Foreground = Brushes.Red;
+                        CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         classifficaiton = false;
                     }
                     else
                     {
-                        CreateReservationGridClassifficationLabel.Foreground = Brushes.White;
+                        CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom(Resources["FontBrush"]);
                         classifficaiton = true;
                     }
                     bool fromdate = false;
                     if (CreateReservationGridFromDateCalendar.SelectedDate == null)
                     {
-                        CreateReservationGridFromDateLabel.Foreground = Brushes.Red;
+                        CreateReservationGridFromDateLabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         fromdate = false;
                     }
                     else
@@ -2384,7 +2443,7 @@ namespace testroom
                     bool todate = false;
                     if (CreateReservationGridToDateCalendar.SelectedDate == null)
                     {
-                        CreateReservationGridToDateLabel.Foreground = Brushes.Red;
+                        CreateReservationGridToDateLabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         todate = false;
                     }
                     else
@@ -2412,7 +2471,7 @@ namespace testroom
                     bool firstname = false;
                     if (CreateReservationGridMainGuestFirstnameInput.Text.Length <= 1)
                     {
-                        CreateReservationGridMainGuestFirstnamelabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         firstname = false;
                     }
                     else
@@ -2424,7 +2483,7 @@ namespace testroom
                     bool surname = false;
                     if (CreateReservationGridMainGuestSurnameInput.Text.Length <= 2)
                     {
-                        CreateReservationGridMainGuestSurnamelabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         surname = false;
                     }
                     else
@@ -2436,7 +2495,7 @@ namespace testroom
                     bool birth = false;
                     if (CreateReservationGridMainReservantBirthCalendar.SelectedDate == null)
                     {
-                        CreateReservationGridMainGuestBirthlabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         birth = false;
                     }
                     else
@@ -2449,7 +2508,7 @@ namespace testroom
                     Regex emailregex = new Regex(@".*@\w*\.\w*");
                     if (emailregex.IsMatch(CreateReservationGridMainGuestEmailInput.Text) == false)
                     {
-                        CreateReservationGridMainGuestEmaillabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestEmaillabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         email = false;
                     }
                     else
@@ -2461,7 +2520,7 @@ namespace testroom
                     bool phonenumber = false;
                     if (CreateReservationGridMainGuestPhoneNumberInput.Text.Length <= 7)
                     {
-                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestPhoneNumberlabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         phonenumber = false;
                     }
                     else
@@ -2473,7 +2532,7 @@ namespace testroom
                     bool country = false;
                     if (CreateReservationGridMainGuestCountryInput.Text.Length <= 2)
                     {
-                        CreateReservationGridMainGuestCountrylabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestCountrylabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         country = false;
                     }
                     else
@@ -2485,7 +2544,7 @@ namespace testroom
                     bool Address = false;
                     if (CreateReservationGridMainGuestAddressInput.Text.Length <= 2)
                     {
-                        CreateReservationGridMainGuestAddresslabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestAddresslabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         Address = false;
                     }
                     else
@@ -2497,7 +2556,7 @@ namespace testroom
                     bool postnumber = false;
                     if (CreateReservationGridMainGuestPostNumberInput.Text.Length <= 1)
                     {
-                        CreateReservationGridMainGuestPostNumberlabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestPostNumberlabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         postnumber = false;
                     }
                     else
@@ -2509,7 +2568,7 @@ namespace testroom
                     bool city = false;
                     if (CreateReservationGridMainGuestCityInput.Text.Length < 1)
                     {
-                        CreateReservationGridMainGuestCitylabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestCitylabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         city = false;
                     }
                     else
@@ -2521,7 +2580,7 @@ namespace testroom
                     bool certifiednumber = false;
                     if (CreateReservationGridMainGuestCertifiedNumberInput.Text.Length <= 3)
                     {
-                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = Brushes.Red;
+                        CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         certifiednumber = false;
                     }
                     else
@@ -2670,8 +2729,8 @@ namespace testroom
                         }
                         else
                         {
-                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = Brushes.Red;
-                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = Brushes.Red;
+                            CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = (SolidColorBrush)Resources["FalseBrush"];
+                            CreateReservationGridPaymentInformationCashCheckBox.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         }
                     }
                     catch (Exception ex) 
@@ -2847,7 +2906,7 @@ namespace testroom
                 bool firstname = false;
                 if (CreateReservationGridSideGuestFirstnameInput.Text.Length <= 1)
                 {
-                    CreateReservationGridSideGuestFirstnamelabel.Foreground = Brushes.Red;
+                    CreateReservationGridSideGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                     firstname = false;
                 }
                 else
@@ -2859,7 +2918,7 @@ namespace testroom
                 bool surname = false;
                 if (CreateReservationGridSideGuestSurnameInput.Text.Length <= 1)
                 {
-                    CreateReservationGridSideGuestSurnamelabel.Foreground = Brushes.Red;
+                    CreateReservationGridSideGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                     surname = false;
                 }
                 else
@@ -2871,7 +2930,7 @@ namespace testroom
                 bool birth = false;
                 if (CreateReservationGridSideGuestBirthCalendar.SelectedDate == null)
                 {
-                    CreateReservationGridSideGuestBirthlabel.Foreground = Brushes.Red;
+                    CreateReservationGridSideGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                     birth = false;
                 }
                 else
@@ -3037,6 +3096,8 @@ namespace testroom
             catch (Exception ex)
             {
                 PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError(ex.GetBaseException().Message);
+                LoadedAnimation();
             }
         }
 

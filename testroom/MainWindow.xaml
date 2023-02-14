@@ -512,6 +512,8 @@
         </Style>
 
         <Style x:Key="TextBoxInput" TargetType="{x:Type TextBox}">
+            <EventSetter Event="GotFocus" Handler="NormalTextBox_GotFocus"/>
+            <EventSetter Event="LostFocus" Handler="NormalTextBox_LostFocus"/>
             <Setter Property="Foreground" Value="{DynamicResource FontBrush}"/>
             <Setter Property="Background" Value="{DynamicResource SecondaryBrush}"/>
             <Setter Property="Height" Value="50"/>
@@ -531,6 +533,98 @@
                                 <SolidColorBrush Color="Transparent" />
                             </Border.BorderBrush>
                             <ScrollViewer Margin="0, 0, 0, 0" x:Name="PART_ContentHost" MinHeight="50" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="450"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MiniTextBoxInput"
+               TargetType="{x:Type TextBox}">
+            <EventSetter Event="GotFocus"
+                         Handler="MiniTextBox_GotFocus" />
+            <EventSetter Event="LostFocus"
+                         Handler="MiniTextBox_LostFocus" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="Background"
+                    Value="{DynamicResource SecondaryBrush}" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="Width"
+                    Value="120" />
+            <Setter Property="FontSize"
+                    Value="24" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Cursor"
+                    Value="IBeam" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border"
+                                CornerRadius="25"
+                                Padding="0">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.BorderBrush>
+                            <ScrollViewer Margin="0, 0, 0, 0"
+                                          x:Name="PART_ContentHost"
+                                          MinHeight="50"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Top"
+                                          MinWidth="450" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MediumTextBoxInput"
+               TargetType="{x:Type TextBox}">
+            <EventSetter Event="GotFocus"
+                         Handler="MediumTextBox_GotFocus" />
+            <EventSetter Event="LostFocus"
+                         Handler="MediumTextBox_LostFocus" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="Background"
+                    Value="{DynamicResource SecondaryBrush}" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="Width"
+                    Value="300" />
+            <Setter Property="FontSize"
+                    Value="24" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Cursor"
+                    Value="IBeam" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border"
+                                CornerRadius="25"
+                                Padding="0">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}" />
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="Transparent" />
+                            </Border.BorderBrush>
+                            <ScrollViewer Margin="0, 0, 0, 0"
+                                          x:Name="PART_ContentHost"
+                                          MinHeight="50"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Top"
+                                          MinWidth="450" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -1182,9 +1276,9 @@
         <Grid x:Name="LogInScreen" Visibility="Hidden">
             <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
-                     Height="50" Width="500" Foreground="White" FontSize="24" FontFamily="Arial" HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" Cursor="IBeam" GotFocus="LogInUsernameTextBox_GotFocus" LostFocus="LogInUsernameTextBox_LostFocus" FontWeight="Bold" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
-            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="500" Margin="0,0,0,-100" Height="50" 
+                     HorizontalContentAlignment="Center" 
+                     VerticalContentAlignment="Center" Margin="0,-75,0,0" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
+            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-100" Height="50" 
                          Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
                 <PasswordBox.Resources>
                     <Style x:Key="{x:Type PasswordBox}"
@@ -1528,7 +1622,7 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="857*"/>
@@ -1568,7 +1662,7 @@
                     </Border>
                 </Grid>
 
-                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Hidden" Margin="0,0,0,0">
+                <Grid x:Name="CreateReservationGridMainReservantInformationGrid" Grid.Row="1" Visibility="Visible" Margin="0,0,0,0">
                     <Label x:Name="CreateReservationGridMainGuestFirstnamelabel" Content="Firstname :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-535,0,0"/>
                     <TextBox x:Name="CreateReservationGridMainGuestFirstnameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-448,0,0"/>
 
@@ -1590,11 +1684,16 @@
                     <Label x:Name="CreateReservationGridMainGuestAddresslabel" Content="Address :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-650,-45"/>
                     <TextBox x:Name="CreateReservationGridMainGuestAddressInput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-650,-135"/>
 
-                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-345,-235"/>
-                    <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-345,-320" Width="145" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label x:Name="CreateReservationGridMainGuestPostNumberlabel" Content="Post n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20"
+                           Margin="0,0,-320,-235" />
+                    <TextBox x:Name="CreateReservationGridMainGuestPostNumberInput" 
+                             Style="{DynamicResource MiniTextBoxInput}"
+                             Margin="0,0,-320,-320"
+                             VerticalAlignment="Center" 
+                             HorizontalAlignment="Center"/>
 
                     <Label x:Name="CreateReservationGridMainGuestCitylabel" Content="City :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-795,-235"/>
-                    <TextBox x:Name="CreateReservationGridMainGuestCityInput" Style="{DynamicResource TextBoxInput}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-320"/>
+                    <TextBox x:Name="CreateReservationGridMainGuestCityInput" Style="{DynamicResource MediumTextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-795,-320"/>
 
                     <Label x:Name="CreateReservationGridMainGuestCertifiedNumberlabel" Content="Certified n. :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="0,0,-650,-425"/>
                     <TextBox x:Name="CreateReservationGridMainGuestCertifiedNumberInput" Style="{DynamicResource TextBoxInput}" Margin="0,0,-650,-525" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -1670,8 +1769,8 @@
                     <CheckBox x:Name="CreateReservationGridPaymentInformationCashCheckBox" Style="{DynamicResource GeneratedCheckBox}" FontSize="24" Content="Cash" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-800,0,0,-50" Width="185" Height="100" Checked="CreateReservationGridPaymentInformationCashCheckBox_Checked" Background="{x:Null}"/>
 
                     <Label Grid.Column="1" x:Name="CreateReservationGridPaymentinfoTaxLabel" Content="Tax in %:" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-950,0,0,-250"/>
-                    <TextBox x:Name="CreateReservationGridPaymentinfoTaxinput" Style="{DynamicResource TextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                             PreviewTextInput="PreviewCreateReservationGridPaymentInfoDdvInput" Margin="-950,0,0,-335" Width="200"/>
+                    <TextBox x:Name="CreateReservationGridPaymentinfoTaxinput" Style="{DynamicResource MiniTextBoxInput}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                             PreviewTextInput="PreviewTextInput" Margin="-950,0,0,-335"/>
 
                     <Button Style="{DynamicResource GrayButton}" Content="SAVE" MouseEnter="SaveBtn_Enter" MouseLeave="SaveBtn_Leave" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-180,-500"/>
                     <Button Style="{DynamicResource GrayButton}" Content="PRINT &amp; SAVE" MouseEnter="SaveAndPrintBtn_Enter" MouseLeave="SaveAndPrintBtn_Leave" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-170,0,0,-500"/>
@@ -1692,7 +1791,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <Label x:Name="CreateClassifficationGridNamelabel" Content="Name :" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  FontSize="20" Margin="-650,-480,0,0"/>
                 <TextBox x:Name="CreateClassifficationGridNameInput" Style="{DynamicResource TextBoxInput}" Margin="-650,-400,0,0"/>
