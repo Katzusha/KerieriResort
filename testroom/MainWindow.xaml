@@ -60,8 +60,8 @@
         <Color x:Key="CurrentMarkColor">#5656FF</Color>
 
         <SolidColorBrush x:Key="IncomingMarkBrush"
-                         Color="#56FF56" />
-        <Color x:Key="IncomingMarkColor">#56FF56</Color>
+                         Color="#63CF63" />
+        <Color x:Key="IncomingMarkColor">#63CF63</Color>
 
         <SolidColorBrush x:Key="DismissedMarkBrush"
                          Color="#FF5656" />
@@ -2550,8 +2550,7 @@
                            Background="{x:Null}"
                            Margin="-100,0,0,-100" />
                     <TextBox x:Name="AgeLimit"
-                             Style="{DynamicResource TextBoxInput}"
-                             Width="150"
+                             Style="{DynamicResource MiniTextBoxInput}"
                              VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              Margin="0,0,-175,-100"
@@ -2580,8 +2579,7 @@
                            Background="{x:Null}"
                            Margin="-100,0,0,-210" />
                     <TextBox x:Name="TaxInput"
-                             Style="{DynamicResource TextBoxInput}"
-                             Width="150"
+                             Style="{DynamicResource MiniTextBoxInput}"
                              VerticalAlignment="Center"
                              HorizontalAlignment="Center"
                              PreviewTextInput="PreviewTextInput"
@@ -3118,7 +3116,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateClassifficationScreen" Grid.Column="2" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                 <Label x:Name="CreateClassifficationGridNamelabel"
                        Content="Name :"
