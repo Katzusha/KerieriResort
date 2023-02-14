@@ -357,6 +357,14 @@ namespace testroom
         #region RED BUTTON animations
         private void RedBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -371,8 +379,9 @@ namespace testroom
             //Animations for buttons background color to transforme it from transparrent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 255, 86, 86);
-            myColorAnimation.To = Color.FromArgb(255, 255, 86, 86);
+
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#00" + Resources["FalseBrush"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#FF" + Resources["FalseBrush"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -381,6 +390,14 @@ namespace testroom
         }
         private void RedBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -395,8 +412,8 @@ namespace testroom
             //Animations for buttons background color to transforme it from red back to transparent
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 255, 86, 86);
-            myColorAnimation.To = Color.FromArgb(0, 255, 86, 86);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#FF" + Resources["FalseBrush"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#00" + Resources["FalseBrush"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -409,6 +426,14 @@ namespace testroom
         #region BLUE BUTTON animations
         private void BlueBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -424,6 +449,14 @@ namespace testroom
         }
         private void BlueBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -443,6 +476,14 @@ namespace testroom
         #region GREEN BUTTON animations
         private void GreenBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -467,6 +508,14 @@ namespace testroom
         }
         private void GreenBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -617,6 +666,14 @@ namespace testroom
 
         private void MediumTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it to 110% it's size
@@ -624,12 +681,20 @@ namespace testroom
             myDoubleAnimation.To = 300 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-            myDoubleAnimation.To = 50 * 1.1;
+            myDoubleAnimation.To = 50 * 1.05;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
         }
         private void MediumTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for textboxes size to transforme it back to 100% it's size
@@ -647,6 +712,14 @@ namespace testroom
         #region PASWORDBOX INPUT animation
         private void PasswordBoxInput_GotFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             PasswordBox text = (PasswordBox)sender;
 
             //Animation for textboxes size to transforme it to 110% it's size
@@ -654,12 +727,20 @@ namespace testroom
             myDoubleAnimation.To = 450 * 1.1;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.WidthProperty, myDoubleAnimation);
-            myDoubleAnimation.To = 50 * 1.1;
+            myDoubleAnimation.To = 50 * 1.05;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             text.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
         }
         private void PasswordBoxInput_LostFocus(object sender, RoutedEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             PasswordBox text = (PasswordBox)sender;
 
             //Animation for passwordboxes size to transforme it back to 100% it's size
@@ -691,8 +772,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -715,8 +796,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -739,8 +820,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -763,8 +844,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -788,8 +869,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(255, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -811,8 +892,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to blue
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 86, 86, 118);
-            myColorAnimation.To = Color.FromArgb(0, 86, 86, 118);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#FF" + Resources["MenuColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#00" + Resources["MenuColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -836,8 +917,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 255, 79, 79);
-            myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#00" + Resources["FalseColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#FF" + Resources["FalseColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -859,8 +940,8 @@ namespace testroom
             //Animation for buttons background to transforme from transperent to red
             SolidColorBrush myBrush = new SolidColorBrush();
             ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 255, 79, 79);
-            myColorAnimation.To = Color.FromArgb(0, 255, 79, 79);
+            myColorAnimation.From = (Color)ColorConverter.ConvertFromString("#FF" + Resources["FalseColor"].ToString().Replace("#FF", ""));
+            myColorAnimation.To = (Color)ColorConverter.ConvertFromString("#00" + Resources["FalseColor"].ToString().Replace("#FF", ""));
             myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
             button.Background = myBrush;
@@ -900,6 +981,14 @@ namespace testroom
         }
         private void HomeGridSearch_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for searchboxes size to transforme it to 110% it's size
@@ -910,6 +999,14 @@ namespace testroom
         }
         private void HomeGridSearch_MouseLeave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             TextBox text = (TextBox)sender;
 
             //Animation for searchboxes size to transforme it back to 100% it's size
@@ -924,6 +1021,14 @@ namespace testroom
         #region SETTINGS BUTTON animations
         private void HomeSettingsBtn_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Hand;
@@ -936,6 +1041,14 @@ namespace testroom
         }
         private void HomeSettingsBtn_MouseLeave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to transforme button back to 100% it's size
@@ -952,6 +1065,14 @@ namespace testroom
         #region GENERATED BUTTON animations
         private void GeneratedCassifficationAndReservationBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Hand;
@@ -973,6 +1094,14 @@ namespace testroom
         }
         private void GeneratedCassifficationAndReservationBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -994,6 +1123,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -1015,6 +1152,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -1036,6 +1181,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestDeleteBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -1057,6 +1210,14 @@ namespace testroom
         }
         private void GeneratedAddedSideGuestDeleteBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             Cursor = Cursors.Arrow;
@@ -1084,6 +1245,14 @@ namespace testroom
         #region PREVIEW BUTTON animations
         private void PreviewBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1099,6 +1268,14 @@ namespace testroom
         }
         private void PreviewBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -1118,6 +1295,14 @@ namespace testroom
         #region PRINT AND SAVE BUTTON animations
         private void SaveAndPrintBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1133,6 +1318,14 @@ namespace testroom
         }
         private void SaveAndPrintBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -1152,6 +1345,14 @@ namespace testroom
         #region SAVE BUTTON animations
         private void SaveBtn_Enter(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it to 110% it's size
@@ -1167,6 +1368,14 @@ namespace testroom
         }
         private void SaveBtn_Leave(object sender, MouseEventArgs e)
         {
+            //Open app.config file
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (bool.Parse(configuration.AppSettings.Settings["Animations"].Value) == false)
+            {
+                return;
+            }
+
             Button button = (Button)sender;
 
             //Animation for buttons size to make transformate it back to 100% it's size
@@ -3486,6 +3695,8 @@ namespace testroom
             configuration.AppSettings.Settings["CalculateUnderagedAge"].Value = AgeLimit.Text;
 
             configuration.AppSettings.Settings["Tax"].Value = TaxInput.Text;
+
+            configuration.AppSettings.Settings["Animations"].Value = AnimationsCheckbox.IsChecked.ToString();
 
             //Save app.config chages
             configuration.Save();
