@@ -33,6 +33,8 @@ namespace testroom
 
         public static string DatabaseName = "";
 
+        public static string Username = "";
+
         public static string APIconnection = "https://kerieri.eu/API";
         #endregion
 
@@ -246,10 +248,6 @@ namespace testroom
                 ClassifficaitonsGridScrollViewer.RowDefinitions.Clear();
 
                 CreateReservationGridClassifficationCombobox.Items.Clear();
-
-                ReservationGridSpanSelection.SelectedIndex = 0;
-
-
 
                 try
                 {
@@ -1555,6 +1553,8 @@ namespace testroom
                     //Generate all reservations from users database
                     var isGetAllSearched = await GetAllReservations(null);
 
+                    Username = username;
+
                     ControlGrid.Visibility = Visibility.Visible;
 
                     //Animation to hide login screen
@@ -1911,6 +1911,34 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
+
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
                                 }
                                 //Past
                                 else if (information.Status == -1)
@@ -1928,6 +1956,34 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
+
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
                                 }
                                 //Incoming
                                 else if (information.Status == 1)
@@ -1945,41 +2001,46 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
+
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
                                 }
-
-                                Label label = new Label();
-                                label.Content = firstname + " " + information.Surname;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 0);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
-
-                                label = new Label();
-                                label.Content = information.Name;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 1);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
-
-                                label = new Label();
-                                label.Content = information.FromDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 2);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
-
-                                label = new Label();
-                                label.Content = information.ToDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 3);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
 
                                 row++;
                             }
 
                             if (information.Status == status)
                             {
+
+                                newrow = new RowDefinition();
+                                newrow.Height = new GridLength(50);
+                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
+
                                 //Declare children speciffications
                                 Button button = new Button();
                                 button.Name = "ReservationId" + information.Id;
@@ -2635,7 +2696,7 @@ namespace testroom
                     }
                     else
                     {
-                        CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom(Resources["FontBrush"]);
+                        CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         classifficaiton = true;
                     }
                     bool fromdate = false;
@@ -2875,11 +2936,28 @@ namespace testroom
                             CreateReservationGridPaymentInformationCreditCardCheckBox.Foreground = (SolidColorBrush)Resources["FontBrush"];
                             CreateReservationGridPaymentInformationCashCheckBox.Foreground = (SolidColorBrush)Resources["FontBrush"];
 
-                            if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString()))
+                            if (ReservationCommands.PostReservationInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridPaymentInformationPriceInput.Text, CreateReservationGridPaymentInformationCommentInput.Text.ToString(), Username))
                             {
-                                if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text))
+                                if (ReservationCommands.PostMainReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestFirstnameInput.Text, CreateReservationGridMainGuestSurnameInput.Text, CreateReservationGridMainReservantBirthCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridMainGuestEmailInput.Text, CreateReservationGridMainGuestPhoneNumberInput.Text, CreateReservationGridMainGuestCountryInput.Text, CreateReservationGridMainGuestPostNumberInput.Text, CreateReservationGridMainGuestCityInput.Text, CreateReservationGridMainGuestAddressInput.Text, "Male", CreateReservationGridMainGuestCertifiedNumberInput.Text, Username))
                                 {
+                                    foreach (var child in CreateReservationGridAvailableEssentialsGrid.Children)
+                                    {
+
+                                        if (child is CheckBox)
+                                        {
+                                            CheckBox checkbox = (CheckBox) child;
+
+                                            if (checkbox.IsChecked == true)
+                                            {
+                                                ReservationCommands.PostEssentialInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), checkbox.Content.ToString(), Username);
+
+                                                //PublicCommands.ShowError(classiffication.Name.Replace("ClassifficationId", "") + CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd") + CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd") + checkbox.Content.ToString() + Username);
+                                            }
+                                        }
+                                    }
+
                                     bool sidereservants = true;
+
                                     foreach (var child in CreateReservationGridSideGuestAddedGrid.Children)
                                     {
                                         string Firstname, Surname, Birth = string.Empty;
@@ -2899,7 +2977,7 @@ namespace testroom
                                             Surname = buttoninfo[0].ToString().Substring(3);
                                             Birth = buttoninfo[1];
 
-                                            if (ReservationCommands.PostSideReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), Firstname, Surname, Birth))
+                                            if (ReservationCommands.PostSideReservantInformation(classiffication.Name.Replace("ClassifficationId", ""), CreateReservationGridFromDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), CreateReservationGridToDateCalendar.SelectedDate.Value.ToString("yyyy-MM-dd"), Firstname, Surname, Birth, Username))
                                             {
                                                 sidereservants = true;
                                             }
