@@ -1911,34 +1911,6 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    Label label = new Label();
-                                    label.Content = firstname + " " + information.Surname;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 0);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.Name;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 1);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.FromDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 2);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.ToDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 3);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
                                 }
                                 //Past
                                 else if (information.Status == -1)
@@ -1956,34 +1928,6 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    Label label = new Label();
-                                    label.Content = firstname + " " + information.Surname;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 0);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.Name;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 1);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.FromDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 2);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.ToDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 3);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
                                 }
                                 //Incoming
                                 else if (information.Status == 1)
@@ -2001,35 +1945,40 @@ namespace testroom
                                     Grid.SetColumn(button, col);
                                     Grid.SetRow(button, row);
                                     HomeGridScrollViewer.Children.Add(button);
-
-                                    Label label = new Label();
-                                    label.Content = firstname + " " + information.Surname;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 0);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.Name;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 1);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.FromDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 2);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
-
-                                    label = new Label();
-                                    label.Content = information.ToDate;
-                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                    Grid.SetColumn(label, 3);
-                                    Grid.SetRow(label, row);
-                                    HomeGridScrollViewer.Children.Add(label);
                                 }
+
+                                else if (information.Status == -2)
+                                {
+                                    continue;
+                                }
+
+                                Label label = new Label();
+                                label.Content = firstname + " " + information.Surname;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 0);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.Name;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 1);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.FromDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 2);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
+
+                                label = new Label();
+                                label.Content = information.ToDate;
+                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                Grid.SetColumn(label, 3);
+                                Grid.SetRow(label, row);
+                                HomeGridScrollViewer.Children.Add(label);
 
                                 row++;
                             }
