@@ -89,6 +89,47 @@
                     Value="Center" />
         </Style>
 
+        <Style x:Key="GeneratedDashboardButton"
+               TargetType="{x:Type Button}">
+            <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
+            <!--<EventSetter Event="MouseEnter"-->
+                         <!--Handler="GeneratedCassifficationAndReservationBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="GeneratedCassifficationAndReservationBtn_Leave" />-->
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="Background"
+                    Value="{DynamicResource FalseBrush}" />
+            <!-- POTREBNO DODAT VALUE-->
+            <Setter Property="Margin"
+                    Value="127, 2, 127, 2" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="FontSize"
+                    Value="26px" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="15"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0, 0, 0, 0"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment"
+                    Value="Center" />
+        </Style>
+
         <Style x:Key="GeneratedReservationAndClassifficationButton"
                TargetType="{x:Type Button}">
             <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
@@ -2573,30 +2614,8 @@
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Auto">
 
-                    <Grid Background="#3e5656FF">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Button Grid.Column="1"
-                                Grid.ColumnSpan="2"
-                                Grid.Row="1"
-                                Background="#3e3e3e">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius"
-                                            Value="0, 250, 250, 0" />
-                                </Style>
-                            </Button.Resources>
-                        </Button>
+                    <Grid x:Name="DashboardClassifficationsGrid"
+                          ShowGridLines="True" >
                     </Grid>
                 </ScrollViewer>
             </Grid>
@@ -3347,7 +3366,7 @@
                     MouseLeave="MenuDashboardButton_Leave"
                     Margin="0,200,-1000,0"
                     FontWeight="Bold"
-                    Click="MenuReservationsBtn_Click">
+                    Click="MenuDashboardBtn_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius"

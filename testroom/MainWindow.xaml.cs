@@ -194,6 +194,7 @@ namespace testroom
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
             ReservationGridSpanSelection.SelectedIndex = 0;
+            DashboardScreen.Visibility = Visibility.Hidden;
 
             StartClock();
 
@@ -317,6 +318,10 @@ namespace testroom
                 CreateClassifficationGridSizeInput.Clear();
                 CreateClassifficationGridIncludedEssentials.Children.Clear();
                 CreateClassifficationGridIncludedEssentials.RowDefinitions.Clear();
+
+                DashboardClassifficationsGrid.Children.Clear();
+                DashboardClassifficationsGrid.RowDefinitions.Clear();
+                DashboardClassifficationsGrid.ColumnDefinitions.Clear();
             }
             catch
             {
@@ -1716,6 +1721,120 @@ namespace testroom
 
 
         #region MENU BUTTONS
+        //Dashboard button on control screen
+        private void MenuDashboardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                LoadingAnimation();
+
+                ClearAll();
+
+                ControlGrid.Visibility = Visibility.Visible;
+                ReservationsScreen.Visibility = Visibility.Hidden;
+                ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
+                HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
+                ClassifficationScreen.Visibility = Visibility.Hidden;
+                CreateClassifficationScreen.Visibility = Visibility.Hidden;
+                CreateReservationScreen.Visibility = Visibility.Hidden;
+                SettingsScreen.Visibility = Visibility.Hidden;
+
+                DashboardScreen.Visibility = Visibility.Visible;
+
+                ColumnDefinition newcol = new ColumnDefinition();
+                newcol.Width = new GridLength(75);
+                DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
+
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(50);
+                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
+
+                for (int x = 1; x < 21; x ++)
+                {
+                    newcol = new ColumnDefinition();
+                    newcol.Width = new GridLength(250);
+                    DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
+
+                    Label label = new Label();
+                    label.Content = DateTime.Now.AddDays(x - 1).ToString("dd.MM.yyyy");
+                    label.Style = (Style)this.Resources["Label"];
+                    label.VerticalAlignment = VerticalAlignment.Center;
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetColumn(label, x);
+                    DashboardClassifficationsGrid.Children.Add(label);
+                }
+
+                for(int x = 1; x < 11; x ++)
+                {
+                    newrow = new RowDefinition();
+                    newrow.Height = new GridLength(50);
+                    DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
+
+                    Label label = new Label();
+                    label.Content = x;
+                    label.Style = (Style)this.Resources["Label"];
+                    label.VerticalAlignment = VerticalAlignment.Center;
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(label, x);
+                    DashboardClassifficationsGrid.Children.Add(label);
+                }
+
+                Button btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 3);
+                Grid.SetRow(btn, 2);
+                Grid.SetColumnSpan(btn, 4);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 2);
+                Grid.SetRow(btn, 1);
+                Grid.SetColumnSpan(btn, 5);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 3);
+                Grid.SetRow(btn, 5);
+                Grid.SetColumnSpan(btn, 7);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 2);
+                Grid.SetRow(btn, 5);
+                Grid.SetColumnSpan(btn, 2);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 6);
+                Grid.SetRow(btn, 8);
+                Grid.SetColumnSpan(btn, 2);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                btn = new Button();
+                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                btn.Content = "NIGGER";
+                Grid.SetColumn(btn, 2);
+                Grid.SetRow(btn, 9);
+                Grid.SetColumnSpan(btn, 4);
+                DashboardClassifficationsGrid.Children.Add(btn);
+
+                LoadedAnimation();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Culdn't load the dashboard screen. Please try again!");
+            }
+        }
+
         //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -1733,6 +1852,8 @@ namespace testroom
                 CreateClassifficationScreen.Visibility = Visibility.Hidden;
                 CreateReservationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
+                DashboardScreen.Visibility = Visibility.Hidden;
+
 
                 //Clear all elements
                 ClearAll();
@@ -1769,6 +1890,7 @@ namespace testroom
                 CreateReservationScreen.Visibility = Visibility.Hidden;
                 CreateClassifficationScreen.Visibility = Visibility.Hidden;
                 SettingsScreen.Visibility = Visibility.Hidden;
+                DashboardScreen.Visibility = Visibility.Hidden;
 
                 //Clear all elements
                 ClearAll();
@@ -1797,6 +1919,7 @@ namespace testroom
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
             ClassifficationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
+            DashboardScreen.Visibility = Visibility.Hidden;
 
             //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
@@ -1825,6 +1948,7 @@ namespace testroom
             SettingsScreen.Visibility = Visibility.Visible;
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
             ClassifficationScreen.Visibility = Visibility.Hidden;
+            DashboardScreen.Visibility = Visibility.Hidden;
 
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
