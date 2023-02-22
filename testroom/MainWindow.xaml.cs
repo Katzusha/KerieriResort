@@ -1745,19 +1745,13 @@ namespace testroom
 
                 DashboardScreen.Visibility = Visibility.Visible;
 
-                dynamic calendarinfo = ReservationCommands.GetCalendarInfo();
-                int classiffications = 0;
+                dynamic calendarinfo = ReservationCommands.GetCalendarClassiffications();
                 DateTime maxdate = DateTime.Now;
                 DateTime mindate = DateTime.Now;
 
-                foreach(var information in calendarinfo)
-                {
-                    classiffications = Int32.Parse(information.Classiffications.ToString());
-                    maxdate = DateTime.Parse(information.MaxDate.ToString());
-                    mindate = DateTime.Parse(information.MinDate.ToString());
-                }
+                int x = 0;
 
-                for (int x = 0; x < classiffications; x++)
+                foreach(var information in calendarinfo)
                 {
                     RowDefinition newrow = new RowDefinition();
                     newrow.Height = new GridLength(50);
@@ -1768,12 +1762,21 @@ namespace testroom
                     DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
 
                     Label label = new Label();
-                    label.Content = x + 1;
+                    label.Content = information.Name;
                     label.Style = (Style)this.Resources["Label"];
                     label.VerticalAlignment = VerticalAlignment.Center;
                     label.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(label, x);
                     DashboardClassifficationsGridRows.Children.Add(label);
+
+                    try
+                    {
+                        maxdate = DateTime.Parse(information.MaxDate.ToString());
+                        mindate = DateTime.Parse(information.MinDate.ToString());
+                    }
+                    catch { }
+
+                    x++;
                 }
 
                 int whileloop = 0;

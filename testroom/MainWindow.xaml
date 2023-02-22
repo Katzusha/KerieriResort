@@ -2620,7 +2620,7 @@
 
                         <Grid >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50px" />
+                                <ColumnDefinition Width="125px" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -2634,7 +2634,10 @@
                             <Grid x:Name="DashboardClassifficationsGridColumns"
                                   Grid.Column="1" />
 
-                            <Grid x:Name="DashboardClassifficationsGrid" Grid.Row="1" Grid.Column="1"/>
+                            <Grid x:Name="DashboardClassifficationsGrid"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                  ShowGridLines="True"/>
                         </Grid>
                     </ScrollViewer>
                 </Border>
