@@ -322,6 +322,10 @@ namespace testroom
                 DashboardClassifficationsGrid.Children.Clear();
                 DashboardClassifficationsGrid.RowDefinitions.Clear();
                 DashboardClassifficationsGrid.ColumnDefinitions.Clear();
+                DashboardClassifficationsGridRows.RowDefinitions.Clear();
+                DashboardClassifficationsGridRows.Children.Clear();
+                DashboardClassifficationsGridColumns.ColumnDefinitions.Clear();
+                DashboardClassifficationsGridColumns.Children.Clear();
             }
             catch
             {
@@ -1741,97 +1745,72 @@ namespace testroom
 
                 DashboardScreen.Visibility = Visibility.Visible;
 
-                ColumnDefinition newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(75);
-                DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
+                dynamic calendarinfo = ReservationCommands.GetCalendarInfo();
+                int classiffications = 0;
+                DateTime maxdate = DateTime.Now;
+                DateTime mindate = DateTime.Now;
 
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
-
-                for (int x = 1; x < 21; x ++)
+                foreach(var information in calendarinfo)
                 {
-                    newcol = new ColumnDefinition();
-                    newcol.Width = new GridLength(250);
-                    DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
-
-                    Label label = new Label();
-                    label.Content = DateTime.Now.AddDays(x - 1).ToString("dd.MM.yyyy");
-                    label.Style = (Style)this.Resources["Label"];
-                    label.VerticalAlignment = VerticalAlignment.Center;
-                    label.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(label, x);
-                    DashboardClassifficationsGrid.Children.Add(label);
+                    classiffications = Int32.Parse(information.Classiffications.ToString());
+                    maxdate = DateTime.Parse(information.MaxDate.ToString());
+                    mindate = DateTime.Parse(information.MinDate.ToString());
                 }
 
-                for(int x = 1; x < 11; x ++)
+                for (int x = 0; x < classiffications; x++)
                 {
-                    newrow = new RowDefinition();
+                    RowDefinition newrow = new RowDefinition();
                     newrow.Height = new GridLength(50);
                     DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
 
+                    newrow = new RowDefinition();
+                    newrow.Height = new GridLength(50);
+                    DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
+
                     Label label = new Label();
-                    label.Content = x;
+                    label.Content = x + 1;
                     label.Style = (Style)this.Resources["Label"];
                     label.VerticalAlignment = VerticalAlignment.Center;
                     label.HorizontalAlignment = HorizontalAlignment.Center;
                     Grid.SetRow(label, x);
-                    DashboardClassifficationsGrid.Children.Add(label);
+                    DashboardClassifficationsGridRows.Children.Add(label);
                 }
 
-                Button btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 3);
-                Grid.SetRow(btn, 2);
-                Grid.SetColumnSpan(btn, 4);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                int whileloop = 0;
 
-                btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 2);
-                Grid.SetRow(btn, 1);
-                Grid.SetColumnSpan(btn, 5);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                while(true)
+                {
+                    ColumnDefinition newcol = new ColumnDefinition();
+                    newcol.Width = new GridLength(250);
+                    DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
 
-                btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 3);
-                Grid.SetRow(btn, 5);
-                Grid.SetColumnSpan(btn, 7);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                    newcol = new ColumnDefinition();
+                    newcol.Width = new GridLength(250);
+                    DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
 
-                btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 2);
-                Grid.SetRow(btn, 5);
-                Grid.SetColumnSpan(btn, 2);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                    Label label = new Label();
+                    label.Content = mindate.AddDays(whileloop - 1).ToString("dd.MM.yyyy");
+                    label.Style = (Style)this.Resources["Label"];
+                    label.VerticalAlignment = VerticalAlignment.Center;
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetColumn(label, whileloop);
+                    DashboardClassifficationsGridColumns.Children.Add(label);
 
-                btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 6);
-                Grid.SetRow(btn, 8);
-                Grid.SetColumnSpan(btn, 2);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                    whileloop++;
 
-                btn = new Button();
-                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                btn.Content = "NIGGER";
-                Grid.SetColumn(btn, 2);
-                Grid.SetRow(btn, 9);
-                Grid.SetColumnSpan(btn, 4);
-                DashboardClassifficationsGrid.Children.Add(btn);
+                    if (mindate.AddDays(whileloop - 1) > maxdate)
+                    {
+                        break;
+                    }
+                }
 
                 LoadedAnimation();
             }
             catch (Exception ex)
             {
                 PublicCommands.ShowError("Culdn't load the dashboard screen. Please try again!");
+
+                LoadedAnimation();
             }
         }
 

@@ -2560,7 +2560,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Border Background="#3e3e3e"
+                    <Border Background="{DynamicResource SecondaryBrush}"
                             CornerRadius="25"
                             Margin="5, 5, 5, 5" 
                             Grid.Column="0">
@@ -2572,7 +2572,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="#3e3e3e"
+                    <Border Background="{DynamicResource SecondaryBrush}"
                             CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="1">
@@ -2584,7 +2584,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="#3e3e3e"
+                    <Border Background="{DynamicResource SecondaryBrush}"
                             CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="2">
@@ -2596,7 +2596,7 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="#3e3e3e"
+                    <Border Background="{DynamicResource SecondaryBrush}"
                             CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="3">
@@ -2609,15 +2609,35 @@
                     </Border>
                 </Grid>
 
-                <ScrollViewer Grid.Row="1"
-                              Margin="5, 5, 5, 5"
-                              VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Auto">
+                <Border Background="{DynamicResource SecondaryBrush}"
+                        Grid.Row="1"
+                        CornerRadius="15"
+                        Margin="5, 5, 5, 5">
+                    <ScrollViewer Grid.Row="1"
+                                  Margin="5, 5, 5, 5"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Auto">
 
-                    <Grid x:Name="DashboardClassifficationsGrid"
-                          ShowGridLines="True" >
-                    </Grid>
-                </ScrollViewer>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50px" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50px" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Grid x:Name="DashboardClassifficationsGridRows"
+                                  Grid.Row="1" />
+
+                            <Grid x:Name="DashboardClassifficationsGridColumns"
+                                  Grid.Column="1" />
+
+                            <Grid x:Name="DashboardClassifficationsGrid" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Border>
             </Grid>
 
 
