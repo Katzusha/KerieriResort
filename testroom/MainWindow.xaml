@@ -2503,6 +2503,105 @@
                 </Grid>
             </Grid>
 
+
+            <Grid x:Name="DashboardScreen"
+                  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="4*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Background="#3e3e3e"
+                            CornerRadius="25"
+                            Margin="5, 5, 5, 5" 
+                            Grid.Column="0">
+                        <Grid>
+                            <Label Style="{DynamicResource Label}"
+                                   Content="Available classiffications"
+                                   Margin="0, 5, 0, 0"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="#3e3e3e"
+                            CornerRadius="25"
+                            Margin="5, 5, 5, 5"
+                            Grid.Column="1">
+                        <Grid>
+                            <Label Style="{DynamicResource Label}"
+                                   Content="Unavailable classiffications"
+                                   Margin="0, 5, 0, 0"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="#3e3e3e"
+                            CornerRadius="25"
+                            Margin="5, 5, 5, 5"
+                            Grid.Column="2">
+                        <Grid>
+                            <Label Style="{DynamicResource Label}"
+                                   Content="Something"
+                                   Margin="0, 5, 0, 0"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="#3e3e3e"
+                            CornerRadius="25"
+                            Margin="5, 5, 5, 5"
+                            Grid.Column="3">
+                        <Grid>
+                            <Label Style="{DynamicResource Label}"
+                                   Content="Something"
+                                   Margin="0, 5, 0, 0"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <ScrollViewer Grid.Row="1"
+                              Margin="5, 5, 5, 5"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto">
+
+                    <Grid Background="#3e5656FF">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="1"
+                                Background="#3e3e3e">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius"
+                                            Value="0, 250, 250, 0" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+
             <Grid Grid.Column="1"
                   x:Name="SettingsScreen"
                   Visibility="Hidden">
@@ -2612,7 +2711,11 @@
             <!--#endregion-->
 
             <!--#region  CREATION GRID-->
-            <Grid x:Name="CreateReservationScreen" Grid.Column="2" Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="CreateReservationScreen" 
+                  Grid.Column="2" 
+                  Visibility="Hidden" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100" />
                     <RowDefinition Height="857*" />
