@@ -19,6 +19,170 @@
         VerticalContentAlignment="Center">
     <Window.Resources>
 
+
+
+
+
+
+        <!--Scrollbar Thumbs-->
+        <Style x:Key="ScrollThumbs"
+               TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid x:Name="Grid">
+                            <Rectangle HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch"
+                                       Width="auto"
+                                       Height="auto"
+                                       Fill="Transparent" />
+                            <Border x:Name="Rectangle1"
+                                    CornerRadius="5"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Width="auto"
+                                    Height="auto">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource PrimaryColor}"
+                                                     Opacity="0.5" />
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag"
+                                     Value="Horizontal">
+                                <Setter TargetName="Rectangle1"
+                                        Property="Width"
+                                        Value="Auto" />
+                                <Setter TargetName="Rectangle1"
+                                        Property="Height"
+                                        Value="20" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--ScrollBars-->
+        <Style x:Key="{x:Type ScrollBar}"
+               TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="false" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource PrimaryBrush}"/>
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Width"
+                    Value="25" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="GridRoot"
+                              Width="20"
+                              Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.00001*" />
+                            </Grid.RowDefinitions>
+                            <Track x:Name="PART_Track"
+                                   Grid.Row="0"
+                                   IsDirectionReversed="true"
+                                   Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb"
+                                           Background="{TemplateBinding Foreground}"
+                                           Style="{DynamicResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp"
+                                                  Command="ScrollBar.PageDownCommand"
+                                                  Opacity="0"
+                                                  Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown"
+                                                  Command="ScrollBar.PageUpCommand"
+                                                  Opacity="0"
+                                                  Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="Thumb"
+                                     Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Value="{DynamicResource ButtonSelectBrush}"
+                                        TargetName="Thumb"
+                                        Property="Background" />
+                            </Trigger>
+                            <Trigger SourceName="Thumb"
+                                     Property="IsDragging"
+                                     Value="true">
+                                <Setter Value="{DynamicResource DarkBrush}"
+                                        TargetName="Thumb"
+                                        Property="Background" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter TargetName="Thumb"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation"
+                                     Value="Horizontal">
+                                <Setter TargetName="GridRoot"
+                                        Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="PART_Track"
+                                        Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width"
+                                        Value="Auto" />
+                                <Setter Property="Height"
+                                        Value="20" />
+                                <Setter TargetName="Thumb"
+                                        Property="Tag"
+                                        Value="Horizontal" />
+                                <Setter TargetName="PageDown"
+                                        Property="Command"
+                                        Value="ScrollBar.PageLeftCommand" />
+                                <Setter TargetName="PageUp"
+                                        Property="Command"
+                                        Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+
+
+        <SolidColorBrush x:Key="DashboardButtonColor1"
+                         Color="#004697" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor2"
+                         Color="#00234b" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor3"
+                         Color="#003c7e" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor4"
+                         Color="#006ec5" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor5"
+                         Color="#005192" />
+
         <SolidColorBrush x:Key="BackgroundBrush"
                          Color="#1f1f27" />
         <Color x:Key="BackgroundColor">#1f1f27</Color>
@@ -2560,10 +2724,13 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Border Background="{DynamicResource SecondaryBrush}"
-                            CornerRadius="25"
+                    <Border CornerRadius="25"
                             Margin="5, 5, 5, 5" 
                             Grid.Column="0">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                             Opacity="0.5" />
+                        </Border.Background>
                         <Grid>
                             <Label Style="{DynamicResource Label}"
                                    Content="Available classiffications"
@@ -2588,10 +2755,13 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{DynamicResource SecondaryBrush}"
-                            CornerRadius="25"
+                    <Border CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                             Opacity="0.5" />
+                        </Border.Background>
                         <Grid>
                             <Label Style="{DynamicResource Label}"
                                    Content="Unavailable classiffications"
@@ -2615,10 +2785,13 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{DynamicResource SecondaryBrush}"
-                            CornerRadius="25"
+                    <Border CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="2">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                             Opacity="0.5" />
+                        </Border.Background>
                         <Grid>
                             <Label Style="{DynamicResource Label}"
                                    Content="Something"
@@ -2627,10 +2800,13 @@
                         </Grid>
                     </Border>
 
-                    <Border Background="{DynamicResource SecondaryBrush}"
-                            CornerRadius="25"
+                    <Border CornerRadius="25"
                             Margin="5, 5, 5, 5"
                             Grid.Column="3">
+                        <Border.Background>
+                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                             Opacity="0.5" />
+                        </Border.Background>
                         <Grid>
                             <Label Style="{DynamicResource Label}"
                                    Content="Something"
@@ -2640,10 +2816,13 @@
                     </Border>
                 </Grid>
 
-                <Border Background="{DynamicResource SecondaryBrush}"
-                        Grid.Row="1"
+                <Border Grid.Row="1"
                         CornerRadius="15"
                         Margin="5, 5, 5, 5">
+                    <Border.Background>
+                        <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                         Opacity="0.5" />
+                    </Border.Background>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -2655,28 +2834,46 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <ScrollViewer x:Name="DashboardClassifficationsGridRowsScrollViewer"
-                                      VerticalScrollBarVisibility="Hidden"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      Grid.Row="1">
-                            <Grid x:Name="DashboardClassifficationsGridRows" />
-                        </ScrollViewer>
-
-                        <ScrollViewer x:Name="DashboardClassifficationsGridColumnsScrollViewer"
-                                      VerticalScrollBarVisibility="Hidden"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      Grid.Column="1">
-                            <Grid x:Name="DashboardClassifficationsGridColumns" />
-                        </ScrollViewer>
+                        <Border Grid.RowSpan="2" CornerRadius="5, 0, 0, 5">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                                 Opacity="0.5" />
+                            </Border.Background>
+                        </Border>
+                        <Border Grid.Column="1" CornerRadius="0, 5, 0, 0">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource SecondaryColor}"
+                                                 Opacity="0.5" />
+                            </Border.Background>
+                        </Border>
 
                         <ScrollViewer Grid.Row="1"
                                       Grid.Column="1"
                                       VerticalScrollBarVisibility="Auto"
                                       HorizontalScrollBarVisibility="Auto"
+                                      Margin="-125, 50, 0, 0"
                                       ScrollChanged="DashboardClassifficationsGrid_ScrollChanged">
 
                             <Grid x:Name="DashboardClassifficationsGrid"
-                                  ShowGridLines="True" />
+                                  ShowGridLines="False" />
+                        </ScrollViewer>
+
+                        <ScrollViewer x:Name="DashboardClassifficationsGridRowsScrollViewer"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      Grid.Row="1"
+                                      Margin="0, 0, 0, 25"
+                                      IsEnabled="False">
+                            <Grid x:Name="DashboardClassifficationsGridRows"/>
+                        </ScrollViewer>
+
+                        <ScrollViewer x:Name="DashboardClassifficationsGridColumnsScrollViewer"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      Grid.Column="1"
+                                      Margin="0, 0, 25, 0"
+                                      IsEnabled="False">
+                            <Grid x:Name="DashboardClassifficationsGridColumns" />
                         </ScrollViewer>
                     </Grid>                    
                 </Border>

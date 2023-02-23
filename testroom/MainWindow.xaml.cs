@@ -328,6 +328,11 @@ namespace testroom
                 DashboardClassifficationsGridRows.Children.Clear();
                 DashboardClassifficationsGridColumns.ColumnDefinitions.Clear();
                 DashboardClassifficationsGridColumns.Children.Clear();
+
+                DashboardScreenAvailableCapacityLabel.Content = "0.00%";
+                DashboardScreenAvailableClassifficationsLabel.Content = "00";
+                DashboardScreenUnavailableCapacityLabel.Content = "0.00%";
+                DashboardScreenUnavailableClassifficationsLabel.Content = "00";
             }
             catch
             {
@@ -1552,7 +1557,7 @@ namespace testroom
             //Begin loading animation
             LoadingAnimation();
 
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             string username = Encryption(loginusernameinput.Text);
             string password = Encryption(loginpasswordinput.Password.ToString());
@@ -1613,7 +1618,7 @@ namespace testroom
                 //Begin loading animation
                 LoadingAnimation();
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 string username = Encryption(loginusernameinput.Text);
                 string password = Encryption(loginpasswordinput.Password.ToString());
@@ -1673,7 +1678,7 @@ namespace testroom
                 //Begin loading animation
                 LoadingAnimation();
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 string username = Encryption(loginusernameinput.Text);
                 string password = Encryption(loginpasswordinput.Password.ToString());
@@ -1767,7 +1772,7 @@ namespace testroom
 
         private async Task<bool> GetCalendarInfo()
         {
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
             DateTime maxdate = DateTime.Now;
@@ -1860,20 +1865,7 @@ namespace testroom
                                 {
                                     Random rnd = new Random();
 
-                                    switch(rnd.Next(1, 4))
-                                    {
-                                        case 1:
-                                            btn.Background = (SolidColorBrush)Resources["CurrentMarkBrush"];
-                                            break;
-
-                                        case 2:
-                                            btn.Background = (SolidColorBrush)Resources["PastMarkBrush"];
-                                            break;
-
-                                        case 3:
-                                            btn.Background = (SolidColorBrush)Resources["IncomingMarkBrush"];
-                                            break;
-                                    }
+                                    btn.Background = (SolidColorBrush)Resources["DashboardButtonColor" + rnd.Next(1, 6).ToString()];
 
                                     Label tlabel = (Label)todate;
                                     if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
@@ -2040,7 +2032,7 @@ namespace testroom
         //Generate buttons for all the Reservations in json file
         public async Task<bool> GetAllReservations(int? status)
         {
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             try
             {
@@ -2286,7 +2278,7 @@ namespace testroom
         //Generate buttons for searched Reservations in json file
         public async Task<bool> GetSearchedReservations()
         {
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             ClearAll();
 
@@ -2728,7 +2720,7 @@ namespace testroom
                 LoadingAnimation();
 
                 //Fill the Combobox with all the classifficaitons
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 ClearAll();
 
@@ -3181,7 +3173,7 @@ namespace testroom
                         //Begin loading animation
                         LoadingAnimation();
 
-                        await Task.Delay(500);
+                        await Task.Delay(100);
 
                         CreateReservationScreen.Visibility = Visibility.Hidden;
                         ReservationsScreen.Visibility = Visibility.Visible;
@@ -3247,7 +3239,7 @@ namespace testroom
             {
                 LoadingAnimation();
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 if (CreateReservationGridClassifficationCombobox.SelectedIndex <= 0 || CreateReservationGridClassifficationCombobox.Items.Count != 0)
                 {
@@ -3303,7 +3295,7 @@ namespace testroom
                     foreach (var information in BlackOutDates)
                     {
                         CreateReservationGridFromDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
+                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime.Parse(information.FromDate.ToString())).AddDays(1), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
                         CreateReservationGridToDateCalendar.SelectedDates.Clear();
                         CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
                     }
@@ -3640,7 +3632,7 @@ namespace testroom
 
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
 
@@ -3678,7 +3670,7 @@ namespace testroom
         #region CLASSIFFICATIONS GRID actions
         public async Task<bool> GetAllClassiffications()
         {
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             try
             {
