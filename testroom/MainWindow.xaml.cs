@@ -1,10 +1,12 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using resorttestroom;
 using System;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.IO;
 using System.Linq.Expressions;
@@ -1726,7 +1728,7 @@ namespace testroom
 
         #region MENU BUTTONS
         //Dashboard button on control screen
-        private void MenuDashboardBtn_Click(object sender, RoutedEventArgs e)
+        private async void MenuDashboardBtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1745,76 +1747,150 @@ namespace testroom
 
                 DashboardScreen.Visibility = Visibility.Visible;
 
-                dynamic calendarinfo = ReservationCommands.GetCalendarClassiffications();
-                DateTime maxdate = DateTime.Now;
-                DateTime mindate = DateTime.Now;
-
-                int x = 0;
-
-                foreach(var information in calendarinfo)
-                {
-                    RowDefinition newrow = new RowDefinition();
-                    newrow.Height = new GridLength(50);
-                    DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
-
-                    newrow = new RowDefinition();
-                    newrow.Height = new GridLength(50);
-                    DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
-
-                    Label label = new Label();
-                    label.Content = information.Name;
-                    label.Style = (Style)this.Resources["Label"];
-                    label.VerticalAlignment = VerticalAlignment.Center;
-                    label.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetRow(label, x);
-                    DashboardClassifficationsGridRows.Children.Add(label);
-
-                    try
-                    {
-                        maxdate = DateTime.Parse(information.MaxDate.ToString());
-                        mindate = DateTime.Parse(information.MinDate.ToString());
-                    }
-                    catch { }
-
-                    x++;
-                }
-
-                int whileloop = 0;
-
-                while(true)
-                {
-                    ColumnDefinition newcol = new ColumnDefinition();
-                    newcol.Width = new GridLength(250);
-                    DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
-
-                    newcol = new ColumnDefinition();
-                    newcol.Width = new GridLength(250);
-                    DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
-
-                    Label label = new Label();
-                    label.Content = mindate.AddDays(whileloop - 1).ToString("dd.MM.yyyy");
-                    label.Style = (Style)this.Resources["Label"];
-                    label.VerticalAlignment = VerticalAlignment.Center;
-                    label.HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(label, whileloop);
-                    DashboardClassifficationsGridColumns.Children.Add(label);
-
-                    whileloop++;
-
-                    if (mindate.AddDays(whileloop - 1) > maxdate)
-                    {
-                        break;
-                    }
-                }
+                var CalendarInfo = await GetCalendarInfo();
 
                 LoadedAnimation();
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Culdn't load the dashboard screen. Please try again!");
+                PublicCommands.ShowError(ex.Message);
 
                 LoadedAnimation();
             }
+        }
+
+        void DashboardClassifficationsGrid_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            DashboardClassifficationsGridRowsScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+            DashboardClassifficationsGridColumnsScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+        }
+
+        private async Task<bool> GetCalendarInfo()
+        {
+            await Task.Delay(500);
+
+            dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
+            DateTime maxdate = DateTime.Now;
+            DateTime mindate = DateTime.Now;
+
+            int x = 0;
+
+            foreach (var information in classiffications)
+            {
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(40);
+                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
+
+                newrow = new RowDefinition();
+                newrow.Height = new GridLength(40);
+                DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
+
+                Label label = new Label();
+                label.Content = information.Name;
+                label.Style = (Style)this.Resources["Label"];
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(label, x);
+                DashboardClassifficationsGridRows.Children.Add(label);
+
+                try
+                {
+                    maxdate = DateTime.Parse(information.MaxDate.ToString());
+                    mindate = DateTime.Parse(information.MinDate.ToString());
+
+                    DashboardScreenUnavailableCapacityLabel.Content = information.Filled.ToString() + "%";
+                    DashboardScreenUnavailableClassifficationsLabel.Content = information.Unavailable.ToString();
+
+                    DashboardScreenAvailableCapacityLabel.Content = (1 -double.Parse(information.Filled.ToString())).ToString() + "%";
+                    DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
+                }
+                catch { }
+
+                x++;
+            }
+
+            int whileloop = 0;
+
+            while (true)
+            {
+                ColumnDefinition newcol = new ColumnDefinition();
+                newcol.Width = new GridLength(250);
+                DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
+
+                newcol = new ColumnDefinition();
+                newcol.Width = new GridLength(250);
+                DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
+
+                Label label = new Label();
+                label.Content = mindate.AddDays(whileloop - 1).ToString("yyyy-MM-dd");
+                label.Style = (Style)this.Resources["Label"];
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                Grid.SetColumn(label, whileloop);
+                DashboardClassifficationsGridColumns.Children.Add(label);
+
+                whileloop++;
+
+                if (mindate.AddDays(whileloop - 1) > maxdate)
+                {
+                    break;
+                }
+            }
+
+            dynamic calendarinfo = ReservationCommands.GetCalendarInfo();
+
+            foreach (var information in calendarinfo)
+            {
+                foreach (var room in DashboardClassifficationsGridRows.Children)
+                {
+                    Label label = (Label)room;
+                    if (label.Content.ToString() == information.Classiffication.ToString())
+                    {
+                        foreach (var date in DashboardClassifficationsGridColumns.Children)
+                        {
+                            Label flabel = (Label)date;
+                            if (DateTime.Parse(flabel.Content.ToString()) == DateTime.Parse(information.FromDate.ToString()))
+                            {
+                                Button btn = new Button();
+                                btn.Content = information.Name.ToString();
+                                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                                Grid.SetColumn(btn, Grid.GetColumn(flabel));
+
+                                foreach (var todate in DashboardClassifficationsGridColumns.Children)
+                                {
+                                    Random rnd = new Random();
+
+                                    switch(rnd.Next(1, 4))
+                                    {
+                                        case 1:
+                                            btn.Background = (SolidColorBrush)Resources["CurrentMarkBrush"];
+                                            break;
+
+                                        case 2:
+                                            btn.Background = (SolidColorBrush)Resources["PastMarkBrush"];
+                                            break;
+
+                                        case 3:
+                                            btn.Background = (SolidColorBrush)Resources["IncomingMarkBrush"];
+                                            break;
+                                    }
+
+                                    Label tlabel = (Label)todate;
+                                    if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
+                                    {
+                                        Grid.SetRow(btn, Grid.GetRow(label));
+                                        Grid.SetColumnSpan(btn, (DateTime.Parse(tlabel.Content.ToString()).Date - DateTime.Parse(flabel.Content.ToString()).Date).Days + 1);
+                                    }
+                                }
+
+                                DashboardClassifficationsGrid.Children.Add(btn);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
         //Reservations button on control screen
@@ -3227,7 +3303,7 @@ namespace testroom
                     foreach (var information in BlackOutDates)
                     {
                         CreateReservationGridFromDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
+                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
                         CreateReservationGridToDateCalendar.SelectedDates.Clear();
                         CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
                     }

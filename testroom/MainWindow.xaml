@@ -2568,7 +2568,23 @@
                             <Label Style="{DynamicResource Label}"
                                    Content="Available classiffications"
                                    Margin="0, 5, 0, 0"
+                                   VerticalAlignment="Top"
                                    HorizontalAlignment="Center"/>
+
+                            <Label x:Name="DashboardScreenAvailableClassifficationsLabel"
+                                   FontSize="72px"
+                                   Foreground="{DynamicResource PrimaryBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontWeight="ExtraBold" />
+
+                            <Label x:Name="DashboardScreenAvailableCapacityLabel"
+                                   FontSize="24px"
+                                   Foreground="{DynamicResource PrimaryBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   FontWeight="Bold"
+                                   Margin="0, 0, 5, 0" />
                         </Grid>
                     </Border>
 
@@ -2581,6 +2597,21 @@
                                    Content="Unavailable classiffications"
                                    Margin="0, 5, 0, 0"
                                    HorizontalAlignment="Center"/>
+
+                            <Label x:Name="DashboardScreenUnavailableClassifficationsLabel"
+                                   FontSize="72px"
+                                   Foreground="{DynamicResource FalseBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontWeight="ExtraBold"/>
+
+                            <Label x:Name="DashboardScreenUnavailableCapacityLabel"
+                                   FontSize="24px"
+                                   Foreground="{DynamicResource FalseBrush}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   FontWeight="Bold"
+                                   Margin="0, 0, 5, 0" />
                         </Grid>
                     </Border>
 
@@ -2613,33 +2644,41 @@
                         Grid.Row="1"
                         CornerRadius="15"
                         Margin="5, 5, 5, 5">
-                    <ScrollViewer Grid.Row="1"
-                                  Margin="5, 5, 5, 5"
-                                  VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Auto">
 
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="125px" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50px" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125px" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50px" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                            <Grid x:Name="DashboardClassifficationsGridRows"
-                                  Grid.Row="1" />
+                        <ScrollViewer x:Name="DashboardClassifficationsGridRowsScrollViewer"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      Grid.Row="1">
+                            <Grid x:Name="DashboardClassifficationsGridRows" />
+                        </ScrollViewer>
 
-                            <Grid x:Name="DashboardClassifficationsGridColumns"
-                                  Grid.Column="1" />
+                        <ScrollViewer x:Name="DashboardClassifficationsGridColumnsScrollViewer"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      Grid.Column="1">
+                            <Grid x:Name="DashboardClassifficationsGridColumns" />
+                        </ScrollViewer>
+
+                        <ScrollViewer Grid.Row="1"
+                                      Grid.Column="1"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      ScrollChanged="DashboardClassifficationsGrid_ScrollChanged">
 
                             <Grid x:Name="DashboardClassifficationsGrid"
-                                  Grid.Row="1"
-                                  Grid.Column="1"
-                                  ShowGridLines="True"/>
-                        </Grid>
-                    </ScrollViewer>
+                                  ShowGridLines="True" />
+                        </ScrollViewer>
+                    </Grid>                    
                 </Border>
             </Grid>
 
