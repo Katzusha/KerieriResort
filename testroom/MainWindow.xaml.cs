@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.IO;
 using System.Linq.Expressions;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -333,6 +334,9 @@ namespace testroom
                 DashboardScreenAvailableClassifficationsLabel.Content = "00";
                 DashboardScreenUnavailableCapacityLabel.Content = "0.00%";
                 DashboardScreenUnavailableClassifficationsLabel.Content = "00";
+
+                DashboardScreenClassifficationsGridScrollViewer.ScrollToVerticalOffset(Top);
+                DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset(Left);
             }
             catch
             {
@@ -1783,11 +1787,11 @@ namespace testroom
             foreach (var information in classiffications)
             {
                 RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(40);
+                newrow.Height = new GridLength(50);
                 DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
 
                 newrow = new RowDefinition();
-                newrow.Height = new GridLength(40);
+                newrow.Height = new GridLength(50);
                 DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
 
                 Label label = new Label();
@@ -1819,18 +1823,30 @@ namespace testroom
             while (true)
             {
                 ColumnDefinition newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(250);
+                newcol.Width = new GridLength(200);
                 DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
 
                 newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(250);
+                newcol.Width = new GridLength(200);
                 DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
+
+                
 
                 Label label = new Label();
                 label.Content = mindate.AddDays(whileloop - 1).ToString("yyyy-MM-dd");
                 label.Style = (Style)this.Resources["Label"];
                 label.VerticalAlignment = VerticalAlignment.Center;
                 label.HorizontalAlignment = HorizontalAlignment.Center;
+
+                if (mindate.AddDays(whileloop - 1) == DateTime.Today)
+                {
+                    label.Background = (SolidColorBrush)Resources["PrimaryBrush"];
+                    label.Height = 50;
+                    label.Width = 200;
+                    label.VerticalContentAlignment = VerticalAlignment.Center;
+                    label.HorizontalContentAlignment = HorizontalAlignment.Center;
+                }
+
                 Grid.SetColumn(label, whileloop);
                 DashboardClassifficationsGridColumns.Children.Add(label);
 
@@ -1854,10 +1870,12 @@ namespace testroom
                         foreach (var date in DashboardClassifficationsGridColumns.Children)
                         {
                             Label flabel = (Label)date;
+
                             if (DateTime.Parse(flabel.Content.ToString()) == DateTime.Parse(information.FromDate.ToString()))
                             {
                                 Button btn = new Button();
-                                btn.Content = information.Name.ToString();
+                                string[] name = information.Name.ToString().Split('-');
+                                btn.Content = name[0].Substring(0, 1) + ". " + name[1];
                                 btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
                                 Grid.SetColumn(btn, Grid.GetColumn(flabel));
 
@@ -1876,6 +1894,7 @@ namespace testroom
                                 }
 
                                 DashboardClassifficationsGrid.Children.Add(btn);
+
                             }
                         }
                     }
