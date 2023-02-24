@@ -2313,7 +2313,7 @@ namespace testroom
                 int col = 0;
                 int row = 0;
                 RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(250);
+                newrow.Height = new GridLength(50);
                 HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                 ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
