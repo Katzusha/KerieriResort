@@ -352,14 +352,36 @@ namespace testroom
 
         private void PreviewDecimal(object sender, TextCompositionEventArgs e)
         {
-            
+
+        }
+
+        private void CalendarLoseFocus(object sender, SelectionChangedEventArgs e)
+        {
+            Mouse.Capture(null);
+        }
+
+        private void Calendar_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Calendar calendar = (Calendar)sender;
+
+            FocusManager.SetFocusedElement(calendar, null);
+        }
+
+        private void CreateClassifficationGridNextBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ScrollViewer_DisableScrolling(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
         }
 
         //Becouse of all the animations, instead of using normal commands, we need to use tasks becouse they execute in the background
         #region PUBLIC TASKS
 
         #region Reservations
-        
+
 
         //Generate children for CreateReservation combobox
 
@@ -1768,142 +1790,6 @@ namespace testroom
             }
         }
 
-        void DashboardClassifficationsGrid_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            DashboardClassifficationsGridRowsScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
-            DashboardClassifficationsGridColumnsScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
-        }
-
-        private async Task<bool> GetCalendarInfo()
-        {
-            await Task.Delay(100);
-
-            dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
-            DateTime maxdate = DateTime.Now;
-            DateTime mindate = DateTime.Now;
-
-            int x = 0;
-
-            foreach (var information in classiffications)
-            {
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
-
-                newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
-
-                Label label = new Label();
-                label.Content = information.Name;
-                label.Style = (Style)this.Resources["Label"];
-                label.VerticalAlignment = VerticalAlignment.Center;
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                Grid.SetRow(label, x);
-                DashboardClassifficationsGridRows.Children.Add(label);
-
-                try
-                {
-                    maxdate = DateTime.Parse(information.MaxDate.ToString());
-                    mindate = DateTime.Parse(information.MinDate.ToString());
-
-                    DashboardScreenUnavailableCapacityLabel.Content = information.Filled.ToString() + "%";
-                    DashboardScreenUnavailableClassifficationsLabel.Content = information.Unavailable.ToString();
-
-                    DashboardScreenAvailableCapacityLabel.Content = (1 -double.Parse(information.Filled.ToString())).ToString() + "%";
-                    DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
-                }
-                catch { }
-
-                x++;
-            }
-
-            int whileloop = 0;
-
-            while (true)
-            {
-                ColumnDefinition newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(200);
-                DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
-
-                newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(200);
-                DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
-
-                
-
-                Label label = new Label();
-                label.Content = mindate.AddDays(whileloop - 1).ToString("yyyy-MM-dd");
-                label.Style = (Style)this.Resources["Label"];
-                label.VerticalAlignment = VerticalAlignment.Center;
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-
-                if (mindate.AddDays(whileloop - 1) == DateTime.Today)
-                {
-                    label.Background = (SolidColorBrush)Resources["PrimaryBrush"];
-                    label.Height = 50;
-                    label.Width = 200;
-                    label.VerticalContentAlignment = VerticalAlignment.Center;
-                    label.HorizontalContentAlignment = HorizontalAlignment.Center;
-                }
-
-                Grid.SetColumn(label, whileloop);
-                DashboardClassifficationsGridColumns.Children.Add(label);
-
-                whileloop++;
-
-                if (mindate.AddDays(whileloop - 1) > maxdate)
-                {
-                    break;
-                }
-            }
-
-            dynamic calendarinfo = ReservationCommands.GetCalendarInfo();
-
-            foreach (var information in calendarinfo)
-            {
-                foreach (var room in DashboardClassifficationsGridRows.Children)
-                {
-                    Label label = (Label)room;
-                    if (label.Content.ToString() == information.Classiffication.ToString())
-                    {
-                        foreach (var date in DashboardClassifficationsGridColumns.Children)
-                        {
-                            Label flabel = (Label)date;
-
-                            if (DateTime.Parse(flabel.Content.ToString()) == DateTime.Parse(information.FromDate.ToString()))
-                            {
-                                Button btn = new Button();
-                                string[] name = information.Name.ToString().Split('-');
-                                btn.Content = name[0].Substring(0, 1) + ". " + name[1];
-                                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
-                                Grid.SetColumn(btn, Grid.GetColumn(flabel));
-
-                                foreach (var todate in DashboardClassifficationsGridColumns.Children)
-                                {
-                                    Random rnd = new Random();
-
-                                    btn.Background = (SolidColorBrush)Resources["DashboardButtonColor" + rnd.Next(1, 6).ToString()];
-
-                                    Label tlabel = (Label)todate;
-                                    if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
-                                    {
-                                        Grid.SetRow(btn, Grid.GetRow(label));
-                                        Grid.SetColumnSpan(btn, (DateTime.Parse(tlabel.Content.ToString()).Date - DateTime.Parse(flabel.Content.ToString()).Date).Days + 1);
-                                    }
-                                }
-
-                                DashboardClassifficationsGrid.Children.Add(btn);
-
-                            }
-                        }
-                    }
-                }
-            }
-
-            return true;
-        }
-
         //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -2863,7 +2749,7 @@ namespace testroom
                         CreateReservationGridToDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
                         todate = true;
                     }
-                    
+
                     if (classifficaiton && fromdate && todate)
                     {
                         //CreateReservationGridReservationInformationGrid.Visibility = Visibility.Hidden;
@@ -3087,7 +2973,7 @@ namespace testroom
 
                                         if (child is CheckBox)
                                         {
-                                            CheckBox checkbox = (CheckBox) child;
+                                            CheckBox checkbox = (CheckBox)child;
 
                                             if (checkbox.IsChecked == true)
                                             {
@@ -3162,7 +3048,7 @@ namespace testroom
                             CreateReservationGridPaymentInformationCashCheckBox.Foreground = (SolidColorBrush)Resources["FalseBrush"];
                         }
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
                         PublicCommands.ShowError(ex.Message);
                         //PublicCommands.ShowError("Something is wrong with the server. Please check your internet connection and try again.");
@@ -3854,7 +3740,7 @@ namespace testroom
 
 
             int row = 0;
-            foreach(var information in getall)
+            foreach (var information in getall)
             {
                 if (information.Success == 0)
                 {
@@ -3886,6 +3772,161 @@ namespace testroom
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
         }
         #endregion
+
+
+        #region DASHBOARD GRID ACTIONS
+        void DashboardClassifficationsGrid_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            DashboardClassifficationsGridRowsScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+            DashboardClassifficationsGridColumnsScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+        }
+
+        private async Task<bool> GetCalendarInfo()
+        {
+            await Task.Delay(100);
+
+            dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
+            DateTime maxdate = DateTime.Now;
+            DateTime mindate = DateTime.Now;
+
+            int x = 0;
+
+            foreach (var information in classiffications)
+            {
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(50);
+                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
+
+                newrow = new RowDefinition();
+                newrow.Height = new GridLength(50);
+                DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
+
+                Label label = new Label();
+                label.Content = information.Name;
+                label.Style = (Style)this.Resources["Label"];
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                Grid.SetRow(label, x);
+                DashboardClassifficationsGridRows.Children.Add(label);
+
+                Border border = new Border();
+                border.BorderThickness = new Thickness(0, 0, 0, 1);
+                border.Margin = new Thickness(-125, 0, 0, 0);
+                border.BorderBrush = (SolidColorBrush)Resources["SecondaryBrush"];
+                Grid.SetRow(border, x);
+                Grid.SetColumnSpan(border, 2147483647);
+                DashboardClassifficationsGrid.Children.Add(border);
+
+                try
+                {
+                    maxdate = DateTime.Parse(information.MaxDate.ToString());
+                    mindate = DateTime.Parse(information.MinDate.ToString());
+
+                    DashboardScreenUnavailableCapacityLabel.Content = information.Filled.ToString() + "%";
+                    DashboardScreenUnavailableClassifficationsLabel.Content = information.Unavailable.ToString();
+
+                    DashboardScreenAvailableCapacityLabel.Content = (1 - double.Parse(information.Filled.ToString())).ToString() + "%";
+                    DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
+                }
+                catch { }
+
+                x++;
+            }
+
+            int whileloop = 0;
+
+            while (true)
+            {
+                ColumnDefinition newcol = new ColumnDefinition();
+                newcol.Width = new GridLength(200);
+                DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
+
+                newcol = new ColumnDefinition();
+                newcol.Width = new GridLength(200);
+                DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
+
+
+
+                Label label = new Label();
+                label.Content = mindate.AddDays(whileloop - 1).ToString("yyyy-MM-dd");
+                label.Style = (Style)this.Resources["Label"];
+                label.VerticalAlignment = VerticalAlignment.Center;
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+
+                if (mindate.AddDays(whileloop - 1) == DateTime.Today)
+                {
+                    label.Background = (SolidColorBrush)Resources["PrimaryBrush"];
+                    label.Height = 50;
+                    label.Width = 200;
+                    label.VerticalContentAlignment = VerticalAlignment.Center;
+                    label.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+                    Border border = new Border();
+                    border.Background = (SolidColorBrush)Resources["FontBrush"];
+                    border.Opacity = 0.1;
+                    Grid.SetRowSpan(border, 2147483647);
+                    Grid.SetColumn(border, whileloop);
+                    DashboardClassifficationsGrid.Children.Add(border);
+                }
+
+                Grid.SetColumn(label, whileloop);
+                DashboardClassifficationsGridColumns.Children.Add(label);
+
+                whileloop++;
+
+                if (mindate.AddDays(whileloop - 1) > maxdate)
+                {
+                    break;
+                }
+            }
+
+            dynamic calendarinfo = ReservationCommands.GetCalendarInfo();
+
+            foreach (var information in calendarinfo)
+            {
+                foreach (var room in DashboardClassifficationsGridRows.Children)
+                {
+                    Label label = (Label)room;
+                    if (label.Content.ToString() == information.Classiffication.ToString())
+                    {
+                        foreach (var date in DashboardClassifficationsGridColumns.Children)
+                        {
+                            Label flabel = (Label)date;
+
+                            if (DateTime.Parse(flabel.Content.ToString()) == DateTime.Parse(information.FromDate.ToString()))
+                            {
+                                Button btn = new Button();
+                                string[] name = information.Name.ToString().Split('-');
+                                btn.Content = name[0].Substring(0, 1) + ". " + name[1];
+                                btn.Style = (Style)this.Resources["GeneratedDashboardButton"];
+                                Grid.SetColumn(btn, Grid.GetColumn(flabel));
+
+                                foreach (var todate in DashboardClassifficationsGridColumns.Children)
+                                {
+                                    Random rnd = new Random();
+
+                                    btn.Background = (SolidColorBrush)Resources["DashboardButtonColor" + rnd.Next(1, 6).ToString()];
+
+                                    Label tlabel = (Label)todate;
+                                    if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
+                                    {
+                                        Grid.SetRow(btn, Grid.GetRow(label));
+                                        Grid.SetColumnSpan(btn, (DateTime.Parse(tlabel.Content.ToString()).Date - DateTime.Parse(flabel.Content.ToString()).Date).Days + 1);
+                                    }
+                                }
+
+                                DashboardClassifficationsGrid.Children.Add(btn);
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+        #endregion
+
 
 
         #region SETTINGS GRID actions
@@ -3983,22 +4024,5 @@ namespace testroom
         }
         #endregion
         #endregion
-
-        private void CalendarLoseFocus(object sender, SelectionChangedEventArgs e)
-        {
-            Mouse.Capture(null);
-        }
-
-        private void Calendar_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Calendar calendar = (Calendar)sender;
-
-            FocusManager.SetFocusedElement(calendar, null);
-        }
-
-        private void CreateClassifficationGridNextBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

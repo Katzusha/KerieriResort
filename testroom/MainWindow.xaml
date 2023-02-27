@@ -256,7 +256,7 @@
                     Value="{DynamicResource FalseBrush}" />
             <!-- POTREBNO DODAT VALUE-->
             <Setter Property="Margin"
-                    Value="102, 2, 102, 2" />
+                    Value="102, 2, 102, 3" />
             <Setter Property="Cursor"
                     Value="Hand" />
             <Setter Property="Foreground"
@@ -2831,6 +2831,10 @@
                                       HorizontalScrollBarVisibility="Auto"
                                       Margin="-125, -50, 0, 0"
                                       ScrollChanged="DashboardClassifficationsGrid_ScrollChanged">
+                            <ScrollViewer.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
+                                                 Color="Transparent" />
+                            </ScrollViewer.Resources>
 
                             <Grid x:Name="DashboardClassifficationsGrid"
                                   Margin="125, 50, 0, 0"
@@ -2860,7 +2864,8 @@
                                       Grid.Row="0"
                                       Grid.RowSpan="2"
                                       Margin="0, 0, 0, 25"
-                                      IsEnabled="True">
+                                      IsEnabled="True"
+                                      PreviewMouseWheel="ScrollViewer_DisableScrolling">
                             <Grid x:Name="DashboardClassifficationsGridRows"
                                   ShowGridLines="False"
                                   Margin="0, 50, 0, 0"/>
@@ -2872,7 +2877,8 @@
                                       Grid.Column="0"
                                       Grid.ColumnSpan="2"
                                       Margin="0, 0, 25, 0"
-                                      IsEnabled="true">
+                                      IsEnabled="true"
+                                      PreviewMouseWheel="ScrollViewer_DisableScrolling">
                             <Grid x:Name="DashboardClassifficationsGridColumns" 
                                   ShowGridLines="False"
                                   Margin="125, 0, 0, 0"/>
