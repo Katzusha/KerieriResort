@@ -3835,6 +3835,8 @@ namespace testroom
 
             int whileloop = 0;
 
+            Label currentdate = new Label();
+
             while (true)
             {
                 ColumnDefinition newcol = new ColumnDefinition();
@@ -3867,6 +3869,8 @@ namespace testroom
                     Grid.SetRowSpan(border, 2147483647);
                     Grid.SetColumn(border, whileloop);
                     DashboardClassifficationsGrid.Children.Add(border);
+
+                    currentdate = label;
                 }
 
                 Grid.SetColumn(label, whileloop);
@@ -3906,6 +3910,7 @@ namespace testroom
                                     Random rnd = new Random();
 
                                     btn.Background = (SolidColorBrush)Resources["DashboardButtonColor" + rnd.Next(1, 6).ToString()];
+                                    btn.ToolTip = information.Name.ToString() + "\n" + information.Classiffication.ToString() + "\n" + information.FromDate.ToString() + " ... " + information.ToDate.ToString();
 
                                     Label tlabel = (Label)todate;
                                     if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
@@ -3922,6 +3927,8 @@ namespace testroom
                     }
                 }
             }
+
+            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset(Grid.GetColumn(currentdate) * 200);
 
             return true;
         }
