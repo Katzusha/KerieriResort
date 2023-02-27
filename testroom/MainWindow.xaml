@@ -19,62 +19,6 @@
         VerticalContentAlignment="Center">
     <Window.Resources>
 
-        <Style x:Key="{x:Type ToolTip}"
-               TargetType="ToolTip">
-            <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
-            <Setter Property="HasDropShadow"
-                    Value="True" />
-            <Setter Property="Foreground"
-                    Value="{DynamicResource FontBrush}" />
-            <Setter Property="FontSize"
-                    Value="16" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Left" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToolTip">
-                        <Border Name="Border"
-                                BorderThickness="1"
-                                Width="{TemplateBinding Width}"
-                                Height="{TemplateBinding Height}">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0"
-                                                     EndPoint="0,1">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStopCollection>
-                                            <GradientStop Color="{DynamicResource SecondaryColor}"
-                                                          Offset="0.0" />
-                                            <GradientStop Color="{DynamicResource SecondaryColor}"
-                                                          Offset="1.0" />
-                                        </GradientStopCollection>
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-
-                            </Border.Background>
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource FontColor}" Opacity="0.1" />
-                            </Border.BorderBrush>
-                            <ContentPresenter Margin="4"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Top" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="HasDropShadow"
-                                     Value="true">
-                                <Setter TargetName="Border"
-                                        Property="CornerRadius"
-                                        Value="10" />
-                                <Setter TargetName="Border"
-                                        Property="SnapsToDevicePixels"
-                                        Value="true" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <SolidColorBrush x:Key="DashboardButtonColor1"
                          Color="#004697" />
 
@@ -137,6 +81,63 @@
         <SolidColorBrush x:Key="DismissedMarkBrush"
                          Color="#FF5656" />
         <Color x:Key="DismissedMarkColor">#FF5656</Color>
+
+        <Style x:Key="{x:Type ToolTip}"
+               TargetType="ToolTip">
+            <Setter Property="OverridesDefaultStyle"
+                    Value="true" />
+            <Setter Property="HasDropShadow"
+                    Value="True" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Name="Border"
+                                BorderThickness="1"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0"
+                                                     EndPoint="0,1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStopCollection>
+                                            <GradientStop Color="{DynamicResource SecondaryColor}"
+                                                          Offset="0.0" />
+                                            <GradientStop Color="{DynamicResource SecondaryColor}"
+                                                          Offset="1.0" />
+                                        </GradientStopCollection>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+
+                            </Border.Background>
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource FontColor}"
+                                                 Opacity="0.1" />
+                            </Border.BorderBrush>
+                            <ContentPresenter Margin="4"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasDropShadow"
+                                     Value="true">
+                                <Setter TargetName="Border"
+                                        Property="CornerRadius"
+                                        Value="10" />
+                                <Setter TargetName="Border"
+                                        Property="SnapsToDevicePixels"
+                                        Value="true" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs"
@@ -301,15 +302,12 @@
 
         <Style x:Key="GeneratedDashboardButton"
                TargetType="{x:Type Button}">
-            <!--<EventSetter Event="Click" Handler="ClassBtn_Click"/>-->
-            <!--<EventSetter Event="MouseEnter"-->
-                         <!--Handler="GeneratedCassifficationAndReservationBtn_Enter" />
-            <EventSetter Event="MouseLeave"
-                         Handler="GeneratedCassifficationAndReservationBtn_Leave" />-->
+            <EventSetter Event="Click"
+                         Handler="DashboardCalendarReservationBtn_Click" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Left" />
             <Setter Property="Background"
-                    Value="{DynamicResource FalseBrush}" />
+                    Value="{DynamicResource PrimaryBrush}" />
             <!-- POTREBNO DODAT VALUE-->
             <Setter Property="Margin"
                     Value="102, 2, 102, 3" />
@@ -2756,7 +2754,8 @@
 
 
             <Grid x:Name="DashboardScreen"
-                  Grid.Column="1">
+                  Grid.Column="1"
+                  KeyDown="DashboardScreen_KeyDown">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="4*" />
@@ -2864,7 +2863,7 @@
 
                 <Border Grid.Row="1"
                         CornerRadius="15"
-                        Margin="5, 5, 5, 5">
+                        Margin="5, 5, 30, 30">
                     <Border.Background>
                         <SolidColorBrush Color="{DynamicResource SecondaryColor}"
                                          Opacity="0.5" />
@@ -2879,13 +2878,13 @@
                             <RowDefinition Height="50px" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        
+
                         <ScrollViewer x:Name="DashboardScreenClassifficationsGridScrollViewer"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       VerticalScrollBarVisibility="Auto"
                                       HorizontalScrollBarVisibility="Auto"
-                                      Margin="-125, -50, 0, 0"
+                                      Margin="-125, -50, -25, -25"
                                       ScrollChanged="DashboardClassifficationsGrid_ScrollChanged">
                             <ScrollViewer.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
@@ -2898,16 +2897,16 @@
                         </ScrollViewer>
 
                         <Border Grid.RowSpan="2"
-                                CornerRadius="5, 0, 0, 5"
-                                Margin="0, 0, 0, 25">
+                                CornerRadius="15, 0, 0, 15"
+                                Margin="0, 0, 0, 0">
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SecondaryColor}"
                                                  Opacity="0.75" />
                             </Border.Background>
                         </Border>
                         <Border Grid.Column="1"
-                                CornerRadius="0, 5, 0, 0"
-                                Margin="0, 0, 25, 0">
+                                CornerRadius="0, 15, 0, 0"
+                                Margin="0, 0, 0, 0">
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource SecondaryColor}"
                                                  Opacity="0.75" />
@@ -2919,9 +2918,15 @@
                                       HorizontalScrollBarVisibility="Hidden"
                                       Grid.Row="0"
                                       Grid.RowSpan="2"
-                                      Margin="0, 0, 0, 25"
+                                      Margin="0, 0, 0, 0"
                                       IsEnabled="True"
                                       PreviewMouseWheel="ScrollViewer_DisableScrolling">
+                            <ScrollViewer.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius"
+                                            Value="15, 15, 15, 15" />
+                                </Style>
+                            </ScrollViewer.Resources>
                             <Grid x:Name="DashboardClassifficationsGridRows"
                                   ShowGridLines="False"
                                   Margin="0, 50, 0, 0"/>
@@ -2932,9 +2937,15 @@
                                       HorizontalScrollBarVisibility="Hidden"
                                       Grid.Column="0"
                                       Grid.ColumnSpan="2"
-                                      Margin="0, 0, 25, 0"
+                                      Margin="0, 0, 0, 0"
                                       IsEnabled="true"
                                       PreviewMouseWheel="ScrollViewer_DisableScrolling">
+                            <ScrollViewer.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius"
+                                            Value="15, 15, 15, 15" />
+                                </Style>
+                            </ScrollViewer.Resources>
                             <Grid x:Name="DashboardClassifficationsGridColumns" 
                                   ShowGridLines="False"
                                   Margin="125, 0, 0, 0"/>

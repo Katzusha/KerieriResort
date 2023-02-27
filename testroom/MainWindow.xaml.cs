@@ -28,16 +28,23 @@ namespace testroom
     public partial class MainWindow : Window
     {
         #region PUBLIC VALUES AND COMMANDS
+        //Set a server connection
         public static MySqlConnection conn = new MySqlConnection("server=152.89.234.190;user=kerieri_Client;database=kerieri_Clients;port=3306;" +
                     "password=keriericlient123");
+
+        //Create a cmd execution command so you dont need to create it every time
         public static MySqlCommand cmd;
 
+        //Create public ClassifficationType
         public static string ClassifficationType = string.Empty;
 
+        //Create public Database name to be able to use one host by many clients
         public static string DatabaseName = "";
 
+        //Create public username to save who GSED
         public static string Username = "";
 
+        //Set public connection to the API files
         public static string APIconnection = "https://kerieri.eu/API";
         #endregion
 
@@ -184,6 +191,7 @@ namespace testroom
             //When application start we need to make sure that the login window is the first window that we show regardles of programming activity
             InitializeComponent();
 
+            //Set the language of the application to be able to calculate prices correctly
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("en-US");
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("en-US");
 
@@ -203,6 +211,7 @@ namespace testroom
 
             LoadingAnimationGrid.Visibility = Visibility.Hidden;
 
+            //Start the loading animation to run in background
             var doubleanimation = new DoubleAnimation(360, 0, new Duration(TimeSpan.FromSeconds(2)));
             var rotatetransform = new RotateTransform();
             LoadingSpinner.RenderTransform = rotatetransform;
@@ -210,6 +219,7 @@ namespace testroom
             doubleanimation.RepeatBehavior = RepeatBehavior.Forever;
             rotatetransform.BeginAnimation(RotateTransform.AngleProperty, doubleanimation);
 
+            //Blackout all needed dates
             CreateReservationGridMainReservantBirthCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime)DateTime.Now.AddYears(-18), new DateTime(2100, 12, 31)));
             CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
         }
@@ -342,6 +352,13 @@ namespace testroom
             {
                 PublicCommands.ShowError("Something went wrong. Please contact system support.");
             }
+        }
+
+        //Preview for numbers only input
+        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void PreviewNumber(object sender, TextCompositionEventArgs e)
@@ -1632,6 +1649,7 @@ namespace testroom
             catch (Exception ex)
             {
                 PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                LoadedAnimation();
             }
         }
 
@@ -1765,8 +1783,6 @@ namespace testroom
             {
                 LoadingAnimation();
 
-                ClearAll();
-
                 ControlGrid.Visibility = Visibility.Visible;
                 ReservationsScreen.Visibility = Visibility.Hidden;
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
@@ -1778,6 +1794,7 @@ namespace testroom
 
                 DashboardScreen.Visibility = Visibility.Visible;
 
+                //Fill calendar with reservations, rows and columns
                 var CalendarInfo = await GetCalendarInfo();
 
                 LoadedAnimation();
@@ -3785,6 +3802,8 @@ namespace testroom
         {
             await Task.Delay(100);
 
+            ClearAll();
+
             dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
             DateTime maxdate = DateTime.Now;
             DateTime mindate = DateTime.Now;
@@ -3928,12 +3947,17 @@ namespace testroom
                 }
             }
 
-            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset(Grid.GetColumn(currentdate) * 200);
+            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(currentdate) - 1) * 200);
 
             return true;
         }
-        #endregion
 
+        private void DashboardCalendarReservationBtn_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(btn) - 1) * 200);
+        }
+        #endregion
 
 
         #region SETTINGS GRID actions
@@ -3974,13 +3998,6 @@ namespace testroom
             ReservationsScreen.Visibility = Visibility.Visible;
 
             MenuReservationsBtn_Click(sender, e);
-        }
-
-        //Preview for numbers only input
-        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void CalculatePricePerPearson_Checked(object sender, RoutedEventArgs e)
@@ -4030,6 +4047,26 @@ namespace testroom
             AgeLimitLabel.Foreground = Brushes.Gray;
         }
         #endregion
+
         #endregion
+
+        private async void DashboardScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+            {
+                try
+                {
+                    LoadingAnimation();
+
+                    var calendarinfo = await GetCalendarInfo();
+
+                    LoadedAnimation();
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError("Something went wrong. Please contact support.");
+                }
+            }
+        }
     }
 }
