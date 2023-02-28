@@ -82,6 +82,102 @@
                          Color="#FF5656" />
         <Color x:Key="DismissedMarkColor">#FF5656</Color>
 
+        <Style TargetType="{x:Type ContextMenu}">
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
+            <Setter Property="OverridesDefaultStyle"
+                    Value="True" />
+            <Setter Property="Grid.IsSharedSizeScope"
+                    Value="true" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="HasDropShadow"
+                    Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContextMenu}">
+                        <Border x:Name="Border"
+                                Background="{StaticResource SecondaryBrush}"
+                                BorderThickness="1"
+                                Padding="5, 5, 5, 5">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="{StaticResource PrimaryColor}"
+                                                 Opacity="0.1" />
+                            </Border.BorderBrush>
+                            <StackPanel IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasDropShadow"
+                                     Value="true">
+                                <Setter TargetName="Border"
+                                        Property="CornerRadius"
+                                        Value="10" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>   
+        </Style>
+
+        <Style x:Key="SimpleSysResources"
+               TargetType="{x:Type MenuItem}">
+            <Setter Property="Background"
+                    Value="{DynamicResource SecondaryBrush}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Border x:Name="Bd"
+                                Padding="17,0,17,0"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                SnapsToDevicePixels="True"
+                                Uid="Border_38">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Content="{TemplateBinding Header}"
+                                              Grid.Column="1"
+                                              ContentSource="Header"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              Uid="ContentPresenter_33" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted"
+                                     Value="True">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource PrimaryColor}"
+                                                         Opacity="0.1" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="Bd"
+                                        Value="{DynamicResource SecondaryBrush}" />
+                            </Trigger>
+                            </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="MenuItem.IsMouseOver"
+                         Value="true">
+                    <Setter Property="FontSize"
+                            Value="20" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource FontBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
         <Style x:Key="{x:Type ToolTip}"
                TargetType="ToolTip">
             <Setter Property="OverridesDefaultStyle"
@@ -332,6 +428,16 @@
                                               VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Style="{DynamicResource SimpleSysResources}"
+                                  Header="Edit" />
+                        <MenuItem Style="{DynamicResource SimpleSysResources}" 
+                                  Header="Delete" />
+                    </ContextMenu>
                 </Setter.Value>
             </Setter>
             <Setter Property="TextBlock.TextAlignment"
