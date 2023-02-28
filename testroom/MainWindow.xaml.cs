@@ -11,12 +11,14 @@ using System.Dynamic;
 using System.IO;
 using System.Linq.Expressions;
 using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -3928,8 +3930,10 @@ namespace testroom
                                 {
                                     Random rnd = new Random();
 
+                                    btn.Name = "ReservationId" + information.Id.ToString();
+
                                     btn.Background = (SolidColorBrush)Resources["DashboardButtonColor" + rnd.Next(1, 6).ToString()];
-                                    btn.ToolTip = information.Name.ToString() + "\n" + information.Classiffication.ToString() + "\n" + information.FromDate.ToString() + " ... " + information.ToDate.ToString();
+                                    btn.ToolTip = information.Name.ToString().Replace("-", " ") + "\n" + information.Classiffication.ToString() + "\n" + information.FromDate.ToString() + " ... " + information.ToDate.ToString();
 
                                     Label tlabel = (Label)todate;
                                     if (DateTime.Parse(tlabel.Content.ToString()) == DateTime.Parse(information.ToDate.ToString()))
@@ -4067,6 +4071,47 @@ namespace testroom
                     PublicCommands.ShowError("Something went wrong. Please contact support.");
                 }
             }
+        }
+
+        private async void MenuItem_Click(object sender, System.EventArgs e)
+        {
+            LoadingAnimation();
+
+            try
+            {
+                Button tap = (((sender as MenuItem).Parent as ContextMenu).PlacementTarget as Button);
+
+                if ((sender as MenuItem).Header.ToString() == "Delete")
+                {
+                    Window window = new DeletionWindow();
+                    window.ShowDialog();
+
+                    if (DeletionWindow.confirmed)
+                    {
+                        if (ReservationCommands.DeleteReservation(tap.Name.ToString().Replace("ReservationId", "")))
+                        {
+                            if (DashboardScreen.Visibility == Visibility.Visible && ReservationsScreen.Visibility == Visibility.Hidden)
+                            {
+                                var calendarinfo = await GetCalendarInfo();
+                            }
+                            else if (DashboardScreen.Visibility == Visibility.Hidden && ReservationsScreen.Visibility == Visibility.Visible)
+                            {
+                                var reservations = await GetAllReservations(null);
+                            }
+                        }
+                    }
+                }
+                else if ((sender as MenuItem).Header.ToString() == "Edit")
+                {
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError("Something went wrong. Please contact system support!");
+            }
+
+            LoadedAnimation();
         }
     }
 }

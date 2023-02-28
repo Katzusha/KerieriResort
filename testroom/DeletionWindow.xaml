@@ -1,0 +1,201 @@
+﻿<Window x:Class="resorttestroom.DeletionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:resorttestroom"
+        mc:Ignorable="d"
+        Title="DeletionWindow" WindowStyle="None" Height="300" Width="500" Background="{DynamicResource BackgroundBrush}">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="DashboardButtonColor1"
+                         Color="#004697" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor2"
+                         Color="#00234b" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor3"
+                         Color="#003c7e" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor4"
+                         Color="#006ec5" />
+
+        <SolidColorBrush x:Key="DashboardButtonColor5"
+                         Color="#005192" />
+
+        <SolidColorBrush x:Key="BackgroundBrush"
+                         Color="#1f1f27" />
+        <Color x:Key="BackgroundColor">#1f1f27</Color>
+
+        <SolidColorBrush x:Key="MenuBrush"
+                         Color="#565676" />
+        <Color x:Key="MenuColor">#565676</Color>
+
+        <SolidColorBrush x:Key="PrimaryBrush"
+                         Color="#5656FF" />
+        <Color x:Key="PrimaryColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="SecondaryBrush"
+                         Color="#3e3e3e" />
+        <Color x:Key="SecondaryColor">#3e3e3e</Color>
+
+        <SolidColorBrush x:Key="FalseBrush"
+                         Color="#FF5656" />
+        <Color x:Key="FalseColor">#FF5656</Color>
+
+        <SolidColorBrush x:Key="TrueBrush"
+                         Color="#5656FF" />
+        <Color x:Key="TrueColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="FontBrush"
+                         Color="#FFFFFF" />
+        <Color x:Key="FontColor">#FFFFFF</Color>
+
+        <SolidColorBrush x:Key="DefaultBorderBrush"
+                         Color="#5656FF" />
+        <Color x:Key="DefaultBorderColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="PastMarkBrush"
+                         Color="#f2b33b" />
+        <Color x:Key="PastMarkColor">#f2b33b</Color>
+
+        <SolidColorBrush x:Key="CurrentMarkBrush"
+                         Color="#5656FF" />
+        <Color x:Key="CurrentMarkColor">#5656FF</Color>
+
+        <SolidColorBrush x:Key="IncomingMarkBrush"
+                         Color="#63CF63" />
+        <Color x:Key="IncomingMarkColor">#63CF63</Color>
+
+        <SolidColorBrush x:Key="DismissedMarkBrush"
+                         Color="#FF5656" />
+        <Color x:Key="DismissedMarkColor">#FF5656</Color>
+
+        <Style x:Key="BlueButton"
+               TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter"
+                         Handler="BlueBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="BlueBtn_Leave" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="{DynamicResource TrueBrush}" />
+            <Setter Property="Margin"
+                    Value="0, 0, 0, 0" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="FontSize"
+                    Value="24px" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0, 0, 0, 0"
+                                BorderBrush="#0000FF">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment"
+                    Value="Center" />
+        </Style>
+
+        <Style x:Key="RedButton"
+               TargetType="{x:Type Button}">
+            <EventSetter Event="MouseEnter"
+                         Handler="RedBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="RedBtn_Leave" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="#00000000" />
+            <Setter Property="Margin"
+                    Value="0, 0, 0, 0" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="Height"
+                    Value="50" />
+            <Setter Property="FontSize"
+                    Value="24px" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="25, 25, 25, 25"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="3, 3, 3, 3"
+                                BorderBrush="{DynamicResource FalseBrush}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextBlock.TextAlignment"
+                    Value="Center" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Label Content="ATTENTION!"
+               FontSize="48px" 
+               Foreground="{DynamicResource FalseBrush}"
+               FontWeight="ExtraBold"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Margin="0, 10, 0, 0"/>
+        <TextBox Text="Are you sure you want to delete this entity'"
+                 Background="Transparent"
+                 Foreground="{DynamicResource FontBrush}"
+                 FontSize="24px"
+                 Margin="25, 100, 25, 0"
+                 TextWrapping="Wrap"
+                 HorizontalContentAlignment="Center"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Top"
+                 BorderBrush="Transparent"
+                 IsReadOnly="True"
+                 Cursor="Arrow"/>
+
+        <Grid VerticalAlignment="Bottom"
+              HorizontalAlignment="Right"
+              Width="350"
+              Height="75">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{DynamicResource BlueButton}"
+                    Width="150px"
+                    Content="Confirm"
+                    VerticalAlignment="Center"
+                    Grid.Column="1"
+                    Click="ConfirmBtn_Click" />
+            <Button Style="{DynamicResource RedButton}"
+                    Width="150px"
+                    Content="Cancel"
+                    VerticalAlignment="Center"
+                    Grid.Column="0"
+                    Click="CancelBtn_Click" />
+        </Grid>
+    </Grid>
+</Window>

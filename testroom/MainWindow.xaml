@@ -124,6 +124,8 @@
 
         <Style x:Key="SimpleSysResources"
                TargetType="{x:Type MenuItem}">
+            <EventSetter Event="Click"
+                         Handler="MenuItem_Click" />
             <Setter Property="Background"
                     Value="{DynamicResource SecondaryBrush}" />
             <Setter Property="Foreground"
@@ -483,6 +485,16 @@
                                               VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Style="{DynamicResource SimpleSysResources}"
+                                  Header="Edit" />
+                        <MenuItem Style="{DynamicResource SimpleSysResources}"
+                                  Header="Delete" />
+                    </ContextMenu>
                 </Setter.Value>
             </Setter>
             <Setter Property="TextBlock.TextAlignment"
