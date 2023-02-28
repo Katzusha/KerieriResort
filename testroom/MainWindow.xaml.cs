@@ -3814,30 +3814,6 @@ namespace testroom
 
             foreach (var information in classiffications)
             {
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
-
-                newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
-
-                Label label = new Label();
-                label.Content = information.Name;
-                label.Style = (Style)this.Resources["Label"];
-                label.VerticalAlignment = VerticalAlignment.Center;
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                Grid.SetRow(label, x);
-                DashboardClassifficationsGridRows.Children.Add(label);
-
-                Border border = new Border();
-                border.BorderThickness = new Thickness(0, 0, 0, 1);
-                border.Margin = new Thickness(-125, 0, 0, 0);
-                border.BorderBrush = (SolidColorBrush)Resources["SecondaryBrush"];
-                Grid.SetRow(border, x);
-                Grid.SetColumnSpan(border, 2147483647);
-                DashboardClassifficationsGrid.Children.Add(border);
-
                 try
                 {
                     maxdate = DateTime.Parse(information.MaxDate.ToString());
@@ -3849,7 +3825,32 @@ namespace testroom
                     DashboardScreenAvailableCapacityLabel.Content = (1 - double.Parse(information.Filled.ToString())).ToString() + "%";
                     DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
                 }
-                catch { }
+                catch 
+                {
+                    RowDefinition newrow = new RowDefinition();
+                    newrow.Height = new GridLength(50);
+                    DashboardClassifficationsGrid.RowDefinitions.Add(newrow);
+
+                    newrow = new RowDefinition();
+                    newrow.Height = new GridLength(50);
+                    DashboardClassifficationsGridRows.RowDefinitions.Add(newrow);
+
+                    Label label = new Label();
+                    label.Content = information.Name;
+                    label.Style = (Style)this.Resources["Label"];
+                    label.VerticalAlignment = VerticalAlignment.Center;
+                    label.HorizontalAlignment = HorizontalAlignment.Center;
+                    Grid.SetRow(label, x);
+                    DashboardClassifficationsGridRows.Children.Add(label);
+
+                    Border border = new Border();
+                    border.BorderThickness = new Thickness(0, 0, 0, 1);
+                    border.Margin = new Thickness(-125, 0, 0, 0);
+                    border.BorderBrush = (SolidColorBrush)Resources["SecondaryBrush"];
+                    Grid.SetRow(border, x);
+                    Grid.SetColumnSpan(border, 2147483647);
+                    DashboardClassifficationsGrid.Children.Add(border);
+                }
 
                 x++;
             }
