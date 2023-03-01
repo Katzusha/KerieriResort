@@ -47,7 +47,7 @@ namespace testroom
         public static string Username = "";
 
         //Set public connection to the API files
-        public static string APIconnection = "https://kerieri.eu/API";
+        public static string APIconnection = "https://api.kerieri.eu";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
@@ -1850,11 +1850,11 @@ namespace testroom
         //Classiffications button on control screen
         private async void MenuClassifficationBtn_Click(object sender, RoutedEventArgs e)
         {
+            //Start the loading animation
+            LoadingAnimation();
+
             try
             {
-                //Start the loading animation
-                LoadingAnimation();
-
                 //Show the reservatons grid and hide no results label
                 ControlGrid.Visibility = Visibility.Visible;
                 ReservationsScreen.Visibility = Visibility.Hidden;
@@ -1866,22 +1866,16 @@ namespace testroom
                 SettingsScreen.Visibility = Visibility.Hidden;
                 DashboardScreen.Visibility = Visibility.Hidden;
 
-                //Clear all elements
-                ClearAll();
-
                 //Generate all reservations
                 var isGetAllClassiffications = await GetAllClassiffications();
-
-                //End the loading animation
-                LoadedAnimation();
             }
             catch (Exception ex)
             {
                 PublicCommands.ShowError(ex.Message);
-
-                //End the loading animation
-                LoadedAnimation();
             }
+
+            //End the loading animation
+            LoadedAnimation();
         }
 
         //LogOut button on control screen
@@ -4089,15 +4083,25 @@ namespace testroom
 
                     if (DeletionWindow.confirmed)
                     {
-                        if (ReservationCommands.DeleteReservation(tap.Name.ToString().Replace("ReservationId", "")))
+                        if (DashboardScreen.Visibility == Visibility.Visible || ReservationsScreen.Visibility == Visibility.Visible)
                         {
-                            if (DashboardScreen.Visibility == Visibility.Visible && ReservationsScreen.Visibility == Visibility.Hidden)
+                            if (ReservationCommands.DeleteReservation(tap.Name.ToString().Replace("ReservationId", ""), Username))
                             {
-                                var calendarinfo = await GetCalendarInfo();
+                                if (DashboardScreen.Visibility == Visibility.Visible && ReservationsScreen.Visibility == Visibility.Hidden)
+                                {
+                                    var calendarinfo = await GetCalendarInfo();
+                                }
+                                else if (DashboardScreen.Visibility == Visibility.Hidden && ReservationsScreen.Visibility == Visibility.Visible)
+                                {
+                                    var reservations = await GetAllReservations(null);
+                                }
                             }
-                            else if (DashboardScreen.Visibility == Visibility.Hidden && ReservationsScreen.Visibility == Visibility.Visible)
+                        }
+                        else if (ClassifficationScreen.Visibility == Visibility.Visible)
+                        {
+                            if (ClassifficationCommands.DeleteClassiffication(tap.Name.ToString().Replace("ClassifficationId", ""), Username))
                             {
-                                var reservations = await GetAllReservations(null);
+                                var classiffications = GetAllClassiffications();
                             }
                         }
                     }

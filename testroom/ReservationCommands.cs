@@ -391,14 +391,14 @@ namespace testroom
             return CalendarInfo;
         }
 
-        public static bool DeleteReservation(string id)
+        public static bool DeleteReservation(string id, string user)
         {
             // Create a request using a URL that can receive a post. 
             WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/DeleteReservation.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
-            string postData = "ReservationId=" + id + "&DatabaseName=" + MainWindow.DatabaseName;
+            string postData = "ReservationId=" + id + "&User=" + user + "&DatabaseName=" + MainWindow.DatabaseName;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
             request.ContentType = "application/x-www-form-urlencoded";
