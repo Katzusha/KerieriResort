@@ -394,7 +394,7 @@ namespace testroom
         public static bool DeleteReservation(string id, string user)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/DeleteReservation.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/Delete.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.

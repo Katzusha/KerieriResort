@@ -47,7 +47,7 @@ namespace testroom
         public static string Username = "";
 
         //Set public connection to the API files
-        public static string APIconnection = "https://api.kerieri.eu";
+        public static string APIconnection = "https://kerieri.eu/API";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
@@ -4103,6 +4103,10 @@ namespace testroom
                             {
                                 var classiffications = GetAllClassiffications();
                             }
+                        }
+                        else if (ReservationsScreen.Visibility == Visibility.Visible)
+                        {
+
                         }
                     }
                 }

@@ -88,7 +88,7 @@ namespace testroom
         //Post classiffication information to clients database
         public static bool CreateClassiffication(string Name, string SerialNumber, string Price)
         {
-            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/PostClassiffication.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/Post.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
@@ -175,7 +175,7 @@ namespace testroom
         public static bool DeleteClassiffication(string id, string user)
         {
             // Create a request using a URL that can receive a post. 
-            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/DeleteReservation.php");
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/Delete.php");
             // Set the Method property of the request to POST.
             request.Method = "POST";
             // Create POST data and convert it to a byte array.
