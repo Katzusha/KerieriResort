@@ -271,14 +271,22 @@ namespace testroom
                     CreateReservationGridFromDateCalendar.SelectedDates.Clear();
                     CreateReservationGridFromDateCalendar.DisplayDate = DateTime.Today;
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(1.1, "create reservation screen");
+                    ErrorWindow.ErrorException = ex.Message;
+                }
                 try
                 {
                     CreateReservationGridToDateCalendar.BlackoutDates.Clear();
                     CreateReservationGridToDateCalendar.SelectedDates.Clear();
                     CreateReservationGridToDateCalendar.DisplayDate = DateTime.Today;
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(1.1, "create reservation screen");
+                    ErrorWindow.ErrorException = ex.Message;
+                }
 
                 CreateReservationGridAvailableEssentialsGrid.Children.Clear();
                 CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
@@ -350,9 +358,179 @@ namespace testroom
                 DashboardScreenClassifficationsGridScrollViewer.ScrollToVerticalOffset(Top);
                 DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset(Left);
             }
-            catch
+            catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError(1, "all screens");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearLoginScreen()
+        {
+            try
+            {
+                loginusernameinput.Clear();
+                loginpasswordinput.Clear();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(1, "login screen");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearDashboardScreen()
+        {
+            try
+            {
+                DashboardClassifficationsGrid.Children.Clear();
+                DashboardClassifficationsGrid.RowDefinitions.Clear();
+                DashboardClassifficationsGrid.ColumnDefinitions.Clear();
+                DashboardClassifficationsGridRows.RowDefinitions.Clear();
+                DashboardClassifficationsGridRows.Children.Clear();
+                DashboardClassifficationsGridColumns.ColumnDefinitions.Clear();
+                DashboardClassifficationsGridColumns.Children.Clear();
+
+                DashboardScreenAvailableCapacityLabel.Content = "0.00%";
+                DashboardScreenAvailableClassifficationsLabel.Content = "00";
+                DashboardScreenUnavailableCapacityLabel.Content = "0.00%";
+                DashboardScreenUnavailableClassifficationsLabel.Content = "00";
+
+                DashboardScreenClassifficationsGridScrollViewer.ScrollToVerticalOffset(Top);
+                DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset(Left);
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(0, "dashboard");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearReservationsScreen()
+        {
+            try
+            {
+                HomeGridScrollViewer.Children.Clear();
+                HomeGridScrollViewer.RowDefinitions.Clear();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(0, "reservations screen");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearCreateReservationScreen()
+        {
+            try
+            {
+                CreateReservationGridClassifficationCombobox.Items.Clear();
+
+                try
+                {
+                    CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                    CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                    CreateReservationGridFromDateCalendar.DisplayDate = DateTime.Today;
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(1.1, "create reservations screen");
+                    ErrorWindow.ErrorException = ex.Message;
+                }
+                try
+                {
+                    CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+                    CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                    CreateReservationGridToDateCalendar.DisplayDate = DateTime.Today;
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(1.1, "create reservations screen");
+                    ErrorWindow.ErrorException = ex.Message;
+                }
+
+                CreateReservationGridAvailableEssentialsGrid.Children.Clear();
+                CreateReservationGridAvailableEssentialsGrid.RowDefinitions.Clear();
+
+                CreateReservationGridMainGuestFirstnameInput.Clear();
+                CreateReservationGridMainGuestSurnameInput.Clear();
+                CreateReservationGridMainReservantBirthCalendar.SelectedDates.Clear();
+                CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridMainGuestEmailInput.Clear();
+                CreateReservationGridMainGuestPhoneNumberInput.Clear();
+                CreateReservationGridMainGuestCountryInput.Clear();
+                CreateReservationGridMainGuestPostNumberInput.Clear();
+                CreateReservationGridMainGuestCityInput.Clear();
+                CreateReservationGridMainGuestAddressInput.Clear();
+                CreateReservationGridMainGuestCertifiedNumberInput.Clear();
+                CreateReservationGridSideGuestAddedGrid.Children.Clear();
+                CreateReservationGridSideGuestAddedGrid.RowDefinitions.Clear();
+                CreateReservationGridSideGuestFirstnameInput.Clear();
+                CreateReservationGridSideGuestSurnameInput.Clear();
+                CreateReservationGridSideGuestBirthCalendar.SelectedDates.Clear();
+                CreateReservationGridSideGuestBirthCalendar.DisplayDate = DateTime.Today;
+                CreateReservationGridMainReservantBirthCalendar.DisplayDate = DateTime.Now.AddYears(-18);
+                CreateReservationGridPaymentInformationCreditCardCheckBox.IsChecked = false;
+                CreateReservationGridPaymentInformationCashCheckBox.IsChecked = false;
+                CreateReservationGridPaymentinfoTaxinput.Clear();
+                CreateReservationGridPaymentInformationPdfPreview.CloseDocument();
+                CreateReservationGridPaymentInformationPriceInput.Clear();
+                CreateReservationGridPaymentInformationCommentInput.Clear();
+
+                CreateReservationGridClassifficationLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridFromDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridToDateLabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestEmaillabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestPhoneNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCountrylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestAddresslabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestPostNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCitylabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridMainGuestCertifiedNumberlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestFirstnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestSurnamelabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+                CreateReservationGridSideGuestBirthlabel.Foreground = (SolidColorBrush)Resources["FontBrush"];
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(1, "create reservation screen");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearClassifficationsScreen()
+        {
+            try
+            {
+                ClassifficaitonsGridScrollViewer.Children.Clear();
+                ClassifficaitonsGridScrollViewer.RowDefinitions.Clear();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(0, "classiffications screen");
+                ErrorWindow.ErrorException = ex.Message;
+            }
+        }
+
+        public void ClearCreateClassifficationScreen()
+        {
+            try
+            {
+                CreateClassifficationGridMaxReservantsInput.Clear();
+                CreateClassifficationGridNameInput.Clear();
+                CreateClassifficationGridPriceInput.Clear();
+                CreateClassifficationGridSerialNumberInput.Clear();
+                CreateClassifficationGridSizeInput.Clear();
+                CreateClassifficationGridIncludedEssentials.Children.Clear();
+                CreateClassifficationGridIncludedEssentials.RowDefinitions.Clear();
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(1, "create classiffication screen");
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -1611,10 +1789,13 @@ namespace testroom
             {
                 if (LogInCommands.UserLogIn(username, password))
                 {
-                    //Generate all reservations from users database
-                    var isGetAllSearched = await GetAllReservations(null);
 
                     Username = username;
+
+                    ClearLoginScreen();
+
+                    //Generate all reservations from users database
+                    var isGetAllSearched = await GetAllReservations(null);
 
                     ControlGrid.Visibility = Visibility.Visible;
 
@@ -1633,26 +1814,22 @@ namespace testroom
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                     loginfaillabel.Visibility = Visibility.Hidden;
-
-                    //End the loading animation
-                    LoadedAnimation();
                 }
                 else
                 {
                     //If there is no user in database then show error label
                     loginfaillabel.Visibility = Visibility.Visible;
-
-                    //End the loading animation
-                    LoadedAnimation();
                 }
 
 
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
-                LoadedAnimation();
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
+
+            LoadedAnimation();
         }
 
         //Username input on login screen
@@ -1673,6 +1850,11 @@ namespace testroom
                 {
                     if (LogInCommands.UserLogIn(username, password))
                     {
+
+                        Username = username;
+
+                        ClearLoginScreen();
+
                         //Generate all reservations from users database
                         var isGetAllSearched = await GetAllReservations(null);
 
@@ -1693,25 +1875,22 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
-
-                        //End the loading animation
-                        LoadedAnimation();
                     }
                     else
                     {
                         //If there is no user in database then show error label
                         loginfaillabel.Visibility = Visibility.Visible;
-
-                        //End the loading animation
-                        LoadedAnimation();
                     }
 
 
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
                 }
+
+                LoadedAnimation();
             }
         }
 
@@ -1733,6 +1912,11 @@ namespace testroom
                 {
                     if (LogInCommands.UserLogIn(username, password))
                     {
+
+                        Username = username;
+
+                        ClearLoginScreen();
+
                         //Generate all reservations from users database
                         var isGetAllSearched = await GetAllReservations(null);
 
@@ -1753,25 +1937,22 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
-
-                        //End the loading animation
-                        LoadedAnimation();
                     }
                     else
                     {
                         //If there is no user in database then show error label
                         loginfaillabel.Visibility = Visibility.Visible;
-
-                        //End the loading animation
-                        LoadedAnimation();
                     }
 
 
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
                 }
+
+                LoadedAnimation();
             }
         }
         #endregion
@@ -1781,10 +1962,10 @@ namespace testroom
         //Dashboard button on control screen
         private async void MenuDashboardBtn_Click(object sender, RoutedEventArgs e)
         {
+            LoadingAnimation();
+
             try
             {
-                LoadingAnimation();
-
                 ControlGrid.Visibility = Visibility.Visible;
                 ReservationsScreen.Visibility = Visibility.Hidden;
                 ReservationsScreen.Margin = new Thickness(0, 0, 0, 0);
@@ -1798,24 +1979,23 @@ namespace testroom
 
                 //Fill calendar with reservations, rows and columns
                 var CalendarInfo = await GetCalendarInfo();
-
-                LoadedAnimation();
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
-
-                LoadedAnimation();
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
+
+            LoadedAnimation();
         }
 
         //Reservations button on control screen
         private async void MenuReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
+            LoadingAnimation();
+
             try
             {
-                //Start the loading animation
-                LoadingAnimation();
 
                 //Show the reservatons grid and hide no results label
                 ControlGrid.Visibility = Visibility.Visible;
@@ -1828,23 +2008,16 @@ namespace testroom
                 SettingsScreen.Visibility = Visibility.Hidden;
                 DashboardScreen.Visibility = Visibility.Hidden;
 
-
-                //Clear all elements
-                ClearAll();
-
                 //Generate all reservations
                 var isGetAllReservations = await GetAllReservations(null);
-
-                //End the loading animation
-                LoadedAnimation();
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
-
-                //End the loading animation
-                LoadedAnimation();
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
+
+            LoadedAnimation();
         }
 
         //Classiffications button on control screen
@@ -1871,7 +2044,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
 
             //End the loading animation
@@ -1954,7 +2128,7 @@ namespace testroom
 
             try
             {
-                ClearAll();
+                ClearReservationsScreen();
 
                 //Get json file for all the reservations
                 dynamic getall = ReservationCommands.GetAll();
@@ -1967,15 +2141,12 @@ namespace testroom
                         //Declare row definition for the generated children
                         int col = 0;
                         int row = 0;
-                        RowDefinition newrow = new RowDefinition();
-                        newrow.Height = new GridLength(50);
-                        HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
                         foreach (var information in getall)
                         {
                             if (status == null)
                             {
-                                newrow = new RowDefinition();
+                                RowDefinition newrow = new RowDefinition();
                                 newrow.Height = new GridLength(50);
                                 HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
@@ -2078,7 +2249,7 @@ namespace testroom
                             if (information.Status == status)
                             {
 
-                                newrow = new RowDefinition();
+                                RowDefinition newrow = new RowDefinition();
                                 newrow.Height = new GridLength(50);
                                 HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
@@ -2172,7 +2343,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(ex.Message);
+                        PublicCommands.ShowError(2, null);
+                        ErrorWindow.ErrorException = ex.Message;
                     }
                 }
                 else
@@ -2187,7 +2359,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
 
                 return false;
             }
@@ -2198,158 +2371,93 @@ namespace testroom
         {
             await Task.Delay(100);
 
-            ClearAll();
-
-            ReservationsScreen.Visibility = Visibility.Visible;
-            HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
-
-            //Get json file for the searched reservations
-            dynamic GetSearched = ReservationCommands.GetSearched(HomeGridSearch.Text);
-
-            if (GetSearched != null)
+            try
             {
-                //Declare row definition for the generated children
-                int col = 0;
-                int row = 0;
-                RowDefinition newrow = new RowDefinition();
-                newrow.Height = new GridLength(50);
-                HomeGridScrollViewer.RowDefinitions.Add(newrow);
+                ClearReservationsScreen();
 
-                ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
+                ReservationsScreen.Visibility = Visibility.Visible;
+                HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
 
-                if (item.Content.ToString() == "All")
+                //Get json file for the searched reservations
+                dynamic GetSearched = ReservationCommands.GetSearched(HomeGridSearch.Text);
+
+                if (GetSearched != null)
                 {
-                    foreach (var information in GetSearched)
+                    //Declare row definition for the generated children
+                    int col = 0;
+                    int row = 0;
+
+                    ComboBoxItem item = (ComboBoxItem)ReservationGridSpanSelection.SelectedItem;
+
+                    if (item.Content.ToString() == "All")
                     {
-                        if (information.Success == 1)
+                        foreach (var information in GetSearched)
                         {
-                            newrow = new RowDefinition();
-                            newrow.Height = new GridLength(50);
-                            HomeGridScrollViewer.RowDefinitions.Add(newrow);
-
-                            //Declare children speciffications
-                            Button button = new Button();
-                            button.Name = "ReservationId" + information.Id;
-                            string firstname = information.Firstname.ToString();
-                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                            //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
-
-                            //Current
-                            if (information.Status == 0)
+                            if (information.Success == 1)
                             {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                RowDefinition newrow = new RowDefinition();
+                                newrow.Height = new GridLength(50);
+                                HomeGridScrollViewer.RowDefinitions.Add(newrow);
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                //Declare children speciffications
+                                Button button = new Button();
+                                button.Name = "ReservationId" + information.Id;
+                                string firstname = information.Firstname.ToString();
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
-                            }
-                            //Past
-                            else if (information.Status == -1)
-                            {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 242, 179, 59);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                //Current
+                                if (information.Status == 0)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
-                            }
-                            //Incoming
-                            else if (information.Status == 1)
-                            {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 74, 148, 74);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
+                                }
+                                //Past
+                                else if (information.Status == -1)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 242, 179, 59);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
-                            }
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
+                                }
+                                //Incoming
+                                else if (information.Status == 1)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 74, 148, 74);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                            Label label = new Label();
-                            label.Content = firstname + " " + information.Surname;
-                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                            Grid.SetColumn(label, 0);
-                            Grid.SetRow(label, row);
-                            HomeGridScrollViewer.Children.Add(label);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                            label = new Label();
-                            label.Content = information.Name;
-                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                            Grid.SetColumn(label, 1);
-                            Grid.SetRow(label, row);
-                            HomeGridScrollViewer.Children.Add(label);
-
-                            label = new Label();
-                            label.Content = information.FromDate;
-                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                            Grid.SetColumn(label, 2);
-                            Grid.SetRow(label, row);
-                            HomeGridScrollViewer.Children.Add(label);
-
-                            label = new Label();
-                            label.Content = information.ToDate;
-                            label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                            Grid.SetColumn(label, 3);
-                            Grid.SetRow(label, row);
-                            HomeGridScrollViewer.Children.Add(label);
-
-                            row++;
-                        }
-                    }
-                }
-
-                else if (item.Content.ToString() == "Incoming")
-                {
-                    foreach (var information in GetSearched)
-                    {
-                        if (information.Success == 1)
-                        {
-                            //Declare children speciffications
-                            Button button = new Button();
-                            button.Name = "ReservationId" + information.Id;
-                            string firstname = information.Firstname.ToString();
-                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
-
-                            //Incoming
-                            if (information.Status == 1)
-                            {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 74, 148, 74);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
-
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
-
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
+                                }
 
                                 Label label = new Label();
                                 label.Content = firstname + " " + information.Surname;
@@ -2383,207 +2491,279 @@ namespace testroom
                             }
                         }
                     }
-                }
 
-                else if (item.Content.ToString() == "Past")
-                {
-                    foreach (var information in GetSearched)
+                    else if (item.Content.ToString() == "Incoming")
                     {
-                        if (information.Success == 1)
+                        foreach (var information in GetSearched)
                         {
-                            //Declare children speciffications
-                            Button button = new Button();
-                            button.Name = "ReservationId" + information.Id;
-                            string firstname = information.Firstname.ToString();
-                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
-
-                            //Incoming
-                            if (information.Status == -1)
+                            if (information.Success == 1)
                             {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 242, 179, 59);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                //Declare children speciffications
+                                Button button = new Button();
+                                button.Name = "ReservationId" + information.Id;
+                                string firstname = information.Firstname.ToString();
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                //Incoming
+                                if (information.Status == 1)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 74, 148, 74);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                                Label label = new Label();
-                                label.Content = firstname + " " + information.Surname;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 0);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
 
-                                label = new Label();
-                                label.Content = information.Name;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 1);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.FromDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 2);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.ToDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 3);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                row++;
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    row++;
+                                }
                             }
                         }
                     }
-                }
 
-                else if (item.Content.ToString() == "Current")
-                {
-                    foreach (var information in GetSearched)
+                    else if (item.Content.ToString() == "Past")
                     {
-                        if (information.Success == 1)
+                        foreach (var information in GetSearched)
                         {
-                            //Declare children speciffications
-                            Button button = new Button();
-                            button.Name = "ReservationId" + information.Id;
-                            string firstname = information.Firstname.ToString();
-                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                            //"\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
-
-                            //Incoming
-                            if (information.Status == 0)
+                            if (information.Success == 1)
                             {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                //Declare children speciffications
+                                Button button = new Button();
+                                button.Name = "ReservationId" + information.Id;
+                                string firstname = information.Firstname.ToString();
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                //Incoming
+                                if (information.Status == -1)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 242, 179, 59);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                                Label label = new Label();
-                                label.Content = firstname + " " + information.Surname;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 0);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
 
-                                label = new Label();
-                                label.Content = information.Name;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 1);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.FromDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 2);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.ToDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 3);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                row++;
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    row++;
+                                }
                             }
                         }
                     }
-                }
 
-                else if (item.Content.ToString() == "Dismissed")
-                {
-                    foreach (var information in GetSearched)
+                    else if (item.Content.ToString() == "Current")
                     {
-                        if (information.Success == 1)
+                        foreach (var information in GetSearched)
                         {
-                            //Declare children speciffications
-                            Button button = new Button();
-                            button.Name = "ReservationId" + information.Id;
-                            string firstname = information.Firstname.ToString();
-                            //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                            //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
-                            button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
-
-                            //Incoming
-                            if (information.Status == -2)
+                            if (information.Success == 1)
                             {
-                                SolidColorBrush myBrush = new SolidColorBrush();
-                                ColorAnimation myColorAnimation = new ColorAnimation();
-                                myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
-                                myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
-                                myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-                                button.BorderBrush = myBrush;
+                                //Declare children speciffications
+                                Button button = new Button();
+                                button.Name = "ReservationId" + information.Id;
+                                string firstname = information.Firstname.ToString();
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //"\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
 
-                                //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+                                //Incoming
+                                if (information.Status == 0)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 101, 101, 255);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
 
-                                //Add generated children to the grid
-                                Grid.SetColumn(button, col);
-                                Grid.SetRow(button, row);
-                                HomeGridScrollViewer.Children.Add(button);
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
 
-                                Label label = new Label();
-                                label.Content = firstname + " " + information.Surname;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 0);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
 
-                                label = new Label();
-                                label.Content = information.Name;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 1);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.FromDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 2);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                label = new Label();
-                                label.Content = information.ToDate;
-                                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
-                                Grid.SetColumn(label, 3);
-                                Grid.SetRow(label, row);
-                                HomeGridScrollViewer.Children.Add(label);
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
 
-                                col++;
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    row++;
+                                }
                             }
                         }
                     }
-                }
 
-                return true;
+                    else if (item.Content.ToString() == "Dismissed")
+                    {
+                        foreach (var information in GetSearched)
+                        {
+                            if (information.Success == 1)
+                            {
+                                //Declare children speciffications
+                                Button button = new Button();
+                                button.Name = "ReservationId" + information.Id;
+                                string firstname = information.Firstname.ToString();
+                                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                                //            "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                                button.Style = (Style)this.Resources["GeneratedReservationAndClassifficationButton"];
+
+                                //Incoming
+                                if (information.Status == -2)
+                                {
+                                    SolidColorBrush myBrush = new SolidColorBrush();
+                                    ColorAnimation myColorAnimation = new ColorAnimation();
+                                    myColorAnimation.To = Color.FromArgb(255, 255, 79, 79);
+                                    myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0));
+                                    myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
+                                    button.BorderBrush = myBrush;
+
+                                    //button.Click += new RoutedEventHandler(ShowSubjectsGrades);
+
+                                    //Add generated children to the grid
+                                    Grid.SetColumn(button, col);
+                                    Grid.SetRow(button, row);
+                                    HomeGridScrollViewer.Children.Add(button);
+
+                                    Label label = new Label();
+                                    label.Content = firstname + " " + information.Surname;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 0);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.Name;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 1);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.FromDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 2);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    label = new Label();
+                                    label.Content = information.ToDate;
+                                    label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                                    Grid.SetColumn(label, 3);
+                                    Grid.SetRow(label, row);
+                                    HomeGridScrollViewer.Children.Add(label);
+
+                                    col++;
+                                }
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
+
                 return false;
             }
         }
@@ -2620,7 +2800,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
 
                 //End the loading animation
                 LoadedAnimation();
@@ -2632,15 +2813,17 @@ namespace testroom
         //Add reservation button on reservations grid
         private async void AddReservationsBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
                 //Begin loading animation
                 LoadingAnimation();
+            try
+            {
 
                 //Fill the Combobox with all the classifficaitons
                 await Task.Delay(100);
 
-                ClearAll();
+                ClearReservationsScreen();
+                ClearCreateReservationScreen();
+
 
                 CreateReservationGridClassifficationCombobox.Items.Add("None");
                 CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
@@ -2692,16 +2875,14 @@ namespace testroom
                 //RowDefinition newrow = new RowDefinition();
                 //newrow.Height = new GridLength(150);
                 //CreateReservationGridSideGuestAddedGrid.RowDefinitions.Add(newrow);
-
-                //End the loading animation
-                LoadedAnimation();
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError(1, "create reservation screen");
+                ErrorWindow.ErrorException = ex.Message;
+            }
 
                 LoadedAnimation();
-            }
         }
 
         public void BlackOutPastDates()
@@ -2717,7 +2898,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError(1.1, "blackout calendars");
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3042,17 +3224,17 @@ namespace testroom
                                     }
                                     else
                                     {
-                                        PublicCommands.ShowError("Writtings in the server is currupted. Please contact system support!");
+                                        PublicCommands.ShowError(2, null);
                                     }
                                 }
                                 else
                                 {
-                                    PublicCommands.ShowError("Writing in the server is currupted. Please contact system support!");
+                                    PublicCommands.ShowError(2, null);
                                 }
                             }
                             else
                             {
-                                PublicCommands.ShowError("Reservation culdn't be created. Please check your internet connection and try again.");
+                                PublicCommands.ShowError(2, null);
                             }
                         }
                         else
@@ -3063,20 +3245,21 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(ex.Message);
-                        //PublicCommands.ShowError("Something is wrong with the server. Please check your internet connection and try again.");
+                        PublicCommands.ShowError(2, null);
+                        ErrorWindow.ErrorException = ex.Message;
                     }
 
                     LoadedAnimation();
                 }
                 else
                 {
-                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    PublicCommands.ShowError(2, null);
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3140,14 +3323,15 @@ namespace testroom
                 }
                 else
                 {
-                    PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                    PublicCommands.ShowError(3, null);
                 }
 
                 CreateReservationProgress -= 1;
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
+                PublicCommands.ShowError(3, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3311,7 +3495,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Please contact system support!");
+                PublicCommands.ShowError(3, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3345,12 +3530,14 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError("Please contact system support!");
+                    PublicCommands.ShowError(3, null);
+                    ErrorWindow.ErrorException = ex.Message;
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something is wrong with the inputed data.");
+                PublicCommands.ShowError(3, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3377,12 +3564,14 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError("Please contact system support!");
+                    PublicCommands.ShowError(3, null);
+                    ErrorWindow.ErrorException = ex.Message;
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Please contact system support!");
+                PublicCommands.ShowError(3, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
 
@@ -3423,8 +3612,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support.");
-                PublicCommands.ShowError(ex.GetBaseException().Message);
+                PublicCommands.ShowError(3, null);
+                ErrorWindow.ErrorException = ex.Message;
                 LoadedAnimation();
             }
         }
@@ -3592,7 +3781,7 @@ namespace testroom
 
             try
             {
-                ClearAll();
+                ClearClassifficationsScreen();
 
                 //Get json file for all the reservations
                 dynamic getall = ClassifficationCommands.GetAll();
@@ -3655,7 +3844,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(ex.Message);
+                        PublicCommands.ShowError(0, "classiffications screen");
+                        ErrorWindow.ErrorException = ex.Message;
                     }
                 }
                 else
@@ -3670,7 +3860,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(0, "classiffications screen");
+                ErrorWindow.ErrorException = ex.Message;
 
                 return false;
             }
@@ -3780,7 +3971,8 @@ namespace testroom
 
         private void CreateClassifficationGridBackBtn_Click(object sender, RoutedEventArgs e)
         {
-            ClearAll();
+            ClearClassifficationsScreen();
+            ClearCreateClassifficationScreen();
             ClassifficationScreen.Visibility = Visibility.Visible;
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
         }
@@ -3798,7 +3990,7 @@ namespace testroom
         {
             await Task.Delay(100);
 
-            ClearAll();
+            ClearDashboardScreen();
 
             dynamic classiffications = ReservationCommands.GetCalendarClassiffications();
             DateTime maxdate = DateTime.Now;
@@ -4063,7 +4255,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError("Something went wrong. Please contact support.");
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
                 }
             }
         }
@@ -4117,7 +4310,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError("Something went wrong. Please contact system support!");
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
 
             LoadedAnimation();

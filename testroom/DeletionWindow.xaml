@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:resorttestroom"
         mc:Ignorable="d"
-        Title="DeletionWindow" WindowStyle="None" Height="300" Width="500" Background="{DynamicResource BackgroundBrush}">
+        Title="Are you sure?"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="300" Width="500" Background="{DynamicResource BackgroundBrush}">
     <Window.Resources>
 
         <SolidColorBrush x:Key="DashboardButtonColor1"

@@ -22,6 +22,7 @@ namespace testroom
     public partial class ErrorWindow : Window
     {
         public static string ErrorMessage;
+        public static string ErrorException;
         System.Media.SoundPlayer player;
 
         public ErrorWindow()

@@ -286,7 +286,7 @@
             <Setter Property="Background"
                     Value="Transparent" />
             <Setter Property="Width"
-                    Value="25" />
+                    Value="20" />
             <Setter Property="BorderThickness"
                     Value="0" />
             <Setter Property="Template">
@@ -2981,7 +2981,7 @@
 
                 <Border Grid.Row="1"
                         CornerRadius="15"
-                        Margin="5, 5, 30, 30">
+                        Margin="5, 5, 25, 25">
                     <Border.Background>
                         <SolidColorBrush Color="{DynamicResource SecondaryColor}"
                                          Opacity="0.5" />
@@ -3002,7 +3002,7 @@
                                       Grid.Column="1"
                                       VerticalScrollBarVisibility="Auto"
                                       HorizontalScrollBarVisibility="Auto"
-                                      Margin="-125, -50, -25, -25"
+                                      Margin="-125, -50, -20, -20"
                                       ScrollChanged="DashboardClassifficationsGrid_ScrollChanged">
                             <ScrollViewer.Resources>
                                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
