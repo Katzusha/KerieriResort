@@ -2274,174 +2274,207 @@
 
 
         <!-- LOGIN GRID -->
-        <Grid x:Name="LogInScreen" Visibility="Hidden">
-            <Image Source="Images/kerierilogo.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="loginusernameinput" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" 
-                     HorizontalContentAlignment="Center" 
-                     VerticalContentAlignment="Center" Margin="0,-75,0,0" KeyUp="loginusernameinput_KeyUp" Style="{StaticResource TextBoxInput}"/>
-            <PasswordBox x:Name="loginpasswordinput" HorizontalAlignment="Center" VerticalAlignment="Center" Width="450" Margin="0,0,0,-100" Height="50" 
-                         Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24" Cursor="IBeam" GotFocus="PasswordBoxInput_GotFocus" LostFocus="PasswordBoxInput_LostFocus" FontWeight="Bold" KeyUp="loginpasswordinput_KeyUp">
-                <PasswordBox.Resources>
-                    <Style x:Key="{x:Type PasswordBox}"
-                           TargetType="{x:Type PasswordBox}">
-                        <Setter Property="Foreground"
-                                Value="{DynamicResource FontBrush}" />
-                        <Setter Property="Background"
-                                Value="{DynamicResource SecondaryBrush}" />
-                        <Setter Property="Height"
-                                Value="50" />
-                        <Setter Property="Width"
-                                Value="450" />
-                        <Setter Property="FontSize"
-                                Value="24" />
-                        <Setter Property="VerticalContentAlignment"
-                                Value="Center" />
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Center" />
-                        <Setter Property="Cursor"
-                                Value="IBeam" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type PasswordBox}">
-                                    <Border Name="Border"
-                                            CornerRadius="25"
-                                            Padding="0">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{DynamicResource SecondaryColor}" />
-                                        </Border.Background>
-                                        <Border.BorderBrush>
-                                            <SolidColorBrush Color="Transparent" />
-                                        </Border.BorderBrush>
-                                        <ScrollViewer Margin="0, 0, 0, 0"
-                                                      x:Name="PART_ContentHost"
-                                                      MinHeight="50"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Top"
-                                                      MinWidth="450" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </PasswordBox.Resources>
-            </PasswordBox>
-            <Label x:Name="loginusernamelabel"
-                   Content="Username :"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Margin="-300,-155,0,0"
-                   Style="{DynamicResource Label}" />
-            <Label x:Name="loginpasswordlabel"
-                   Content="Password :"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Margin="-300,20,0,0"
-                   Style="{DynamicResource Label}" />
-            <Button Style="{DynamicResource BlueButton}"
-                    x:Name="loginloginbutton"
-                    Content="Log in"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="150"
-                    Height="50"
-                    Foreground="White"
-                    FontSize="24"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial"
-                    Margin="0,0,-450,-240"
-                    Click="loginloginbutton_Click"
-                    MouseEnter="BlueBtn_Enter"
-                    MouseLeave="BlueBtn_Leave" />
-            <Button Style="{DynamicResource RedButton}"
-                    x:Name="loginexitbutton"
-                    Content="Exit"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="150"
-                    Height="50"
-                    BorderBrush="{x:Null}"
-                    Foreground="White"
-                    FontSize="24"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    FontFamily="Arial"
-                    Margin="0,0,-100,-240"
-                    Click="loginexitbutton_Click"
-                    MouseEnter="RedBtn_Enter"
-                    MouseLeave="RedBtn_Leave" />
-            <TextBox x:Name="loginfaillabel"
-                     Visibility="Hidden"
-                     HorizontalAlignment="Center"
-                     TextWrapping="Wrap"
-                     Text="Unvalid username or password!"
-                     VerticalAlignment="Center"
-                     Background="{x:Null}"
-                     BorderBrush="{x:Null}"
-                     Foreground="Red"
-                     SelectionBrush="{x:Null}"
-                     SelectionTextBrush="{x:Null}"
-                     FontSize="24"
-                     FontFamily="Arial"
-                     TextAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     FontWeight="Bold"
-                     IsReadOnly="True"
-                     Width="450"
-                     Margin="0,-225,0,0">
-                <TextBox.Resources>
-                    <Style x:Key="{x:Type TextBox}"
-                           TargetType="{x:Type TextBox}">
-                        <Setter Property="SnapsToDevicePixels"
-                                Value="true" />
-                        <Setter Property="OverridesDefaultStyle"
-                                Value="true" />
-                        <Setter Property="KeyboardNavigation.TabNavigation"
-                                Value="None" />
-                        <Setter Property="FocusVisualStyle"
-                                Value="{x:Null}" />
-                        <Setter Property="FontFamily"
-                                Value="Verdana" />
-                        <Setter Property="MinWidth"
-                                Value="120" />
-                        <Setter Property="MinHeight"
-                                Value="20" />
-                        <Setter Property="AllowDrop"
-                                Value="true" />
-                        <Setter Property="Foreground"
-                                Value="White" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type TextBox}">
-                                    <Border x:Name="Border"
-                                            CornerRadius="10"
-                                            Padding="2"
-                                            BorderThickness="1"
-                                            Background="Transparent">
-                                        <Border.BorderBrush>
-                                            <SolidColorBrush Color="Transparent" />
-                                        </Border.BorderBrush>
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal" />
-                                                <VisualState x:Name="Disabled" />
-                                                <VisualState x:Name="MouseOver" />
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                        <ScrollViewer x:Name="PART_ContentHost" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
+        <Grid x:Name="LogInScreen" Visibility="Visible">
+            <Border Height="300"
+                    Width="525"
+                    CornerRadius="25">
+                <Border.Background>
+                    <SolidColorBrush Color="{DynamicResource PrimaryColor}"
+                                     Opacity="0.1" />
+                </Border.Background>
+                <Grid>
+                    <TextBox x:Name="loginusernameinput"
+                             HorizontalAlignment="Center"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Margin="0,-120,0,0"
+                             KeyUp="loginusernameinput_KeyUp"
+                             Style="{StaticResource TextBoxInput}" />
+                    <PasswordBox x:Name="loginpasswordinput"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Width="450"
+                                 Margin="0,0,0,-80"
+                                 Height="50"
+                                 Foreground="White"
+                                 HorizontalContentAlignment="Center"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="24"
+                                 Cursor="IBeam"
+                                 GotFocus="PasswordBoxInput_GotFocus"
+                                 LostFocus="PasswordBoxInput_LostFocus"
+                                 FontWeight="Bold"
+                                 KeyUp="loginpasswordinput_KeyUp">
+                        <PasswordBox.Resources>
+                            <Style x:Key="{x:Type PasswordBox}"
+                                   TargetType="{x:Type PasswordBox}">
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource FontBrush}" />
+                                <Setter Property="Background"
+                                        Value="{DynamicResource SecondaryBrush}" />
+                                <Setter Property="Height"
+                                        Value="50" />
+                                <Setter Property="Width"
+                                        Value="450" />
+                                <Setter Property="FontSize"
+                                        Value="24" />
+                                <Setter Property="VerticalContentAlignment"
+                                        Value="Center" />
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Center" />
+                                <Setter Property="Cursor"
+                                        Value="IBeam" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                                            <Border Name="Border"
+                                                    CornerRadius="25"
+                                                    Padding="0">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{DynamicResource SecondaryColor}" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="Transparent" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0, 0, 0, 0"
+                                                              x:Name="PART_ContentHost"
+                                                              MinHeight="50"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Top"
+                                                              MinWidth="450" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </PasswordBox.Resources>
+                    </PasswordBox>
+                    <Label x:Name="loginusernamelabel"
+                           Content="Username :"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,-200,0,0"
+                           Style="{DynamicResource Label}" />
+                    <Label x:Name="loginpasswordlabel"
+                           Content="Password :"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0, 0,0,0"
+                           Style="{DynamicResource Label}" />
+                    <Button Style="{DynamicResource BlueButton}"
+                            x:Name="loginloginbutton"
+                            Content="Log in"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="150"
+                            Height="50"
+                            Foreground="White"
+                            FontSize="24"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial"
+                            Margin="0,0,-325,-225"
+                            Click="loginloginbutton_Click"
+                            MouseEnter="BlueBtn_Enter"
+                            MouseLeave="BlueBtn_Leave" />
+                    <Button Style="{DynamicResource RedButton}"
+                            x:Name="loginexitbutton"
+                            Content="Exit"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="150"
+                            Height="50"
+                            BorderBrush="{x:Null}"
+                            Foreground="White"
+                            FontSize="24"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Arial"
+                            Margin="0,0,0,-225"
+                            Click="loginexitbutton_Click"
+                            MouseEnter="RedBtn_Enter"
+                            MouseLeave="RedBtn_Leave" />
+                    <TextBox x:Name="loginfaillabel"
+                             Visibility="Hidden"
+                             HorizontalAlignment="Center"
+                             TextWrapping="Wrap"
+                             Text="Unvalid username or password!"
+                             VerticalAlignment="Center"
+                             Background="{x:Null}"
+                             BorderBrush="{x:Null}"
+                             Foreground="Red"
+                             SelectionBrush="{x:Null}"
+                             SelectionTextBrush="{x:Null}"
+                             FontSize="24"
+                             FontFamily="Arial"
+                             TextAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             FontWeight="Bold"
+                             IsReadOnly="True"
+                             Width="450"
+                             Margin="0,-225,0,0">
+                        <TextBox.Resources>
+                            <Style x:Key="{x:Type TextBox}"
+                                   TargetType="{x:Type TextBox}">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="true" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="true" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="FontFamily"
+                                        Value="Verdana" />
+                                <Setter Property="MinWidth"
+                                        Value="120" />
+                                <Setter Property="MinHeight"
+                                        Value="20" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground"
+                                        Value="White" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBox}">
+                                            <Border x:Name="Border"
+                                                    CornerRadius="10"
+                                                    Padding="2"
+                                                    BorderThickness="1"
+                                                    Background="Transparent">
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="Transparent" />
+                                                </Border.BorderBrush>
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup x:Name="CommonStates">
+                                                        <VisualState x:Name="Normal" />
+                                                        <VisualState x:Name="Disabled" />
+                                                        <VisualState x:Name="MouseOver" />
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                                <ScrollViewer x:Name="PART_ContentHost" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </Grid>
+            </Border>
+            <Image Source="Images/kerierilogo.png"
+                   Width="150"
+                   Height="150"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top" />
         </Grid>
 
 
         <!-- CONTROL GRID -->
         <Grid x:Name="ControlGrid"
-              Visibility="Visible">
+              Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition />
