@@ -408,7 +408,7 @@
                     Value="{DynamicResource PrimaryBrush}" />
             <!-- POTREBNO DODAT VALUE-->
             <Setter Property="Margin"
-                    Value="102, 2, 102, 3" />
+                    Value="77, 2, 77, 3" />
             <Setter Property="Cursor"
                     Value="Hand" />
             <Setter Property="Foreground"

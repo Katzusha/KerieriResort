@@ -9,6 +9,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource PrimaryBrush}"
+        BorderThickness="2"
         Height="300" Width="500" Background="{DynamicResource BackgroundBrush}">
     <Window.Resources>
 

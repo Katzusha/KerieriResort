@@ -29,7 +29,7 @@ namespace testroom
         {
             InitializeComponent();
 
-            ErrorMessageOutput.Text = ErrorMessage;
+            ErrorMessageOutput.Text = ErrorException;
 
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             if (configuration.AppSettings.Settings["HaHaFunny"].Value == "true")

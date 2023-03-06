@@ -22,9 +22,9 @@ namespace testroom
             string postData = "DatabaseName=" + MainWindow.DatabaseName;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            //request.ContentType = "application/x-www-form-urlencoded";
-            // Set the ContentLength property of the WebRequest.
-            //request.ContentLength = byteArray.Length;
+            request.ContentType = "application/x-www-form-urlencoded";
+            //Set the ContentLength property of the WebRequest.
+                request.ContentLength = byteArray.Length;
             // Get the request stream.
             Stream dataStream = request.GetRequestStream();
             // Write the data to the request stream.
@@ -139,7 +139,7 @@ namespace testroom
             string postData = "DatabaseName=" + MainWindow.DatabaseName + "&ClassifficationId=" + ID.ToString();
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            //request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/x-www-form-urlencoded";
             // Set the ContentLength property of the WebRequest.
             request.ContentLength = byteArray.Length;
             // Get the request stream.

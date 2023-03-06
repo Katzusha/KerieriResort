@@ -47,7 +47,7 @@ namespace testroom
         public static string Username = "";
 
         //Set public connection to the API files
-        public static string APIconnection = "https://kerieri.eu/API";
+        public static string APIconnection = "https://api.kerieri.eu";
         #endregion
 
         //Encryption and Decryption is use from external source becouse of the combination of C# encryption/decryption and php encryption/decryption
@@ -200,14 +200,14 @@ namespace testroom
             ControlGrid.Visibility = Visibility.Hidden;
             LogInScreen.Visibility = Visibility.Visible;
 
-            ReservationsScreen.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Hidden;
             HomeGridNoResultsLabel.Visibility = Visibility.Hidden;
             ClassifficationScreen.Visibility = Visibility.Hidden;
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
             ReservationGridSpanSelection.SelectedIndex = 0;
-            DashboardScreen.Visibility = Visibility.Hidden;
+            DashboardScreen.Visibility = Visibility.Visible;
 
             StartClock();
 
@@ -1784,18 +1784,40 @@ namespace testroom
 
             string username = Encryption(loginusernameinput.Text);
             string password = Encryption(loginpasswordinput.Password.ToString());
+            bool loginsuccess = false;
 
             try
             {
                 if (LogInCommands.UserLogIn(username, password))
                 {
+                    loginsuccess = true;
+                }
+                else
+                {
+                    //If there is no user in database then show error label
+                    loginfaillabel.Visibility = Visibility.Visible;
 
+                    loginsuccess = false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
+            }
+
+            try
+            {
+                if (loginsuccess)
+                {
                     Username = username;
 
                     ClearLoginScreen();
 
                     //Generate all reservations from users database
-                    var isGetAllSearched = await GetAllReservations(null);
+                    var CalendarInfo = await GetCalendarInfo();
 
                     ControlGrid.Visibility = Visibility.Visible;
 
@@ -1815,13 +1837,6 @@ namespace testroom
 
                     loginfaillabel.Visibility = Visibility.Hidden;
                 }
-                else
-                {
-                    //If there is no user in database then show error label
-                    loginfaillabel.Visibility = Visibility.Visible;
-                }
-
-
             }
             catch (Exception ex)
             {
@@ -1845,18 +1860,40 @@ namespace testroom
 
                 string username = Encryption(loginusernameinput.Text);
                 string password = Encryption(loginpasswordinput.Password.ToString());
+                bool loginsuccess = false;
 
                 try
                 {
                     if (LogInCommands.UserLogIn(username, password))
                     {
+                        loginsuccess = true;
+                    }
+                    else
+                    {
+                        //If there is no user in database then show error label
+                        loginfaillabel.Visibility = Visibility.Visible;
 
+                        loginsuccess = false;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
+                }
+
+                try
+                {
+                    if (loginsuccess)
+                    {
                         Username = username;
 
                         ClearLoginScreen();
 
                         //Generate all reservations from users database
-                        var isGetAllSearched = await GetAllReservations(null);
+                        var CalendarInfo = await GetCalendarInfo();
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1876,13 +1913,6 @@ namespace testroom
 
                         loginfaillabel.Visibility = Visibility.Hidden;
                     }
-                    else
-                    {
-                        //If there is no user in database then show error label
-                        loginfaillabel.Visibility = Visibility.Visible;
-                    }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -1907,18 +1937,40 @@ namespace testroom
 
                 string username = Encryption(loginusernameinput.Text);
                 string password = Encryption(loginpasswordinput.Password.ToString());
+                bool loginsuccess = false;
 
                 try
                 {
                     if (LogInCommands.UserLogIn(username, password))
                     {
+                        loginsuccess = true;
+                    }
+                    else
+                    {
+                        //If there is no user in database then show error label
+                        loginfaillabel.Visibility = Visibility.Visible;
 
+                        loginsuccess = false;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
+                }
+
+                try
+                {
+                    if (loginsuccess)
+                    {
                         Username = username;
 
                         ClearLoginScreen();
 
                         //Generate all reservations from users database
-                        var isGetAllSearched = await GetAllReservations(null);
+                        var CalendarInfo = await GetCalendarInfo();
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1938,13 +1990,6 @@ namespace testroom
 
                         loginfaillabel.Visibility = Visibility.Hidden;
                     }
-                    else
-                    {
-                        //If there is no user in database then show error label
-                        loginfaillabel.Visibility = Visibility.Visible;
-                    }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -2056,12 +2101,14 @@ namespace testroom
         private void MenuLogOutBtn_Click(object sender, RoutedEventArgs e)
         {
             //Reset the grid view
-            ReservationsScreen.Visibility = Visibility.Visible;
+            ReservationsScreen.Visibility = Visibility.Hidden;
             CreateReservationScreen.Visibility = Visibility.Hidden;
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
             ClassifficationScreen.Visibility = Visibility.Hidden;
             SettingsScreen.Visibility = Visibility.Hidden;
-            DashboardScreen.Visibility = Visibility.Hidden;
+            DashboardScreen.Visibility = Visibility.Visible;
+
+            ClearDashboardScreen();
 
             //Animation to show login screen
             ThicknessAnimation LogInAnimation = new ThicknessAnimation();
@@ -2134,7 +2181,7 @@ namespace testroom
                 dynamic getall = ReservationCommands.GetAll();
 
 
-                if (getall != null)
+                if (getall.First.Success == 1)
                 {
                     try
                     {
@@ -2343,8 +2390,11 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(2, null);
-                        ErrorWindow.ErrorException = ex.Message;
+                        if (ReservationsScreen.Visibility == Visibility.Visible)
+                        {
+                            PublicCommands.ShowError(2, null);
+                            ErrorWindow.ErrorException = ex.Message;
+                        }
                     }
                 }
                 else
@@ -2359,8 +2409,11 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
-                ErrorWindow.ErrorException = ex.Message;
+                if (ReservationsScreen.Visibility == Visibility.Visible)
+                {
+                    PublicCommands.ShowError(2, null);
+                    ErrorWindow.ErrorException = ex.Message;
+                }
 
                 return false;
             }
