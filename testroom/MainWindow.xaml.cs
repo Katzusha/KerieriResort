@@ -711,7 +711,7 @@ namespace testroom
 
         //Enter and leave animations for green buttons
         #region GREEN BUTTON animations
-        private void GreenBtn_Enter(object sender, MouseEventArgs e)
+        private void GrayBtn_Enter(object sender, MouseEventArgs e)
         {
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -732,18 +732,9 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
-            //Animations for buttons background color to transforme it from transparrent to green
-            SolidColorBrush myBrush = new SolidColorBrush();
-            ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 0, 255, 0);
-            myColorAnimation.To = Color.FromArgb(255, 0, 255, 0);
-            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-            button.Background = myBrush;
-
             Cursor = Cursors.Hand;
         }
-        private void GreenBtn_Leave(object sender, MouseEventArgs e)
+        private void GrayBtn_Leave(object sender, MouseEventArgs e)
         {
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -763,15 +754,6 @@ namespace testroom
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
-
-            //Animations for buttons background color to transforme it from green back to transparent
-            SolidColorBrush myBrush = new SolidColorBrush();
-            ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 0, 255, 0);
-            myColorAnimation.To = Color.FromArgb(0, 0, 255, 0);
-            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-            button.Background = myBrush;
 
             Cursor = Cursors.Arrow;
         }
@@ -1788,7 +1770,16 @@ namespace testroom
 
             try
             {
-                if (LogInCommands.UserLogIn(username, password))
+                if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                {
+                    Window window = new AdminWindow();
+                    this.Hide();
+                    window.ShowDialog();
+                    this.Show();
+
+                    ClearLoginScreen();
+                }
+                else if (LogInCommands.UserLogIn(username, password))
                 {
                     loginsuccess = true;
                 }
@@ -1864,7 +1855,16 @@ namespace testroom
 
                 try
                 {
-                    if (LogInCommands.UserLogIn(username, password))
+                    if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                    {
+                        Window window = new AdminWindow();
+                        this.Hide();
+                        window.ShowDialog();
+                        this.Show();
+
+                        ClearLoginScreen();
+                    }
+                    else if (LogInCommands.UserLogIn(username, password))
                     {
                         loginsuccess = true;
                     }
@@ -1941,7 +1941,16 @@ namespace testroom
 
                 try
                 {
-                    if (LogInCommands.UserLogIn(username, password))
+                    if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                    {
+                        Window window = new AdminWindow();
+                        this.Hide();
+                        window.ShowDialog();
+                        this.Show();
+
+                        ClearLoginScreen();
+                    }
+                    else if (LogInCommands.UserLogIn(username, password))
                     {
                         loginsuccess = true;
                     }

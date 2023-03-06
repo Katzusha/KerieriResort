@@ -2274,7 +2274,7 @@
 
 
         <!-- LOGIN GRID -->
-        <Grid x:Name="LogInScreen" Visibility="Visible">
+        <Grid x:Name="LogInScreen" Visibility="Hidden">
             <Border Height="300"
                     Width="525"
                     CornerRadius="25">
@@ -2404,7 +2404,7 @@
                              VerticalAlignment="Center"
                              Background="{x:Null}"
                              BorderBrush="{x:Null}"
-                             Foreground="Red"
+                             Foreground="{DynamicResource FalseBrush}"
                              SelectionBrush="{x:Null}"
                              SelectionTextBrush="{x:Null}"
                              FontSize="24"
@@ -2414,7 +2414,7 @@
                              FontWeight="Bold"
                              IsReadOnly="True"
                              Width="450"
-                             Margin="0,-225,0,0">
+                             Margin="0,-250,0,0">
                         <TextBox.Resources>
                             <Style x:Key="{x:Type TextBox}"
                                    TargetType="{x:Type TextBox}">
