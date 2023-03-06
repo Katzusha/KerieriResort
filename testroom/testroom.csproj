@@ -19,6 +19,8 @@
     <None Remove="Images\dashboardicon.png" />
     <None Remove="Images\logouticon.png" />
     <None Remove="kerieri.png" />
+    <None Remove="Screenshot_2.png" />
+    <None Remove="Screenshot_3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +45,8 @@
     <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
+    <Resource Include="Images\leafpicture1.png" />
+    <Resource Include="Images\leafpicture2.png" />
   </ItemGroup>
 
   <ItemGroup>

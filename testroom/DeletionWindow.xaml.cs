@@ -14,40 +14,19 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace testroom
+namespace resorttestroom
 {
     /// <summary>
-    /// Interaction logic for ErrorWindow.xaml
+    /// Interaction logic for DeletionWindow.xaml
     /// </summary>
-    public partial class ErrorWindow : Window
+    public partial class DeletionWindow : Window
     {
-        public static string ErrorMessage;
-        public static string ErrorException;
-        System.Media.SoundPlayer player;
-
-        public ErrorWindow()
+        public DeletionWindow()
         {
             InitializeComponent();
-
-            ErrorMessageOutput.Text = ErrorException;
-
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            if (configuration.AppSettings.Settings["HaHaFunny"].Value == "true")
-            {
-                string[] randomerror = {"I have no clue what just went wrong. Just do the basic procedures and check things up like" +
-            " like internet and stuf \nHere is some useles error code: C30034", "Something went wrong with the output. Please check all the inserted " +
-            "data and try again.\nError code: C40012", "Opsie wipsie something went wrong!\nPlease check some useles internet stuf and go cry in ur room.\n" +
-            "Here is the error code becouse I Will Not explain it to you: C42069", "Error.... \n\n Just error"};
-
-                Random rand = new Random();
-                int index = rand.Next(randomerror.Length);
-
-                ErrorMessageOutput.Text = randomerror[index];
-
-                player = new System.Media.SoundPlayer(@"D:\Projects\Kerieri\Kerieri\Sounds\errorsound.wav");
-                player.Play();
-            }
         }
+
+        public static bool confirmed = false;
 
         //Enter and leave animations for red buttons
         #region RED BUTTON animations
@@ -168,8 +147,15 @@ namespace testroom
         }
         #endregion
 
-        private void okbutton_Click(object sender, RoutedEventArgs e)
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
+            confirmed = false;
+            this.Close();
+        }
+
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
+        {
+            confirmed = true;
             this.Close();
         }
     }
