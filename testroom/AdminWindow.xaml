@@ -333,15 +333,31 @@
                     Value="Center" />
         </Style>
 
-        <Style x:Key="GeneratedDashboardButton"
+        <Style x:Key="GeneratedReservationAndClassifficationLabel"
+               TargetType="Label">
+            <Setter Property="IsHitTestVisible"
+                    Value="False" />
+            <Setter Property="FontSize"
+                    Value="26px" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource FontBrush}" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+        
+        <Style x:Key="GeneratedCompanyButton"
                TargetType="{x:Type Button}">
+            <EventSetter Event="Click"
+                         Handler="ClientBtn_Click" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Left" />
             <Setter Property="Background"
                     Value="{DynamicResource PrimaryBrush}" />
             <!-- POTREBNO DODAT VALUE-->
             <Setter Property="Margin"
-                    Value="77, 2, 77, 3" />
+                    Value="2, 2, 2, 2" />
             <Setter Property="Cursor"
                     Value="Hand" />
             <Setter Property="Foreground"
@@ -533,7 +549,12 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto"
                           Margin="10, 10, 10, 10">
-                <Grid x:Name="AdminScreenCompanysGrid"/>
+                <Grid x:Name="AdminScreenCompanysGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                </Grid>
             </ScrollViewer>
         </Border>
 

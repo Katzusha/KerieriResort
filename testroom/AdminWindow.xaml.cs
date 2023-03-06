@@ -1,4 +1,6 @@
 ﻿using Google.Protobuf.Reflection;
+using Microsoft.VisualBasic;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,17 +27,69 @@ namespace resorttestroom
         public AdminWindow()
         {
             InitializeComponent();
+
+            GenerateClients();
         }
 
         public async void GenerateClients()
         {
-            dynamic clients = await AdminCommands.GetClients();
+            dynamic clients = AdminCommands.GetClients();
+
+            int row = 0;
 
             foreach(var information in clients)
             {
-                AdminScreenCompanysGrid.RowDefinitions.Add(new RowDefinition());
+                RowDefinition newrow = new RowDefinition();
+                newrow.Height = new GridLength(50);
+                AdminScreenCompanysGrid.RowDefinitions.Add(newrow);
 
-                Button btn = new Button();
+                //Declare children speciffications
+                Button button = new Button();
+                button.Name = "ClientId" + information.Id;
+                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
+                //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
+                button.Style = (Style)this.Resources["GeneratedCompanyButton"];
+
+                //Add generated children to the grid
+                Grid.SetColumn(button, 0);
+                Grid.SetColumnSpan(button, 2);
+                Grid.SetRow(button, row);
+                AdminScreenCompanysGrid.Children.Add(button);
+
+                Label label = new Label();
+                label.Content = information.Name.ToString();
+                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                Grid.SetColumn(label, 0);
+                Grid.SetRow(label, row);
+                AdminScreenCompanysGrid.Children.Add(label);
+                label = new Label();
+                label.Content = information.DatabaseName.ToString();
+                label.Style = (Style)this.Resources["GeneratedReservationAndClassifficationLabel"];
+                Grid.SetColumn(label, 1);
+                Grid.SetRow(label, row);
+                AdminScreenCompanysGrid.Children.Add(label);
+
+                row++;
+            }
+        }
+
+        private void ClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            dynamic clientinfo = AdminCommands.GetClientsInfo(btn.Name.ToString().Replace("ClientId", ""));
+
+            foreach(var information in clientinfo)
+            {
+                AdminScreenCompanyNameInput.Text = information.Name.ToString();
+                AdminScreenCompanyDescriptionInput.Text = information.Description.ToString();
+                AdminScreenCompanyEmailInput.Text = information.InfoEmail.ToString();
+                AdminScreenCompanyPhoneNumberInput.Text = information.PhoneNumber.ToString();
+                AdminScreenCompanyStationaryNumberInput.Text = information.StationaryNumber.ToString();
+                AdminScreenCompanyCountryInput.Text = information.Country.ToString();
+                AdminScreenPostNumberInput.Text = information.PostCode.ToString();
+                AdminScreenAddressInput.Text = information.Address.ToString();
+                AdminScreenDatabaseInput.Text = information.DatabaseName.ToString();
             }
         }
 
