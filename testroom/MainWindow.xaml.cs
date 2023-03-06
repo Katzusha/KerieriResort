@@ -4048,11 +4048,11 @@ namespace testroom
             while (true)
             {
                 ColumnDefinition newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(200);
+                newcol.Width = new GridLength(150);
                 DashboardClassifficationsGrid.ColumnDefinitions.Add(newcol);
 
                 newcol = new ColumnDefinition();
-                newcol.Width = new GridLength(200);
+                newcol.Width = new GridLength(150);
                 DashboardClassifficationsGridColumns.ColumnDefinitions.Add(newcol);
 
 
@@ -4138,7 +4138,7 @@ namespace testroom
                 }
             }
 
-            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(currentdate) - 1) * 200);
+            DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(currentdate) - 1) * 150);
 
             return true;
         }
