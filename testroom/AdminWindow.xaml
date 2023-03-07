@@ -6,13 +6,14 @@
         xmlns:local="clr-namespace:resorttestroom"
         mc:Ignorable="d"
         Title="AdminWindow"
-        Height="1074"
-        Width="1082"
+        Height="1142"
+        Width="1281"
         Background="{DynamicResource BackgroundBrush}"
         WindowStyle="None"
         BorderBrush="{DynamicResource TrueBrush}"
         BorderThickness="2"
         ResizeMode="NoResize"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
@@ -544,141 +545,143 @@
 
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Border CornerRadius="25"
-                Grid.Column="0"
-                Margin="5, 5, 5, 100">
-            <Border.Background>
-                <SolidColorBrush Color="{DynamicResource PrimaryColor}"
-                                 Opacity="0.1" />
-            </Border.Background>
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Auto"
-                          Margin="10, 10, 10, 10">
-                <Grid x:Name="AdminScreenCompanysGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                </Grid>
-            </ScrollViewer>
-        </Border>
+        <Grid x:Name="ClientsScreen"
+              MaxHeight="900"
+              MaxWidth="1000"
+              Visibility="Visible"
+              Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="25"
+                    Grid.Column="0"
+                    Margin="5, 5, 5, 100">
+                <Border.Background>
+                    <SolidColorBrush Color="{DynamicResource PrimaryColor}"
+                                     Opacity="0.1" />
+                </Border.Background>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              Margin="10, 10, 10, 10">
+                    <Grid x:Name="AdminScreenCompanysGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
 
-        <Grid VerticalAlignment="Bottom"
-              Height="100"
-              HorizontalAlignment="Center">
-            <Button x:Name="AdminScreenAddClientBtn"
-                    Style="{DynamicResource GrayButton}"
-                    Content="Add client"
-                    Click="AdminScreenAddClientBtn_Click" />
-        </Grid>
+            <Grid VerticalAlignment="Bottom"
+                  Height="100"
+                  HorizontalAlignment="Center">
+                <Button x:Name="AdminScreenAddClientBtn"
+                        Style="{DynamicResource GrayButton}"
+                        Content="Add client"
+                        Click="AdminScreenAddClientBtn_Click" />
+            </Grid>
 
-        <Button x:Name="AdminScreenExitBtn"
-                Style="{DynamicResource RedButton}"
-                Content="Exit"
-                Margin="0, -900, -325, 0"
-                Grid.Column="1"
-                Click="Button_Click" />
+            <Label Content="Company name:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, -780, 0, 0" />
+            <TextBox x:Name="AdminScreenCompanyNameInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, -700, 0, 0" />
 
-        <Label Content="Company name:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, -780, 0, 0" />
-        <TextBox x:Name="AdminScreenCompanyNameInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, -700, 0, 0" />
+            <Label Content="Description:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, -580, 0, 0" />
+            <TextBox x:Name="AdminScreenCompanyDescriptionInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, -500, 0, 0" />
 
-        <Label Content="Description:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, -580, 0, 0" />
-        <TextBox x:Name="AdminScreenCompanyDescriptionInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, -500, 0, 0" />
+            <Label Content="Company information email:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, -380, 0, 0" />
+            <TextBox x:Name="AdminScreenCompanyEmailInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, -300, 0, 0" />
 
-        <Label Content="Company information email:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, -380, 0, 0" />
-        <TextBox x:Name="AdminScreenCompanyEmailInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, -300, 0, 0" />
+            <Label Content="Phone number:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, -180, 0, 0" />
+            <TextBox x:Name="AdminScreenCompanyPhoneNumberInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, -100, 0, 0" />
 
-        <Label Content="Phone number:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, -180, 0, 0" />
-        <TextBox x:Name="AdminScreenCompanyPhoneNumberInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, -100, 0, 0" />
+            <Label Content="Stationary phone number:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, 0, 0, -20" />
+            <TextBox x:Name="AdminScreenCompanyStationaryNumberInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, 0, 0, -100" />
 
-        <Label Content="Stationary phone number:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, 0, 0, -20" />
-        <TextBox x:Name="AdminScreenCompanyStationaryNumberInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, 0, 0, -100" />
+            <Label Content="Country:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, 0, 0, -220" />
+            <TextBox x:Name="AdminScreenCompanyCountryInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, 0, 0, -300" />
 
-        <Label Content="Country:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, 0, 0, -220" />
-        <TextBox x:Name="AdminScreenCompanyCountryInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, 0, 0, -300" />
+            <Label Content="ZIP:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="-330, 0, 0, -420" />
+            <TextBox x:Name="AdminScreenPostNumberInput"
+                     Style="{DynamicResource MiniTextBoxInput}"
+                     Grid.Column="1"
+                     Margin="-330, 0, 0, -500" />
 
-        <Label Content="ZIP:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="-330, 0, 0, -420" />
-        <TextBox x:Name="AdminScreenPostNumberInput"
-                 Style="{DynamicResource MiniTextBoxInput}"
-                 Grid.Column="1"
-                 Margin="-330, 0, 0, -500" />
+            <Label Content="Address:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, 0, -150, -420" />
+            <TextBox x:Name="AdminScreenAddressInput"
+                     Style="{DynamicResource MediumTextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, 0, -150, -500" />
 
-        <Label Content="Address:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, 0, -150, -420" />
-        <TextBox x:Name="AdminScreenAddressInput"
-                 Style="{DynamicResource MediumTextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, 0, -150, -500" />
+            <Label Content="Database:"
+                   Style="{DynamicResource Label}"
+                   Grid.Column="1"
+                   Margin="0, 0, 0, -620" />
+            <TextBox x:Name="AdminScreenDatabaseInput"
+                     Style="{DynamicResource TextBoxInput}"
+                     Grid.Column="1"
+                     Margin="0, 0, 0, -700" />
 
-        <Label Content="Database:"
-               Style="{DynamicResource Label}"
-               Grid.Column="1"
-               Margin="0, 0, 0, -620" />
-        <TextBox x:Name="AdminScreenDatabaseInput"
-                 Style="{DynamicResource TextBoxInput}"
-                 Grid.Column="1"
-                 Margin="0, 0, 0, -700" />
+            <Grid Height="75"
+                  Width="350"
+                  VerticalAlignment="Bottom"
+                  HorizontalAlignment="Right"
+                  Grid.Column="1">
 
-        <Grid Height="75"
-              Width="400"
-              VerticalAlignment="Bottom"
-              HorizontalAlignment="Right"
-              Grid.Column="1">
+                <Button x:Name="AdminScreenExitBtn"
+                        Style="{DynamicResource RedButton}"
+                        Content="Exit"
+                        Margin="-175, 0, 0, 0"
+                        Grid.Column="1"
+                        Click="Button_Click" />
 
-            <Button x:Name="AdminScreenSaveClientBtn"
-                    Style="{DynamicResource BlueButton}"
-                    Content="Save"
-                    Margin="0, 0, -200, 0"
-                    Click="AdminScreenSaveClientBtn_Click" />
-
-            <Button Style="{DynamicResource GrayButton}"
-                    Content="Users"
-                    Margin="-200, 0, 0, 0" />
+                <Button x:Name="AdminScreenSaveClientBtn"
+                        Style="{DynamicResource BlueButton}"
+                        Content="Save"
+                        Margin="0, 0, -175, 0"
+                        Click="AdminScreenSaveClientBtn_Click" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>

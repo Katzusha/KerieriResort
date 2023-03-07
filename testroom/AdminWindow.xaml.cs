@@ -5,6 +5,8 @@ using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,19 @@ namespace resorttestroom
             InitializeComponent();
 
             GenerateClients();
+
+            ProcessStartInfo script = new ProcessStartInfo();
+            script.FileName = "Scripts/Python Scripts/GenerateDatabaseContent.py";
+            script.UseShellExecute = false;
+            script.RedirectStandardOutput = true;
+            using (Process process = Process.Start(script))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    Console.Write(result);
+                }
+            }
         }
 
         public void ClearClientInpuit()
@@ -79,8 +94,6 @@ namespace resorttestroom
                 //Declare children speciffications
                 Button button = new Button();
                 button.Name = "ClientId" + information.Id;
-                //button.Content = firstname.Substring(0, 1) + ". " + information.Surname + "\nCl.: " + information.Name +
-                //    "\nFrom : " + information.FromDate + "\nTo: " + information.ToDate;
                 button.Style = (Style)this.Resources["GeneratedCompanyButton"];
 
                 //Add generated children to the grid
@@ -422,13 +435,6 @@ namespace resorttestroom
                     {
                         if (AdminCommands.CreateCompany(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
                         {
-                            conn.Open();
-                            string s0 = "CREATE DATABASE IF NOT EXISTS `" + AdminScreenDatabaseInput.Text + "`;";
-                            MySqlCommand cmd = new MySqlCommand(s0, conn);
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-
-
                             ClearClientInpuit();
 
                             GenerateClients();
@@ -441,13 +447,21 @@ namespace resorttestroom
                 }
                 else
                 {
+                    if (AdminCommands.EditCompany(editclientid, AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                    {
+                        if (AdminCommands.EditClient(editclientid, AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                        {
+                            ClearClientInpuit();
 
+                            GenerateClients();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
         }
     }

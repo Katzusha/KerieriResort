@@ -273,8 +273,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservation screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservation screen");
                 }
                 try
                 {
@@ -360,8 +360,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "all screens");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "all screens");
             }
         }
 
@@ -374,8 +374,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "login screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "login screen");
             }
         }
 
@@ -401,8 +401,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "dashboard");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "dashboard");
             }
         }
 
@@ -415,8 +415,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "reservations screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "reservations screen");
             }
         }
 
@@ -434,8 +434,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservations screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservations screen");
                 }
                 try
                 {
@@ -445,8 +445,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservations screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservations screen");
                 }
 
                 CreateReservationGridAvailableEssentialsGrid.Children.Clear();
@@ -496,8 +496,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create reservation screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create reservation screen");
             }
         }
 
@@ -510,8 +510,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "classiffications screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "classiffications screen");
             }
         }
 
@@ -529,8 +529,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create classiffication screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create classiffication screen");
             }
         }
 
@@ -1795,8 +1795,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             try
@@ -1831,8 +1831,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
@@ -1880,8 +1880,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 try
@@ -1916,8 +1916,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 LoadedAnimation();
@@ -1966,8 +1966,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 try
@@ -2002,8 +2002,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 LoadedAnimation();
@@ -2036,8 +2036,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
@@ -2098,8 +2098,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             //End the loading animation
@@ -2401,8 +2401,8 @@ namespace testroom
                     {
                         if (ReservationsScreen.Visibility == Visibility.Visible)
                         {
-                            PublicCommands.ShowError(2, null);
                             ErrorWindow.ErrorException = ex.Message;
+                            PublicCommands.ShowError(2, null);
                         }
                     }
                 }
@@ -2420,8 +2420,8 @@ namespace testroom
             {
                 if (ReservationsScreen.Visibility == Visibility.Visible)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 return false;
@@ -2940,8 +2940,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create reservation screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create reservation screen");
             }
 
                 LoadedAnimation();
@@ -3307,8 +3307,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(2, null);
                         ErrorWindow.ErrorException = ex.Message;
+                        PublicCommands.ShowError(2, null);
                     }
 
                     LoadedAnimation();
@@ -3320,8 +3320,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
         }
 
@@ -3392,8 +3392,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(3, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(3, null);
             }
         }
 
@@ -3906,8 +3906,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(0, "classiffications screen");
                         ErrorWindow.ErrorException = ex.Message;
+                        PublicCommands.ShowError(0, "classiffications screen");
                     }
                 }
                 else
@@ -3922,8 +3922,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "classiffications screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "classiffications screen");
 
                 return false;
             }
@@ -4067,10 +4067,10 @@ namespace testroom
                     maxdate = DateTime.Parse(information.MaxDate.ToString());
                     mindate = DateTime.Parse(information.MinDate.ToString());
 
-                    DashboardScreenUnavailableCapacityLabel.Content = information.Filled.ToString() + "%";
+                    DashboardScreenUnavailableCapacityLabel.Content = (Math.Round(double.Parse(information.Filled.ToString()), 3)).ToString() + "%";
                     DashboardScreenUnavailableClassifficationsLabel.Content = information.Unavailable.ToString();
 
-                    DashboardScreenAvailableCapacityLabel.Content = (1 - double.Parse(information.Filled.ToString())).ToString() + "%";
+                    DashboardScreenAvailableCapacityLabel.Content = (Math.Round((100 - double.Parse(information.Filled.ToString())), 3)).ToString() + "%";
                     DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
                 }
                 catch 
@@ -4210,6 +4210,26 @@ namespace testroom
             Button btn = (Button)sender;
             DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(btn) - 1) * 200);
         }
+
+        private async void DashboardScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+            {
+                try
+                {
+                    LoadingAnimation();
+
+                    var calendarinfo = await GetCalendarInfo();
+
+                    LoadedAnimation();
+                }
+                catch (Exception ex)
+                {
+                    ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
+                }
+            }
+        }
         #endregion
 
 
@@ -4303,26 +4323,6 @@ namespace testroom
 
         #endregion
 
-        private async void DashboardScreen_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F5)
-            {
-                try
-                {
-                    LoadingAnimation();
-
-                    var calendarinfo = await GetCalendarInfo();
-
-                    LoadedAnimation();
-                }
-                catch (Exception ex)
-                {
-                    PublicCommands.ShowError(2, null);
-                    ErrorWindow.ErrorException = ex.Message;
-                }
-            }
-        }
-
         private async void MenuItem_Click(object sender, System.EventArgs e)
         {
             LoadingAnimation();
@@ -4359,10 +4359,6 @@ namespace testroom
                                 var classiffications = GetAllClassiffications();
                             }
                         }
-                        else if (ReservationsScreen.Visibility == Visibility.Visible)
-                        {
-
-                        }
                     }
                 }
                 else if ((sender as MenuItem).Header.ToString() == "Edit")
@@ -4372,11 +4368,17 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
+        }
+
+        private void VerticalScroll(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            scroll.ScrollToVerticalOffset(scroll.VerticalOffset - (e.Delta * 0.75));
         }
     }
 }

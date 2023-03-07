@@ -237,6 +237,12 @@
             </Setter>
         </Style>
 
+        <Style x:Key="ScrollViewer"
+               TargetType="{x:Type ScrollViewer}">
+            <EventSetter Event="PreviewMouseWheel"
+                         Handler="VerticalScroll" />
+        </Style>
+        
         <!--Scrollbar Thumbs-->
         <Style x:Key="ScrollThumbs"
                TargetType="{x:Type Thumb}">
@@ -375,6 +381,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
 
         <Style x:Key="Label"
                TargetType="{x:Type Label}">
@@ -2338,7 +2346,8 @@
                                                 <Border.BorderBrush>
                                                     <SolidColorBrush Color="Transparent" />
                                                 </Border.BorderBrush>
-                                                <ScrollViewer Margin="0, 0, 0, 0"
+                                                <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                                              Margin="0, 0, 0, 0"
                                                               x:Name="PART_ContentHost"
                                                               MinHeight="50"
                                                               HorizontalAlignment="Center"
@@ -2454,7 +2463,8 @@
                                                         <VisualState x:Name="MouseOver" />
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-                                                <ScrollViewer x:Name="PART_ContentHost" />
+                                                <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                                              x:Name="PART_ContentHost" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -2557,7 +2567,8 @@
                         </Grid>
                     </Border>
 
-                    <ScrollViewer x:Name="HomeGridScrollViewerSetter"
+                    <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                  x:Name="HomeGridScrollViewerSetter"
                                   Grid.Row="1"
                                   VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Auto"
@@ -2619,7 +2630,8 @@
                                                     Padding="2"
                                                     Background="#3e3e3e"
                                                     BorderBrush="Transparent">
-                                                <ScrollViewer Margin="0"
+                                                <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                                              Margin="0"
                                                               x:Name="PART_ContentHost"
                                                               Height="28"
                                                               VerticalAlignment="Center"
@@ -2779,7 +2791,8 @@
                         </Grid>
                     </Border>
 
-                    <ScrollViewer x:Name="ClassifficaitonsGridScrollViewerSetter"
+                    <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                  x:Name="ClassifficaitonsGridScrollViewerSetter"
                                   Grid.Row="1"
                                   VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Auto"
@@ -2841,7 +2854,8 @@
                                                     Padding="2"
                                                     Background="{DynamicResource SecondaryBrush}"
                                                     BorderBrush="Transparent">
-                                                <ScrollViewer Margin="0"
+                                                <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                                              Margin="0"
                                                               x:Name="PART_ContentHost"
                                                               Height="28"
                                                               VerticalAlignment="Center"
@@ -2908,8 +2922,8 @@
                   Grid.Column="1"
                   KeyDown="DashboardScreen_KeyDown">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="175" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <Grid>
@@ -3030,7 +3044,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <ScrollViewer x:Name="DashboardScreenClassifficationsGridScrollViewer"
+                        <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                      x:Name="DashboardScreenClassifficationsGridScrollViewer"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       VerticalScrollBarVisibility="Auto"
@@ -3064,7 +3079,8 @@
                             </Border.Background>
                         </Border>
 
-                        <ScrollViewer x:Name="DashboardClassifficationsGridRowsScrollViewer"
+                        <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                      x:Name="DashboardClassifficationsGridRowsScrollViewer"
                                       VerticalScrollBarVisibility="Hidden"
                                       HorizontalScrollBarVisibility="Hidden"
                                       Grid.Row="0"
@@ -3083,7 +3099,8 @@
                                   Margin="0, 50, 0, 0"/>
                         </ScrollViewer>
 
-                        <ScrollViewer x:Name="DashboardClassifficationsGridColumnsScrollViewer"
+                        <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                      x:Name="DashboardClassifficationsGridColumnsScrollViewer"
                                       VerticalScrollBarVisibility="Hidden"
                                       HorizontalScrollBarVisibility="Hidden"
                                       Grid.Column="0"
@@ -3344,7 +3361,8 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="0,0,-650,0">
-                        <ScrollViewer Margin="0,25,0,25"
+                        <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                      Margin="0,25,0,25"
                                       VerticalScrollBarVisibility="Auto">
                             <Grid x:Name="CreateReservationGridAvailableEssentialsGrid">
                                 <Grid.ColumnDefinitions>
@@ -3467,7 +3485,8 @@
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                    <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                  VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Auto">
                         <Grid x:Name="CreateReservationGridSideGuestAddedGrid"
                               Margin="10, 10, 10, 10">
@@ -3793,7 +3812,8 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Margin="0,0,-650,0">
-                    <ScrollViewer Margin="0,25,0,25"
+                    <ScrollViewer Style="{DynamicResource ScrollViewer}"
+                                  Margin="0,25,0,25"
                                   VerticalScrollBarVisibility="Auto">
                         <Grid x:Name="CreateClassifficationGridIncludedEssentials">
                             <Grid.ColumnDefinitions>
