@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:resorttestroom"
         mc:Ignorable="d"
         Title="AdminWindow"
-        Height="975"
-        Width="1000"
+        Height="1074"
+        Width="1082"
         Background="{DynamicResource BackgroundBrush}"
         WindowStyle="None"
+        BorderBrush="{DynamicResource TrueBrush}"
+        BorderThickness="2"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
@@ -63,8 +66,10 @@
 
         <Style x:Key="BlueButton"
                TargetType="{x:Type Button}">
-            <EventSetter Event="MouseEnter" Handler="BlueBtn_Enter"/>
-            <EventSetter Event="MouseLeave" Handler="BlueBtn_Leave"/>
+            <EventSetter Event="MouseEnter"
+                         Handler="BlueBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="BlueBtn_Leave" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="Background"
@@ -104,8 +109,10 @@
 
         <Style x:Key="RedButton"
                TargetType="{x:Type Button}">
-            <EventSetter Event="MouseEnter" Handler="RedBtn_Enter"/>
-            <EventSetter Event="MouseLeave" Handler="RedBtn_Leave"/>
+            <EventSetter Event="MouseEnter"
+                         Handler="RedBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="RedBtn_Leave" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="Background"
@@ -145,8 +152,10 @@
 
         <Style x:Key="GrayButton"
                TargetType="{x:Type Button}">
-            <EventSetter Event="MouseEnter" Handler="GrayBtn_Enter"/>
-            <EventSetter Event="MouseLeave" Handler="GrayBtn_Leave"/>
+            <EventSetter Event="MouseEnter"
+                         Handler="GrayBtn_Enter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="GrayBtn_Leave" />
             <Setter Property="HorizontalContentAlignment"
                     Value="Center" />
             <Setter Property="Background"
@@ -346,7 +355,7 @@
             <Setter Property="VerticalAlignment"
                     Value="Center" />
         </Style>
-        
+
         <Style x:Key="GeneratedCompanyButton"
                TargetType="{x:Type Button}">
             <EventSetter Event="Click"
@@ -541,7 +550,7 @@
         </Grid.ColumnDefinitions>
         <Border CornerRadius="25"
                 Grid.Column="0"
-                Margin="5, 5, 5, 5">
+                Margin="5, 5, 5, 100">
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource PrimaryColor}"
                                  Opacity="0.1" />
@@ -558,6 +567,15 @@
             </ScrollViewer>
         </Border>
 
+        <Grid VerticalAlignment="Bottom"
+              Height="100"
+              HorizontalAlignment="Center">
+            <Button x:Name="AdminScreenAddClientBtn"
+                    Style="{DynamicResource GrayButton}"
+                    Content="Add client"
+                    Click="AdminScreenAddClientBtn_Click" />
+        </Grid>
+
         <Button x:Name="AdminScreenExitBtn"
                 Style="{DynamicResource RedButton}"
                 Content="Exit"
@@ -570,9 +588,9 @@
                Grid.Column="1"
                Margin="0, -780, 0, 0" />
         <TextBox x:Name="AdminScreenCompanyNameInput"
-                 Style="{DynamicResource TextBoxInput}" 
+                 Style="{DynamicResource TextBoxInput}"
                  Grid.Column="1"
-                 Margin="0, -700, 0, 0"/>
+                 Margin="0, -700, 0, 0" />
 
         <Label Content="Description:"
                Style="{DynamicResource Label}"
@@ -652,9 +670,11 @@
               HorizontalAlignment="Right"
               Grid.Column="1">
 
-            <Button Style="{DynamicResource BlueButton}"
+            <Button x:Name="AdminScreenSaveClientBtn"
+                    Style="{DynamicResource BlueButton}"
                     Content="Save"
-                    Margin="0, 0, -200, 0" />
+                    Margin="0, 0, -200, 0"
+                    Click="AdminScreenSaveClientBtn_Click" />
 
             <Button Style="{DynamicResource GrayButton}"
                     Content="Users"

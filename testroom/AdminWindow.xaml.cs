@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using testroom;
 
 namespace resorttestroom
 {
@@ -24,6 +25,10 @@ namespace resorttestroom
     /// </summary>
     public partial class AdminWindow : Window
     {
+
+        public bool createclient = false;
+        public string editclientid = "";
+
         public AdminWindow()
         {
             InitializeComponent();
@@ -31,8 +36,30 @@ namespace resorttestroom
             GenerateClients();
         }
 
+        public void ClearClientInpuit()
+        {
+            AdminScreenCompanyNameInput.Clear();
+            AdminScreenCompanyDescriptionInput.Clear();
+            AdminScreenCompanyEmailInput.Clear();
+            AdminScreenCompanyPhoneNumberInput.Clear();
+            AdminScreenCompanyStationaryNumberInput.Clear();
+            AdminScreenCompanyCountryInput.Clear();
+            AdminScreenPostNumberInput.Clear();
+            AdminScreenAddressInput.Clear();
+            AdminScreenDatabaseInput.Clear();
+
+            AdminScreenSaveClientBtn.IsEnabled = false;
+        }
+
         public async void GenerateClients()
         {
+            createclient = false;
+
+            ClearClientInpuit();
+
+            AdminScreenSaveClientBtn.Content = "Save";
+            AdminScreenSaveClientBtn.IsEnabled = true;
+
             dynamic clients = AdminCommands.GetClients();
 
             int row = 0;
@@ -78,6 +105,8 @@ namespace resorttestroom
             Button btn = (Button)sender;
 
             dynamic clientinfo = AdminCommands.GetClientsInfo(btn.Name.ToString().Replace("ClientId", ""));
+
+            editclientid = btn.Name.ToString().Replace("ClientId", "");
 
             foreach(var information in clientinfo)
             {
@@ -365,6 +394,35 @@ namespace resorttestroom
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void AdminScreenAddClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            createclient = true;
+
+            ClearClientInpuit();
+
+            AdminScreenSaveClientBtn.Content = "Create";
+            AdminScreenSaveClientBtn.IsEnabled = true;
+        }
+
+        private void AdminScreenSaveClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (createclient)
+            {
+                if(AdminCommands.CreateCompanyClient(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                {
+                    ClearClientInpuit();
+                }
+                else
+                {
+                    PublicCommands.ShowError(2, null);
+                }
+            }
+            else
+            {
+
+            }
         }
     }
 }
