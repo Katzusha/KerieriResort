@@ -391,18 +391,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="ContextMenu">
-                <Setter.Value>
-                    <ContextMenu>
-                        <MenuItem Style="{DynamicResource SimpleSysResources}"
-                                  Header="Edit" />
-                        <MenuItem Style="{DynamicResource SimpleSysResources}"
-                                  Header="Delete" />
-                    </ContextMenu>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="TextBlock.TextAlignment"
-                    Value="Center" />
         </Style>
 
         <Style x:Key="TextBoxInput"

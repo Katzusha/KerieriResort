@@ -1807,9 +1807,6 @@ namespace testroom
 
                     ClearLoginScreen();
 
-                    //Generate all reservations from users database
-                    var CalendarInfo = await GetCalendarInfo();
-
                     ControlGrid.Visibility = Visibility.Visible;
 
                     //Animation to hide login screen
@@ -1827,6 +1824,10 @@ namespace testroom
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                     loginfaillabel.Visibility = Visibility.Hidden;
+
+
+                    //Generate all reservations from users database
+                    var CalendarInfo = await GetCalendarInfo();
                 }
             }
             catch (Exception ex)
@@ -1892,9 +1893,6 @@ namespace testroom
 
                         ClearLoginScreen();
 
-                        //Generate all reservations from users database
-                        var CalendarInfo = await GetCalendarInfo();
-
                         ControlGrid.Visibility = Visibility.Visible;
 
                         //Animation to hide login screen
@@ -1912,6 +1910,10 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
+
+
+                        //Generate all reservations from users database
+                        var CalendarInfo = await GetCalendarInfo();
                     }
                 }
                 catch (Exception ex)
@@ -1978,9 +1980,6 @@ namespace testroom
 
                         ClearLoginScreen();
 
-                        //Generate all reservations from users database
-                        var CalendarInfo = await GetCalendarInfo();
-
                         ControlGrid.Visibility = Visibility.Visible;
 
                         //Animation to hide login screen
@@ -1998,6 +1997,9 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
+
+                        //Generate all reservations from users database
+                        var CalendarInfo = await GetCalendarInfo();
                     }
                 }
                 catch (Exception ex)

@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,24 +35,145 @@ namespace resorttestroom
         public bool createclient = false;
         public string editclientid = "";
 
+        public string EncryptString(string plainText, byte[] key, byte[] iv)
+        {
+            // Instantiate a new Aes object to perform string symmetric encryption
+            Aes encryptor = Aes.Create();
+
+            encryptor.Mode = CipherMode.CBC;
+            //encryptor.KeySize = 256;
+            //encryptor.BlockSize = 128;
+            //encryptor.Padding = PaddingMode.Zeros;
+
+            // Set key and IV
+            encryptor.Key = key;
+            encryptor.IV = iv;
+
+            // Instantiate a new MemoryStream object to contain the encrypted bytes
+            MemoryStream memoryStream = new MemoryStream();
+
+            // Instantiate a new encryptor from our Aes object
+            ICryptoTransform aesEncryptor = encryptor.CreateEncryptor();
+
+            // Instantiate a new CryptoStream object to process the data and write it to the 
+            // memory stream
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, aesEncryptor, CryptoStreamMode.Write);
+
+            // Convert the plainText string into a byte array
+            byte[] plainBytes = Encoding.ASCII.GetBytes(plainText);
+
+            // Encrypt the input plaintext string
+            cryptoStream.Write(plainBytes, 0, plainBytes.Length);
+
+            // Complete the encryption process
+            cryptoStream.FlushFinalBlock();
+
+            // Convert the encrypted data from a MemoryStream to a byte array
+            byte[] cipherBytes = memoryStream.ToArray();
+
+            // Close both the MemoryStream and the CryptoStream
+            memoryStream.Close();
+            cryptoStream.Close();
+
+            // Convert the encrypted byte array to a base64 encoded string
+            string cipherText = Convert.ToBase64String(cipherBytes, 0, cipherBytes.Length);
+
+            // Return the encrypted data as a string
+            return cipherText;
+        }
+
+        public string DecryptString(string cipherText, byte[] key, byte[] iv)
+        {
+            // Instantiate a new Aes object to perform string symmetric encryption
+            Aes encryptor = Aes.Create();
+
+            encryptor.Mode = CipherMode.CBC;
+            //encryptor.KeySize = 256;
+            //encryptor.BlockSize = 128;
+            //encryptor.Padding = PaddingMode.Zeros;
+
+            // Set key and IV
+            encryptor.Key = key;
+            encryptor.IV = iv;
+
+            // Instantiate a new MemoryStream object to contain the encrypted bytes
+            MemoryStream memoryStream = new MemoryStream();
+
+            // Instantiate a new encryptor from our Aes object
+            ICryptoTransform aesDecryptor = encryptor.CreateDecryptor();
+
+            // Instantiate a new CryptoStream object to process the data and write it to the 
+            // memory stream
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, aesDecryptor, CryptoStreamMode.Write);
+
+            // Will contain decrypted plaintext
+            string plainText = String.Empty;
+
+            try
+            {
+                // Convert the ciphertext string into a byte array
+                byte[] cipherBytes = Convert.FromBase64String(cipherText);
+
+                // Decrypt the input ciphertext string
+                cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
+
+                // Complete the decryption process
+                cryptoStream.FlushFinalBlock();
+
+                // Convert the decrypted data from a MemoryStream to a byte array
+                byte[] plainBytes = memoryStream.ToArray();
+
+                // Convert the decrypted byte array to string
+                plainText = Encoding.ASCII.GetString(plainBytes, 0, plainBytes.Length);
+            }
+            finally
+            {
+                // Close both the MemoryStream and the CryptoStream
+                memoryStream.Close();
+                cryptoStream.Close();
+            }
+
+            // Return the decrypted data as a string
+            return plainText;
+        }
+
+        public string Encryption(string encrypt)
+        {
+            string password = "3sc3RLrpd17";
+
+            // Create sha256 hash
+            SHA256 mySHA256 = SHA256Managed.Create();
+            byte[] key = mySHA256.ComputeHash(Encoding.ASCII.GetBytes(password));
+
+            // Create secret IV
+            byte[] iv = new byte[16] { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
+
+            string encrypted = this.EncryptString(encrypt, key, iv);
+
+            return encrypted;
+        }
+
+        public string Decryption(string decrypt)
+        {
+            string password = "3sc3RLrpd17";
+
+            // Create sha256 hash
+            SHA256 mySHA256 = SHA256Managed.Create();
+            byte[] key = mySHA256.ComputeHash(Encoding.ASCII.GetBytes(password));
+
+            // Create secret IV
+            byte[] iv = new byte[16] { 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 };
+
+            string decrypted = this.DecryptString(decrypt, key, iv);
+
+            return decrypted;
+        }
+
         public AdminWindow()
         {
             InitializeComponent();
 
             GenerateClients();
-
-            ProcessStartInfo script = new ProcessStartInfo();
-            script.FileName = "Scripts/Python Scripts/GenerateDatabaseContent.py";
-            script.UseShellExecute = false;
-            script.RedirectStandardOutput = true;
-            using (Process process = Process.Start(script))
-            {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    Console.Write(result);
-                }
-            }
         }
 
         public void ClearClientInpuit()
@@ -435,6 +557,8 @@ namespace resorttestroom
                     {
                         if (AdminCommands.CreateCompany(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
                         {
+                            bool user = AdminCommands.CreateUser(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, Encryption(AdminScreenCompanyNameInput.Text.ToLower()), Encryption("admin"));
+
                             ClearClientInpuit();
 
                             GenerateClients();
