@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.Reflection;
 using Microsoft.VisualBasic;
+using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace resorttestroom
     /// </summary>
     public partial class AdminWindow : Window
     {
+
+        MySqlConnection conn = MainWindow.conn;
 
         public bool createclient = false;
         public string editclientid = "";
@@ -56,6 +59,9 @@ namespace resorttestroom
             createclient = false;
 
             ClearClientInpuit();
+
+            AdminScreenCompanysGrid.Children.Clear();
+            AdminScreenCompanysGrid.RowDefinitions.Clear();
 
             AdminScreenSaveClientBtn.Content = "Save";
             AdminScreenSaveClientBtn.IsEnabled = true;
@@ -408,20 +414,40 @@ namespace resorttestroom
 
         private void AdminScreenSaveClientBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (createclient)
+            try
             {
-                if(AdminCommands.CreateCompanyClient(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                if (createclient)
                 {
-                    ClearClientInpuit();
+                    if (AdminCommands.CreateClient(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                    {
+                        if (AdminCommands.CreateCompany(AdminScreenCompanyNameInput.Text, AdminScreenCompanyEmailInput.Text, AdminScreenCompanyPhoneNumberInput.Text, AdminScreenCompanyStationaryNumberInput.Text, AdminScreenCompanyCountryInput.Text, AdminScreenPostNumberInput.Text, AdminScreenAddressInput.Text, AdminScreenCompanyDescriptionInput.Text, AdminScreenDatabaseInput.Text))
+                        {
+                            conn.Open();
+                            string s0 = "CREATE DATABASE IF NOT EXISTS `" + AdminScreenDatabaseInput.Text + "`;";
+                            MySqlCommand cmd = new MySqlCommand(s0, conn);
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+
+
+                            ClearClientInpuit();
+
+                            GenerateClients();
+                        }
+                    }
+                    else
+                    {
+                        PublicCommands.ShowError(2, null);
+                    }
                 }
                 else
                 {
-                    PublicCommands.ShowError(2, null);
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-
+                PublicCommands.ShowError(2, null);
+                ErrorWindow.ErrorException = ex.Message;
             }
         }
     }
