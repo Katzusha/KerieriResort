@@ -243,23 +243,31 @@ namespace resorttestroom
 
         private void ClientBtn_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = (Button)sender;
-
-            dynamic clientinfo = AdminCommands.GetClientsInfo(btn.Name.ToString().Replace("ClientId", ""));
-
-            editclientid = btn.Name.ToString().Replace("ClientId", "");
-
-            foreach(var information in clientinfo)
+            try
             {
-                AdminScreenCompanyNameInput.Text = information.Name.ToString();
-                AdminScreenCompanyDescriptionInput.Text = information.Description.ToString();
-                AdminScreenCompanyEmailInput.Text = information.InfoEmail.ToString();
-                AdminScreenCompanyPhoneNumberInput.Text = information.PhoneNumber.ToString();
-                AdminScreenCompanyStationaryNumberInput.Text = information.StationaryNumber.ToString();
-                AdminScreenCompanyCountryInput.Text = information.Country.ToString();
-                AdminScreenPostNumberInput.Text = information.PostCode.ToString();
-                AdminScreenAddressInput.Text = information.Address.ToString();
-                AdminScreenDatabaseInput.Text = information.DatabaseName.ToString();
+                Button btn = (Button)sender;
+
+                dynamic clientinfo = AdminCommands.GetClientsInfo(btn.Name.ToString().Replace("ClientId", ""));
+
+                editclientid = btn.Name.ToString().Replace("ClientId", "");
+
+                foreach (var information in clientinfo)
+                {
+                    AdminScreenCompanyNameInput.Text = information.Name.ToString();
+                    AdminScreenCompanyDescriptionInput.Text = information.Description.ToString();
+                    AdminScreenCompanyEmailInput.Text = information.InfoEmail.ToString();
+                    AdminScreenCompanyPhoneNumberInput.Text = information.PhoneNumber.ToString();
+                    AdminScreenCompanyStationaryNumberInput.Text = information.StationaryNumber.ToString();
+                    AdminScreenCompanyCountryInput.Text = information.Country.ToString();
+                    AdminScreenPostNumberInput.Text = information.PostCode.ToString();
+                    AdminScreenAddressInput.Text = information.Address.ToString();
+                    AdminScreenDatabaseInput.Text = information.DatabaseName.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
         }
 
