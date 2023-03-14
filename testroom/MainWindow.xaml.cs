@@ -4365,7 +4365,76 @@ namespace testroom
                 }
                 else if ((sender as MenuItem).Header.ToString() == "Edit")
                 {
-                    
+                    CreateReservationGridClassifficationCombobox.Items.Add("None");
+                    CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
+
+                    dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+                    foreach (var information in GetClassiffications)
+                    {
+                        ComboBoxItem item = new ComboBoxItem();
+                        item.Name = "ClassifficationId" + information.Id;
+                        item.Content = information.Name;
+
+                        CreateReservationGridClassifficationCombobox.Items.Add(item);
+                    }
+
+                    //Switch displayed grids
+                    CreateReservationScreen.Visibility = Visibility.Visible;
+                    ReservationsScreen.Visibility = Visibility.Hidden;
+                    DashboardScreen.Visibility = Visibility.Hidden;
+
+                    //Make sure that every grid will be displayed in the right order
+                    CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+                    //Resert progression bar
+                    CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+                    //Start the progress bar
+                    CreateReservationGridReservationInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
+
+                    //Reset all the values needed for the Creation
+                    CreateReservationProgress = 1;
+                    CreateReservationGridNextBtn.Content = "Next";
+                    CreateReservationGridBackBtn.Content = "Cancel";
+
+                    BlackOutPastDates();
+
+
+
+                    dynamic ReservationInformations = ReservationCommands.GetReservationInformations(tap.Name.ToString().Replace("ReservationId", ""));
+
+                    foreach (var information in ReservationInformations)
+                    {
+                        try
+                        {
+                            CreateReservationGridClassifficationCombobox.Text = information.Name.ToString();
+                            BlackOutPastDates();
+                            CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
+                            CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                            CreateReservationGridMainGuestFirstnameInput.Text = information.Firstname.ToString();
+                            CreateReservationGridMainGuestSurnameInput.Text = information.Surname.ToString();
+                            CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                            CreateReservationGridMainGuestEmailInput.Text = information.Email.ToString();
+                            CreateReservationGridMainGuestPhoneNumberInput.Text = information.PhoneNumber.ToString();
+                            CreateReservationGridMainGuestCountryInput.Text = information.Country.ToString();
+                            CreateReservationGridMainGuestAddressInput.Text = information.Address.ToString();
+                            CreateReservationGridMainGuestPostNumberInput.Text = information.PostNumber.ToString();
+                            CreateReservationGridMainGuestCityInput.Text = information.City.ToString();
+                            CreateReservationGridMainGuestCertifiedNumberInput.Text = information.CertifiedNumber.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorWindow.ErrorException = ex.Message;
+                            PublicCommands.ShowError(2, null);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

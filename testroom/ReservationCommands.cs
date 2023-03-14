@@ -432,5 +432,40 @@ namespace testroom
                 return false;
             }
         }
+
+        public static dynamic GetReservationInformations(string id)
+        {
+            // Create a request using a URL that can receive a post. 
+            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ReservationsAPI/GetReservationInformations.php");
+            // Set the Method property of the request to POST.
+            request.Method = "POST";
+            // Create POST data and convert it to a byte array.
+            string postData = "ReservationId=" + id + "&DatabaseName=" + MainWindow.DatabaseName;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.
+            request.ContentType = "application/x-www-form-urlencoded";
+            // Set the ContentLength property of the WebRequest.
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.
+            Stream dataStream = request.GetRequestStream();
+            { }
+            // Write the data to the request stream.
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.
+            dataStream.Close();
+            // Get the response.
+            WebResponse response = request.GetResponse();
+            Stream data = response.GetResponseStream();
+
+            string html = string.Empty;
+
+            using (StreamReader sr = new StreamReader(data))
+            {
+                html = sr.ReadToEnd();
+            }
+            dynamic ReservationInformations = JsonConvert.DeserializeObject(html);
+
+            return ReservationInformations;
+        }
     }
 }
