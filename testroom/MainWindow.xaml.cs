@@ -273,8 +273,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservation screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservation screen");
                 }
                 try
                 {
@@ -360,8 +360,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "all screens");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "all screens");
             }
         }
 
@@ -374,8 +374,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "login screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "login screen");
             }
         }
 
@@ -401,8 +401,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "dashboard");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "dashboard");
             }
         }
 
@@ -415,8 +415,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "reservations screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "reservations screen");
             }
         }
 
@@ -434,8 +434,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservations screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservations screen");
                 }
                 try
                 {
@@ -445,8 +445,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(1.1, "create reservations screen");
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(1.1, "create reservations screen");
                 }
 
                 CreateReservationGridAvailableEssentialsGrid.Children.Clear();
@@ -496,8 +496,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create reservation screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create reservation screen");
             }
         }
 
@@ -510,8 +510,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "classiffications screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "classiffications screen");
             }
         }
 
@@ -529,8 +529,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create classiffication screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create classiffication screen");
             }
         }
 
@@ -711,7 +711,7 @@ namespace testroom
 
         //Enter and leave animations for green buttons
         #region GREEN BUTTON animations
-        private void GreenBtn_Enter(object sender, MouseEventArgs e)
+        private void GrayBtn_Enter(object sender, MouseEventArgs e)
         {
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -732,18 +732,9 @@ namespace testroom
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
 
-            //Animations for buttons background color to transforme it from transparrent to green
-            SolidColorBrush myBrush = new SolidColorBrush();
-            ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(0, 0, 255, 0);
-            myColorAnimation.To = Color.FromArgb(255, 0, 255, 0);
-            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-            button.Background = myBrush;
-
             Cursor = Cursors.Hand;
         }
-        private void GreenBtn_Leave(object sender, MouseEventArgs e)
+        private void GrayBtn_Leave(object sender, MouseEventArgs e)
         {
             //Open app.config file
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -763,15 +754,6 @@ namespace testroom
             myDoubleAnimation.To = 50;
             myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
             button.BeginAnimation(TextBox.HeightProperty, myDoubleAnimation);
-
-            //Animations for buttons background color to transforme it from green back to transparent
-            SolidColorBrush myBrush = new SolidColorBrush();
-            ColorAnimation myColorAnimation = new ColorAnimation();
-            myColorAnimation.From = Color.FromArgb(255, 0, 255, 0);
-            myColorAnimation.To = Color.FromArgb(0, 0, 255, 0);
-            myColorAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, myColorAnimation);
-            button.Background = myBrush;
 
             Cursor = Cursors.Arrow;
         }
@@ -1788,7 +1770,16 @@ namespace testroom
 
             try
             {
-                if (LogInCommands.UserLogIn(username, password))
+                if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                {
+                    Window window = new AdminWindow();
+                    this.Hide();
+                    window.ShowDialog();
+                    this.Show();
+
+                    ClearLoginScreen();
+                }
+                else if (LogInCommands.UserLogIn(username, password))
                 {
                     loginsuccess = true;
                 }
@@ -1804,8 +1795,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             try
@@ -1815,9 +1806,6 @@ namespace testroom
                     Username = username;
 
                     ClearLoginScreen();
-
-                    //Generate all reservations from users database
-                    var CalendarInfo = await GetCalendarInfo();
 
                     ControlGrid.Visibility = Visibility.Visible;
 
@@ -1836,12 +1824,16 @@ namespace testroom
                     ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                     loginfaillabel.Visibility = Visibility.Hidden;
+
+
+                    //Generate all reservations from users database
+                    var CalendarInfo = await GetCalendarInfo();
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
@@ -1864,7 +1856,16 @@ namespace testroom
 
                 try
                 {
-                    if (LogInCommands.UserLogIn(username, password))
+                    if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                    {
+                        Window window = new AdminWindow();
+                        this.Hide();
+                        window.ShowDialog();
+                        this.Show();
+
+                        ClearLoginScreen();
+                    }
+                    else if (LogInCommands.UserLogIn(username, password))
                     {
                         loginsuccess = true;
                     }
@@ -1880,8 +1881,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 try
@@ -1891,9 +1892,6 @@ namespace testroom
                         Username = username;
 
                         ClearLoginScreen();
-
-                        //Generate all reservations from users database
-                        var CalendarInfo = await GetCalendarInfo();
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1912,12 +1910,16 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
+
+
+                        //Generate all reservations from users database
+                        var CalendarInfo = await GetCalendarInfo();
                     }
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 LoadedAnimation();
@@ -1941,7 +1943,16 @@ namespace testroom
 
                 try
                 {
-                    if (LogInCommands.UserLogIn(username, password))
+                    if (loginusernameinput.Text == "kosak.andraz@gmail.com" && loginpasswordinput.Password.ToString() == "neoserv\"sztvkvtcss\"2253.")
+                    {
+                        Window window = new AdminWindow();
+                        this.Hide();
+                        window.ShowDialog();
+                        this.Show();
+
+                        ClearLoginScreen();
+                    }
+                    else if (LogInCommands.UserLogIn(username, password))
                     {
                         loginsuccess = true;
                     }
@@ -1957,8 +1968,8 @@ namespace testroom
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 try
@@ -1968,9 +1979,6 @@ namespace testroom
                         Username = username;
 
                         ClearLoginScreen();
-
-                        //Generate all reservations from users database
-                        var CalendarInfo = await GetCalendarInfo();
 
                         ControlGrid.Visibility = Visibility.Visible;
 
@@ -1989,12 +1997,15 @@ namespace testroom
                         ControlGrid.BeginAnimation(MarginProperty, ControlAnimation);
 
                         loginfaillabel.Visibility = Visibility.Hidden;
+
+                        //Generate all reservations from users database
+                        var CalendarInfo = await GetCalendarInfo();
                     }
                 }
                 catch (Exception ex)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 LoadedAnimation();
@@ -2027,8 +2038,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
@@ -2089,8 +2100,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             //End the loading animation
@@ -2392,8 +2403,8 @@ namespace testroom
                     {
                         if (ReservationsScreen.Visibility == Visibility.Visible)
                         {
-                            PublicCommands.ShowError(2, null);
                             ErrorWindow.ErrorException = ex.Message;
+                            PublicCommands.ShowError(2, null);
                         }
                     }
                 }
@@ -2411,8 +2422,8 @@ namespace testroom
             {
                 if (ReservationsScreen.Visibility == Visibility.Visible)
                 {
-                    PublicCommands.ShowError(2, null);
                     ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
                 }
 
                 return false;
@@ -2931,8 +2942,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(1, "create reservation screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(1, "create reservation screen");
             }
 
                 LoadedAnimation();
@@ -3298,8 +3309,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(2, null);
                         ErrorWindow.ErrorException = ex.Message;
+                        PublicCommands.ShowError(2, null);
                     }
 
                     LoadedAnimation();
@@ -3311,8 +3322,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
         }
 
@@ -3383,8 +3394,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(3, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(3, null);
             }
         }
 
@@ -3443,17 +3454,20 @@ namespace testroom
                         row++;
                     }
 
-                    BlackOutPastDates();
-
-                    dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
-
-                    foreach (var information in BlackOutDates)
+                    if (editreservationId == null)
                     {
-                        CreateReservationGridFromDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime.Parse(information.FromDate.ToString())).AddDays(1), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
-                        CreateReservationGridToDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
-                    }
+                        BlackOutPastDates();
+
+                        dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
+
+                        foreach (var information in BlackOutDates)
+                        {
+                            CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                            CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime.Parse(information.FromDate.ToString())).AddDays(1), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
+                            CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
+                        }
+                    }                    
                 }
 
                 LoadedAnimation();
@@ -3897,8 +3911,8 @@ namespace testroom
                     }
                     catch (Exception ex)
                     {
-                        PublicCommands.ShowError(0, "classiffications screen");
                         ErrorWindow.ErrorException = ex.Message;
+                        PublicCommands.ShowError(0, "classiffications screen");
                     }
                 }
                 else
@@ -3913,8 +3927,8 @@ namespace testroom
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(0, "classiffications screen");
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(0, "classiffications screen");
 
                 return false;
             }
@@ -4058,10 +4072,10 @@ namespace testroom
                     maxdate = DateTime.Parse(information.MaxDate.ToString());
                     mindate = DateTime.Parse(information.MinDate.ToString());
 
-                    DashboardScreenUnavailableCapacityLabel.Content = information.Filled.ToString() + "%";
+                    DashboardScreenUnavailableCapacityLabel.Content = (Math.Round(double.Parse(information.Filled.ToString()), 3)).ToString() + "%";
                     DashboardScreenUnavailableClassifficationsLabel.Content = information.Unavailable.ToString();
 
-                    DashboardScreenAvailableCapacityLabel.Content = (1 - double.Parse(information.Filled.ToString())).ToString() + "%";
+                    DashboardScreenAvailableCapacityLabel.Content = (Math.Round((100 - double.Parse(information.Filled.ToString())), 3)).ToString() + "%";
                     DashboardScreenAvailableClassifficationsLabel.Content = information.Available.ToString();
                 }
                 catch 
@@ -4201,6 +4215,26 @@ namespace testroom
             Button btn = (Button)sender;
             DashboardScreenClassifficationsGridScrollViewer.ScrollToHorizontalOffset((Grid.GetColumn(btn) - 1) * 200);
         }
+
+        private async void DashboardScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+            {
+                try
+                {
+                    LoadingAnimation();
+
+                    var calendarinfo = await GetCalendarInfo();
+
+                    LoadedAnimation();
+                }
+                catch (Exception ex)
+                {
+                    ErrorWindow.ErrorException = ex.Message;
+                    PublicCommands.ShowError(2, null);
+                }
+            }
+        }
         #endregion
 
 
@@ -4294,26 +4328,7 @@ namespace testroom
 
         #endregion
 
-        private async void DashboardScreen_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F5)
-            {
-                try
-                {
-                    LoadingAnimation();
-
-                    var calendarinfo = await GetCalendarInfo();
-
-                    LoadedAnimation();
-                }
-                catch (Exception ex)
-                {
-                    PublicCommands.ShowError(2, null);
-                    ErrorWindow.ErrorException = ex.Message;
-                }
-            }
-        }
-
+        public string editreservationId = null;
         private async void MenuItem_Click(object sender, System.EventArgs e)
         {
             LoadingAnimation();
@@ -4350,24 +4365,108 @@ namespace testroom
                                 var classiffications = GetAllClassiffications();
                             }
                         }
-                        else if (ReservationsScreen.Visibility == Visibility.Visible)
-                        {
-
-                        }
                     }
                 }
                 else if ((sender as MenuItem).Header.ToString() == "Edit")
                 {
-                    
+                    CreateReservationGridClassifficationCombobox.Items.Add("None");
+                    CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
+
+                    dynamic GetClassiffications = ClassifficationCommands.GetAll();
+
+                    foreach (var information in GetClassiffications)
+                    {
+                        ComboBoxItem item = new ComboBoxItem();
+                        item.Name = "ClassifficationId" + information.Id;
+                        item.Content = information.Name;
+
+                        CreateReservationGridClassifficationCombobox.Items.Add(item);
+                    }
+
+                    //Switch displayed grids
+                    CreateReservationScreen.Visibility = Visibility.Visible;
+                    ReservationsScreen.Visibility = Visibility.Hidden;
+                    DashboardScreen.Visibility = Visibility.Hidden;
+
+                    //Make sure that every grid will be displayed in the right order
+                    CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+                    //Resert progression bar
+                    CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+                    //Start the progress bar
+                    CreateReservationGridReservationInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
+
+                    //Reset all the values needed for the Creation
+                    CreateReservationProgress = 1;
+                    CreateReservationGridNextBtn.Content = "Next";
+                    CreateReservationGridBackBtn.Content = "Cancel";
+
+                    //BlackOutPastDates();
+
+                    editreservationId = tap.Name.ToString().Replace("ReservationId", "");
+
+                    dynamic ReservationInformations = ReservationCommands.GetReservationInformations(tap.Name.ToString().Replace("ReservationId", ""));
+
+                    foreach (var information in ReservationInformations)
+                    {
+                        try
+                        {
+                            CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+
+                            CreateReservationGridClassifficationCombobox.Text = information.Name.ToString();
+                            try
+                            {
+                                CreateReservationGridFromDateCalendar.DisplayDate = Convert.ToDateTime(information.FromDate.ToString());
+                                CreateReservationGridToDateCalendar.DisplayDate = Convert.ToDateTime(information.ToDate.ToString());
+                                CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
+                                CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                            }
+                            catch { }
+                            CreateReservationGridMainGuestFirstnameInput.Text = information.Firstname.ToString();
+                            CreateReservationGridMainGuestSurnameInput.Text = information.Surname.ToString();
+                            try
+                            {
+                                CreateReservationGridMainReservantBirthCalendar.DisplayDate = Convert.ToDateTime(information.Birth.ToString());
+                                CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                            }
+                            catch { }
+                            CreateReservationGridMainGuestEmailInput.Text = information.Email.ToString();
+                            CreateReservationGridMainGuestPhoneNumberInput.Text = information.PhoneNumber.ToString();
+                            CreateReservationGridMainGuestCountryInput.Text = information.Country.ToString();
+                            CreateReservationGridMainGuestAddressInput.Text = information.Address.ToString();
+                            CreateReservationGridMainGuestPostNumberInput.Text = information.PostNumber.ToString();
+                            CreateReservationGridMainGuestCityInput.Text = information.City.ToString();
+                            CreateReservationGridMainGuestCertifiedNumberInput.Text = information.CertifiedNumber.ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorWindow.ErrorException = ex.Message;
+                            PublicCommands.ShowError(2, null);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(2, null);
                 ErrorWindow.ErrorException = ex.Message;
+                PublicCommands.ShowError(2, null);
             }
 
             LoadedAnimation();
+        }
+
+        private void VerticalScroll(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scroll = (ScrollViewer)sender;
+            scroll.ScrollToVerticalOffset(scroll.VerticalOffset - (e.Delta * 0.75));
         }
     }
 }

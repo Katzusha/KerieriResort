@@ -21,7 +21,7 @@ namespace resorttestroom
             string postData = "DatabaseName=" + MainWindow.DatabaseName;
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
             // Set the ContentType property of the WebRequest.
-            //request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/x-www-form-urlencoded";
             // Set the ContentLength property of the WebRequest.
             request.ContentLength = byteArray.Length;
             // Get the request stream.
