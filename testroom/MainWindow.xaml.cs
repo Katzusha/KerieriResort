@@ -3454,17 +3454,20 @@ namespace testroom
                         row++;
                     }
 
-                    BlackOutPastDates();
-
-                    dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
-
-                    foreach (var information in BlackOutDates)
+                    if (editreservationId == null)
                     {
-                        CreateReservationGridFromDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime.Parse(information.FromDate.ToString())).AddDays(1), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
-                        CreateReservationGridToDateCalendar.SelectedDates.Clear();
-                        CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
-                    }
+                        BlackOutPastDates();
+
+                        dynamic BlackOutDates = ReservationCommands.GetBlackoutDates(item.Name.Replace("ClassifficationId", ""));
+
+                        foreach (var information in BlackOutDates)
+                        {
+                            CreateReservationGridFromDateCalendar.SelectedDates.Clear();
+                            CreateReservationGridFromDateCalendar.BlackoutDates.Add(new CalendarDateRange((DateTime.Parse(information.FromDate.ToString())).AddDays(1), (DateTime.Parse(information.ToDate.ToString())).AddDays(-1)));
+                            CreateReservationGridToDateCalendar.SelectedDates.Clear();
+                            CreateReservationGridToDateCalendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Parse(information.FromDate.ToString()), DateTime.Parse(information.ToDate.ToString())));
+                        }
+                    }                    
                 }
 
                 LoadedAnimation();
@@ -4325,6 +4328,7 @@ namespace testroom
 
         #endregion
 
+        public string editreservationId = null;
         private async void MenuItem_Click(object sender, System.EventArgs e)
         {
             LoadingAnimation();
@@ -4404,9 +4408,9 @@ namespace testroom
                     CreateReservationGridNextBtn.Content = "Next";
                     CreateReservationGridBackBtn.Content = "Cancel";
 
-                    BlackOutPastDates();
+                    //BlackOutPastDates();
 
-
+                    editreservationId = tap.Name.ToString().Replace("ReservationId", "");
 
                     dynamic ReservationInformations = ReservationCommands.GetReservationInformations(tap.Name.ToString().Replace("ReservationId", ""));
 
@@ -4414,13 +4418,26 @@ namespace testroom
                     {
                         try
                         {
+                            CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+
                             CreateReservationGridClassifficationCombobox.Text = information.Name.ToString();
-                            BlackOutPastDates();
-                            CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
-                            CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                            try
+                            {
+                                CreateReservationGridFromDateCalendar.DisplayDate = Convert.ToDateTime(information.FromDate.ToString());
+                                CreateReservationGridToDateCalendar.DisplayDate = Convert.ToDateTime(information.ToDate.ToString());
+                                CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
+                                CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                            }
+                            catch { }
                             CreateReservationGridMainGuestFirstnameInput.Text = information.Firstname.ToString();
                             CreateReservationGridMainGuestSurnameInput.Text = information.Surname.ToString();
-                            CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                            try
+                            {
+                                CreateReservationGridMainReservantBirthCalendar.DisplayDate = Convert.ToDateTime(information.Birth.ToString());
+                                CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                            }
+                            catch { }
                             CreateReservationGridMainGuestEmailInput.Text = information.Email.ToString();
                             CreateReservationGridMainGuestPhoneNumberInput.Text = information.PhoneNumber.ToString();
                             CreateReservationGridMainGuestCountryInput.Text = information.Country.ToString();
