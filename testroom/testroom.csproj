@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="cashicon.png" />
+    <None Remove="creditcardicon.png" />
     <None Remove="home.png" />
     <None Remove="icons8-home-500.png" />
     <None Remove="image.png" />
@@ -17,6 +19,8 @@
     <None Remove="Images\dashboardicon.png" />
     <None Remove="Images\logouticon.png" />
     <None Remove="kerieri.png" />
+    <None Remove="Screenshot_2.png" />
+    <None Remove="Screenshot_3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,20 +32,29 @@
     <PackageReference Include="kenjiuno.PdfSharp.Xps" Version="1.1.10" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MySql.Data" Version="8.0.29" />
+    <PackageReference Include="Pdfium.Net.SDK" Version="4.73.2704" />
     <PackageReference Include="PdfSharp" Version="1.50.5147" />
     <PackageReference Include="Syncfusion.Pdf.Wpf" Version="20.2.0.38" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\cashicon.png" />
+    <Resource Include="Images\creditcardicon.png" />
     <Resource Include="Images\classifficationsicon.png" />
     <Resource Include="Images\dashboardicon.png" />
     <Resource Include="Images\logouticon.png" />
     <Resource Include="Images\reservations.png" />
     <Resource Include="Images\kerierilogo.png" />
+    <Resource Include="Images\leafpicture1.png" />
+    <Resource Include="Images\leafpicture2.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Documents\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
 </Project>

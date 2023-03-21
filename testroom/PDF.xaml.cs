@@ -5,6 +5,8 @@ using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 
@@ -91,10 +93,38 @@ namespace testroom
                     fileStream.Flush();
                     fileStream.Close();
                 }
+
+                else if (id == 3)
+                {
+                    MemoryStream lMemoryStream = new MemoryStream();
+                    Package package = Package.Open(lMemoryStream, FileMode.Create);
+                    XpsDocument doc = new XpsDocument(package);
+                    XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
+
+                    // This is your window
+                    writer.Write(print);
+
+                    doc.Close();
+                    package.Close();
+
+                    // Convert 
+                    MemoryStream outStream = new MemoryStream();
+                    PdfSharp.Xps.XpsConverter.Convert(lMemoryStream, outStream, false);
+
+                    // Write pdf file
+                    FileStream fileStream = new FileStream("D:\\preview.pdf", FileMode.Create);
+                    outStream.CopyTo(fileStream);
+
+                    // Clean up
+                    outStream.Flush();
+                    outStream.Close();
+                    fileStream.Flush();
+                    fileStream.Close();
+                }
             }
             catch (Exception ex)
             {
-                PublicCommands.ShowError(ex.Message);
+                PublicCommands.ShowError(3, null);
             }
 
             this.Close();
@@ -102,13 +132,16 @@ namespace testroom
 
         private void GenerateItems(dynamic pdfinfo)
         {
+            ItemsGrid.Children.Clear();
+            ItemsGrid.RowDefinitions.Clear();
+
             decimal totalprice = 0.00m;
 
             RowDefinition newrow = new RowDefinition();
             newrow.Height = new GridLength(30);
             ItemsGrid.RowDefinitions.Add(newrow);
 
-            int row = 1;
+            int row = 0;
 
             foreach(var info in pdfinfo.Items)
             {
@@ -127,13 +160,13 @@ namespace testroom
                 ItemsGrid.Children.Add(button);
 
                 button = new Label();
-                button.Content = (decimal.Parse(info.Price.Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())) + "€";
+                button.Content = (decimal.Parse(info.Price) * decimal.Parse(info.Quantity.ToString())) + "€";
                 button.Style = (Style)this.Resources["Item"];
                 Grid.SetColumn(button, 2);
                 Grid.SetRow(button, row);
                 ItemsGrid.Children.Add(button);
 
-                totalprice = totalprice + ((decimal.Parse(info.Price.ToString().Replace('.', ',')) * decimal.Parse(info.Quantity.ToString())));
+                totalprice = totalprice + ((decimal.Parse(info.Price.ToString()) * decimal.Parse(info.Quantity.ToString())));
 
                 row++;
 
@@ -142,7 +175,7 @@ namespace testroom
                 ItemsGrid.RowDefinitions.Add(newrow);
             }
 
-            TotalPrice.Content = totalprice.ToString().Replace(',', '.') + "€";
+            TotalPrice.Content = totalprice.ToString() + "€";
         }
     }
 }
