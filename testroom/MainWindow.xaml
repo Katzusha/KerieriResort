@@ -47,8 +47,8 @@
         <Color x:Key="PrimaryColor">#5656FF</Color>
 
         <SolidColorBrush x:Key="SecondaryBrush"
-                         Color="#3e3e3e" />
-        <Color x:Key="SecondaryColor">#3e3e3e</Color>
+                         Color="#3e3e5e" />
+        <Color x:Key="SecondaryColor">#3e3e5e</Color>
 
         <SolidColorBrush x:Key="FalseBrush"
                          Color="#FF5656" />
@@ -2628,7 +2628,7 @@
                                             <Border x:Name="Border"
                                                     CornerRadius="25"
                                                     Padding="2"
-                                                    Background="#3e3e3e"
+                                                    Background="{DynamicResource SecondaryBrush}"
                                                     BorderBrush="Transparent">
                                                 <ScrollViewer Style="{DynamicResource ScrollViewer}"
                                                               Margin="0"
@@ -2672,9 +2672,9 @@
                             VerticalAlignment="Center"
                             Width="50"
                             Height="50"
-                            Background="#FF3E3E3E"
-                            BorderBrush="#3e3e3e"
-                            Foreground="White"
+                            Background="{DynamicResource SecondaryBrush}"
+                            BorderBrush="{DynamicResource SecondaryBrush}"
+                            Foreground="{DynamicResource FontBrush}"
                             FontSize="24"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
@@ -2691,7 +2691,7 @@
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background"
-                                        Value="#3e3e3e" />
+                                        Value="{DynamicResource SecondaryBrush}" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
@@ -2874,7 +2874,7 @@
                             VerticalAlignment="Center"
                             Width="50"
                             Height="50"
-                            Background="#FF3E3E3E"
+                            Background="{DynamicResource SecondaryBrush}"
                             BorderBrush="{DynamicResource SecondaryBrush}"
                             Foreground="{DynamicResource FontBrush}"
                             FontSize="24"
@@ -2893,7 +2893,7 @@
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background"
-                                        Value="#3e3e3e" />
+                                        Value="{DynamicResource SecondaryBrush}" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
@@ -3555,9 +3555,9 @@
                             VerticalAlignment="Center"
                             Width="150"
                             Height="50"
-                            Background="#3e3e3e"
-                            BorderBrush="#3e3e3e"
-                            Foreground="White"
+                            Background="{DynamicResource SecondaryBrush}"
+                            BorderBrush="{DynamicResource SecondaryBrush}"
+                            Foreground="{DynamicResource FontBrush}"
                             FontSize="24"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
@@ -3575,7 +3575,7 @@
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background"
-                                        Value="#3e3e3e" />
+                                        Value="{DynamicResource SecondaryBrush}" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type Button}">
@@ -4147,7 +4147,7 @@
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background"
-                                Value="#3e3e3e" />
+                                Value="{DynamicResource SecondaryBrush}" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
