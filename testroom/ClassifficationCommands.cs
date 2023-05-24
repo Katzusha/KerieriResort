@@ -86,48 +86,78 @@ namespace testroom
         }
 
         //Post classiffication information to clients database
-        public static bool CreateClassiffication(string Name, string SerialNumber, string Price)
+        public static bool CreateClassiffication(string Name, string SerialNumber, string Price, string Size, string MaxReservants)
         {
-            WebRequest request = WebRequest.Create(MainWindow.APIconnection + "/ClassifficationsAPI/Post.php");
-            // Set the Method property of the request to POST.
-            request.Method = "POST";
-            // Create POST data and convert it to a byte array.
-            string postData = "DatabaseName=" + MainWindow.DatabaseName + "&Name=" + Name +
-                "&SerialNumber=SN-" + SerialNumber + "&PriceEuros=" + Price.Substring(0, (Price.Length - 2)) +
-                "&PriceCents=" + Price.Substring(Price.Length - 2);
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            // Set the ContentType property of the WebRequest.
-            //request.ContentType = "application/x-www-form-urlencoded";
-            // Set the ContentLength property of the WebRequest.
-            request.ContentLength = byteArray.Length;
-            // Get the request stream.
-            Stream dataStream = request.GetRequestStream();
-            // Write the data to the request stream.
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            // Close the Stream object.
-            dataStream.Close();
-            // Get the response.
-            WebResponse response = request.GetResponse();
-            Stream data = response.GetResponseStream();
-
-            string html = string.Empty;
-
-            using (StreamReader sr = new StreamReader(data))
+            try
             {
-                html = sr.ReadToEnd();
 
-                //MainWindow.ShowError(html);
-            }
-            dynamic PostResponse = JsonConvert.DeserializeObject(html);
+                WebRequest request = WebRequest.Create("http://www.kerieri.eu/API/ClassifficationsAPI/PostClassiffication.php");
+                // Set the Method property of the request to POST.
+                request.Method = "POST";
+                // Create POST data and convert it to a byte array.
 
-            if (PostResponse.response.success == "1")
-            {
-                return true;
+                string eur = Price.Substring(0, (Price.Length - 2));
+                string cent = Price.Substring(Price.Length - 2);
+
+                string postData = "DatabaseName=" + MainWindow.DatabaseName + "&Name=" + Name + "&SerialNumber=SN-" + SerialNumber + "&PriceEuros=" + eur + "&PriceCents=" + cent + "&Size=" + Size + "&MaxReservants=" + MaxReservants;
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                // Set the ContentType property of the WebRequest.
+                request.ContentType = "application/x-www-form-urlencoded";
+                // Set the ContentLength property of the WebRequest.
+                request.ContentLength = byteArray.Length;
+                // Get the request stream.
+                Stream dataStream = request.GetRequestStream();
+                // Write the data to the request stream.
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                // Close the Stream object.
+                dataStream.Close();
+                // Get the response.
+                WebResponse response = request.GetResponse();
+                Stream data = response.GetResponseStream();
+
+                string html = string.Empty;
+
+                using (StreamReader sr = new StreamReader(data))
+                {
+                    html = sr.ReadToEnd();
+
+                    //MainWindow.ShowError(html);
+                }
+                dynamic PostResponse = JsonConvert.DeserializeObject(html);
+
+                if (PostResponse.response.success == "1")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (WebException ex)
             {
-                return false;
+                // Handle the exception
+                if (ex.Response is HttpWebResponse response)
+                {
+                    if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        // Handle the 404 error (Not Found) specifically
+                        Console.WriteLine("API endpoint not found.");
+                    }
+                    else
+                    {
+                        // Handle other HTTP errors
+                        Console.WriteLine($"HTTP error: {response.StatusCode}");
+                    }
+                }
+                else
+                {
+                    // Handle other types of WebExceptions
+                    Console.WriteLine($"WebException: {ex.Message}");
+                }
             }
+
+            return false;
         }
 
         public static double GetClassifficationPrice(int ID)

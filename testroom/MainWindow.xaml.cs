@@ -564,9 +564,23 @@ namespace testroom
             FocusManager.SetFocusedElement(calendar, null);
         }
 
-        private void CreateClassifficationGridNextBtn_Click(object sender, RoutedEventArgs e)
+        private async void CreateClassifficationGridNextBtn_Click(object sender, RoutedEventArgs e)
         {
+            bool ret = ClassifficationCommands.CreateClassiffication(CreateClassifficationGridNameInput.Text, CreateClassifficationGridSerialNumberInput.Text, CreateClassifficationGridPriceInput.Text, CreateClassifficationGridSizeInput.Text, CreateClassifficationGridMaxReservantsInput.Text);
 
+
+            if (ret == true)
+            {
+                ClearClassifficationsScreen();
+                ClearCreateClassifficationScreen();
+                ClassifficationScreen.Visibility = Visibility.Visible;
+                CreateClassifficationScreen.Visibility = Visibility.Hidden;
+                await GetAllClassiffications();
+            }
+            else
+            {
+                
+            }
         }
 
         private void ScrollViewer_DisableScrolling(object sender, MouseWheelEventArgs e)
@@ -1788,7 +1802,7 @@ namespace testroom
                     //If there is no user in database then show error label
                     loginfaillabel.Visibility = Visibility.Visible;
 
-                    loginsuccess = false;
+                    loginsuccess = false; //spremen nazaj na false
                 }
 
 

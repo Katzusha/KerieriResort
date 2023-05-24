@@ -186,7 +186,7 @@ namespace testroom
 
             string html = string.Empty;
 
-            using (StreamReader sr = new StreamReader(data))
+            using (     StreamReader sr = new StreamReader(data))
             {
                 html = sr.ReadToEnd();
             }

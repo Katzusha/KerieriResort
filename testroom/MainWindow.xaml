@@ -2995,35 +2995,7 @@
                         </Grid>
                     </Border>
 
-                    <Border CornerRadius="25"
-                            Margin="5, 5, 5, 5"
-                            Grid.Column="2">
-                        <Border.Background>
-                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
-                                             Opacity="0.5" />
-                        </Border.Background>
-                        <Grid>
-                            <Label Style="{DynamicResource Label}"
-                                   Content="Something"
-                                   Margin="0, 5, 0, 0"
-                                   HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Border>
-
-                    <Border CornerRadius="25"
-                            Margin="5, 5, 5, 5"
-                            Grid.Column="3">
-                        <Border.Background>
-                            <SolidColorBrush Color="{DynamicResource SecondaryColor}"
-                                             Opacity="0.5" />
-                        </Border.Background>
-                        <Grid>
-                            <Label Style="{DynamicResource Label}"
-                                   Content="Something"
-                                   Margin="0, 5, 0, 0"
-                                   HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Border>
+                    
                 </Grid>
 
                 <Border Grid.Row="1"
