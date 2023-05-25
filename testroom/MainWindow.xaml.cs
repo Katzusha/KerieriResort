@@ -4056,6 +4056,8 @@ namespace testroom
             ClearCreateClassifficationScreen();
             ClassifficationScreen.Visibility = Visibility.Visible;
             CreateClassifficationScreen.Visibility = Visibility.Hidden;
+
+            GetAllClassiffications();
         }
         #endregion
 
@@ -4383,89 +4385,135 @@ namespace testroom
                 }
                 else if ((sender as MenuItem).Header.ToString() == "Edit")
                 {
-                    CreateReservationGridClassifficationCombobox.Items.Add("None");
-                    CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
-
-                    dynamic GetClassiffications = ClassifficationCommands.GetAll();
-
-                    foreach (var information in GetClassiffications)
+                    if(DashboardScreen.Visibility == Visibility.Visible || ReservationsScreen.Visibility == Visibility.Visible)
                     {
-                        ComboBoxItem item = new ComboBoxItem();
-                        item.Name = "ClassifficationId" + information.Id;
-                        item.Content = information.Name;
+                        CreateReservationGridClassifficationCombobox.Items.Add("None");
+                        CreateReservationGridClassifficationCombobox.SelectedIndex = 0;
 
-                        CreateReservationGridClassifficationCombobox.Items.Add(item);
-                    }
+                        dynamic GetClassiffications = ClassifficationCommands.GetAll();
 
-                    //Switch displayed grids
-                    CreateReservationScreen.Visibility = Visibility.Visible;
-                    ReservationsScreen.Visibility = Visibility.Hidden;
-                    DashboardScreen.Visibility = Visibility.Hidden;
-
-                    //Make sure that every grid will be displayed in the right order
-                    CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
-                    CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
-                    CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
-
-                    //Resert progression bar
-                    CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
-                    CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
-                    CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
-                    CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
-
-                    //Start the progress bar
-                    CreateReservationGridReservationInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
-
-                    //Reset all the values needed for the Creation
-                    CreateReservationProgress = 1;
-                    CreateReservationGridNextBtn.Content = "Next";
-                    CreateReservationGridBackBtn.Content = "Cancel";
-
-                    //BlackOutPastDates();
-
-                    editreservationId = tap.Name.ToString().Replace("ReservationId", "");
-
-                    dynamic ReservationInformations = ReservationCommands.GetReservationInformations(tap.Name.ToString().Replace("ReservationId", ""));
-
-                    foreach (var information in ReservationInformations)
-                    {
-                        try
+                        foreach (var information in GetClassiffications)
                         {
-                            CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
-                            CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+                            ComboBoxItem item = new ComboBoxItem();
+                            item.Name = "ClassifficationId" + information.Id;
+                            item.Content = information.Name;
 
-                            CreateReservationGridClassifficationCombobox.Text = information.Name.ToString();
+                            CreateReservationGridClassifficationCombobox.Items.Add(item);
+                        }
+
+                        //Switch displayed grids
+                        CreateReservationScreen.Visibility = Visibility.Visible;
+                        ReservationsScreen.Visibility = Visibility.Hidden;
+                        DashboardScreen.Visibility = Visibility.Hidden;
+
+                        //Make sure that every grid will be displayed in the right order
+                        CreateReservationGridReservationInformationGrid.Visibility = Visibility.Visible;
+                        CreateReservationGridMainReservantInformationGrid.Visibility = Visibility.Hidden;
+                        CreateReservationGridSideReservantInformationGrid.Visibility = Visibility.Hidden;
+                        CreateReservationGridPaymentInformationGrid.Visibility = Visibility.Hidden;
+
+                        //Resert progression bar
+                        CreateReservationGridReservationInformationProgress.Foreground = Brushes.Gray;
+                        CreateReservationGridMainReservantInformationProgress.Foreground = Brushes.Gray;
+                        CreateReservationGridSideGuestsInformationProgress.Foreground = Brushes.Gray;
+                        CreateReservationGridPaymentInformationProgress.Foreground = Brushes.Gray;
+
+                        //Start the progress bar
+                        CreateReservationGridReservationInformationProgress.Foreground = (SolidColorBrush)Resources["FontBrush"];
+
+                        //Reset all the values needed for the Creation
+                        CreateReservationProgress = 1;
+                        CreateReservationGridNextBtn.Content = "Next";
+                        CreateReservationGridBackBtn.Content = "Cancel";
+
+                        //BlackOutPastDates();
+
+                        editreservationId = tap.Name.ToString().Replace("ReservationId", "");
+
+                        dynamic ReservationInformations = ReservationCommands.GetReservationInformations(tap.Name.ToString().Replace("ReservationId", ""));
+
+                        foreach (var information in ReservationInformations)
+                        {
                             try
                             {
-                                CreateReservationGridFromDateCalendar.DisplayDate = Convert.ToDateTime(information.FromDate.ToString());
-                                CreateReservationGridToDateCalendar.DisplayDate = Convert.ToDateTime(information.ToDate.ToString());
-                                CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
-                                CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                                CreateReservationGridFromDateCalendar.BlackoutDates.Clear();
+                                CreateReservationGridToDateCalendar.BlackoutDates.Clear();
+
+                                CreateReservationGridClassifficationCombobox.Text = information.Name.ToString();
+                                try
+                                {
+                                    CreateReservationGridFromDateCalendar.DisplayDate = Convert.ToDateTime(information.FromDate.ToString());
+                                    CreateReservationGridToDateCalendar.DisplayDate = Convert.ToDateTime(information.ToDate.ToString());
+                                    CreateReservationGridFromDateCalendar.SelectedDate = Convert.ToDateTime(information.FromDate.ToString());
+                                    CreateReservationGridToDateCalendar.SelectedDate = Convert.ToDateTime(information.ToDate.ToString());
+                                }
+                                catch { }
+                                CreateReservationGridMainGuestFirstnameInput.Text = information.Firstname.ToString();
+                                CreateReservationGridMainGuestSurnameInput.Text = information.Surname.ToString();
+                                try
+                                {
+                                    CreateReservationGridMainReservantBirthCalendar.DisplayDate = Convert.ToDateTime(information.Birth.ToString());
+                                    CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                                }
+                                catch { }
+                                CreateReservationGridMainGuestEmailInput.Text = information.Email.ToString();
+                                CreateReservationGridMainGuestPhoneNumberInput.Text = information.PhoneNumber.ToString();
+                                CreateReservationGridMainGuestCountryInput.Text = information.Country.ToString();
+                                CreateReservationGridMainGuestAddressInput.Text = information.Address.ToString();
+                                CreateReservationGridMainGuestPostNumberInput.Text = information.PostNumber.ToString();
+                                CreateReservationGridMainGuestCityInput.Text = information.City.ToString();
+                                CreateReservationGridMainGuestCertifiedNumberInput.Text = information.CertifiedNumber.ToString();
                             }
-                            catch { }
-                            CreateReservationGridMainGuestFirstnameInput.Text = information.Firstname.ToString();
-                            CreateReservationGridMainGuestSurnameInput.Text = information.Surname.ToString();
-                            try
+                            catch (Exception ex)
                             {
-                                CreateReservationGridMainReservantBirthCalendar.DisplayDate = Convert.ToDateTime(information.Birth.ToString());
-                                CreateReservationGridMainReservantBirthCalendar.SelectedDate = Convert.ToDateTime(information.Birth.ToString());
+                                ErrorWindow.ErrorException = ex.Message;
+                                PublicCommands.ShowError(2, null);
                             }
-                            catch { }
-                            CreateReservationGridMainGuestEmailInput.Text = information.Email.ToString();
-                            CreateReservationGridMainGuestPhoneNumberInput.Text = information.PhoneNumber.ToString();
-                            CreateReservationGridMainGuestCountryInput.Text = information.Country.ToString();
-                            CreateReservationGridMainGuestAddressInput.Text = information.Address.ToString();
-                            CreateReservationGridMainGuestPostNumberInput.Text = information.PostNumber.ToString();
-                            CreateReservationGridMainGuestCityInput.Text = information.City.ToString();
-                            CreateReservationGridMainGuestCertifiedNumberInput.Text = information.CertifiedNumber.ToString();
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorWindow.ErrorException = ex.Message;
-                            PublicCommands.ShowError(2, null);
                         }
                     }
+                    else if (ClassifficationScreen.Visibility == Visibility.Visible)
+                    {
+                        ClassifficationScreen.Visibility = Visibility.Hidden;
+                        CreateClassifficationScreen.Visibility = Visibility.Visible;
+
+                        dynamic ClassifficationInformations = ClassifficationCommands.GetClassifficationInformations(tap.Name.ToString().Replace("ClassifficationId", ""));
+                        dynamic Essentials = EssentialCommands.GetAll();
+
+                        foreach (var info in ClassifficationInformations)
+                        {
+                            CreateClassifficationGridNameInput.Text = info.Name.ToString();
+                            CreateClassifficationGridSerialNumberInput.Text = info.SerialNumber.ToString();
+                            CreateClassifficationGridPriceInput.Text = info.Price.ToString();
+                            CreateClassifficationGridSizeInput.Text = info.Size.ToString();
+                            CreateClassifficationGridMaxReservantsInput.Text = info.MaxReservants.ToString();
+                        }
+
+                        int row = 0;
+                        foreach (var essen in Essentials)
+                        {
+                            if (essen.Success == 0)
+                            {
+                                break;
+                            }
+
+                            RowDefinition newrow = new RowDefinition();
+                            newrow.Height = new GridLength(60);
+                            CreateClassifficationGridIncludedEssentials.RowDefinitions.Add(newrow);
+
+
+                            CheckBox button = new CheckBox();
+                            button.Name = "EssentialId" + essen.Id;
+                            button.Content = essen.Name;
+                            button.Style = (Style)this.Resources["GeneratedCheckBox"];
+
+                            Grid.SetColumn(button, 0);
+                            Grid.SetRow(button, row);
+                            CreateClassifficationGridIncludedEssentials.Children.Add(button);
+
+                            row++;
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
