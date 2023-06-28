@@ -8,13 +8,13 @@ This project has been built for a high school graduation exam. It is designed fo
   * C#
   * XAML
 * MySQL
-  * Hosted on [@Neoserv](https://www.neoserv.si)
+  * Hosted on [Neoserv](https://www.neoserv.si)
 * Web API
   * PhP
-  * Hosted on [@Neoserv](https://www.neoserv.si)
+  * Hosted on [Neoserv](https://www.neoserv.si)
 
 ## Licence
 Distributed under [GNU LGPLv3](https://choosealicense.com/licenses/lgpl-3.0/) licence.
 
 ## Contact
-Andraž Košak - [@Instagram](https://www.instagram.com/andraz.kosak) - kosak.andraz@gmail.com
+Andraž Košak - [Instagram](https://www.instagram.com/andraz.kosak) - kosak.andraz@gmail.com
