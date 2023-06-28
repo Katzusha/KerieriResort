@@ -1,9 +1,20 @@
 # Kerieri resort
-Kerieri resort is an application for the use at the register desk at camps, hotels or appartments. It is easyer and less complex version of other applications a.k. as LIGHT version. It was built for the finishing project for highschool coriculum.
 
+## About the project
+This project has been built for a high school graduation exam. It is designed for companies which offer overnight stays. It is meant to be used at the reception and its only use is to have a view over the calendar of the reservations, have control over reservations and have control over classification (rooms, parcels and apartments).
 
-### Contributers
-Other contribute to this project is Bernard Kužnik who was a friend and a classmate at highschool in Velenje.
+### Built with
+* WPF Application
+  * C#
+  * XAML
+* MySQL
+  * Hosted on [@Neoserv](https://www.neoserv.si)
+* Web API
+  * PhP
+  * Hosted on [@Neoserv](https://www.neoserv.si)
 
-## LICENCE
-[GNU LGPLv3](https://choosealicense.com/licenses/lgpl-3.0/)
+## Licence
+Distributed under [GNU LGPLv3](https://choosealicense.com/licenses/lgpl-3.0/) licence.
+
+## Contact
+Andraž Košak - [@Instagram](https://www.instagram.com/andraz.kosak) - kosak.andraz@gmail.com
